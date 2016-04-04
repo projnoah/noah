@@ -1,0 +1,90 @@
+/*
+* Border radius mixin
+*/
+@mixin br($radius: 8px) {
+	border-radius: $radius;
+	-webkit-border-radius: $radius;
+	-moz-border-radius: $radius;
+	-ms-border-radius: $radius;
+	-o-border-radius: $radius;
+}
+
+/*
+* Box shadow for panels
+*/
+@mixin box-shadow-panel(){
+	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+}
+
+/*
+* Flex box display
+*/
+@mixin flexbox() {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+/*
+* Translate Y mixin
+*/
+@mixin tY($offset) {
+	transform: translateY($offset);
+	-webkit-transform: translateY($offset);
+	-moz-transform: translateY($offset);
+	-ms-transform: translateY($offset);
+	-o-transform: translateY($offset);
+}
+
+/*
+* Blur out the content
+*/
+@mixin blur($radius: 20px){
+	filter: blur($radius);
+	-webkit-filter: blur($radius);
+	-moz-filter: blur($radius);
+	-ms-filter: blur($radius);
+}
+
+/*
+* Full screen with fixed positioning
+*/
+@mixin full-screen(){
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+}
+
+/*
+* Transition mixin
+*/
+@mixin ts($content: all ease-in-out .3s){
+	transition: $content;
+	-webkit-transition: $content;
+	-moz-transition: $content;
+	-ms-transition: $content;
+	-o-transition: $content;
+}
+
+/*
+* Animation mixin
+*/
+@mixin am($content){
+	animation: $content;
+	-webkit-animation: $content;
+	-moz-animation: $content;
+	-ms-animation: $content;
+	-o-animation: $content;
+}
+
+/*
+* Animation delay mixin
+*/
+@mixin anim-delay($duration: .2s) {
+	-webkit-animation-delay: $duration;
+	-moz-animation-delay: $duration;
+	-o-animation-delay: $duration;
+	animation-delay: $duration;
+}

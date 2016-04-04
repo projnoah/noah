@@ -1,0 +1,537 @@
+// Import the pre-defined mixins, vars
+@import "mixins";
+@import "variables";
+@import "vendor/icheck";
+@import "vendor/ns-notification";
+@import "vendor/animate";
+@import "vendor/dialog";
+
+.login-wrapper {
+	//	margin-top: 50px;
+	overflow: visible;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	@include full-screen();
+	z-index: 99;
+}
+
+.input-wrapper {
+	position: relative;
+	width: 100%;
+	margin-bottom: 5em;
+}
+
+.login-panel {
+	flex: 1;
+	max-width: 550px;
+	padding: 10px 20px;
+	background: #fefefe;
+	@include br(20px);
+	@include box-shadow-panel();
+	position: relative;
+	@extend .animated, .fadeIn;
+
+	.title {
+		text-align: center;
+		@extend .animated, .fadeInUp;
+		@include anim-delay(.23s);
+		font-weight: 300;
+	}
+
+	.input--login {
+		@extend .animated, .fadeInUp;
+		@for $i from 1 through 4 {
+			&:nth-of-type(#{$i}) {
+				@include anim-delay($i * 0.078s);
+			}
+		}
+	}
+}
+
+.remember-wrapper {
+	margin: 2em 1em;
+	@include flexbox();
+	.remember-me-checkbox {
+		flex: 1;
+		position: relative;
+		display: inline-block;
+		margin-left: 20px;
+		text-align: center;
+		vertical-align: middle;
+		@extend .animated, .fadeInUp;
+		@include anim-delay(.45s);
+	}
+}
+
+.input {
+	position: relative;
+	z-index: 1;
+	display: block;
+	margin: 1em;
+	max-width: 350px;
+	width: calc(100% - 2em);
+	vertical-align: top;
+	margin-left: -175px;
+	left: 50%;
+	label.error {
+		position: absolute;
+		top: 5px;
+		left: 60px;
+		font-size: 12px;
+		color: $labelError;
+		width: 100%;
+		text-align: left;
+		text-overflow: ellipsis;
+	}
+}
+
+.input__field {
+	position: relative;
+	display: block;
+	float: right;
+	padding: 0.8em;
+	width: 60%;
+	border: none;
+	border-radius: 0;
+	background: $themewhite;
+	color: #aaa;
+	font-weight: 400;
+	font-family: $fonts;
+	-webkit-appearance: none;
+	/* for box shadows to show on iOS */
+	&:focus {
+		outline: none;
+	}
+}
+
+.input__label {
+	display: inline-block;
+	float: right;
+	padding: 0 1em;
+	width: 40%;
+	color: $themedarkblue;
+	font-weight: bold;
+	font-size: 70.25%;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+.input__label-content {
+	position: relative;
+	display: block;
+	padding: 1.6em 0;
+	width: 100%;
+}
+
+
+/* login */
+
+.input--login {
+	overflow: hidden;
+	padding-top: 1.6em;
+	font-size: 22px;
+}
+
+.input__field--login {
+	width: 100%;
+	background: transparent;
+	opacity: 0;
+	padding: 0.35em;
+	z-index: 100;
+	color: $themedarkblue;
+}
+
+.input__label--login {
+	width: 100%;
+	bottom: 0;
+	position: absolute;
+	pointer-events: none;
+	text-align: left;
+	color: $themedarkblue;
+	padding: 0 0.5em;
+	&:before {
+		content: '';
+		position: absolute;
+		width: 100%;
+		height: 4em;
+		top: 100%;
+		left: 0;
+		background: #fff;
+		border-top: 4px solid $themelightblue;
+		-webkit-transform: translate3d(0, -3px, 0);
+		transform: translate3d(0, -3px, 0);
+		-webkit-transition: -webkit-transform 0.4s;
+		transition: transform 0.4s;
+		-webkit-transition-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
+		transition-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
+	}
+}
+
+.input__label-content--login {
+	padding: 0.5em 0;
+	-webkit-transform-origin: 0% 100%;
+	transform-origin: 0% 100%;
+	-webkit-transition: -webkit-transform 0.4s, color 0.4s;
+	transition: transform 0.4s, color 0.4s;
+	-webkit-transition-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
+	transition-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
+}
+
+.input__field--login:focus,
+.input--filled .input__field--login {
+	cursor: text;
+	opacity: 1;
+	-webkit-transition: opacity 0s 0.4s;
+	transition: opacity 0s 0.4s;
+}
+
+.input__field--login:focus + .input__label--login::before,
+.input--filled .input__label--login::before {
+	-webkit-transition-delay: 0.05s;
+	transition-delay: 0.05s;
+	-webkit-transform: translate3d(0, -3.3em, 0);
+	transform: translate3d(0, -3.3em, 0);
+}
+
+.input__field--login:focus + .input__label--login .input__label-content--login,
+.input--filled .input__label-content--login {
+	color: $themelightblue;
+	-webkit-transform: translate3d(0, -3.3em, 0) scale3d(0.81, 0.81, 1);
+	transform: translate3d(0, -3.3em, 0) scale3d(0.81, 0.81, 1);
+}
+
+.pn-form {
+	position: relative;
+	margin: 0 auto;
+	padding: 1.2em 0;
+	ul,
+	ol {
+		list-style: none;
+		padding: 0;
+		margin: 0 auto;
+		max-width: 800px;
+	}
+	li {
+		margin: 0 auto;
+		padding: 2em 0;
+		position: relative;
+	}
+	.label {
+		color: $themedarkblue;
+		font-size: 1em;
+		font-weight: bolder;
+	}
+}
+
+.social-login {
+	list-style: none;
+	margin: 5px auto;
+	position: relative;
+	padding-left: 0;
+	text-align: center;
+
+	li {
+		display: inline-block;
+		position: relative;
+		margin: 0 15px;
+		@extend .animated, .fadeInDown;
+
+		@for $i from 1 through 5 {
+			&:nth-of-type(#{$i}) {
+				@include anim-delay(0.5s + $i * 0.13s);
+			}
+		}
+	}
+}
+
+.social-link {
+	position: relative;
+	@include br(50%);
+	color: $themedarkblue;
+	font-size: 25px;
+}
+
+
+/* Button container */
+.progress-button-wrapper {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.progress-button {
+	position: relative;
+	display: inline-block;
+	text-align: center;
+	width: 45%;
+	min-width: 250px;
+	margin: 20px 0;
+	flex: 1;
+	@extend .animated, .bounceIn;
+	@include anim-delay(.6s);
+
+	button {
+		display: block;
+		margin: 0 auto;
+		padding: 0;
+		width: 250px;
+		height: 70px;
+		border: 2px solid $themelightblue;
+		border-radius: 40px;
+		background: transparent;
+		color: $themelightblue;
+		letter-spacing: 1px;
+		font-size: 18px;
+		-webkit-tap-highlight-color: transparent;
+		-webkit-transition: background-color 0.3s, color 0.3s, width 0.3s, border-width 0.3s, border-color 0.3s;
+		transition: background-color 0.3s, color 0.3s, width 0.3s, border-width 0.3s, border-color 0.3s;
+		&:hover {
+			background-color: $themelightblue;
+			color: $themewhite;
+		}
+		&:focus {
+			outline: none;
+		}
+	}
+	/* Text (transition for when returning to initial state) */
+	span {
+		-webkit-transition: opacity 0.3s 0.1s;
+		transition: opacity 0.3s 0.1s;
+	}
+	/* Common style of SVGs */
+	svg {
+		position: absolute;
+		top: 0;
+		left: 50%;
+		-webkit-transform: translateX(-50%);
+		transform: translateX(-50%);
+		pointer-events: none;
+		path {
+			opacity: 0;
+			fill: none;
+		}
+	}
+	svg.progress-circle path {
+		stroke: $themelightgreen;
+		stroke-width: 5;
+	}
+	svg.checkmark path,
+	svg.cross path {
+		stroke: $themewhite;
+		stroke-linecap: round;
+		stroke-width: 4;
+		-webkit-transition: opacity 0.1s;
+		transition: opacity 0.1s;
+	}
+}
+
+/* Loading, success and error effects */
+
+.loading.progress-button {
+	button {
+		width: 70px;
+		/* make a circle */
+		border-width: 5px;
+		border-color: #ddd;
+		background-color: transparent;
+		color: $themewhite;
+	}
+	span {
+		-webkit-transition: opacity 0.15s;
+		transition: opacity 0.15s;
+	}
+}
+
+.loading.progress-button span,
+.success.progress-button span,
+.error.progress-button span {
+	opacity: 0;
+	/* keep it hidden in all states */
+}
+
+.success.progress-button button,
+.error.progress-button button {
+	-webkit-transition: background-color 0.3s, width 0.3s, border-width 0.3s;
+	transition: background-color 0.3s, width 0.3s, border-width 0.3s;
+}
+
+.success.progress-button button {
+	border-color: $themelightgreen;
+	background-color: $themelightgreen;
+}
+
+.error.progress-button button {
+	border-color: $buttonError;
+	background-color: $buttonError;
+}
+
+.loading.progress-button svg.progress-circle path,
+.success.progress-button svg.checkmark path,
+.error.progress-button svg.cross path {
+	opacity: 1;
+	-webkit-transition: stroke-dashoffset 0.3s;
+	transition: stroke-dashoffset 0.3s;
+}
+
+
+/* Optional elastic effect for the width of the button */
+
+.elastic.progress-button button {
+	-webkit-transition: background-color 0.3s, color 0.3s, width 0.3s cubic-bezier(0.25, 0.25, 0.4, 1), border-width 0.3s, border-color 0.3s;
+	-webkit-transition: background-color 0.3s, color 0.3s, width 0.3s cubic-bezier(0.25, 0.25, 0.4, 1.6), border-width 0.3s, border-color 0.3s;
+	transition: background-color 0.3s, color 0.3s, width 0.3s cubic-bezier(0.25, 0.25, 0.4, 1.6), border-width 0.3s, border-color 0.3s;
+}
+
+.loading.elastic.progress-button button {
+	-webkit-transition: background-color 0.3s, color 0.3s, width 0.3s cubic-bezier(0.6, 0, 0.75, 0.75), border-width 0.3s, border-color 0.3s;
+	-webkit-transition: background-color 0.3s, color 0.3s, width 0.3s cubic-bezier(0.6, -0.6, 0.75, 0.75), border-width 0.3s, border-color 0.3s;
+	transition: background-color 0.3s, color 0.3s, width 0.3s cubic-bezier(0.6, -0.6, 0.75, 0.75), border-width 0.3s, border-color 0.3s;
+}
+
+.blur-out {
+	@at-root .blur-container {
+		@include ts(all ease-in-out 1s);
+		z-index: 3;
+		@include full-screen();
+	}
+	.blur-container {
+		@include blur(15px);
+	}
+	@at-root .background-container {
+		width: 100%;
+		height: 100%;
+	}
+	@at-root .overlay-container {
+		@include ts(opacity ease-in-out 1s);
+		z-index: 3;
+		background: rgba(220, 220, 220, 0.5);
+		opacity: 0;
+		@include full-screen();
+	}
+	.overlay-container {
+		opacity: 1;
+	}
+}
+
+button {
+	outline: none;
+}
+
+.login-options {
+	width: 100%;
+	position: relative;
+	margin: 15px 0;
+	text-align: center;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+
+	button {
+		font-size: 1.1em;
+		margin: 0 20px;
+		font-weight: 300;
+		background-color: $themedarkblue;
+		color: #fff;
+		flex: 1;
+		padding: 12px;
+		@include ts();
+		@include br(10px);
+
+		&:hover {
+			font-weight: 700;
+			text-decoration: none;
+			@include box-shadow-panel();
+		}
+
+		@extend .animated, .fadeInUp;
+		@for $i from 1 through 5 {
+			&:nth-of-type(#{$i}) {
+				@include anim-delay(0.62s + $i * 0.08s);
+			}
+		}
+	}
+}
+
+.powered {
+	text-align: center;
+
+	img {
+		max-width: 45%;
+		opacity: 0.75;
+	}
+}
+
+.dialog__content {
+	@include br();
+
+	h2 {
+		font-weight: 300;
+	}
+
+	form {
+		width: 80%;
+		display: block;
+		margin-left: -40%;
+		left: 50%;
+		position: relative;
+
+		.email {
+			width: 100%;
+			padding: 8px;
+			color: #444;
+			font-size: 1.15em;
+			border: 2px dashed rgba(0,0,0,0.2);
+			@include br();
+			outline: none;
+			@include ts();
+
+			&:focus {
+				border: 2px dashed rgba($themedarkblue, 0.5);
+			}
+		}
+
+		.submit {
+			width: 100%;
+			padding: 5px;
+			border: none;
+			@include br(4px);
+			font-size: 1.2em;
+			color: #fff;
+			background-color: $themelightblue;
+			margin-top: 15px;
+		}
+	}
+}
+
+.dialog--open {
+	h2 {
+		@extend .animated, .fadeInUp;
+	}
+	.email {
+		@extend .animated, .fadeInUp;
+		@include anim-delay(.15s);
+	}
+	.submit {
+		@extend .animated, .fadeInUp;
+		@include anim-delay(.27s);
+	}
+}
+
+.dialog__close {
+	position: absolute;
+	right: 25px;
+	top: 25px;
+	font-size: 25px;
+	cursor: pointer;
+}
+
+.background-container {
+	background: url("/assets/backgrounds/login.png");
+}
