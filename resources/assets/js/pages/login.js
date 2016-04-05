@@ -180,7 +180,7 @@ $(function () {
                         // Login success
                         this.setLoginStatus(true);
                         // Redirect back to the intended url
-                        setTimeout(() => window.location.href = redirectUrl, 1000);
+                        setTimeout(() => window.location.href = JSON.redirect, 1000);
                     } else {
                         // Login failed
                         this.setLoginStatus(false);

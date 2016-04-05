@@ -20,6 +20,8 @@ class CreateBlogsTable extends Migration {
             $table->string('type');
             $table->unsignedBigInteger('origin')->nullable();
             $table->unsignedBigInteger('views')->default(1);
+            $table->string('user_agent');
+            $table->ipAddress('ip');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

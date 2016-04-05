@@ -2,6 +2,7 @@
 
 namespace Noah;
 
+use Noah\Library\Traits\User\Sociable;
 use Illuminate\Foundation\Auth\User as BaseUser;
 
 class User extends BaseUser {
@@ -16,6 +17,8 @@ class User extends BaseUser {
     | @author Cali
     |
     */
+
+    use Sociable;
     
     /**
      * The attributes that are mass assignable.
@@ -29,7 +32,7 @@ class User extends BaseUser {
     ];
 
     /**
-     * The attributes excluded from the model's JSON form.
+     * The attributes that are excluded to present.
      *
      * @var array
      * 
@@ -38,4 +41,14 @@ class User extends BaseUser {
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * The user's avatar
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function avatar()
+    {
+        return $this->hasOne(UserAvatar::class);
+    }    
 }

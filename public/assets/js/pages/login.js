@@ -10470,7 +10470,7 @@ $(function () {
                         _this3.setLoginStatus(true);
                         // Redirect back to the intended url
                         setTimeout(function () {
-                            return window.location.href = redirectUrl;
+                            return window.location.href = JSON.redirect;
                         }, 1000);
                     } else {
                         // Login failed

@@ -39,6 +39,10 @@ class Router {
         Route::post('password/email', 'Auth\PasswordController@sendResetLinkEmail');
         Route::post('password/reset', 'Auth\PasswordController@reset');
 
+        // Third Party Authentications...
+        Route::get('auth/{service}/callback', 'Auth\AuthController@callback');
+        Route::get('auth/{service}', 'Auth\AuthController@socialLogin')->name('social');
+
         return new static;
     }
 

@@ -16,7 +16,7 @@ class CreateMediasTable extends Migration {
             $table->bigIncrements('id');
             $table->unsignedInteger('user_id');
             $table->string('src', 191)->index();
-            $table->string('title', 191)->index();
+            $table->string('title', 100)->index();
             $table->string('mime_type');
             $table->timestamps();
         });

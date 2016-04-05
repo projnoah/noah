@@ -35,4 +35,33 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
 
+    'github' => [
+        'client_id'     => env('GITHUB_CLIENT_ID'),
+        'client_secret' => env('GITHUB_CLIENT_SECRET'),
+        'redirect'      => env('GITHUB_REDIRECT'),
+    ],
+
+    'facebook' => [
+        'client_id'     => env('FACEBOOK_CLIENT_ID'),
+        'client_secret' => env('FACEBOOK_CLIENT_SECRET'),
+        'redirect'      => env('FACEBOOK_REDIRECT'),
+    ],
+
+    'twitter' => [
+        'client_id'     => env('TWITTER_CLIENT_ID'),
+        'client_secret' => env('TWITTER_CLIENT_SECRET'),
+        'redirect'      => env('TWITTER_REDIRECT'),
+    ],
+
+    'qq' => [
+        'client_id'     => env('QQ_KEY'),
+        'client_secret' => env('QQ_SECRET'),
+        'redirect'      => env('QQ_REDIRECT'),
+    ],
+
+    'weibo' => [
+        'client_id'     => env('WEIBO_KEY'),
+        'client_secret' => env('WEIBO_SECRET'),
+        'redirect'      => env('WEIBO_REDIRECT'),
+    ],
 ];

@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="{{ $site::description() }}">
     <meta name="keywords" content="{{ $site::keywords() }}">
-
+    <meta property="qc:admins" content="7750222037267106456" />
     <meta name="_token" content="{{ csrf_token() }}">
 
     <title>@yield('title') {{ $site::title() }}</title>

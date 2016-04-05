@@ -15,7 +15,7 @@ trait AuthenticatesAndRegistersUsers {
     |
     */
     
-    use AuthenticatesUsers, RegistersUsers {
+    use AuthenticatesUsers, RegistersUsers, SocialAuthenticatesUsers {
         AuthenticatesUsers::redirectPath insteadof RegistersUsers;
     }
 }

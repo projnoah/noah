@@ -16,7 +16,9 @@ class CreateCommentsTable extends Migration {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('blog_id')->index();
             $table->unsignedInteger('user_id')->index();
-            $table->text('content');
+            $table->text('body');
+            $table->string('user_agent');
+            $table->ipAddress('ip');
             $table->timestamps();
 
             $table->foreign('blog_id')->references('id')->on('blogs')->onDelete('cascade');
