@@ -22,6 +22,7 @@ trait Sociable {
 
     /**
      * Socializes the user.
+     * 给用户添加社交认证
      *
      * @param  $service
      * @return static
@@ -45,6 +46,7 @@ trait Sociable {
 
     /**
      * Check if the user data has already obtained.
+     * 检查是否已经授权过
      *
      * @param  $userData
      * @return bool|static
@@ -64,6 +66,7 @@ trait Sociable {
 
     /**
      * Persist data into database.
+     * 保存数据到数据库
      *
      * @param  $userData
      * @return static
