@@ -21,6 +21,7 @@
         <form action="{{ route('social-connect') }}" method="POST" id="social-form" class="pn-social-form"
               autocomplete="off">
             {{ csrf_field() }}
+            <input type="hidden" name="service" value="{{ $service }}">
             <input type="hidden" name="avatar" value="{{ $user->avatar }}">
             <input type="hidden" name="id" value="{{ $user->id }}">
             <div class="pn-social-form-inner">

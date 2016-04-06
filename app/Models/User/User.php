@@ -39,7 +39,7 @@ class User extends BaseUser {
      * @author Cali
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token', 'social_info'
     ];
 
     /**

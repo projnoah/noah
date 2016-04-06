@@ -301,15 +301,16 @@ $(function () {
                 failed++;
                 submitForm(form);
             },
-            success: (data) => {
+            success: (JSON) => {
                 loadingMessageEl.innerHTML = "";
                 
-                if (data.status == "succeeded") {
+                if (JSON.status == "succeeded") {
                     // Success
                     classie.addClass(successMessageEl, 'show');
+                    setTimeout(() => window.location.href = JSON.redirect, 1000);
                 } else {
                     // Something fails
-                    showError(data.messages[0]);
+                    showError(JSON.messages[0]);
                 }
             }
         });
@@ -329,7 +330,7 @@ $(function () {
         setTimeout( () => {
             if (errorEl)
                 $(errorEl).fadeOut();
-            setTimeout(() => $(errorEl).remove(), 100);
+            setTimeout(() => $(errorEl).remove(), 350);
         }, 1800);
     }
 });

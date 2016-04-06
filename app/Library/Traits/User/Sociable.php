@@ -25,7 +25,7 @@ trait Sociable {
      * 给用户添加社交认证
      *
      * @param  $service
-     * @return static
+     * @return static|UserData
      *
      * @author Cali
      */
@@ -33,15 +33,13 @@ trait Sociable {
     {
         /** @var UserData $userData */
         $userData = Socialite::driver($service)->user();
-        // If already obtained
-//        $user = self::obtained($userData);
-//
-//        if (!$user instanceof static) {
-//            // If not, persist it
-//            $user = static::persist($userData);
-//        }
 
-        return $userData;
+        // If already obtained
+        $user = self::obtained(
+            "\"$service\":\"$userData->id\""
+        );
+
+        return $user ?: $userData;
     }
 
     /**
@@ -53,12 +51,10 @@ trait Sociable {
      *
      * @author Cali
      */
-    protected static function obtained(UserData $userData)
+    protected static function obtained($info)
     {
         /** @var static $user */
-        $user = self::where('name', $userData->name)
-            ->orWhere('username', $userData->name)
-            ->orWhere('email', $userData->email)
+        $user = self::where('social_info', 'like', "%$info%")
             ->first();
 
         return is_null($user) ? false : $user;
@@ -81,7 +77,7 @@ trait Sociable {
             'username' => $userData->nickname,
             'email'    => $userData->email
         ]);
-        $user->saveAvatar($userData->avatar);
+        $user->saveRemoteAvatar($userData->avatar);
 
         return $user;
     }
@@ -91,14 +87,17 @@ trait Sociable {
      * 保存远程头像
      *
      * @param string $avatar
-     *
+     * @return static
+     * 
      * @author Cali
      */
-    protected function saveAvatar($avatar)
+    public function saveRemoteAvatar($avatar)
     {
         $this->avatar()->create([
             'src'  => $avatar,
             'type' => 1
         ]);
+        
+        return $this;
     }
 }

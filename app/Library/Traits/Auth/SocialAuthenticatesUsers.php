@@ -24,6 +24,13 @@ trait SocialAuthenticatesUsers {
      */
 
     /**
+     * Validates the input.
+     *
+     * @var Validator
+     */
+    protected $validator;
+    
+    /**
      * Redirect user to the related service auth.
      *
      * @param $service
@@ -37,6 +44,8 @@ trait SocialAuthenticatesUsers {
     }
 
     /**
+     * Handle the callback from OAuth.
+     *
      * @param  $service
      * @return \Illuminate\View\View
      *
@@ -44,30 +53,105 @@ trait SocialAuthenticatesUsers {
      */
     public function callback($service)
     {
+        // Check if the user has signed up already
         $user = User::socialize($service);
 
-        return view('auth.social', compact('user', 'service'));
+        if (!$user instanceof User) {
+            // If not, ask for the user's input
+            return view('auth.social', compact('user', 'service'));
+        }
+
+        Auth::login($user, true);
+
+        return redirect($this->redirectPath());
     }
 
+    /**
+     * Connect the user and persist it.
+     *
+     * @param Request $request
+     * @return array
+     *
+     * @author Cali
+     */
     public function connect(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        if (!$this->socialValidated($request)) {
+            return [
+                'status'   => 'error',
+                'messages' => $this->failedMessages()
+            ];
+        }
+
+        $this->createAndLoginUser($request);
+
+        return [
+            'status' => 'succeeded',
+            'redirect' => $this->redirectPath()
+        ];
+    }
+
+    /**
+     * If passes the validation.
+     * 
+     * @param Request $request
+     * @return bool
+     * 
+     * @author Cali
+     */
+    protected function socialValidated(Request $request)
+    {
+        $this->validator = Validator::make($request->all(), [
             'username' => 'required|max:191|min:3|unique:users',
             'email'    => 'required|email|max:191|unique:users'
         ]);
+        
+        return !$this->validator->fails();
+    }
 
-        if ($validator->fails()) {
-            return [
-                'status'   => 'error',
-                'messages' => array_values($validator->messages()->toArray())
-            ];
-        }
-        // Create the user
+    /**
+     * Get the failed messages for displaying.
+     * 
+     * @return array
+     * 
+     * @author Cali
+     */
+    protected function failedMessages()
+    {
+        return array_values($this->validator->messages()->toArray());
+    }
 
-        // Attach social information
-        return [
-            'status' => 'succeeded',
-            'data'   => $request->all()
-        ];
+    /**
+     * Save the user information along with social account id.
+     *
+     * @param Request $request
+     * @return User
+     *
+     * @author Cali
+     */
+    protected function saveUserWithSocialInfo(Request $request)
+    {
+        $user = User::create($request->all());
+        // Store for future authentication
+        $user->social_info = collect([
+            $request->input('service') => $request->input('id')
+        ])->toJson();
+
+        $user->saveRemoteAvatar($request->input('avatar'))
+            ->save();
+
+        return $user;
+    }
+
+    /**
+     * Create the user and log in.
+     *
+     * @param Request $request
+     *
+     * @author Cali
+     */
+    private function createAndLoginUser(Request $request)
+    {
+        Auth::login($this->saveUserWithSocialInfo($request), true);
     }
 }
