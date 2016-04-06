@@ -1,1 +1,8 @@
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+@import "variables";
+
+body {
+  font-family: $fonts;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

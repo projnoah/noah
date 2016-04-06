@@ -5749,4 +5749,15 @@ button.close {
   .hidden-print {
     display: none !important; } }
 
+/*
+* Color definition
+*/
+/*
+* Font definition
+*/
+body {
+  font-family: "Avenir Next", "PingFang SC", "Helvetica Neue", "Microsoft Yahei", "微软雅黑", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; }
+
 /*# sourceMappingURL=app.css.map */

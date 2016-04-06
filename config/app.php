@@ -159,8 +159,7 @@ return [
         /*
          * Socialite Providers... 
          */
-//        Laravel\Socialite\SocialiteServiceProvider::class,
-        SocialiteProviders\Manager\ServiceProvider::class,
+        Laravel\Socialite\SocialiteServiceProvider::class,
     ],
 
     /*

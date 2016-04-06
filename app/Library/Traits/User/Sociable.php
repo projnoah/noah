@@ -34,14 +34,14 @@ trait Sociable {
         /** @var UserData $userData */
         $userData = Socialite::driver($service)->user();
         // If already obtained
-        $user = self::obtained($userData);
+//        $user = self::obtained($userData);
+//
+//        if (!$user instanceof static) {
+//            // If not, persist it
+//            $user = static::persist($userData);
+//        }
 
-        if (!$user instanceof static) {
-            // If not, persist it
-            $user = static::persist($userData);
-        }
-
-        return $user;
+        return $userData;
     }
 
     /**
@@ -75,6 +75,7 @@ trait Sociable {
      */
     protected static function persist(UserData $userData)
     {
+        dd($userData);
         $user = static::create([
             'name'     => $userData->nickname,
             'username' => $userData->nickname,

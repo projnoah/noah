@@ -16,11 +16,6 @@ class EventServiceProvider extends ServiceProvider
         'Noah\Events\SomeEvent' => [
             'Noah\Listeners\EventListener',
         ],
-        \SocialiteProviders\Manager\SocialiteWasCalled::class => [
-            // add your listeners (aka providers) here
-            'SocialiteProviders\Qq\QqExtendSocialite@handle',
-            'SocialiteProviders\Weibo\WeiboExtendSocialite@handle',
-        ],
     ];
 
     /**

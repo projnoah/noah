@@ -15,7 +15,7 @@ return [
     // Authentication
     // 用户验证
     'auth' => [
-        'title'           => '登录或者注册',
+        'title'    => '登录或者注册',
         // Login page
         // 登录页面
         'login'    => [
@@ -41,6 +41,32 @@ return [
             'title'       => '重置密码',
             'button'      => '重置',
             'placeholder' => '要重置密码的邮箱地址...'
-        ]
+        ],
+        // Social connect page
+        // 社交平台绑定页面
+        'social'   => [
+            'title'    => '绑定帐号',
+            'headings' => [
+                'connect' => '通过:service绑定帐号',
+                'tip'     => '请填入以下信息完成注册'
+            ],
+            'errors'   => [
+                'empty' => '请输入内容',
+                'email' => '邮箱格式不正确'
+            ],
+            'inputs'   => [
+                'username' => '用户名',
+                'name'     => '显示的昵称',
+                'email'    => '电子邮件地址'
+            ],
+            'success'  => '成功绑定帐号!',
+            'failed'   => '出错了, 请刷新重试',
+            'loading'  => '加载中...',
+            'services' => [
+                'qq'     => 'QQ',
+                'weibo'  => '微博',
+                'wechat' => '微信'
+            ]
+        ],
     ]
 ];

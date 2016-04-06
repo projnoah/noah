@@ -13,30 +13,56 @@ require('laravel-elixir-vueify');
  |
  */
 
-elixir(function(mix) {
+elixir(function (mix) {
 
-    // === Public app ===
-    mix.sass([
-        'app.scss'
-    ], 'public/assets/css/build-app.css');
+    /*
+     |------------------------------------------------------------
+     | Main App Assets
+     |------------------------------------------------------------
+     |
+     | @project Project Noah
+     | @author Cali
+     |
+     */
+    mix.sass(['app.scss'], 'public/assets/css/app.css')
+        .scripts([
+            'jquery/jquery.min.js',
+            'classie.js',
+            'jquery/icheck.min.js',
+            'notification/notification.custom.js',
+            'notification/notificationFx.js',
+            'uiProgressButton.js',
+            'dialogFx.js'
+        ], 'public/assets/js/app.js');
 
-    // === Login page ===
-    mix.sass([
-        'login.scss'
-    ], 'public/assets/css/pages/login.css');
+    /*
+     |------------------------------------------------------------
+     | Login Page Assets
+     |------------------------------------------------------------
+     |
+     | @project Project Noah
+     | @author Cali
+     |
+     */
+    mix.sass(['pages/login.scss'], 'public/assets/css/pages/login.css')
+        .browserify(
+            'pages/login.js', 'public/assets/js/pages/login.js'
+        );
 
-    // === JS mixes ===
-    mix.scripts([
-        'jquery/jquery.min.js',
-        'classie.js',
-        'jquery/icheck.min.js',
-        'notification/notification.custom.js',
-        'notification/notificationFx.js',
-        'uiProgressButton.js',
-        'dialogFx.js'
-    ], 'public/assets/js/app.js');
-    
-    mix.browserify('pages/login.js', 'public/assets/js/pages/login.js');
+    /*
+     |------------------------------------------------------------
+     | Social Auth Assets
+     |------------------------------------------------------------
+     |
+     | @project Project Noah
+     | @author Cali
+     |
+     */
+    mix.sass(['pages/social.scss'], 'public/assets/css/pages/social.css')
+        .scripts([
+            'vendor/stepsForm.js',
+            'pages/social.js'
+        ], 'public/assets/js/pages/social.js');
 
     //mix.version();
 });

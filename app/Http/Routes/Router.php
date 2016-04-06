@@ -42,7 +42,13 @@ class Router {
         // Third Party Authentications...
         Route::get('auth/{service}/callback', 'Auth\AuthController@callback');
         Route::get('auth/{service}', 'Auth\AuthController@socialLogin')->name('social');
+        Route::post('auth', 'Auth\AuthController@connect')->name('social-connect');
 
+        // Test
+        Route::get('auth', function () {
+            return view('auth.social');
+        });
+        
         return new static;
     }
 

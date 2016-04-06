@@ -1,10 +1,10 @@
 // Import the pre-defined mixins, vars
-@import "mixins";
-@import "variables";
-@import "vendor/icheck";
-@import "vendor/ns-notification";
-@import "vendor/animate";
-@import "vendor/dialog";
+@import "../mixins";
+@import "../variables";
+@import "../vendor/icheck";
+@import "../vendor/ns-notification";
+@import "../vendor/animate";
+@import "../vendor/dialog";
 
 .login-wrapper {
 	//	margin-top: 50px;
@@ -319,7 +319,7 @@
 		}
 	}
 	svg.progress-circle path {
-		stroke: $themelightgreen;
+		stroke: $light-green;
 		stroke-width: 5;
 	}
 	svg.checkmark path,
@@ -363,8 +363,8 @@
 }
 
 .success.progress-button button {
-	border-color: $themelightgreen;
-	background-color: $themelightgreen;
+	border-color: $light-green;
+	background-color: $light-green;
 }
 
 .error.progress-button button {

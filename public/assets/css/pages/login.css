@@ -3585,7 +3585,7 @@
   background: #f9f7f6;
   color: #aaa;
   font-weight: 400;
-  font-family: "Avenir Next", "Helvetica Neue", "Microsoft Yahei", "微软雅黑", Arial, sans-serif;
+  font-family: "Avenir Next", "PingFang SC", "Helvetica Neue", "Microsoft Yahei", "微软雅黑", Arial, sans-serif;
   -webkit-appearance: none;
   /* for box shadows to show on iOS */ }
   .input__field:focus {
