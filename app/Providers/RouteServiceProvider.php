@@ -2,7 +2,7 @@
 
 namespace Noah\Providers;
 
-use Noah\SiteConfiguration;
+use Site;
 use Illuminate\Routing\Router;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
@@ -66,7 +66,7 @@ class RouteServiceProvider extends ServiceProvider
     private function registerSiteConfiguration()
     {
         view()->composer('*', function($view) {
-            $view->with(['site' => SiteConfiguration::class]);
+            $view->with(['site' => Site::class]);
         });
     }
 }

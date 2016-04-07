@@ -304,7 +304,7 @@ $(function () {
                      * @author Cali
                      */
                     substituteTitle() {
-                        document.title = this.title;
+                        document.title = `${this.title} ${Site.title}`;
                     }
                 }
             });

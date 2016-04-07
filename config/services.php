@@ -36,32 +36,74 @@ return [
     ],
 
     'github' => [
-        'client_id'     => env('GITHUB_CLIENT_ID'),
-        'client_secret' => env('GITHUB_CLIENT_SECRET'),
+        'client_id'     => env('GITHUB_ID'),
+        'client_secret' => env('GITHUB_SECRET'),
         'redirect'      => env('GITHUB_REDIRECT'),
     ],
 
     'facebook' => [
-        'client_id'     => env('FACEBOOK_CLIENT_ID'),
-        'client_secret' => env('FACEBOOK_CLIENT_SECRET'),
+        'client_id'     => env('FACEBOOK_ID'),
+        'client_secret' => env('FACEBOOK_SECRET'),
         'redirect'      => env('FACEBOOK_REDIRECT'),
     ],
 
+    'google' => [
+        'client_id'     => env('GOOGLE_ID'),
+        'client_secret' => env('GOOGLE_SECRET'),
+        'redirect'      => env('GOOGLE_REDIRECT'),
+    ],
+
     'twitter' => [
-        'client_id'     => env('TWITTER_CLIENT_ID'),
-        'client_secret' => env('TWITTER_CLIENT_SECRET'),
+        'client_id'     => env('TWITTER_ID'),
+        'client_secret' => env('TWITTER_SECRET'),
         'redirect'      => env('TWITTER_REDIRECT'),
     ],
 
+    'disqus' => [
+        'client_id'     => env('DISQUS_KEY'),
+        'client_secret' => env('DISQUS_SECRET'),
+        'redirect'      => env('DISQUS_REDIRECT'),
+    ],
+
+    'dribbble' => [
+        'client_id'     => env('DRIBBBLE_ID'),
+        'client_secret' => env('DRIBBBLE_SECRET'),
+        'redirect'      => env('DRIBBBLE_REDIRECT'),
+    ],
+
+    'linkedin' => [
+        'client_id'     => env('LINKEDIN_ID'),
+        'client_secret' => env('LINKEDIN_SECRET'),
+        'redirect'      => env('LINKEDIN_REDIRECT'),
+    ],
+
     'qq' => [
-        'client_id'     => env('QQ_KEY'),
-        'client_secret' => env('QQ_SECRET'),
+        'client_id'     => env('QQ_ID'),
+        'client_secret' => env('QQ_KEY'),
         'redirect'      => env('QQ_REDIRECT'),
+    ],
+
+    'slack' => [
+        'client_id'     => env('SLACK_ID'),
+        'client_secret' => env('SLACK_SECRET'),
+        'redirect'      => env('SLACK_REDIRECT'),
+    ],
+
+    'spotify' => [
+        'client_id'     => env('SPOTIFY_ID'),
+        'client_secret' => env('SPOTIFY_SECRET'),
+        'redirect'      => env('SPOTIFY_REDIRECT'),
     ],
 
     'weibo' => [
         'client_id'     => env('WEIBO_KEY'),
         'client_secret' => env('WEIBO_SECRET'),
         'redirect'      => env('WEIBO_REDIRECT'),
+    ],
+
+    'youtube' => [
+        'client_id'     => env('YOUTUBE_ID'),
+        'client_secret' => env('YOUTUBE_SECRET'),
+        'redirect'      => env('YOUTUBE_REDIRECT'),
     ],
 ];

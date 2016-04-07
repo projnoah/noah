@@ -5,12 +5,12 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="{{ $site::description() }}">
-    <meta name="keywords" content="{{ $site::keywords() }}">
+    <meta name="description" content="@site('description')">
+    <meta name="keywords" content="@site('keywords')">
     <meta property="qc:admins" content="7750222037267106456" />
     <meta name="_token" content="{{ csrf_token() }}">
 
-    <title>@yield('title') {{ $site::title() }}</title>
+    <title>@yield('title') @site('title')</title>
 
     {{-- Fonts --}}
     <link href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
@@ -23,10 +23,10 @@
     @stack('styles')
 
     {{-- Favicons --}}
-    <link rel="icon" href="{{ url('favicon.png') }}">
-    <link rel="shortcut icon" href="{{ url('favicon.png') }}">
-    <link rel="apple-touch-icon" href="{{ url('favicon.png') }}">
-    <link rel="apple-touch-icon-precomposed" href="{{ url('favicon.png') }}">
+    <link rel="icon" href="/favicon.png">
+    <link rel="shortcut icon" href="/favicon.png">
+    <link rel="apple-touch-icon" href="/favicon.png">
+    <link rel="apple-touch-icon-precomposed" href="/favicon.png">
 
     <!--[if IE]>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -38,6 +38,11 @@
     {{-- Scripts Stack --}}
     @stack('scripts.header')
 
+    <script>
+        const Site = {
+            title: "@site('title')"
+        };
+    </script>
 </head>
 <body id="app">
 

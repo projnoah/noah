@@ -3,7 +3,7 @@
 namespace Noah\Library\Traits\User;
 
 use Socialite;
-use Laravel\Socialite\Two\User as UserData;
+use Cali\Socialite\Two\User as UserData;
 
 trait Sociable {
 
@@ -58,28 +58,6 @@ trait Sociable {
             ->first();
 
         return is_null($user) ? false : $user;
-    }
-
-    /**
-     * Persist data into database.
-     * 保存数据到数据库
-     *
-     * @param  $userData
-     * @return static
-     *
-     * @author Cali
-     */
-    protected static function persist(UserData $userData)
-    {
-        dd($userData);
-        $user = static::create([
-            'name'     => $userData->nickname,
-            'username' => $userData->nickname,
-            'email'    => $userData->email
-        ]);
-        $user->saveRemoteAvatar($userData->avatar);
-
-        return $user;
     }
 
     /**

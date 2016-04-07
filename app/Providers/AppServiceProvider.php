@@ -2,7 +2,6 @@
 
 namespace Noah\Providers;
 
-use Blade;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -14,9 +13,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Blade::directive('trans', function ($expression) {
-            return "<?php echo trans{$expression} ?>";
-        });
+        
     }
 
     /**

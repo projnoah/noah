@@ -10249,14 +10249,49 @@ exports.default = {
          */
 
         resetPasswordSubmit: function resetPasswordSubmit(e) {
-            var form = e.target;
+            var form = e.target,
+                self = this;
 
-            console.log(form);
+            this.setLoadingButton(false);
+
+            $.post({
+                url: form.action,
+                data: $(form).serialize(),
+                error: function error(_error) {
+                    Noah.displayErrorAlert("出错了", _error.responseJSON.message);
+                    self.setLoadingButton(true);
+                },
+                success: function success(JSON) {
+                    self.setLoadingButton(true);
+
+                    if (JSON.status === 'succeeded') {
+                        Noah.displaySuccessAlert("成功发送", JSON.message);
+                        classie.removeClass(document.querySelector('#reset-dialog'), 'dialog--open');
+                    } else {
+                        Noah.displayErrorAlert("出错了", JSON.message);
+                    }
+                }
+            });
+        },
+
+        /**
+         * Set the loading button.
+         * 设置加载按钮
+         *
+         * @param done
+         * @author Cali
+         */
+        setLoadingButton: function setLoadingButton(done) {
+            var button = this.$el.querySelector('button[type=submit]');
+
+            done ? $(button).removeAttr('disabled') : $(button).attr('disabled', 'disabled');
+
+            button.innerHTML = done ? '<i class="fa fa-envelope"></i>&nbsp;' + this.button : '<i class="fa fa-spin fa-circle-o-notch"></i>';
         }
     }
 };
 if (module.exports.__esModule) module.exports = module.exports.default
-;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div id=\"reset-dialog\" class=\"dialog\">\n    <div class=\"dialog__overlay\"></div>\n    <div class=\"dialog__content\">\n        <h2>{{ title }}</h2>\n        <i class=\"fa fa-close dialog__close action\" data-dialog-close=\"\"></i>\n        <form role=\"form\" action=\"{{ url }}\" method=\"POST\" @submit.prevent=\"resetPasswordSubmit\">\n            <input type=\"hidden\" name=\"_token\" value=\"{{ token }}\">\n            <input type=\"email\" class=\"email\" placeholder=\"{{ placeholder }}\" required=\"\">\n            <button type=\"submit\" class=\"submit\"><i class=\"fa fa-envelope\"></i>&nbsp;{{ button }}</button>\n        </form>\n    </div>\n</div>\n"
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div id=\"reset-dialog\" class=\"dialog\">\n    <div class=\"dialog__overlay\"></div>\n    <div class=\"dialog__content\">\n        <h2>{{ title }}</h2>\n        <i class=\"fa fa-close dialog__close action\" data-dialog-close=\"\"></i>\n        <form role=\"form\" action=\"{{ url }}\" method=\"POST\" @submit.prevent=\"resetPasswordSubmit\">\n            <input type=\"hidden\" name=\"_token\" value=\"{{ token }}\">\n            <input type=\"email\" class=\"email\" name=\"email\" placeholder=\"{{ placeholder }}\" required=\"\" autocomplete=\"off\">\n            <button type=\"submit\" class=\"submit\"><i class=\"fa fa-envelope\"></i>&nbsp;{{ button }}</button>\n        </form>\n    </div>\n</div>\n"
 if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
@@ -10598,7 +10633,7 @@ $(function () {
                      * @author Cali
                      */
                     substituteTitle: function substituteTitle() {
-                        document.title = this.title;
+                        document.title = this.title + " " + Site.title;
                     }
                 }
             });

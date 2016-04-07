@@ -28,9 +28,9 @@
                 </div>
             </form>
             <ul class="social-login">
-                <li><a class="social-link" href="{{ route('social', ['service' => 'weibo']) }}"><i class="fa fa-weibo"></i></a></li>
-                <li><a class="social-link" href="{{ route('social', ['service' => 'qq']) }}"><i class="fa fa-qq"></i></a></li>
-                <li><a class="social-link" href="{{ route('social', ['service' => 'github']) }}"><i class="fa fa-github"></i></a></li>
+                <li><a class="social-link" href="@route('social', ['service' => 'weibo'])"><i class="fa fa-weibo"></i></a></li>
+                <li><a class="social-link" href="@route('social', ['service' => 'qq'])"><i class="fa fa-qq"></i></a></li>
+                <li><a class="social-link" href="@route('social', ['service' => 'github'])"><i class="fa fa-github"></i></a></li>
             </ul>
             <div class="login-options">
                 <button class="forgot-password" data-dialog="reset-dialog">@trans('views.auth.login.forgot_password')</button>
@@ -47,7 +47,7 @@
             <div class="logo-wrapper">
                 <div class="powered">
                     <h5>Powered by</h5>
-                    <img src="{{ url('assets/logo/PN.png') }}" alt="Project Noah">
+                    <img src="@url('assets/logo/PN.png')" alt="Project Noah">
                 </div>
             </div>
         </div>
@@ -63,7 +63,7 @@
             isRegister: '{{ request()->url() === route('sign-in') ? 'false' : 'true' }}',
             login: {
                 title: "@trans("views.auth.login.header_title")",
-                url: "{{ route('sign-in') }}",
+                url: "@route('sign-in')",
                 inputs: [
                     {
                         text: "@trans('views.auth.login.username')",
@@ -79,7 +79,7 @@
             },
             register: {
                 title: "@trans("views.auth.register.header_title")",
-                url: "{{ route('sign-up') }}",
+                url: "@route('sign-up')",
                 inputs: [
                     {
                         text: "@trans('views.auth.register.username')",
@@ -107,11 +107,10 @@
                 title: "@trans('views.auth.reset.title')",
                 button: "@trans('views.auth.reset.button')",
                 placeholder: "@trans('views.auth.reset.placeholder')",
-                url: "{{ route('reset-password') }}"
+                url: "@route('reset-password')"
             }
         };
         const redirectUrl = "{{ redirect()->intended()->getTargetUrl() }}";
-
     </script>
     <script src="/assets/js/pages/login.js"></script>
 @endpush

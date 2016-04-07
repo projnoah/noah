@@ -35,8 +35,8 @@ class Router {
         Route::post('register', 'Auth\AuthController@register');
 
         // Password Reset Routes...
-        Route::get('password/reset/{token?}', 'Auth\PasswordController@showResetForm')->name('reset-password');
-        Route::post('password/email', 'Auth\PasswordController@sendResetLinkEmail');
+        Route::get('password/reset/{token?}', 'Auth\PasswordController@showResetForm')->name('reset');
+        Route::post('password/email', 'Auth\PasswordController@sendResetLinkEmail')->name('reset-password');
         Route::post('password/reset', 'Auth\PasswordController@reset');
 
         // Third Party Authentications...
@@ -44,11 +44,6 @@ class Router {
         Route::get('auth/{service}', 'Auth\AuthController@socialLogin')->name('social');
         Route::post('auth', 'Auth\AuthController@connect')->name('social-connect');
 
-        // Test
-        Route::get('auth', function () {
-            return view('auth.social');
-        });
-        
         return new static;
     }
 
@@ -65,6 +60,10 @@ class Router {
         Route::group(['namespace' => 'Dashboard'], function() {
             Route::get('/', 'HomeController@index')->name('home');
             Route::get('dashboard', 'HomeController@index')->name('dashboard');
+        });
+
+        Route::get('test', function () {
+            return view('auth.emails.password')->with(['token' => '23336666', 'user' => \Noah\User::first()]);
         });
 
         return new static;

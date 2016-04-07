@@ -28,11 +28,13 @@ elixir(function (mix) {
         .scripts([
             'jquery/jquery.min.js',
             'classie.js',
+            'helpers.js',
             'jquery/icheck.min.js',
             'notification/notification.custom.js',
             'notification/notificationFx.js',
             'uiProgressButton.js',
-            'dialogFx.js'
+            'dialogFx.js',
+            'vendor/sweetalert.min.js'
         ], 'public/assets/js/app.js');
 
     /*

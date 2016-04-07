@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'PRC',
 
     /*
     |--------------------------------------------------------------------------
@@ -152,6 +152,7 @@ return [
          * Application Service Providers...
          */
         Noah\Providers\AppServiceProvider::class,
+        Noah\Providers\BladeServiceProvider::class,
         Noah\Providers\AuthServiceProvider::class,
         Noah\Providers\EventServiceProvider::class,
         Noah\Providers\RouteServiceProvider::class,
@@ -159,7 +160,7 @@ return [
         /*
          * Socialite Providers... 
          */
-        Laravel\Socialite\SocialiteServiceProvider::class,
+        Cali\Socialite\SocialiteServiceProvider::class,
     ],
 
     /*
@@ -174,7 +175,7 @@ return [
     */
 
     'aliases' => [
-
+        // Laravel defaults
         'App'       => Illuminate\Support\Facades\App::class,
         'Artisan'   => Illuminate\Support\Facades\Artisan::class,
         'Auth'      => Illuminate\Support\Facades\Auth::class,
@@ -206,7 +207,9 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
         
-        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+        'Mailer' => Noah\Library\Facades\Mailer::class,
+        'Site' => Noah\Library\Facades\Site::class,
+        'Socialite' => Cali\Socialite\Facades\Socialite::class,
 
     ],
 
