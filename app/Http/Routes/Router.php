@@ -20,7 +20,6 @@ class Router {
      * 验证 & 注册相关路由
      * 
      * @return static
-     * 
      * @author Cali
      */
     public static function auth()
@@ -52,7 +51,6 @@ class Router {
      * 仪表盘相关路由
      * 
      * @return static
-     * 
      * @author Cali
      */
     public static function dashboards()
@@ -60,10 +58,6 @@ class Router {
         Route::group(['namespace' => 'Dashboard'], function() {
             Route::get('/', 'HomeController@index')->name('home');
             Route::get('dashboard', 'HomeController@index')->name('dashboard');
-        });
-
-        Route::get('test', function () {
-            return view('auth.emails.password')->with(['token' => '23336666', 'user' => \Noah\User::first()]);
         });
 
         return new static;

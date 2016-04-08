@@ -436,7 +436,7 @@ button {
 	button {
 		font-size: 1.1em;
 		margin: 0 20px;
-		font-weight: 300;
+		font-weight: 500;
 		background-color: $themedarkblue;
 		color: #fff;
 		flex: 1;
@@ -445,7 +445,6 @@ button {
 		@include br(10px);
 
 		&:hover {
-			font-weight: 700;
 			text-decoration: none;
 			@include box-shadow-panel();
 		}

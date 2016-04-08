@@ -108,6 +108,11 @@
                 button: "@trans('views.auth.reset.button')",
                 placeholder: "@trans('views.auth.reset.placeholder')",
                 url: "@route('reset-password')"
+            },
+            tips: {
+                loginError: "@trans('views.auth.login.error')",
+                resetError: "@trans('views.auth.reset.error')",
+                resetSuccess: "@trans('views.auth.reset.success')",
             }
         };
         const redirectUrl = "{{ redirect()->intended()->getTargetUrl() }}";

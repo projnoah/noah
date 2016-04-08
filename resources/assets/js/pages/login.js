@@ -23,7 +23,7 @@ $(function () {
         (function () {
             // Make sure we trim BOM and NBSP
             const trim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g;
-            String.prototype.trim = () => {
+            String.prototype.trim = function () {
                 return this.replace(trim, '');
             };
         })();
@@ -192,19 +192,6 @@ $(function () {
         },
 
         /**
-         * Display notification on top
-         * 顶部显示提醒
-         *
-         * @param errorMsg {string}
-         * @author Cali
-         */
-        notify(errorMsg) {
-            const notification = new TopBarNotify('<span class="fa fa-times"></span><p>' + errorMsg + '</p>', 'warning', function () {
-            });
-            notification.display();
-        },
-
-        /**
          * Handle error message and display a notification
          * 验证错误时处理 与 显示提醒消息
          *
@@ -226,7 +213,7 @@ $(function () {
                 errorMsg = JSON.error;
             }
             // Create the notification
-            this.notify(errorMsg);
+            Noah.displayErrorAlert(data.tips.loginError, errorMsg);
         },
 
         /**

@@ -25,6 +25,7 @@ return [
             'remember_me'     => '记住我, 下次免登录',
             'forgot_password' => '忘记密码?',
             'register'        => '注册',
+            'error' => '填写错误',
         ],
         // Registration page
         // 注册页面
@@ -40,7 +41,9 @@ return [
         'reset'    => [
             'title'       => '重置密码',
             'button'      => '重置',
-            'placeholder' => '要重置密码的邮箱地址...'
+            'placeholder' => '要重置密码的邮箱地址...',
+            'success' => '成功发送',
+            'error' => '出错了',
         ],
         // Social connect page
         // 社交平台绑定页面

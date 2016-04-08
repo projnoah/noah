@@ -50,17 +50,17 @@
                     url: form.action,
                     data: $(form).serialize(),
                     error: function (error) {
-                        Noah.displayErrorAlert("出错了", error.responseJSON.message);
+                        Noah.displayErrorAlert(data.tips.resetError, error.responseJSON.message);
                         self.setLoadingButton(true);
                     },
                     success: function (JSON) {
                         self.setLoadingButton(true);
 
                         if (JSON.status === 'succeeded') {
-                            Noah.displaySuccessAlert("成功发送", JSON.message);
+                            Noah.displaySuccessAlert(data.tips.resetSuccess, JSON.message);
                             classie.removeClass(document.querySelector('#reset-dialog'), 'dialog--open');
                         } else {
-                            Noah.displayErrorAlert("出错了", JSON.message);
+                            Noah.displayErrorAlert(data.tips.resetError, JSON.message);
                         }
                     }
                 });

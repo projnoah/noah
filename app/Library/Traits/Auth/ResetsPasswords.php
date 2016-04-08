@@ -19,6 +19,7 @@ trait ResetsPasswords {
      * Display the form to request a password reset link.
      *
      * @return \Illuminate\Http\Response
+     * @author Cali
      */
     public function getEmail()
     {
@@ -29,6 +30,7 @@ trait ResetsPasswords {
      * Display the form to request a password reset link.
      *
      * @return \Illuminate\Http\Response
+     * @author Cali
      */
     public function showLinkRequestForm()
     {
@@ -48,6 +50,7 @@ trait ResetsPasswords {
      *
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
+     * @author Cali
      */
     public function postEmail(Request $request)
     {
@@ -59,6 +62,7 @@ trait ResetsPasswords {
      *
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
+     * @author Cali
      */
     public function sendResetLinkEmail(Request $request)
     {
@@ -91,6 +95,7 @@ trait ResetsPasswords {
      * Get the Closure which is used to build the password reset email message.
      *
      * @return \Closure
+     * @author Cali
      */
     protected function resetEmailBuilder()
     {
@@ -104,10 +109,11 @@ trait ResetsPasswords {
      * Get the e-mail subject line to be used for the reset link email.
      *
      * @return string
+     * @author Cali
      */
     protected function getEmailSubject()
     {
-        return property_exists($this, 'subject') ? $this->subject : Mailer::subjectPrefix() . trans('passwords.email.subject');
+        return property_exists($this, 'subject') ? $this->subject : trans('passwords.email.subject');
     }
 
     /**
@@ -115,6 +121,7 @@ trait ResetsPasswords {
      *
      * @param  string $response
      * @return \Symfony\Component\HttpFoundation\Response
+     * @author Cali
      */
     protected function getSendResetLinkEmailSuccessResponse($response)
     {
@@ -129,6 +136,7 @@ trait ResetsPasswords {
      *
      * @param  string $response
      * @return \Symfony\Component\HttpFoundation\Response
+     * @author Cali
      */
     protected function getSendResetLinkEmailFailureResponse($response)
     {
@@ -146,6 +154,7 @@ trait ResetsPasswords {
      * @param  \Illuminate\Http\Request $request
      * @param  string|null              $token
      * @return \Illuminate\Http\Response
+     * @author Cali
      */
     public function getReset(Request $request, $token = null)
     {
@@ -160,6 +169,7 @@ trait ResetsPasswords {
      * @param  \Illuminate\Http\Request $request
      * @param  string|null              $token
      * @return \Illuminate\Http\Response
+     * @author Cali
      */
     public function showResetForm(Request $request, $token = null)
     {
@@ -185,6 +195,7 @@ trait ResetsPasswords {
      *
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
+     * @author Cali
      */
     public function postReset(Request $request)
     {
@@ -196,6 +207,7 @@ trait ResetsPasswords {
      *
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
+     * @author Cali
      */
     public function reset(Request $request)
     {
@@ -224,6 +236,7 @@ trait ResetsPasswords {
      * Get the password reset validation rules.
      *
      * @return array
+     * @author Cali
      */
     protected function getResetValidationRules()
     {
@@ -239,7 +252,7 @@ trait ResetsPasswords {
      *
      * @param  \Illuminate\Contracts\Auth\CanResetPassword $user
      * @param  string                                      $password
-     * @return void
+     * @author Cali
      */
     protected function resetPassword($user, $password)
     {
@@ -255,6 +268,7 @@ trait ResetsPasswords {
      *
      * @param  string $response
      * @return \Symfony\Component\HttpFoundation\Response
+     * @author Cali
      */
     protected function getResetSuccessResponse($response)
     {
@@ -267,6 +281,7 @@ trait ResetsPasswords {
      * @param  Request $request
      * @param  string  $response
      * @return \Symfony\Component\HttpFoundation\Response
+     * @author Cali
      */
     protected function getResetFailureResponse(Request $request, $response)
     {
@@ -279,6 +294,7 @@ trait ResetsPasswords {
      * Get the broker to be used during password reset.
      *
      * @return string|null
+     * @author Cali
      */
     public function getBroker()
     {
@@ -289,6 +305,7 @@ trait ResetsPasswords {
      * Get the guard to be used during password reset.
      *
      * @return string|null
+     * @author Cali
      */
     protected function getGuard()
     {

@@ -3903,7 +3903,7 @@ button {
   .login-options button {
     font-size: 1.1em;
     margin: 0 20px;
-    font-weight: 300;
+    font-weight: 500;
     background-color: #0d3b62;
     color: #fff;
     -webkit-flex: 1;
@@ -3921,7 +3921,6 @@ button {
     -ms-border-radius: 10px;
     -o-border-radius: 10px; }
     .login-options button:hover {
-      font-weight: 700;
       text-decoration: none;
       box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15); }
     .login-options button:nth-of-type(1) {

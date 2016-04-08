@@ -10258,17 +10258,17 @@ exports.default = {
                 url: form.action,
                 data: $(form).serialize(),
                 error: function error(_error) {
-                    Noah.displayErrorAlert(data.tips.resetError, _error.responseJSON.message);
+                    Noah.displayErrorAlert("出错了", _error.responseJSON.message);
                     self.setLoadingButton(true);
                 },
                 success: function success(JSON) {
                     self.setLoadingButton(true);
 
                     if (JSON.status === 'succeeded') {
-                        Noah.displaySuccessAlert(data.tips.resetSuccess, JSON.message);
+                        Noah.displaySuccessAlert("成功发送", JSON.message);
                         classie.removeClass(document.querySelector('#reset-dialog'), 'dialog--open');
                     } else {
-                        Noah.displayErrorAlert(data.tips.resetError, JSON.message);
+                        Noah.displayErrorAlert("出错了", JSON.message);
                     }
                 }
             });
@@ -10334,10 +10334,12 @@ $(function () {
     // Trim declaration
     if (!String.prototype.trim) {
         (function () {
+            var _this = this;
+
             // Make sure we trim BOM and NBSP
             var trim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g;
             String.prototype.trim = function () {
-                return this.replace(trim, '');
+                return _this.replace(trim, '');
             };
         })();
     }
@@ -10462,7 +10464,7 @@ $(function () {
          * @author Cali
          */
         submit: function submit() {
-            var _this = this;
+            var _this2 = this;
 
             var has_empty_field = false;
             $('input.input__field--login').each(function () {
@@ -10479,7 +10481,7 @@ $(function () {
 
             // Let's send a request to login
             setTimeout(function () {
-                return _this.sendLoginRequest(_this.$form);
+                return _this2.sendLoginRequest(_this2.$form);
             }, 200);
         },
 
@@ -10492,34 +10494,47 @@ $(function () {
          * @author Cali
          */
         sendLoginRequest: function sendLoginRequest(form) {
-            var _this2 = this;
+            var _this3 = this;
 
             $.post({
                 url: $(form).attr('action'),
                 data: $(form).serializeArray(),
                 error: function error(_error) {
-                    _this2.buttonLock = false;
-                    _this2.setLoginStatus(false);
+                    _this3.buttonLock = false;
+                    _this3.setLoginStatus(false);
                     console.log(JSON.parse(_error.responseText));
                 },
                 success: function success(JSON) {
-                    _this2.buttonLock = false;
+                    _this3.buttonLock = false;
 
                     if (JSON.status == 'succeeded') {
                         // Login success
-                        _this2.setLoginStatus(true);
+                        _this3.setLoginStatus(true);
                         // Redirect back to the intended url
                         setTimeout(function () {
                             return window.location.href = JSON.redirect;
                         }, 1000);
                     } else {
                         // Login failed
-                        _this2.setLoginStatus(false);
+                        _this3.setLoginStatus(false);
                         // Handle error message
-                        _this2.handleError(JSON);
+                        _this3.handleError(JSON);
                     }
                 }
             });
+        },
+
+
+        /**
+         * Display notification on top
+         * 顶部显示提醒
+         *
+         * @param errorMsg {string}
+         * @author Cali
+         */
+        notify: function notify(errorMsg) {
+            var notification = new TopBarNotify('<span class="fa fa-times"></span><p>' + errorMsg + '</p>', 'warning', function () {});
+            notification.display();
         },
 
 
@@ -10545,7 +10560,7 @@ $(function () {
                 errorMsg = JSON.error;
             }
             // Create the notification
-            Noah.displayErrorAlert(data.tips.loginError, errorMsg);
+            this.notify(errorMsg);
         },
 
 
@@ -10650,4 +10665,4 @@ $(function () {
 
 },{"./components/password-reset-dialog.vue":4,"vue":3}]},{},[5]);
 
-//# sourceMappingURL=login.js.map
+//# sourceMappingURL=login.es6.js.map

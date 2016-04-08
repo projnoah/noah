@@ -1,4 +1,5 @@
 var elixir = require('laravel-elixir');
+// elixir.config.sourcemaps = false;
 
 require('laravel-elixir-vueify');
 
@@ -28,13 +29,19 @@ elixir(function (mix) {
         .scripts([
             'jquery/jquery.min.js',
             'classie.js',
-            'helpers.js',
             'jquery/icheck.min.js',
             'notification/notification.custom.js',
             'notification/notificationFx.js',
             'uiProgressButton.js',
             'dialogFx.js',
             'vendor/sweetalert.min.js'
+        ], 'resources/assets/js/builds/app.js')
+        .browserify([
+            'helpers.js',
+        ], 'resources/assets/js/builds/helpers.js')
+        .scripts([
+            'builds/app.js',
+            'builds/helpers.js'
         ], 'public/assets/js/app.js');
 
     /*
