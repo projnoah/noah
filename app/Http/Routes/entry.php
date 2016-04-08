@@ -11,4 +11,5 @@
 |
 */
 
-Router::dashboards()->auth();
+Router::dashboards()
+    ->auth();

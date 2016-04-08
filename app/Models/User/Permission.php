@@ -4,41 +4,34 @@ namespace Noah;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Tag extends Model {
+class Permission extends Model {
 
     /*
      |------------------------------------------------------------
-     | Tag Model
-     | 标签 模型
+     | Permission Model
      |------------------------------------------------------------
+     |
+     | Permissions to be granted in order to do something
      |
      | @project Project Noah
      | @author Cali
      |
      */
 
-    /**
-     * Fillable attributes.
-     *
-     * @var array
-     */
-    protected $fillable = [
-
-    ];
-
     /*
      * Relationship starts
      */
 
     /**
-     * The blogs it belongs to.
+     * The roles it belongs to.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     *
      * @author Cali
      */
-    public function blogs()
+    public function roles()
     {
-        return $this->belongsToMany(Blog::class);
+        return $this->belongsToMany(Role::class);
     }
 
     /*

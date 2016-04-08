@@ -48,17 +48,17 @@ class Configuration extends Model {
 
     /**
      * Call dynamic method by string.
-     * 
+     *
      * @param $expression
      * @return mixed
-     * 
+     *
      * @author Cali
      */
     public static function callByExpression($expression)
     {
         return static::__callStatic($expression, []);
     }
-    
+
     /**
      * Handle dynamic method calls into the model.
      *
@@ -81,23 +81,60 @@ class Configuration extends Model {
             return call_user_func_array([$query, $method], $parameters);
         }
 
-        return $this->getConfiguration($method);
+        $method = $this->filterKey($method);
+
+        return !!count($parameters) ?
+            $this->updateOrCreate($method, $parameters) :
+            $this->getConfiguration($method);
+    }
+
+    /**
+     * Get the filtered key.
+     *
+     * @param $key
+     * @return string
+     *
+     * @author Cali
+     */
+    public function filterKey($key)
+    {
+        return in_array($key, $this->needPrefixKeys) ?
+            snake_case($this->prefix . $key) :
+            snake_case($key);
     }
 
     /**
      * Get configuration according to the method.
-     * 
-     * @param $method
+     *
+     * @param $key
      * @return string
-     * 
+     *
      * @author Cali
      */
-    protected function getConfiguration($method)
+    protected function getConfiguration($key)
     {
-        return static::getConfigurationByKey(
-            in_array($method, $this->needPrefixKeys) ?
-                snake_case($this->prefix . $method) :
-                snake_case($method));
+        return static::getConfigurationByKey($key);
     }
 
+    /**
+     * Update or create a new config by the key.
+     *
+     * @param $key
+     * @param $values
+     * @return bool|int|static
+     *
+     * @author Cali
+     */
+    public function updateOrCreate($key, $values)
+    {
+        $attributes = [
+            'key'   => $key,
+            'value' => implode(',', $values)
+        ];
+
+        return is_null(static::where('key', $key)->first()) ?
+            static::create($attributes) :
+            static::where('key', $key)
+                ->update($attributes);
+    }
 }

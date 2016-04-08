@@ -24,6 +24,7 @@ class User extends BaseUser {
      * The attributes that are mass assignable.
      *
      * @var array
+     *
      * @author Cali
      */
     protected $fillable = [
@@ -34,27 +35,50 @@ class User extends BaseUser {
      * The attributes that are excluded to present.
      *
      * @var array
+     *
      * @author Cali
      */
     protected $hidden = [
         'password', 'remember_token', 'social_info'
     ];
 
+    /*
+     * Relationships starts
+     */
+
     /**
      * The user's avatar
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     *
      * @author Cali
      */
     public function avatar()
     {
-        return $this->hasOne(UserAvatar::class);
+        return $this->hasOne(Avatar::class);
     }
+
+    /**
+     * The user's roles.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     *
+     * @author Cali
+     */
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class);
+    }
+
+    /*
+    * Relationships ends
+    */
 
     /**
      * Fetch the user's avatar url.
      *
      * @return string
+     *
      * @author Cali
      */
     public function getAvatarUrlAttribute()
@@ -62,5 +86,25 @@ class User extends BaseUser {
         return $this->avatar->type === 0 ?
             url($this->avatar->src) :
             $this->avatar->src;
+    }
+
+    /**
+     * Check if has a role.
+     *
+     * @param $role
+     * @return bool
+     *
+     * @author Cali
+     */
+    public function hasRole($role)
+    {
+        if ($role instanceof Role) {
+            return !!$this->roles()
+                ->where($role->primaryKey, $role->id)
+                ->first();
+        }
+
+        // If a string given
+        return !!$this->roles()->where(Role::name, $role)->first();
     }
 }

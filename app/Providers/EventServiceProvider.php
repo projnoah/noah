@@ -13,8 +13,8 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'Noah\Events\SomeEvent' => [
-            'Noah\Listeners\EventListener',
+        'Noah\Events\BroadcastTestEvent' => [
+            'Noah\Listeners\BroadcastListener',
         ],
     ];
 

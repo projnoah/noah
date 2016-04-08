@@ -22,17 +22,19 @@ class SiteConfiguration extends Configuration {
      * 获取视图中的标题后缀
      *
      * @return string
+     * 
      * @author Cali
      */
     public static function title()
     {
         return static::separator() . " " . static::siteTitle();
     }
-
+    
     /**
      * Get the site logo.
      *
      * @return string
+     * 
      * @author Cali
      */
     public static function logo()

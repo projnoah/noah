@@ -19,6 +19,8 @@ class CreateMediasTable extends Migration {
             $table->string('title', 100)->index();
             $table->string('mime_type');
             $table->timestamps();
+            
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

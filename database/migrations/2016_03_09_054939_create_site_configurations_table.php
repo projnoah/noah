@@ -18,17 +18,15 @@ class CreateSiteConfigurationsTable extends Migration {
             $table->text('value');
             $table->timestamps();
         });
-
-        DB::table('site_configurations')->insert([
-            ["key" => "site_url", "value" => url('')],
-            ["key" => "home_url", "value" => url('dashboard')],
-            ["key" => "site_title", "value" => "Project Noah"],
-            ["key" => "site_description", "value" => "A modern web tool for site owners"],
-            ["key" => "site_separator", "value" => "::"],
-            ["key" => "site_keywords", "value" => "modern,noah,project noah"],
-            ["key" => "admin_email", "value" => "cali@projnoah.com"],
-            ["key" => "registration_on", "value" => "1"],
-        ]);
+        
+        Site::url(url('/'));
+        Site::homeUrl(url('dashboard'));
+        Site::siteTitle("Project Noah");
+        Site::description("服务于快速建社交/博客站的站长的工具, 优雅, 现代, 简洁与全能");
+        Site::separator("::");
+        Site::keywords("modern", "noah", "project noah");
+        Site::adminEmail("cali@calicastle.com");
+        Site::registrationOn("1");
     }
 
     /**
