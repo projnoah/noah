@@ -9,6 +9,7 @@ class Avatar extends Model {
     /*
      |------------------------------------------------------------
      | Avatar Model
+     | 头像 模型
      |------------------------------------------------------------
      |
      | The model is responsible for storing the user's
@@ -19,6 +20,20 @@ class Avatar extends Model {
      | @author Cali
      |
      */
+
+    /**
+     * The local type lookup.
+     *
+     * @var int
+     */
+    const TYPE_LOCAL = 0;
+
+    /**
+     * The remote type lookup.
+     *
+     * @var int
+     */
+    const TYPE_REMOTE = 1;
 
     /**
      * Database table.
@@ -36,6 +51,10 @@ class Avatar extends Model {
         'type', 'src'
     ];
 
+    /*
+     * Relationship starts
+     */
+
     /**
      * The user it belongs to.
      *
@@ -47,4 +66,8 @@ class Avatar extends Model {
     {
         return $this->belongsTo(User::class);
     }
+
+    /*
+     * Relationship ends
+     */
 }

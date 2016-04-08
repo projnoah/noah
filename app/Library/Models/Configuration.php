@@ -7,10 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Configuration extends Model {
 
     /**
-     * The attributes that are mass assignable.
-     * 可批量赋值的白名单
-     *
-     * @var array
+     * {@inheritdoc}
      */
     protected $fillable = [
         "key", "value"
@@ -18,19 +15,17 @@ class Configuration extends Model {
 
     /**
      * The keys that need to prepend a prefix.
-     *
+     * 
      * @var array
      */
-    protected $needPrefixKeys = [
-        "url", "title", "description", "separator", "keywords"
-    ];
+    protected $needPrefixKeys = [];
 
     /**
      * The prefix to be prepended on $needPrefixKeys.
-     *
+     * 
      * @var string
      */
-    protected $prefix = 'site_';
+    protected $prefix = '';
 
     /**
      * Get configuration value by the given key

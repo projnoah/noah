@@ -75,6 +75,27 @@ class User extends BaseUser {
     */
 
     /**
+     * Activate the user by its email.
+     *
+     * @param $email
+     * @return bool
+     *
+     * @author Cali
+     */
+    public static function activateByEmail($email)
+    {
+        $user = static::where('email', $email)->first();
+
+        if (!$user->active) {
+            $user->active = true;
+
+            return $user->save();
+        }
+
+        return false;
+    }
+
+    /**
      * Fetch the user's avatar url.
      *
      * @return string

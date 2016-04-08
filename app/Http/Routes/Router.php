@@ -36,6 +36,9 @@ class Router {
         Route::post('password/email', 'Auth\PasswordController@sendResetLinkEmail')->name('reset-password');
         Route::post('password/reset', 'Auth\PasswordController@reset');
 
+        // Email Confirmation...
+        Route::get('auth/confirm', 'Auth\AuthController@confirmRegistration')->name('confirm-email');
+
         // Third Party Authentications...
         Route::get('auth/{service}/callback', 'Auth\AuthController@callback');
         Route::get('auth/{service}', 'Auth\AuthController@socialLogin')->name('social');

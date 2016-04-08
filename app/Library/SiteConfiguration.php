@@ -18,6 +18,22 @@ class SiteConfiguration extends Configuration {
     */
 
     /**
+     * The keys that need to prepend a prefix.
+     *
+     * @var array
+     */
+    protected $needPrefixKeys = [
+        "url", "title", "description", "separator", "keywords"
+    ];
+
+    /**
+     * The prefix to be prepended on $needPrefixKeys.
+     *
+     * @var string
+     */
+    protected $prefix = 'site_';
+    
+    /**
      * Get the title suffix in views
      * 获取视图中的标题后缀
      *

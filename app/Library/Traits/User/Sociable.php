@@ -2,6 +2,7 @@
 
 namespace Noah\Library\Traits\User;
 
+use Noah\Avatar;
 use Socialite;
 use Cali\Socialite\Two\User as UserData;
 
@@ -73,7 +74,7 @@ trait Sociable {
     {
         $this->avatar()->create([
             'src'  => $avatar,
-            'type' => 1
+            'type' => Avatar::TYPE_REMOTE
         ]);
         
         return $this;

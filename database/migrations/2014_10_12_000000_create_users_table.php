@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration {
             $table->string('password', 60)->nullable();
             $table->text('social_info')->nullable();
             $table->unsignedInteger('experience')->default(0);
+            $table->boolean('active')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });

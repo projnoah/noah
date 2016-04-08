@@ -139,5 +139,6 @@
     }
     .no-reply {
         color: #bbbbbb;
+        text-align: center;
     }
 </style>

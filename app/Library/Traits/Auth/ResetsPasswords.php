@@ -4,11 +4,13 @@ namespace Noah\Library\Traits\Auth;
 
 use Site;
 use Auth;
+use Event;
 use Mailer;
 use Password;
 use Validator;
 use Illuminate\Http\Request;
 use Illuminate\Mail\Message;
+use Noah\Events\User\Auth\UserWasReset;
 use Illuminate\Foundation\Auth\RedirectsUsers;
 
 trait ResetsPasswords {
@@ -272,6 +274,8 @@ trait ResetsPasswords {
      */
     protected function getResetSuccessResponse($response)
     {
+        Event::fire(new UserWasReset(Auth::user()));
+
         return redirect($this->redirectPath())->with('status', trans($response));
     }
 

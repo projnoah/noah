@@ -2,8 +2,10 @@
 
 namespace Noah\Http\Controllers\Auth;
 
+use Crypt;
 use Noah\User;
 use Validator;
+use Illuminate\Http\Request;
 use Noah\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Noah\Library\Traits\Auth\AuthenticatesAndRegistersUsers;
@@ -46,7 +48,7 @@ class AuthController extends Controller {
      */
     public function __construct()
     {
-        $this->middleware('guest', ['except' => 'logout']);
+        $this->middleware('guest', ['except' => ['logout', 'confirmRegistration']]);
     }
 
     /**
@@ -82,5 +84,23 @@ class AuthController extends Controller {
             'email'    => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+    }
+
+    /**
+     * Confirm the registration through email.
+     *
+     * @param Request $request
+     * @return mixed
+     *
+     * @author Cali
+     */
+    public function confirmRegistration(Request $request)
+    {
+        $email = Crypt::decrypt($request->input('token'));
+
+        // TODO:
+        return User::activateByEmail($email) ?
+            redirect($this->redirectPath())->with('status', 'success') :
+            redirect('/');
     }
 }

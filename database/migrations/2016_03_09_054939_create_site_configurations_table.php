@@ -18,11 +18,11 @@ class CreateSiteConfigurationsTable extends Migration {
             $table->text('value');
             $table->timestamps();
         });
-        
+
         Site::url(url('/'));
         Site::homeUrl(url('dashboard'));
         Site::siteTitle("Project Noah");
-        Site::description("服务于快速建社交/博客站的站长的工具, 优雅, 现代, 简洁与全能");
+        Site::description("优雅, 现代, 简洁与全能. 服务于快速建社交/博客站的站长的工具.");
         Site::separator("::");
         Site::keywords("modern", "noah", "project noah");
         Site::adminEmail("cali@calicastle.com");

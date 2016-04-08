@@ -28,7 +28,6 @@ class RouteServiceProvider extends ServiceProvider
         //
 
         parent::boot($router);
-        $this->registerSiteConfiguration();
     }
 
     /**
@@ -57,16 +56,6 @@ class RouteServiceProvider extends ServiceProvider
             'namespace' => $this->namespace, 'middleware' => 'web',
         ], function ($router) {
             require app_path('Http/Routes/entry.php');
-        });
-    }
-
-    /**
-     * Register the SiteConfiguration class to $site var.
-     */
-    private function registerSiteConfiguration()
-    {
-        view()->composer('*', function($view) {
-            $view->with(['site' => Site::class]);
         });
     }
 }

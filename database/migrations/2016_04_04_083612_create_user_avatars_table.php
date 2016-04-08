@@ -16,7 +16,7 @@ class CreateUserAvatarsTable extends Migration {
             $table->charset = 'utf8';
             $table->collation = 'utf8_general_ci';
 
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->unsignedInteger('user_id')->index();
             $table->string('src')->nullable()->index();
             // 0: Local, 1: Remote

@@ -2,7 +2,7 @@
 
 @push('styles')
 <style>
-    .reset-button {
+    .confirm-button {
         width: 150px;
         border-radius: 8px;
         position: relative;
@@ -10,24 +10,24 @@
         text-align: center;
         margin-bottom: 1.5em;
     }
-    .reset-button a {
+    .confirm-button a {
         width: 100%;
         padding: .85em 0;
         display: inline-block;
     }
-    .reset-button a:hover {
+    .confirm-button a:hover {
         text-decoration: none;
     }
 </style>
 @endpush
 
 @section('content')
-    <p>@trans('passwords.email.description')</p>
-    <h3>@trans('passwords.email.click')</h3>
-    <div class="reset-button">
-        <a href="@route('reset', ['token' => $token])">@trans('passwords.email.reset-button')</a>
+    <p>@trans('emails.auth.registered.subject')</p>
+    <h3>@trans('emails.auth.registered.description')</h3>
+    <div class="confirm-button">
+        <a href="@route('confirm-email', ['token' => $token])">@trans('emails.auth.registered.button')</a>
     </div>
     <small>@trans('emails.fallback')</small>
     <br>
-    <a href="@route('reset', ['token' => $token])">@route('reset', ['token' => $token])</a>
+    <a href="@route('confirm-email', ['token' => $token])">@route('confirm-email', ['token' => $token])</a>
 @stop

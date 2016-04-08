@@ -5,8 +5,8 @@ namespace Noah\Providers;
 use Blade;
 use Illuminate\Support\ServiceProvider;
 
-class BladeServiceProvider extends ServiceProvider
-{
+class BladeServiceProvider extends ServiceProvider {
+
     /**
      * Bootstrap the application services.
      *
@@ -28,6 +28,7 @@ class BladeServiceProvider extends ServiceProvider
         $this->registerUrlDirective();
         $this->registerRouteDirective();
         $this->registerSiteDirective();
+        $this->registerAuthDirectives();
     }
 
     /**
@@ -79,6 +80,27 @@ class BladeServiceProvider extends ServiceProvider
     {
         Blade::directive('site', function ($expression) {
             return "<?php echo Site::callByExpression{$expression} ?>";
+        });
+    }
+
+    /**
+     * Register @check and @guest for Auth Facade.
+     *
+     * @author Cali
+     */
+    private function registerAuthDirectives()
+    {
+        Blade::directive('check', function () {
+            return "<?php if(auth()->check()): ?>";
+        });
+        Blade::directive('endcheck', function () {
+            return "<?php endif; ?>";
+        });
+        Blade::directive('guest', function () {
+            return "<?php if(auth()->guest()): ?>";
+        });
+        Blade::directive('endguest', function () {
+            return "<?php endif; ?>";
         });
     }
 }

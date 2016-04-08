@@ -3,6 +3,8 @@
 namespace Noah\Library\Traits\Auth;
 
 use Auth;
+use Event;
+use Noah\Events\User\Auth\UserWasRegistered;
 use Validator;
 use Noah\User;
 use Socialite;
@@ -29,7 +31,7 @@ trait SocialAuthenticatesUsers {
      * @var Validator
      */
     protected $validator;
-    
+
     /**
      * Redirect user to the related service auth.
      *
@@ -86,17 +88,17 @@ trait SocialAuthenticatesUsers {
         $this->createAndLoginUser($request);
 
         return [
-            'status' => 'succeeded',
+            'status'   => 'succeeded',
             'redirect' => $this->redirectPath()
         ];
     }
 
     /**
      * If passes the validation.
-     * 
+     *
      * @param Request $request
      * @return bool
-     * 
+     *
      * @author Cali
      */
     protected function socialValidated(Request $request)
@@ -105,15 +107,15 @@ trait SocialAuthenticatesUsers {
             'username' => 'required|max:191|min:3|unique:users',
             'email'    => 'required|email|max:191|unique:users'
         ]);
-        
+
         return !$this->validator->fails();
     }
 
     /**
      * Get the failed messages for displaying.
-     * 
+     *
      * @return array
-     * 
+     *
      * @author Cali
      */
     protected function failedMessages()
@@ -139,6 +141,9 @@ trait SocialAuthenticatesUsers {
 
         $user->saveRemoteAvatar($request->input('avatar'))
             ->save();
+
+        // Fire event
+        Event::fire(new UserWasRegistered($user));
 
         return $user;
     }
