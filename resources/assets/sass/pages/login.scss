@@ -443,10 +443,12 @@ button {
 		padding: 12px;
 		@include ts();
 		@include br(10px);
+		border: 2px solid $themedarkblue;
 
 		&:hover {
 			text-decoration: none;
-			@include box-shadow-panel();
+			color: $themedarkblue;
+			background: #fff;
 		}
 
 		@extend .animated, .fadeInUp;
@@ -533,4 +535,10 @@ button {
 
 .background-container {
 	background: url("/assets/backgrounds/login.png");
+}
+
+@media (min-width: 200px) and (max-width: 550px) {
+	.dialog--open .dialog__content {
+		width: 480px !important;
+	}
 }

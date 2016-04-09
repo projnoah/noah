@@ -59,7 +59,12 @@ class Router {
         Route::group(['namespace' => 'Dashboard'], function() {
             Route::get('/', 'HomeController@index')->name('home');
             Route::get('dashboard', 'HomeController@index')->name('dashboard');
+            Route::get('search/{keyword?}', 'HomeController@search')->name('search');
         });
+
+//        Route::get('test', function () {
+//            return view('auth.emails.password', ['user' => Noah\User::first(), 'token' => 'safjl12asf']);
+//        });
 
         return new static;
     }

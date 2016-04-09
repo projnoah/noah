@@ -80,6 +80,18 @@ return [
             'url_type'  => 'publicURL',
         ],
 
+        'qiniu' => [
+            'driver'     => 'qiniu',
+            'domains'    => [
+                'default' => env('QINIU_DOMAIN_DEFAULT', 'xxxxx.com1.z0.glb.clouddn.com'),
+                'https'   => env('QINIU_DOMAIN_HTTPS', 'dn-yourdomain.qbox.me'),
+                'custom'  => env('QINIU_DOMAIN_CUSTOM', 'static.abc.com'),
+            ],
+            'access_key' => env('QINIU_ACCESS_KEY'),
+            'secret_key' => env('QINIU_SECRET_KEY'),
+            'bucket'     => env('QINIU_BUCKET'),
+            'notify_url' => env('QINIU_NOTIFY_URL'),
+        ],
     ],
 
 ];

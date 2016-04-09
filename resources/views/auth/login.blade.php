@@ -6,6 +6,10 @@
     <link rel="stylesheet" href="/assets/css/pages/login.css">
 @endpush
 
+@push('scripts.header')
+<script>var HAS_VUE = true;</script>
+@endpush
+
 @section('content')
     <div class="container login-wrapper">
         <div class="login-panel" :class="{'register': isRegister, 'login' : !isRegister }" id="panel">
@@ -59,7 +63,7 @@
 
 @push('scripts.footer')
     <script>
-        const data = {
+        var data = {
             isRegister: '{{ request()->url() === route('sign-in') ? 'false' : 'true' }}',
             login: {
                 title: "@trans("views.auth.login.header_title")",
@@ -115,7 +119,7 @@
                 resetSuccess: "@trans('views.auth.reset.success')",
             }
         };
-        const redirectUrl = "{{ redirect()->intended()->getTargetUrl() }}";
+        var redirectUrl = "{{ redirect()->intended()->getTargetUrl() }}";
     </script>
     <script src="/assets/js/pages/login.js"></script>
 @endpush

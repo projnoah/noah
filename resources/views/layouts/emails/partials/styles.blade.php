@@ -11,7 +11,6 @@
         -moz-osx-font-smoothing: grayscale;
     }
     #wrapper {
-        background: linear-gradient(to bottom, rgb(12, 53, 88), rgb(61, 99, 145)) rgb(61, 99, 145);
         display: flex;
         justify-content: center;
         align-items: center;
@@ -140,5 +139,30 @@
     .no-reply {
         color: #bbbbbb;
         text-align: center;
+    }
+    @media (min-width: 250px) and (max-width: 600px) {
+        h1 {
+            font-size: 1.8em;
+        }
+        h2 {
+            font-size: 1.5em;
+        }
+        h3 {
+            font-size: 1.05em;
+        }
+        h4 {
+            font-size: .9em;
+        }
+        p {
+            font-size: .8em;
+        }
+        .hello span {
+            font-size: 1.2em;
+            width: 65%;
+        }
+        .hello .avatar {
+            display: inline-block;
+            width: calc(35% - 10px);
+        }
     }
 </style>

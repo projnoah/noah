@@ -3644,7 +3644,7 @@
     top: 100%;
     left: 0;
     background: #fff;
-    border-top: 4px solid #584781;
+    border-top: 4px solid #87b2c8;
     -webkit-transform: translate3d(0, -3px, 0);
     transform: translate3d(0, -3px, 0);
     transition: -webkit-transform 0.4s;
@@ -3673,7 +3673,7 @@
 
 .input__field--login:focus + .input__label--login .input__label-content--login,
 .input--filled .input__label-content--login {
-  color: #584781;
+  color: #87b2c8;
   -webkit-transform: translate3d(0, -3.3em, 0) scale3d(0.81, 0.81, 1);
   transform: translate3d(0, -3.3em, 0) scale3d(0.81, 0.81, 1); }
 
@@ -3764,16 +3764,16 @@
     padding: 0;
     width: 250px;
     height: 70px;
-    border: 2px solid #584781;
+    border: 2px solid #87b2c8;
     border-radius: 40px;
     background: transparent;
-    color: #584781;
+    color: #87b2c8;
     letter-spacing: 1px;
     font-size: 18px;
     -webkit-tap-highlight-color: transparent;
     transition: background-color 0.3s, color 0.3s, width 0.3s, border-width 0.3s, border-color 0.3s; }
     .progress-button button:hover {
-      background-color: #584781;
+      background-color: #87b2c8;
       color: #f9f7f6; }
     .progress-button button:focus {
       outline: none; }
@@ -3919,10 +3919,12 @@ button {
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
     -ms-border-radius: 10px;
-    -o-border-radius: 10px; }
+    -o-border-radius: 10px;
+    border: 2px solid #0d3b62; }
     .login-options button:hover {
       text-decoration: none;
-      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15); }
+      color: #0d3b62;
+      background: #fff; }
     .login-options button:nth-of-type(1) {
       -webkit-animation-delay: 0.7s;
       animation-delay: 0.7s; }
@@ -3989,7 +3991,7 @@ button {
       -o-border-radius: 4px;
       font-size: 1.2em;
       color: #fff;
-      background-color: #584781;
+      background-color: #87b2c8;
       margin-top: 15px; }
 
 .dialog--open .email {
@@ -4009,5 +4011,9 @@ button {
 
 .background-container {
   background: url("/assets/backgrounds/login.png"); }
+
+@media (min-width: 200px) and (max-width: 550px) {
+  .dialog--open .dialog__content {
+    width: 480px !important; } }
 
 /*# sourceMappingURL=login.css.map */

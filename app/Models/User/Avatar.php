@@ -36,6 +36,13 @@ class Avatar extends Model {
     const TYPE_REMOTE = 1;
 
     /**
+     * The default avatar uri.
+     *
+     * @var string
+     */
+    const DEFAULT_URI = "assets/images/no-avatar.png";
+
+    /**
      * Database table.
      *
      * @var string
@@ -70,4 +77,16 @@ class Avatar extends Model {
     /*
      * Relationship ends
      */
+
+    /**
+     * Get the default avatar URL.
+     *
+     * @return string
+     *
+     * @author Cali
+     */
+    public static function defaultUrl()
+    {
+        return url(static::DEFAULT_URI);
+    }
 }

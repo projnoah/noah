@@ -161,6 +161,11 @@ return [
          * Socialite Providers... 
          */
         Cali\Socialite\SocialiteServiceProvider::class,
+
+        /*
+         * Storage Providers...
+         */
+        zgldh\QiniuStorage\QiniuFilesystemServiceProvider::class,
     ],
 
     /*

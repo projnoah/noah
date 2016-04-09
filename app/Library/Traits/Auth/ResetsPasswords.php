@@ -14,6 +14,21 @@ use Illuminate\Foundation\Auth\RedirectsUsers;
 
 trait ResetsPasswords {
 
+    /*
+     |------------------------------------------------------------
+     | Resets Passwords Trait
+     | 密码重置 Trait
+     |------------------------------------------------------------
+     |
+     | It is responsible for making password reset request
+     | and also handles when the user clicked via email.
+     | Log the user in after reset validation passes.
+     |
+     | @project Project Noah
+     | @author Cali
+     |
+     */
+    
     use RedirectsUsers;
 
     /**

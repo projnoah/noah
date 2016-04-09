@@ -88,8 +88,9 @@ class User extends BaseUser {
      */
     public static function register($attributes)
     {
-        $attributes['password'] = bcrypt($attributes['password']);
-        $user = static::create($attributes);
+        $user = self::create(
+            self::getRegisterAttributes($attributes)
+        );
 
         event(new UserHasRegistered($user));
 
@@ -118,7 +119,7 @@ class User extends BaseUser {
     public function passwordHasReset()
     {
         event(new UserHasReset($this));
-        
+
         return $this;
     }
 
@@ -152,7 +153,11 @@ class User extends BaseUser {
      */
     public function getAvatarUrlAttribute()
     {
-        return $this->avatar->type === 0 ?
+        if (is_null($this->avatar)) {
+            return Avatar::defaultUrl();
+        }
+
+        return $this->avatar->type === Avatar::TYPE_LOCAL ?
             url($this->avatar->src) :
             $this->avatar->src;
     }
@@ -175,5 +180,23 @@ class User extends BaseUser {
 
         // If a string given
         return !!$this->roles()->where(Role::name, $role)->first();
+    }
+
+    /**
+     * Get appropriate attributes for registration.
+     *
+     * @param $attributes
+     * @return array
+     *
+     * @author Cali
+     */
+    private static function getRegisterAttributes($attributes)
+    {
+        if (!array_has($attributes, 'name')) {
+            $attributes = array_add($attributes, 'name', $attributes['username']);
+        }
+        $attributes['password'] = bcrypt($attributes['password']);
+
+        return $attributes;
     }
 }
