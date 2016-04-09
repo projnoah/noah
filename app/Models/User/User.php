@@ -2,7 +2,10 @@
 
 namespace Noah;
 
+use Noah\Events\User\Auth\UserHasReset;
 use Noah\Library\Traits\User\Sociable;
+use Noah\Events\User\Auth\UserHasLoggedIn;
+use Noah\Events\User\Auth\UserHasRegistered;
 use Illuminate\Foundation\Auth\User as BaseUser;
 
 class User extends BaseUser {
@@ -73,6 +76,51 @@ class User extends BaseUser {
     /*
     * Relationships ends
     */
+
+    /**
+     * Registers the user.
+     *
+     * @param $attributes
+     * @return static
+     *
+     * @event UserWasRegistered
+     * @author Cali
+     */
+    public static function register($attributes)
+    {
+        $attributes['password'] = bcrypt($attributes['password']);
+        $user = static::create($attributes);
+
+        event(new UserHasRegistered($user));
+
+        return $user;
+    }
+
+    /**
+     * After the user has logged in.
+     *
+     * @event UserHasLoggedIn
+     * @author Cali
+     */
+    public static function loggedIn()
+    {
+        event(new UserHasLoggedIn(auth()->user()));
+    }
+
+    /**
+     * Password successfully resets.
+     *
+     * @return $this
+     *
+     * @event UserHasReset
+     * @author Cali
+     */
+    public function passwordHasReset()
+    {
+        event(new UserHasReset($this));
+        
+        return $this;
+    }
 
     /**
      * Activate the user by its email.

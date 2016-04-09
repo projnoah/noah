@@ -4,7 +4,6 @@ namespace Noah\Library\Traits\Auth;
 
 use Site;
 use Auth;
-use Event;
 use Mailer;
 use Password;
 use Validator;
@@ -274,7 +273,7 @@ trait ResetsPasswords {
      */
     protected function getResetSuccessResponse($response)
     {
-        Event::fire(new UserWasReset(Auth::user()));
+        Auth::user()->passwordHasReset();
 
         return redirect($this->redirectPath())->with('status', trans($response));
     }

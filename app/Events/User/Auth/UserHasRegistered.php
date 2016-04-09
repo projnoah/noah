@@ -7,11 +7,13 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Noah\User;
 
-class UserWasRegistered extends Event {
+class UserHasRegistered extends Event {
 
     use SerializesModels;
 
     /**
+     * The user.
+     * 
      * @var User
      */
     public $user;

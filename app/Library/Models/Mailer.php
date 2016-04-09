@@ -154,9 +154,9 @@ class Mailer {
     protected function messageBuilder()
     {
         return function (Message $message) {
-            $message->to($this->getUser()->email);
-            $message->from(Site::adminEmail(), Site::siteTitle());
-            $message->subject($this->subject);
+            $message->to($this->getUser()->email)
+                ->from(Site::adminEmail(), Site::siteTitle())
+                ->subject($this->subject);
         };
     }
 

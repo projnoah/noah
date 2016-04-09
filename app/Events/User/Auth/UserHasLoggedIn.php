@@ -7,10 +7,15 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Noah\User;
 
-class UserWasReset extends Event
-{
+class UserHasLoggedIn extends Event {
+
     use SerializesModels;
     
+    /**
+     * The user.
+     *
+     * @var User
+     */
     public $user;
 
     /**

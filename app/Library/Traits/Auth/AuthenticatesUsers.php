@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Foundation\Auth\RedirectsUsers;
+use Noah\User;
 
 
 trait AuthenticatesUsers {
@@ -122,6 +123,8 @@ trait AuthenticatesUsers {
             $this->clearLoginAttempts($request);
         }
 
+        User::loggedIn();
+        
         // Send back json if request is from ajax
         if ($request->ajax()) {
             return [

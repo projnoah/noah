@@ -13,14 +13,14 @@ class EventServiceProvider extends ServiceProvider {
      * @var array
      */
     protected $listen = [
-        'Noah\Events\User\Auth\UserWasRegistered' => [
-            'Noah\Listeners\User\EmailConfirmation@handleRegistered',
+        'Noah\Events\User\Auth\UserHasRegistered' => [
+            'Noah\Listeners\User\EmailRegisterConfirmation',
         ],
-        'Noah\Events\User\Auth\UserWasLogged'     => [
-            'Noah\Listeners\User\EmailConfirmation@handleLoggedIn',
+        'Noah\Events\User\Auth\UserHasLoggedIn'     => [
+//            'Noah\Listeners\User\EmailConfirmation@handleLoggedIn',
         ],
-        'Noah\Events\User\Auth\UserWasReset' => [
-            'Noah\Listeners\User\EmailConfirmation@handleReset',
+        'Noah\Events\User\Auth\UserHasReset' => [
+            'Noah\Listeners\User\EmailPasswordResetConfirmation',
         ]
     ];
 

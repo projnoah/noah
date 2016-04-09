@@ -5,6 +5,7 @@ namespace Noah\Library\Traits\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\RedirectsUsers;
+use Noah\User;
 
 trait RegistersUsers {
 
@@ -71,7 +72,7 @@ trait RegistersUsers {
             ];
         }
 
-        Auth::login($this->create($request->all()));
+        Auth::login(User::register($request->all()));
 
         return [
             'status' => 'succeeded',
