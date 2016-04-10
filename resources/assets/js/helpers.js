@@ -39,6 +39,17 @@ const Noah = {
             showConfirmButton: false
         });
     },
+    displayAvatarNotification: (message, callback = () => {}) => {
+        const notification = new NotificationFx({
+            message: `<div class="ns-thumb"><img src="${AVATAR_URL}"/></div><div class="ns-content"><p>${message}</p></div>`,
+            layout: 'other',
+            ttl: 4000,
+            effect: 'thumbslider',
+            type: 'notice',
+            onClose: callback
+        });
+        notification.show();
+    },
     /**
      * Display notification on top
      * 顶部显示提醒

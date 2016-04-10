@@ -2,6 +2,7 @@
 @import "vendor/sweetalert";
 @import "mixins";
 @import "variables";
+@import "vendor/ns-notification";
 
 body {
   font-family: $fonts;
@@ -609,12 +610,21 @@ section.dashboard-container {
         i {
           font-size: 3em;
           width: 100%;
+          -webkit-transition: transform .25s ease-in-out;
+          transition: transform .25s ease-in-out;
         }
         span {
           width: 100%;
           display: block;
           margin: 5px 0;
           font-size: 1.25em;
+        }
+      }
+
+      &:hover {
+        button i {
+          transform: translateY(-5px);
+          -webkit-transform: translateY(-5px);
         }
       }
 
@@ -645,7 +655,7 @@ section.dashboard-container {
     color: rgba(#fff, 0.45);
   }
   
-  .users-list {
+  @at-root .users-list {
     margin: 0;
     padding: 0;
     clear: both;
@@ -724,6 +734,13 @@ section.dashboard-container {
         width: 25px;
         height: 25px;
         padding: 1px 0 0 1px;
+        -webkit-transition: all .25s ease;
+        transition: all .25s ease;
+
+        &:hover {
+          color: rgba(#fff, .9);
+          background: rgba(#000, .25);
+        }
       }
     }
   }
@@ -742,6 +759,7 @@ section.dashboard-container {
 .widget {
   border-radius: 4px;
   background: transparent;
+  min-width: 250px;
   
   .widget-heading {
     padding: 3px 5px;

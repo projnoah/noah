@@ -61,6 +61,8 @@ class Router {
             Route::get('dashboard', 'HomeController@home')->name('dashboard');
             Route::get('inbox', 'HomeController@inbox')->name('inbox');
             Route::get('search/{keyword?}', 'HomeController@search')->name('search');
+            
+            Route::get('upgrade', 'HomeController@upgrade');
         });
 
 //        Route::get('test', function () {

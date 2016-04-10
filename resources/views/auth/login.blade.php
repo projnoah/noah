@@ -6,10 +6,6 @@
     <link rel="stylesheet" href="/assets/css/pages/login.css">
 @endpush
 
-@push('scripts.header')
-<script>var HAS_VUE = true;</script>
-@endpush
-
 @section('content')
     <div class="container login-wrapper">
         <div class="login-panel" :class="{'register': isRegister, 'login' : !isRegister }" id="panel">

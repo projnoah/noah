@@ -1,6 +1,4 @@
-
 /* Common, default styles for the notification box */
-
 .ns-box {
   position: fixed;
   background: rgba(42,45,50,0.85);
@@ -208,6 +206,8 @@
 /* Thumb slider */
 .ns-effect-thumbslider {
   background: transparent;
+  top: 50px;
+  left: 15px;
 }
 
 .ns-effect-thumbslider .ns-close {
@@ -258,11 +258,12 @@
 
 .ns-effect-thumbslider .ns-box-inner {
   overflow: hidden;
+  border-radius: 5px;
 }
 
 .ns-thumb {
-
   img {
+    border-radius: 4px;
     max-height: 64px;
   }
 }
@@ -281,9 +282,9 @@
   height: 64px;
   line-height: 60px;
   font-size: 15px;
-  @include br(12px);
+  border-radius: 5px;
 
-  span {
+  span, a {
     color: #337ab7;
   }
 }

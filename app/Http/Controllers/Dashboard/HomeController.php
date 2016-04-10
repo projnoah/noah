@@ -42,6 +42,11 @@ class HomeController extends Controller {
         return User::find(1);
     }
 
+    public function upgrade()
+    {
+        
+    }
+
     public function search($keyword)
     {
         return $keyword;

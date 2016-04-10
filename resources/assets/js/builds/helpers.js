@@ -42,6 +42,19 @@ var Noah = {
             showConfirmButton: false
         });
     },
+    displayAvatarNotification: function displayAvatarNotification(message) {
+        var callback = arguments.length <= 1 || arguments[1] === undefined ? function () {} : arguments[1];
+
+        var notification = new NotificationFx({
+            message: "<div class=\"ns-thumb\"><img src=\"" + AVATAR_URL + "\"/></div><div class=\"ns-content\"><p>" + message + "</p></div>",
+            layout: 'other',
+            ttl: 4000,
+            effect: 'thumbslider',
+            type: 'notice',
+            onClose: callback
+        });
+        notification.show();
+    },
     /**
      * Display notification on top
      * 顶部显示提醒

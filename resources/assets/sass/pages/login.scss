@@ -2,7 +2,6 @@
 @import "../mixins";
 @import "../variables";
 @import "../vendor/icheck";
-@import "../vendor/ns-notification";
 @import "../vendor/animate";
 @import "../vendor/dialog";
 
@@ -164,7 +163,7 @@
 		top: 100%;
 		left: 0;
 		background: #fff;
-		border-top: 4px solid $themelightblue;
+		border-top: 4px solid $themedarkblue;
 		-webkit-transform: translate3d(0, -3px, 0);
 		transform: translate3d(0, -3px, 0);
 		-webkit-transition: -webkit-transform 0.4s;
@@ -202,7 +201,7 @@
 
 .input__field--login:focus + .input__label--login .input__label-content--login,
 .input--filled .input__label-content--login {
-	color: $themelightblue;
+	color: $themedarkblue;
 	-webkit-transform: translate3d(0, -3.3em, 0) scale3d(0.81, 0.81, 1);
 	transform: translate3d(0, -3.3em, 0) scale3d(0.81, 0.81, 1);
 }
@@ -283,17 +282,17 @@
 		padding: 0;
 		width: 250px;
 		height: 70px;
-		border: 2px solid $themelightblue;
+		border: 2px solid $themedarkblue;
 		border-radius: 40px;
 		background: transparent;
-		color: $themelightblue;
+		color: $themedarkblue;
 		letter-spacing: 1px;
 		font-size: 18px;
 		-webkit-tap-highlight-color: transparent;
 		-webkit-transition: background-color 0.3s, color 0.3s, width 0.3s, border-width 0.3s, border-color 0.3s;
 		transition: background-color 0.3s, color 0.3s, width 0.3s, border-width 0.3s, border-color 0.3s;
 		&:hover {
-			background-color: $themelightblue;
+			background-color: $themedarkblue;
 			color: $themewhite;
 		}
 		&:focus {
@@ -505,7 +504,7 @@ button {
 			@include br(4px);
 			font-size: 1.2em;
 			color: #fff;
-			background-color: $themelightblue;
+			background-color: $themedarkblue;
 			margin-top: 15px;
 		}
 	}

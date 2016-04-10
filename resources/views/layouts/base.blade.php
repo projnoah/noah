@@ -42,6 +42,9 @@
         const Site = {
             title: "@site('title')",
         };
+        @check
+        const AVATAR_URL = "{{ Auth::user()->avatarUrl }}";
+        @endcheck
     </script>
 </head>
 <body id="app">
