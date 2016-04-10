@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', trans('views.dashboard.home.title'))
+
 @section('content')
     <div class="noah-menu-wrap">
         <nav class="noah-menu-top">
@@ -7,10 +9,10 @@
                 <img src="{{ Auth::check() ? Auth::user()->avatarUrl : Noah\Avatar::defaultUrl() }}" alt=""/>
                 <span>
                     @check
-                        {{ Auth::user()->name }}
+                    {{ Auth::user()->name }}
                     @else
                         请先登录
-                    @endcheck
+                        @endcheck
                 </span>
             </div>
             <div class="icon-list">
@@ -47,9 +49,9 @@
                     </li>
                 </ul>
                 <div class="search-wrapper">
-                    <form action="@route('search')" method="GET" role="search" novalidate>
+                    <form action="@route('search')" method="GET" role="search" novalidate @submit.prevent="searchQuery">
                         <div class="search-field">
-                            <input type="text" name="keyword" placeholder="Search...">
+                            <input type="text" name="keyword" placeholder="搜索...">
                             <i class="search-icon"></i>
                         </div>
                     </form>
@@ -112,93 +114,54 @@
                         </div>
                     </nav>
                     <div class="blogs-list">
-                        @for($i = 0; $i <= 30; $i++)
-                            <article class="blog-wrap blog-item">
-                                <div class="blog-avatar">
-                                    <a href="#">
-                                        <img src="{{ \Noah\Avatar::defaultUrl() }}" alt="">
-                                    </a>
-                                </div>
-                                <div class="blog-content-wrap">
-                                    <header class="blog-header">
-                                        <div class="blog-status">
-                                            <a href="#">Cali &nbsp;<span class="reblog-source"><i class="fa fa-retweet"></i>&nbsp;whxitm</span></a>
-                                        </div>
-                                    </header>
-                                    <section class="blog-content">
-                                        <div class="blog-content-inner">
-                                            <div class="blog-body">
-                                                <h2>王海鑫是大SB!</h2>
-                                                <p>王海鑫是大SB</p>
-                                            </div>
-                                        </div>
-                                    </section>
-                                    <section class="blog-tags">
-                                        <div class="blog-tags-inner">
-                                            <a href="#">funny</a>
-                                            <a href="#">lol</a>
-                                            <a href="#">this shit is legit</a>
-                                            <a href="#">OK</a>
-                                        </div>
-                                    </section>
-                                    <footer class="blog-footer">
-                                        <div class="blog-metas">
-                                            <div class="blog-time">
-                                                <time datetime="{{ \Carbon\Carbon::yesterday()->format('Y-m-d') }}">{{ \Carbon\Carbon::yesterday()->diffForHumans() }}</time>
-                                            </div>
-                                            <div class="blog-sent-from">
-                                                <span>来自网页端</span>
-                                            </div>
-                                        </div>
-                                        <div class="blog-actions">
-                                            <div class="blog-actions-inner">
-                                                <button>
-                                                    <i class="fa fa-ellipsis-h"></i>
-                                                </button>
-                                                <button>
-                                                    <i class="fa fa-send-o"></i>
-                                                </button>
-                                                <button>
-                                                    <i class="fa fa-comment-o"></i>
-                                                    <span>32</span>
-                                                </button>
-                                                <button><i class="fa fa-retweet"></i><span>99+</span></button>
-                                                <button><i class="fa fa-heart-o"></i></button>
-                                            </div>
-                                        </div>
-                                    </footer>
-                                </div>
-                            </article>
-                        @endfor
+                        @each('dashboard.partials.blog-item', $blogs, 'blog')
                     </div>
                 </section>
                 <section class="right-column">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">什么鬼</div>
-                        <div class="panel-body">
-                            什么鬼!
+                    <aside class="widget recommended-users widget--fixed" widget-fixed>
+                        <div class="widget-heading">
+                            <span>推荐用户</span>
                         </div>
-                    </div>
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">什么鬼</div>
-                        <div class="panel-body">
-                            什么鬼!
+                        <div class="widget-content-wrap">
+                            <div class="widget-content">
+                                <ol class="users-list">
+                                    @forelse($recommended_users as $user)
+                                        <li class="user-item">
+                                            <a href="#">
+                                                <span class="user-name big">{{ $user->name }}</span>
+                                                <span class="user-name small">{{ $user->username }}</span>
+                                                <div class="avatar">
+                                                    <img src="{{ $user->avatarUrl }}" alt="{{ $user->name }}">
+                                                </div>
+                                            </a>
+                                            <button class="follow-button">
+                                                <i class="fa fa-plus"></i>
+                                            </button>
+                                        </li>
+                                    @empty
+                                        <li class="no-result">
+
+                                        </li>
+                                    @endforelse
+                                </ol>
+                                <a href="#" class="more">查看更多...</a>
+                            </div>
                         </div>
-                    </div>
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">什么鬼</div>
-                        <div class="panel-body">
-                            什么鬼!
-                        </div>
-                    </div>
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">什么鬼</div>
-                        <div class="panel-body">
-                            什么鬼!
-                        </div>
-                    </div>
+                    </aside>
                 </section>
             </div>
         </section>
+        <footer class="dashboard-footer">
+            <div class="footer-inner">
+                <span class="copyright">&copy; {{ date('Y') }} - @site('siteTitle')</span>
+                <a href="#">About</a>
+                <a href="#">Apps</a>
+                <a href="#">Sponsor</a>
+            </div>
+        </footer>
     </div>
 @endsection
+
+@push('scripts.footer')
+<script src="/assets/js/pages/dashboard.js"></script>
+@endpush

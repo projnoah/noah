@@ -54,6 +54,17 @@ class Blog extends Model {
         return $this->hasMany(Tag::class);
     }
 
+    /**
+     * The user who posted.
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @author Cali
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+    
     /*
      * Relationship ends
      */

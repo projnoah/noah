@@ -14,7 +14,7 @@ return [
 
     // Authentication
     // 用户验证
-    'auth' => [
+    'auth'      => [
         'title'    => '登录或者注册',
         // Login page
         // 登录页面
@@ -25,7 +25,7 @@ return [
             'remember_me'     => '记住我, 下次免登录',
             'forgot_password' => '忘记密码?',
             'register'        => '注册',
-            'error' => '填写错误',
+            'error'           => '填写错误',
         ],
         // Registration page
         // 注册页面
@@ -42,8 +42,8 @@ return [
             'title'       => '重置密码',
             'button'      => '重置',
             'placeholder' => '要重置密码的邮箱地址...',
-            'success' => '成功发送',
-            'error' => '出错了',
+            'success'     => '成功发送',
+            'error'       => '出错了',
         ],
         // Social connect page
         // 社交平台绑定页面
@@ -71,5 +71,10 @@ return [
                 'wechat' => '微信'
             ]
         ],
+    ],
+    'dashboard' => [
+        'home' => [
+            'title' => '主页'
+        ]
     ]
 ];

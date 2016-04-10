@@ -57,8 +57,9 @@ class Router {
     public static function dashboards()
     {
         Route::group(['namespace' => 'Dashboard'], function() {
-            Route::get('/', 'HomeController@index')->name('home');
-            Route::get('dashboard', 'HomeController@index')->name('dashboard');
+            Route::get('/', 'HomeController@home')->name('home');
+            Route::get('dashboard', 'HomeController@home')->name('dashboard');
+            Route::get('inbox', 'HomeController@inbox')->name('inbox');
             Route::get('search/{keyword?}', 'HomeController@search')->name('search');
         });
 

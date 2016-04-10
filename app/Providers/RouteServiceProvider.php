@@ -3,6 +3,7 @@
 namespace Noah\Providers;
 
 use Site;
+use Carbon\Carbon;
 use Illuminate\Routing\Router;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
@@ -21,12 +22,12 @@ class RouteServiceProvider extends ServiceProvider
      * Define your route model bindings, pattern filters, etc.
      *
      * @param  \Illuminate\Routing\Router  $router
-     * @return void
+     * @author Cali
      */
     public function boot(Router $router)
     {
-        //
-
+        $this->setTimeLocale();
+        
         parent::boot($router);
     }
 
@@ -34,7 +35,7 @@ class RouteServiceProvider extends ServiceProvider
      * Define the routes for the application.
      *
      * @param  \Illuminate\Routing\Router  $router
-     * @return void
+     * @author Cali
      */
     public function map(Router $router)
     {
@@ -49,6 +50,7 @@ class RouteServiceProvider extends ServiceProvider
      * These routes all receive session state, CSRF protection, etc.
      *
      * @param  \Illuminate\Routing\Router  $router
+     * @author Cali
      */
     protected function mapWebRoutes(Router $router)
     {
@@ -57,5 +59,15 @@ class RouteServiceProvider extends ServiceProvider
         ], function ($router) {
             require app_path('Http/Routes/entry.php');
         });
+    }
+
+    /**
+     * Set the Carbon locale.
+     * 
+     * @author Cali
+     */
+    protected function setTimeLocale()
+    {
+        Carbon::setLocale($this->app->getLocale());
     }
 }

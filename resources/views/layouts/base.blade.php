@@ -40,7 +40,7 @@
 
     <script>
         const Site = {
-            title: "@site('title')"
+            title: "@site('title')",
         };
     </script>
 </head>

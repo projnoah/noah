@@ -2,6 +2,7 @@
 
 namespace Noah\Http\Controllers\Dashboard;
 
+use Noah\Blog;
 use Noah\User;
 use Noah\Http\Requests;
 use Illuminate\Http\Request;
@@ -25,9 +26,12 @@ class HomeController extends Controller {
      *
      * @author Cali
      */
-    public function index()
+    public function home()
     {
-        return view('dashboard.index');
+        $blogs = Blog::latest()->get();
+        $recommended_users = User::latest()->take(5)->get();
+        
+        return view('dashboard.index', compact('blogs', 'recommended_users'));
     }
 
     /**

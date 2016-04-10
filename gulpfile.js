@@ -35,7 +35,8 @@ elixir(function (mix) {
             'notification/notificationFx.js',
             'vendor/uiProgressButton.js',
             'vendor/dialogFx.js',
-            'vendor/sweetalert.min.js'
+            'vendor/sweetalert.min.js',
+            'vendor/TweenMax.min.js',
         ], 'resources/assets/js/builds/app.js')
         .browserify([
             'helpers.js',
@@ -75,5 +76,22 @@ elixir(function (mix) {
             'pages/social.js'
         ], 'public/assets/js/pages/social.js');
 
+    /*
+     |------------------------------------------------------------
+     | Dashboard Assets
+     |------------------------------------------------------------
+     |
+     | @project Project Noah
+     | @author Cali
+     |
+     */
+    mix.browserify([
+        'vendor/jquery.waypoints.min.js',
+        'vendor/waypoints/infinite.min.js',
+        'vendor/waypoints/sticky.min.js',
+        'vendor/waypoints/inview.min.js',
+        'pages/dashboard.js',
+    ], 'public/assets/js/pages/dashboard.js');
+    
     //mix.version();
 });

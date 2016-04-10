@@ -19,3 +19,13 @@ $factory->define(Noah\User::class, function (Faker\Generator $faker) {
         'remember_token' => str_random(10),
     ];
 });
+
+$factory->define(Noah\Blog::class, function (Faker\Generator $faker) {
+    return [
+        'user_id' => $faker->randomElement(Noah\User::lists('id')->toArray()),
+        'body' => $faker->paragraph(5),
+        'type' => 1,
+        'user_agent' => $faker->userAgent,
+        'ip' => $faker->ipv4
+    ];
+});
