@@ -23,22 +23,16 @@ class Avatar extends Model {
 
     /**
      * The local type lookup.
-     *
-     * @var int
      */
     const TYPE_LOCAL = 0;
 
     /**
      * The remote type lookup.
-     *
-     * @var int
      */
     const TYPE_REMOTE = 1;
 
     /**
      * The default avatar uri.
-     *
-     * @var string
      */
     const DEFAULT_URI = "assets/images/no-avatar.png";
 

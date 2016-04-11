@@ -27,6 +27,7 @@ class RouteServiceProvider extends ServiceProvider
     public function boot(Router $router)
     {
         $this->setTimeLocale();
+        $this->adjustLocale();
         
         parent::boot($router);
     }
@@ -69,5 +70,37 @@ class RouteServiceProvider extends ServiceProvider
     protected function setTimeLocale()
     {
         Carbon::setLocale($this->app->getLocale());
+    }
+
+    /**
+     * Adjust the locale with different browser languages.
+     * 
+     * @author Cali
+     */
+    private function adjustLocale()
+    {
+        if (request()->hasCookie('lang')) {
+            $this->setLocale(Crypt::decrypt(request()->cookie('lang')));
+        } else {
+            // TODO: Uncomment when we're ready
+//            request()->header('accept-language') ? $this->setLocale(substr(request()->header('accept-language'), 0, 2)) : null;
+        }
+    }
+
+    /**
+     * Switch locale
+     *
+     * @param $locale
+     */
+    private function setLocale($locale)
+    {
+        switch ($locale) {
+            case "en":
+            case "zh":
+                app()->setLocale($locale);
+                return;
+            default:
+                return;
+        }
     }
 }

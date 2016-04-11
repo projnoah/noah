@@ -18,6 +18,24 @@ elixir(function (mix) {
 
     /*
      |------------------------------------------------------------
+     | Install Page Assets
+     |------------------------------------------------------------
+     |
+     | @project Project Noah
+     | @author Cali
+     |
+     */
+    mix.styles([
+            'static/normalize.css',
+            'pages/installation/install.css'
+        ], 'public/assets/css/pages/install.css')
+        .scripts([
+            'classie.js',
+            'vendor/fullscreenForm.js'
+        ], 'public/assets/js/pages/install.js');
+
+    /*
+     |------------------------------------------------------------
      | Main App Assets
      |------------------------------------------------------------
      |
@@ -92,6 +110,6 @@ elixir(function (mix) {
         'vendor/waypoints/inview.min.js',
         'pages/dashboard.js',
     ], 'public/assets/js/pages/dashboard.js');
-    
+
     //mix.version();
 });

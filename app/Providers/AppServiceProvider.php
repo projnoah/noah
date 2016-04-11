@@ -2,10 +2,11 @@
 
 namespace Noah\Providers;
 
+use Noah\Library\SiteConfiguration as Site;
 use Illuminate\Support\ServiceProvider;
 
-class AppServiceProvider extends ServiceProvider
-{
+class AppServiceProvider extends ServiceProvider {
+
     /**
      * Bootstrap any application services.
      *
@@ -13,7 +14,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        
+
     }
 
     /**
@@ -23,6 +24,18 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->registerSiteSingleton();
+    }
+
+    /**
+     * Registers the site configuration singleton.
+     * 
+     * @author Cali
+     */
+    private function registerSiteSingleton()
+    {
+        $this->app->singleton('Site', function () {
+            return new Site;
+        });
     }
 }

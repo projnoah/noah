@@ -2,7 +2,6 @@
 
 namespace Noah\Http\Controllers\Dashboard;
 
-use File;
 use Noah\Blog;
 use Noah\User;
 use Noah\Http\Requests;
@@ -31,7 +30,7 @@ class HomeController extends Controller {
     {
         $blogs = Blog::latest()->get();
         $recommended_users = User::latest()->take(5)->get();
-        
+
         return view('dashboard.index', compact('blogs', 'recommended_users'));
     }
 
@@ -41,20 +40,6 @@ class HomeController extends Controller {
     public function test()
     {
         return User::find(1);
-    }
-
-    public function upgrade()
-    {
-//        https://dn-abletive.qbox.me/upgrade.zip
-//        return exec('curl -O https://dn-abletive.qbox.me/1.1/upgrade.zip');
-        $output = [];
-
-        if (File::isDirectory('upgrades')) {
-            return "Yes";
-        }
-        File::makeDirectory('upgrades');
-
-        return $output;
     }
 
     public function inbox()

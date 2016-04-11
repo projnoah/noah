@@ -27,12 +27,17 @@ class Role extends Model {
     const name = "name";
 
     /**
+     * Default role id.
+     */
+    const DEFAULT_ROLE = 1;
+
+    /**
      * Fillable attributes.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'label'
+        self::name, 'label'
     ];
 
     /*

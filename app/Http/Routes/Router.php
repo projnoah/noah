@@ -14,9 +14,9 @@ class Router {
      */
 
     /**
-     * Auth & Register Related Routes
+     * Auth & Register Related Routes.
      * 验证 & 注册相关路由
-     * 
+     *
      * @return static
      * @author Cali
      */
@@ -48,27 +48,62 @@ class Router {
     }
 
     /**
-     * Dashboards Related Routes
+     * Dashboards Related Routes.
      * 仪表盘相关路由
-     * 
+     *
      * @return static
      * @author Cali
      */
     public static function dashboards()
     {
-        Route::group(['namespace' => 'Dashboard'], function() {
+        Route::group(['namespace' => 'Dashboard'], function () {
             Route::get('/', 'HomeController@home')->name('home');
             Route::get('dashboard', 'HomeController@home')->name('dashboard');
             Route::get('inbox', 'HomeController@inbox')->name('inbox');
             Route::get('search/{keyword?}', 'HomeController@search')->name('search');
-            
-            Route::get('upgrade', 'HomeController@upgrade');
         });
+
 
 //        Route::get('test', function () {
 //            return view('auth.emails.password', ['user' => Noah\User::first(), 'token' => 'safjl12asf']);
 //        });
 
+        return new static;
+    }
+
+    /**
+     * Installation Routes.
+     * 站点安装相关路由
+     *
+     * @return static
+     * @author Cali
+     */
+    public static function installations()
+    {
+        if (! noah_installed()) {
+            Route::group(['prefix' => 'install'], function () {
+                Route::get('step/{step?}', 'InstallationController@install');
+                Route::post('step/{step}', 'InstallationController@postInstall')->name('install');
+            });
+        }
+        
+        return new static;
+    }
+
+    /**
+     * Language Routes.
+     * 语言切换路由
+     * 
+     * @return static
+     * @author Cali
+     */
+    public static function language()
+    {
+        Route::get('language/{language}', function ($language) {
+            return redirect()->back()
+                ->withCookie(cookie()->forever('lang', $language));
+        });
+        
         return new static;
     }
 }

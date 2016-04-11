@@ -1,20 +1,18 @@
 @include('layouts.partials.auxiliaries.html-copyright')
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="{{ app()->getLocale() }}">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="@site('description')">
     <meta name="keywords" content="@site('keywords')">
-    <meta property="qc:admins" content="7750222037267106456" />
     <meta name="_token" content="{{ csrf_token() }}">
 
     <title>@yield('title') @site('title')</title>
 
     {{-- Fonts --}}
     <link href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
-    <link href="http://fonts.useso.com/css?family=Lato:100,300,400,700" rel='stylesheet'>
     {{-- Styles --}}
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
     <link rel="stylesheet" href="/assets/css/app.css">

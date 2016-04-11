@@ -11,5 +11,7 @@
 |
 */
 
-Router::dashboards()
+Router::installations()
+    ->dashboards()
+    ->language()
     ->auth();

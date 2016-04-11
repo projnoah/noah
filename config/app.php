@@ -212,6 +212,8 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
         
+        'Noah' => Noah\Library\Facades\Noah::class,
+        
         'Mailer' => Noah\Library\Facades\Mailer::class,
         'Site' => Noah\Library\Facades\Site::class,
         'Socialite' => Cali\Socialite\Facades\Socialite::class,

@@ -153,7 +153,15 @@ return [
         'date'                  => '日期',
         'time'                  => '时间',
         'available'             => '可用的',
-        'size'                  => '大小'
+        'size'                  => '大小',
+        'db_host'               => trans('views.installation.inputs.db_host'),
+        'db_name'               => trans('views.installation.inputs.db_name'),
+        'db_user'               => trans('views.installation.inputs.db_user'),
+        'db_password'           => trans('views.installation.inputs.db_password'),
+        'db_prefix'             => trans('views.installation.inputs.db_prefix'),
+        'admin_username'        => trans('views.installation.inputs.admin_username'),
+        'admin_password'        => trans('views.installation.inputs.admin_password'),
+        'admin_email'           => trans('views.installation.inputs.admin_email'),
     ],
 
 ];

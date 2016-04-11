@@ -91,6 +91,8 @@ class User extends BaseUser {
         $user = self::create(
             self::getRegisterAttributes($attributes)
         );
+        
+        $user->assignRole();
 
         event(new UserHasRegistered($user));
 
@@ -222,5 +224,27 @@ class User extends BaseUser {
         return [
             'avatarUrl' => $this->avatarUrl
         ];
+    }
+
+    /**
+     * Assign a role to a user.
+     * 
+     * @param int $role
+     * @return $this
+     * @author Cali
+     */
+    public function assignRole($role = Role::DEFAULT_ROLE)
+    {
+        if ($role instanceof Role) {
+            $this->roles()->attach($role->id);
+        }
+        if (is_string($role)) {
+            $role = Role::where('name', $role)->first();
+            $this->roles()->attach($role->id);
+        } else {
+            $this->roles()->attach($role);
+        }
+
+        return $this;
     }
 }

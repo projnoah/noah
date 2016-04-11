@@ -9,7 +9,8 @@
         "laravel/framework": "5.2.*",
         "cali/socialite": "^1.0",
         "pusher/pusher-php-server": "^2.3",
-        "zgldh/qiniu-laravel-storage": "^0.3.0"
+        "zgldh/qiniu-laravel-storage": "^0.3.0",
+        "composer/composer": "^1.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

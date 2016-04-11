@@ -7960,7 +7960,7 @@ section.dashboard-container {
     left: auto;
     top: auto;
     right: auto;
-    width: calc(25% - 30px); }
+    width: 260px; }
 
 .post-text i {
   color: #555; }
