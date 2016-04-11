@@ -80,17 +80,27 @@ class User extends BaseUser {
     /**
      * Registers the user.
      *
-     * @param $attributes
+     * @param      $attributes
+     * @param null $social_info
      * @return static
-     *
-     * @event UserWasRegistered
+     * 
+     * @event UserHasRegistered
      * @author Cali
      */
-    public static function register($attributes)
+    public static function register($attributes, $social_info = null)
     {
-        $user = self::create(
-            self::getRegisterAttributes($attributes)
-        );
+        if (is_null($social_info)) {
+            $user = self::create(
+                self::getRegisterAttributes($attributes)
+            );
+        } else {
+            $user = static::create($attributes);
+            // Store for future authentication
+            $user->social_info = $social_info;
+
+            $user->saveRemoteAvatar($attributes['avatar'])
+                ->save();
+        }
         
         $user->assignRole();
 

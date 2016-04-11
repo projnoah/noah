@@ -4,11 +4,11 @@ namespace Noah\Library\Traits\Auth;
 
 use Auth;
 use Event;
-use Noah\Events\User\Auth\UserWasRegistered;
 use Validator;
 use Noah\User;
 use Socialite;
 use Illuminate\Http\Request;
+use Noah\Events\User\Auth\UserHasRegistered;
 
 trait SocialAuthenticatesUsers {
 
@@ -58,7 +58,7 @@ trait SocialAuthenticatesUsers {
         // Check if the user has signed up already
         $user = User::socialize($service);
 
-        if (!$user instanceof User) {
+        if (! $user instanceof User) {
             // If not, ask for the user's input
             return view('auth.social', compact('user', 'service'));
         }
@@ -78,7 +78,7 @@ trait SocialAuthenticatesUsers {
      */
     public function connect(Request $request)
     {
-        if (!$this->socialValidated($request)) {
+        if (! $this->socialValidated($request)) {
             return [
                 'status'   => 'error',
                 'messages' => $this->failedMessages()
@@ -108,7 +108,7 @@ trait SocialAuthenticatesUsers {
             'email'    => 'required|email|max:191|unique:users'
         ]);
 
-        return !$this->validator->fails();
+        return ! $this->validator->fails();
     }
 
     /**
@@ -133,17 +133,13 @@ trait SocialAuthenticatesUsers {
      */
     protected function saveUserWithSocialInfo(Request $request)
     {
-        $user = User::create($request->all());
-        // Store for future authentication
-        $user->social_info = collect([
-            $request->input('service') => $request->input('id')
-        ])->toJson();
-
-        $user->saveRemoteAvatar($request->input('avatar'))
-            ->save();
-
-        // Fire event
-        Event::fire(new UserWasRegistered($user));
+        // Store social info for future authentication
+        $user = User::register(
+            $request->all(),
+            collect([
+                $request->input('service') => $request->input('id')
+            ])->toJson()
+        );
 
         return $user;
     }
