@@ -41,7 +41,7 @@ const Noah = {
     },
     displayAvatarNotification: (message, callback = () => {}) => {
         const notification = new NotificationFx({
-            message: `<div class="ns-thumb"><img src="${AVATAR_URL}"/></div><div class="ns-content"><p>${message}</p></div>`,
+            message: `<div class="ns-thumb"><img src="${User.avatarUrl}"/></div><div class="ns-content"><p>${message}</p></div>`,
             layout: 'other',
             ttl: 4000,
             effect: 'thumbslider',

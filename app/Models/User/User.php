@@ -199,4 +199,28 @@ class User extends BaseUser {
 
         return $attributes;
     }
+
+    /**
+     * {@inheritdoc}
+     * @author Cali
+     */
+    public function jsonSerialize()
+    {
+        $attributes = $this->attributesToArray();
+
+        return array_merge($attributes, $this->extraSerializeAttributes());
+    }
+
+    /**
+     * Get the extra serialize attributes.
+     *
+     * @return array
+     * @author Cali
+     */
+    protected function extraSerializeAttributes()
+    {
+        return [
+            'avatarUrl' => $this->avatarUrl
+        ];
+    }
 }

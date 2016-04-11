@@ -24,6 +24,9 @@
             "app/Models",
             "app/Http/Routes"
         ],
+        "files": [
+            "app/Library/helpers.php"
+        ],
         "psr-4": {
             "Noah\\": "app/"
         }

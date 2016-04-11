@@ -43,7 +43,7 @@
             title: "@site('title')",
         };
         @check
-        const AVATAR_URL = "{{ Auth::user()->avatarUrl }}";
+        const User = JSON.parse('{!! Auth::user() !!}');
         @endcheck
     </script>
 </head>
