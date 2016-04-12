@@ -19,13 +19,13 @@ class CreateSiteConfigurationsTable extends Migration {
             $table->timestamps();
         });
 
-        Site::url(url('/'));
-        Site::homeUrl(url('dashboard'));
+        Site::url(env('APP_URL', url('/')));
+        Site::homeUrl(env('APP_URL', url('/')) . '/dashboard');
         Site::siteTitle("Project Noah");
         Site::description("优雅, 现代, 简洁与全能. 服务于快速建社交/博客站的站长的工具.");
         Site::separator("::");
         Site::keywords("modern", "noah", "project noah");
-        Site::adminEmail("cali@calicastle.com");
+        Site::adminEmail(env('ADMIN_EMAIL'));
         Site::registrationOn("1");
     }
 

@@ -17,18 +17,40 @@
 </head>
 <body>
     <div class="container">
+        @if(count($errors))
+            <div class="errors">
+                <span>{{ $errors->first() }}</span>
+            </div>
+        @endif
         @if(session()->has('status'))
             <div class="step-title">
                 <h2>@trans('views.installation.subtitles.' . $step)</h2>
             </div>
             <div class="step-detail">
-                <ol class="progress">
+                <ol class="progress" data-info="@trans('views.installation.confirm_title')">
                     @foreach(session('status') as $message)
                     <li class="progress-check">
                         <span class="progress-icon progress-{{ $message['type'] }}"></span>
                         <span class="directory-detail">{{ $message['detail'] }}</span>
                     </li>
                     @endforeach
+                    <li class="progress-check">
+                    @if(session('succeeded') == 1)
+                        @if($step == 1)
+                            <a href="@route('install', ['step' => $step + 1])">
+                                @trans('views.installation.success.next')
+                            </a>
+                        @else
+                            <a href="@route('install-done')">
+                                @trans('views.installation.success.done_button')
+                            </a>
+                        @endif
+                    @else
+                        <a href="{{ url()->current() }}">
+                            @trans('views.installation.refresh')
+                        </a>
+                    @endif
+                    </li>
                 </ol>
             </div>
         @else

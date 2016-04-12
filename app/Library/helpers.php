@@ -1,5 +1,35 @@
 <?php
 
+/**
+ * Invalid database username or password, access denied.
+ */
+const DATABASE_ACCESS_DENIED = 1045;
+
+/**
+ * Database not found.
+ */
+const DATABASE_NOT_FOUND = 1049;
+
+/**
+ * Connection refused.
+ */
+const CONNECTION_REFUSED = 2002;
+
+/**
+ * Environment file not found.
+ */
+const ENV_NOT_FOUND = - 1;
+
+/**
+ * Environment file is not writable.
+ */
+const ENV_DENIED = - 2;
+
+/**
+ * Environment file updated.
+ */
+const ENV_UPDATED = 1;
+
 if (! function_exists('noah_installed')) {
     /**
      * Determine if Noah is installed.
@@ -15,10 +45,6 @@ if (! function_exists('noah_installed')) {
     }
 }
 
-const ENV_NOT_FOUND = - 1;
-const ENV_DENIED = - 2;
-const ENV_UPDATED = 1;
-
 if (! function_exists('env_put')) {
     /**
      * Store or update an environment variable.
@@ -32,7 +58,7 @@ if (! function_exists('env_put')) {
      *
      * @author Cali
      */
-    function env_put($key, $value, $new_line = true)
+    function env_put($key, $value, $new_line = false)
     {
         $path = base_path('.env');
         $key = strtoupper($key);

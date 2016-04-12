@@ -83,11 +83,11 @@ class User extends BaseUser {
      * @param      $attributes
      * @param null $social_info
      * @return static
-     * 
+     *
      * @event UserHasRegistered
      * @author Cali
      */
-    public static function register($attributes, $social_info = null)
+    public static function register($attributes, $social_info = null, $fire = true)
     {
         if (is_null($social_info)) {
             $user = self::create(
@@ -101,12 +101,29 @@ class User extends BaseUser {
             $user->saveRemoteAvatar($attributes['avatar'])
                 ->save();
         }
-        
+
         $user->assignRole();
 
-        event(new UserHasRegistered($user));
+        if ($fire) {
+            event(new UserHasRegistered($user));
+        }
 
         return $user;
+    }
+
+    /**
+     * Create an admin account.
+     *
+     * @param $attributes
+     * @return User
+     * @author Cali
+     */
+    public static function createAdmin($attributes)
+    {
+        $admin = static::register($attributes, null, false);
+        $admin->assignRole('administrator');
+
+        return $admin;
     }
 
     /**
@@ -147,7 +164,7 @@ class User extends BaseUser {
     {
         $user = static::where('email', $email)->first();
 
-        if (!$user->active) {
+        if (! $user->active) {
             $user->active = true;
 
             return $user->save();
@@ -185,13 +202,13 @@ class User extends BaseUser {
     public function hasRole($role)
     {
         if ($role instanceof Role) {
-            return !!$this->roles()
+            return ! ! $this->roles()
                 ->where($role->primaryKey, $role->id)
                 ->first();
         }
 
         // If a string given
-        return !!$this->roles()->where(Role::name, $role)->first();
+        return ! ! $this->roles()->where(Role::name, $role)->first();
     }
 
     /**
@@ -204,7 +221,7 @@ class User extends BaseUser {
      */
     private static function getRegisterAttributes($attributes)
     {
-        if (!array_has($attributes, 'name')) {
+        if (! array_has($attributes, 'name')) {
             $attributes = array_add($attributes, 'name', $attributes['username']);
         }
         $attributes['password'] = bcrypt($attributes['password']);
@@ -238,7 +255,7 @@ class User extends BaseUser {
 
     /**
      * Assign a role to a user.
-     * 
+     *
      * @param int $role
      * @return $this
      * @author Cali

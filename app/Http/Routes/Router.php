@@ -84,6 +84,7 @@ class Router {
             Route::group(['prefix' => 'install'], function () {
                 Route::get('step/{step?}', 'InstallationController@install');
                 Route::post('step/{step}', 'InstallationController@postInstall')->name('install');
+                Route::get('done', 'InstallationController@done')->name('install-done');
             });
         }
         
