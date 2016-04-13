@@ -17,7 +17,7 @@
                 <a href="#"><i class="fa fa-fw fa-star-o"></i></a>
                 <a href="#"><i class="fa fa-fw fa-bell-o"></i></a>
                 <a href="#"><i class="fa fa-fw fa-envelope-o"></i></a>
-                <a href="#"><i class="fa fa-fw fa-comment-o"></i></a>
+                <a href="@route('exit')"><i class="fa fa-fw fa-sign-out"></i></a>
             </div>
         </nav>
         <nav class="noah-menu-side">

@@ -1,0 +1,69 @@
+.page-content {
+    background: #d3d3d3;
+}
+
+.navbar .logo-box {
+    background: #d3d3d3;
+}
+
+.navbar .logo-box a {
+    color: #333;
+}
+
+.sidebar {
+    background: #d3d3d3;
+}
+
+.sidebar-header {
+    background: #d3d3d3;
+}
+
+.sidebar-profile span, .sidebar-profile span small {
+    color: #555;
+}
+
+.menu {
+    background: #d3d3d3;
+}
+
+.menu.accordion-menu a {
+    color: #333;
+}
+
+.menu.accordion-menu > li > a:hover {
+    background: #a5a5a5;
+    color: #444;
+}
+
+.menu.accordion-menu > li.active > a,
+.menu.accordion-menu > li.active.open > a {
+    background: #a5a5a5;
+    color: #444;
+}
+
+.small-sidebar:not(.page-sidebar-fixed) .accordion-menu li.droplink:hover > a,
+.horizontal-bar .accordion-menu > li.droplink:hover > a,
+.menu.accordion-menu ul,
+.menu.accordion-menu li.open > a,
+.hover-menu .accordion-menu > li.droplink:hover > a {
+    background: #a5a5a5;
+    color: #444;
+}
+
+.menu.accordion-menu ul li a:hover,
+.menu.accordion-menu ul li.active a {
+    background: #a5a5a5;
+    color: #444;
+}
+
+.menu.accordion-menu ul li a {
+    color: #666;
+}
+
+.pace .pace-progress {
+    background: #d3d3d3;
+}
+
+.pace .pace-progress {
+    box-shadow: 0 0 10px #d3d3d3, 0 0 5px #d3d3d3;
+}

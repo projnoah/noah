@@ -155,8 +155,11 @@
             }
             
             // add class "show-next" to form element (start animations)
-            classie.addClass(this.el, next ? 'show-next' : 'show-prev');
-
+            if (next) {
+                $(this.el).addClass('show-next');
+            } else {
+                $(this.el).addClass('show-prev');
+            }
             // remove class "current" from current question and add it to the next one
             // current question
             var nextQuestion = this.questions[this.current];
@@ -165,7 +168,7 @@
         }
 
         // after animation ends, remove class "show-next" from form element and change current question placeholder
-        let self = this,
+        var self = this,
             onEndTransitionFn = function (ev) {
                 if (support.transitions) {
                     this.removeEventListener(transEndEventName, onEndTransitionFn);
@@ -173,8 +176,10 @@
                 if (self.isFilled) {
                     self._submit();
                 } else {
-                    classie.removeClass(self.el, 'show-next');
-                    classie.removeClass(self.el, 'show-prev');
+                    setTimeout(function () {
+                        classie.removeClass(self.el, 'show-next');
+                        classie.removeClass(self.el, 'show-prev');
+                    }, 500);
                     self.currentNum.innerHTML = self.nextQuestionNum.innerHTML;
                     self.questionStatus.removeChild(self.nextQuestionNum);
                     // force the focus on the next input

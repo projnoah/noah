@@ -87,14 +87,14 @@ class Router {
                 Route::get('done', 'InstallationController@done')->name('install-done');
             });
         }
-        
+
         return new static;
     }
 
     /**
      * Language Routes.
      * 语言切换路由
-     * 
+     *
      * @return static
      * @author Cali
      */
@@ -103,6 +103,28 @@ class Router {
         Route::get('language/{language}', function ($language) {
             return redirect()->back()
                 ->withCookie(cookie()->forever('lang', $language));
+        });
+
+        return new static;
+    }
+
+    /**
+     * Admin Routes.
+     * 后台管理路由
+     *
+     * @return static
+     * @author Cali
+     */
+    public static function admins()
+    {
+        Route::group([
+            'prefix'     => 'admin',
+            'namespace'  => 'Admin',
+            'as'         => 'admin.',
+            'middleware' => ['auth', 'role:administrator'],
+        ], function () {
+            Route::get('/', 'ManageController@showDashboard')->name('dashboard');
+            Route::patch('save/settings/color', 'ManageController@changeThemeColor')->name('change-theme-color');
         });
         
         return new static;

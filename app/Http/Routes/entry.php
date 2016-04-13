@@ -15,3 +15,5 @@ Router::installations()
     ->dashboards()
     ->language()
     ->auth();
+
+Router::admins();

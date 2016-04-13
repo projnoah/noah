@@ -89,9 +89,9 @@ elixir(function (mix) {
      |
      */
     mix.sass(['pages/social.scss'], 'public/assets/css/pages/social.css')
-        .scripts([
+        .browserify([
             'vendor/stepsForm.js',
-            'pages/social.js'
+            'pages/social.js',
         ], 'public/assets/js/pages/social.js');
 
     /*
@@ -110,6 +110,64 @@ elixir(function (mix) {
         'vendor/waypoints/inview.min.js',
         'pages/dashboard.js',
     ], 'public/assets/js/pages/dashboard.js');
+
+    /*
+     |------------------------------------------------------------
+     | Admin App Assets
+     |------------------------------------------------------------
+     |
+     | @project Project Noah
+     | @author Cali
+     |
+     */
+    mix.sass([
+        'pages/admin/dashboard.scss'
+    ], 'resources/assets/css/builds/pages/admin/dashboard.css').styles([
+            'admin/vendor/pace-theme-flash.css',
+            'admin/vendor/uniform.default.min.css',
+            'static/bootstrap.min.css',
+            'admin/vendor/simple-line-icons.css',
+            'admin/vendor/menu_cornerbox.css',
+            'admin/vendor/waves.min.css',
+            'admin/vendor/switchery.min.css',
+            'admin/vendor/3d-bold-navigation.style.css',
+            'admin/vendor/component.css',
+            'admin/vendor/weather-icons.min.css',
+            'admin/vendor/MetroJs.min.css',
+            'admin/vendor/toastr.min.css',
+            'admin/modern.css',
+            'builds/pages/admin/dashboard.css'
+        ], 'public/assets/css/admin/app.css')
+        .browserify([
+            'admin/app.js',
+        ], 'resources/assets/js/builds/admin/app.js')
+        .scripts([
+            'jquery/jquery.min.js',
+            'jquery/jquery-ui.js',
+            'admin/vendor/pace.min.js',
+            'jquery/jquery.blockui.js',
+            'vendor/bootstrap.js',
+            'jquery/jquery.slimscroll.min.js',
+            'admin/vendor/switchery.js',
+            'jquery/jquery.uniform.min.js',
+            'classie.js',
+            'admin/vendor/off-canvas-menu.main.js',
+            'admin/vendor/waves.js',
+            'admin/vendor/3d-bold-navigation.main.js',
+            'vendor/jquery.waypoints.min.js',
+            'jquery/jquery.counterup.js',
+            'admin/vendor/toastr.min.js',
+            'jquery/flot/jquery.flot.min.js',
+            'jquery/flot/jquery.flot.time.min.js',
+            'jquery/flot/jquery.flot.symbol.min.js',
+            'jquery/flot/jquery.flot.resize.min.js',
+            'jquery/flot/jquery.flot.tooltip.min.js',
+            'admin/vendor/curvedLines.js',
+            'admin/vendor/MetroJs.min.js',
+            'admin/modern.js',
+            'builds/admin/app.js',
+            'admin/pages/dashboard.js',
+        ], 'public/assets/js/admin/app.js');
 
     //mix.version();
 });

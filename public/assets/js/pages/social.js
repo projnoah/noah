@@ -1,3 +1,95 @@
+(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+'use strict';
+
+/*
+ |------------------------------------------------------------
+ | Social Connect JavaScript
+ |------------------------------------------------------------
+ |
+ | @project Project Noah
+ | @author Cali
+ |
+ */
+$(function () {
+    var socialForm = document.getElementById('social-form');
+    var loadingMessageEl = socialForm.querySelector('.loading-message');
+    var successMessageEl = socialForm.querySelector('.final-message');
+    var failed = 0;
+
+    // Setup form
+    var setupForm = function setupForm() {
+        new stepsForm(socialForm, {
+            onSubmit: function onSubmit(form) {
+                // Hide form
+                classie.addClass(socialForm.querySelector('.pn-social-form-inner'), 'fade');
+                classie.addClass(loadingMessageEl, 'show');
+
+                loadingMessageEl.innerHTML = '<i class="fa fa-square fa-2x"></i>' + data.loading;
+                successMessageEl.innerHTML = '<i class="fa fa-check-circle"></i>' + data.success;
+
+                setTimeout(function () {
+                    classie.addClass(loadingMessageEl.querySelector('i'), 'loading');
+                    submitForm(form);
+                }, 850);
+            }
+        });
+    };
+
+    setupForm();
+
+    // AJAX form submission
+    var submitForm = function submitForm(form) {
+        if (failed >= 5) {
+            loadingMessageEl.innerHTML = '<i class="fa fa-frown-o"></i>' + data.failed;
+            return false;
+        }
+        $.post({
+            url: $(form).attr('action'),
+            data: $(form).serialize(),
+            error: function error() {
+                failed++;
+                submitForm(form);
+            },
+            success: function success(JSON) {
+                loadingMessageEl.innerHTML = "";
+
+                if (JSON.status == "succeeded") {
+                    // Success
+                    classie.addClass(successMessageEl, 'show');
+                    setTimeout(function () {
+                        return window.location.href = JSON.redirect;
+                    }, 1000);
+                } else {
+                    // Something fails
+                    showError(JSON.messages[0]);
+                }
+            }
+        });
+    };
+
+    // Display errors
+    var showError = function showError(message) {
+        classie.removeClass(loadingMessageEl, 'show');
+        $('.pn-social-form-inner').removeClass('fade');
+
+        var template = '<div id="input-errors"><h3>' + message + '</h3></div>';
+
+        $(template).prependTo($('.submission'));
+
+        var errorEl = document.getElementById('input-errors');
+
+        setTimeout(function () {
+            if (errorEl) $(errorEl).fadeOut();
+            setTimeout(function () {
+                return $(errorEl).remove();
+            }, 350);
+        }, 1800);
+    };
+});
+
+},{}],2:[function(require,module,exports){
+'use strict';
+
 /*
  |------------------------------------------------------------
  | Steps Minimal Form
@@ -10,15 +102,15 @@
 
     'use strict';
 
-    let transEndEventNames = {
-            'WebkitTransition': 'webkitTransitionEnd',
-            'MozTransition': 'transitionend',
-            'OTransition': 'oTransitionEnd',
-            'msTransition': 'MSTransitionEnd',
-            'transition': 'transitionend'
-        },
+    var transEndEventNames = {
+        'WebkitTransition': 'webkitTransitionEnd',
+        'MozTransition': 'transitionend',
+        'OTransition': 'oTransitionEnd',
+        'msTransition': 'MSTransitionEnd',
+        'transition': 'transitionend'
+    },
         transEndEventName = transEndEventNames[Modernizr.prefixed('transition')],
-        support = {transitions: Modernizr.csstransitions};
+        support = { transitions: Modernizr.csstransitions };
 
     function extend(a, b) {
         for (var key in b) {
@@ -37,7 +129,7 @@
     }
 
     stepsForm.prototype.options = {
-        onSubmit: function () {
+        onSubmit: function onSubmit() {
             return false;
         }
     };
@@ -77,14 +169,18 @@
     };
 
     stepsForm.prototype._initEvents = function () {
+        var _this = this;
+
         var self = this,
+
         // first input
-            firstElInput = this.questions[this.current].querySelector('input'),
+        firstElInput = this.questions[this.current].querySelector('input'),
+
         // focus
-            onFocusStartFn = function () {
-                firstElInput.removeEventListener('focus', onFocusStartFn);
-                classie.addClass(self.ctrlNext, 'show');
-            };
+        onFocusStartFn = function onFocusStartFn() {
+            firstElInput.removeEventListener('focus', onFocusStartFn);
+            classie.addClass(self.ctrlNext, 'show');
+        };
 
         // show the next question control first time the input gets focused
         firstElInput.addEventListener('focus', onFocusStartFn);
@@ -103,7 +199,7 @@
 
         // pressing enter will jump to next question
         document.addEventListener('keydown', function (ev) {
-            const keyCode = ev.keyCode || ev.which;
+            var keyCode = ev.keyCode || ev.which;
             // enter
             if (keyCode === 13) {
                 ev.preventDefault();
@@ -112,19 +208,21 @@
         });
 
         // disable tab
-        this.el.addEventListener('keydown', (ev) => {
-            const keyCode = ev.keyCode || ev.which;
+        this.el.addEventListener('keydown', function (ev) {
+            var keyCode = ev.keyCode || ev.which;
             // tab
             if (keyCode === 9) {
                 ev.preventDefault();
             } else if (keyCode === 27) {
                 ev.preventDefault();
-                if (this.current) this._nextQuestion(false);
+                if (_this.current) _this._nextQuestion(false);
             }
         });
     };
 
-    stepsForm.prototype._nextQuestion = function (next = true) {
+    stepsForm.prototype._nextQuestion = function () {
+        var next = arguments.length <= 0 || arguments[0] === undefined ? true : arguments[0];
+
         if (next) {
             if (!this._validate()) return false;
         }
@@ -153,10 +251,13 @@
             } else {
                 classie.addClass(this.ctrlPrev, 'show');
             }
-            
-            // add class "show-next" to form element (start animations)
-            classie.addClass(this.el, next ? 'show-next' : 'show-prev');
 
+            // add class "show-next" to form element (start animations)
+            if (next) {
+                $(this.el).addClass('show-next');
+            } else {
+                $(this.el).addClass('show-prev');
+            }
             // remove class "current" from current question and add it to the next one
             // current question
             var nextQuestion = this.questions[this.current];
@@ -165,35 +266,36 @@
         }
 
         // after animation ends, remove class "show-next" from form element and change current question placeholder
-        let self = this,
-            onEndTransitionFn = function (ev) {
-                if (support.transitions) {
-                    this.removeEventListener(transEndEventName, onEndTransitionFn);
-                }
-                if (self.isFilled) {
-                    self._submit();
-                } else {
+        var self = this,
+            onEndTransitionFn = function onEndTransitionFn(ev) {
+            if (support.transitions) {
+                this.removeEventListener(transEndEventName, onEndTransitionFn);
+            }
+            if (self.isFilled) {
+                self._submit();
+            } else {
+                setTimeout(function () {
                     classie.removeClass(self.el, 'show-next');
                     classie.removeClass(self.el, 'show-prev');
-                    self.currentNum.innerHTML = self.nextQuestionNum.innerHTML;
-                    self.questionStatus.removeChild(self.nextQuestionNum);
-                    // force the focus on the next input
-                    nextQuestion.querySelector('input').focus();
-                }
-            };
+                }, 500);
+                self.currentNum.innerHTML = self.nextQuestionNum.innerHTML;
+                self.questionStatus.removeChild(self.nextQuestionNum);
+                // force the focus on the next input
+                nextQuestion.querySelector('input').focus();
+            }
+        };
 
         if (support.transitions) {
             this.progress.addEventListener(transEndEventName, onEndTransitionFn);
-        }
-        else {
+        } else {
             onEndTransitionFn();
         }
-    }
+    };
 
     // updates the progress bar by setting its width
     stepsForm.prototype._progress = function () {
-        this.progress.style.width = this.current * ( 100 / this.questionsCount ) + '%';
-    }
+        this.progress.style.width = this.current * (100 / this.questionsCount) + '%';
+    };
 
     // changes the current question number
     stepsForm.prototype._updateQuestionNumber = function () {
@@ -203,135 +305,59 @@
         this.nextQuestionNum.innerHTML = Number(this.current + 1);
         // insert it in the DOM
         this.questionStatus.appendChild(this.nextQuestionNum);
-    }
+    };
 
     // submits the form
     stepsForm.prototype._submit = function () {
+        var _this2 = this;
+
         this.current--;
         this.options.onSubmit(this.el);
-        setTimeout(() => this._progress(), 300);
-    }
+        setTimeout(function () {
+            return _this2._progress();
+        }, 300);
+    };
 
     // the validation function
     stepsForm.prototype._validate = function () {
         // current question´s input
-        const input = this.questions[this.current].querySelector('input');
+        var input = this.questions[this.current].querySelector('input');
         if (input.value === '') {
             this._showError('EMPTY');
             return false;
         }
-        const reg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/;
+        var reg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/;
         if (input.type === 'email' && !reg.test(input.value)) {
             this._showError('EMAIL');
             return false;
         }
 
         return true;
-    }
+    };
 
     stepsForm.prototype._showError = function (err) {
-        let message = '';
+        var message = '';
         switch (err) {
-            case 'EMPTY' :
+            case 'EMPTY':
                 message = data.errors.empty;
                 break;
-            case 'EMAIL' :
+            case 'EMAIL':
                 message = data.errors.email;
                 break;
         }
         this.error.innerHTML = message;
         classie.addClass(this.error, 'show');
-    }
+    };
 
     // clears/hides the current error message
     stepsForm.prototype._clearError = function () {
         classie.removeClass(this.error, 'show');
-    }
+    };
 
     // add to global namespace
     window.stepsForm = stepsForm;
-
 })(window);
-/*
- |------------------------------------------------------------
- | Social Connect JavaScript
- |------------------------------------------------------------
- |
- | @project Project Noah
- | @author Cali
- |
- */
-$(function () {
-    const socialForm = document.getElementById('social-form');
-    let loadingMessageEl = socialForm.querySelector('.loading-message');
-    let successMessageEl = socialForm.querySelector('.final-message');
-    let failed = 0;
 
-    // Setup form
-    const setupForm = () => {
-        new stepsForm(socialForm, {
-            onSubmit: (form) => {
-                // Hide form
-                classie.addClass(socialForm.querySelector('.pn-social-form-inner'), 'fade');
-                classie.addClass(loadingMessageEl, 'show');
+},{}]},{},[2,1]);
 
-                loadingMessageEl.innerHTML = `<i class="fa fa-square fa-2x"></i>${data.loading}`;
-                successMessageEl.innerHTML = `<i class="fa fa-check-circle"></i>${data.success}`;
-
-                setTimeout(function () {
-                    classie.addClass(loadingMessageEl.querySelector('i'), 'loading');
-                    submitForm(form);
-                }, 850);
-            }
-        });
-    }
-
-    setupForm();
-
-    // AJAX form submission
-    const submitForm = function (form) {
-        if (failed >= 5) {
-            loadingMessageEl.innerHTML = `<i class="fa fa-frown-o"></i>${data.failed}`;
-            return false;
-        }
-        $.post({
-            url: $(form).attr('action'),
-            data: $(form).serialize(),
-            error: () => {
-                failed++;
-                submitForm(form);
-            },
-            success: (JSON) => {
-                loadingMessageEl.innerHTML = "";
-                
-                if (JSON.status == "succeeded") {
-                    // Success
-                    classie.addClass(successMessageEl, 'show');
-                    setTimeout(() => window.location.href = JSON.redirect, 1000);
-                } else {
-                    // Something fails
-                    showError(JSON.messages[0]);
-                }
-            }
-        });
-    }
-
-    // Display errors
-    const showError = function (message) {
-        classie.removeClass(loadingMessageEl, 'show');
-        $('.pn-social-form-inner').removeClass('fade');
-
-        const template = `<div id="input-errors"><h3>${message}</h3></div>`;
-
-        $(template).prependTo($('.submission'));
-
-        let errorEl = document.getElementById('input-errors');
-
-        setTimeout( () => {
-            if (errorEl)
-                $(errorEl).fadeOut();
-            setTimeout(() => $(errorEl).remove(), 350);
-        }, 1800);
-    }
-});
 //# sourceMappingURL=social.js.map

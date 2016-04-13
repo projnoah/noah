@@ -40,10 +40,6 @@
                             <a href="@route('install', ['step' => $step + 1])">
                                 @trans('views.installation.success.next')
                             </a>
-                        @else
-                            <a href="@route('install-done')">
-                                @trans('views.installation.success.done_button')
-                            </a>
                         @endif
                     @else
                         <a href="{{ url()->current() }}">

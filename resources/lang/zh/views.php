@@ -56,8 +56,6 @@ return [
         'success'       => [
             'writable'            => '文件目录检查完毕',
             'database_connection' => '数据库连接成功',
-            'done'                => '设置完成，一切已准备就绪',
-            'done_button'         => '开启全新站点',
             'next'                => '前往下一步',
         ],
     ],
@@ -126,5 +124,8 @@ return [
         'home' => [
             'title' => '主页'
         ]
+    ],
+    'admin'        => [
+        'theme-color-changed' => '主题已更换'
     ]
 ];

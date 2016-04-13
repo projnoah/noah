@@ -65,19 +65,6 @@ class InstallationController extends Controller {
     }
 
     /**
-     * Redirect after installation is done.
-     * 
-     * @return mixed
-     * @author Cali
-     */
-    public function done()
-    {
-        $this->writeLock();
-
-        return redirect(route('dashboard'));
-    }
-
-    /**
      * Handle the installation request.
      *
      * @param         $step
@@ -112,6 +99,8 @@ class InstallationController extends Controller {
             ];
 
             $this->migrateAndCreateAdmin($credentials);
+
+            return redirect(route('dashboard'));
         }
 
         if ($this->errorMessages->count()) {
@@ -169,7 +158,7 @@ class InstallationController extends Controller {
     protected function checkWritability()
     {
         foreach ($this->writablePaths as $path) {
-            if (! is_writable(base_path($path))) {
+            if (! File::isWritable(base_path($path))) {
                 $this->errorMessages->push(
                     trans('views.installation.errors.unwritable', compact('path'))
                 );
@@ -355,11 +344,12 @@ class InstallationController extends Controller {
     {
         env_put('ADMIN_EMAIL', $credentials['email'], true);
 
-        Artisan::call('key:generate');
-        Artisan::call('migrate', ['--force' => true]);
+        Artisan::call('migrate', ['--force' => 'true']);
 
         $admin = User::createAdmin($credentials);
         Auth::login($admin, true);
+
+        $this->writeLock();
     }
 
     /**

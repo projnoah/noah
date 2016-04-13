@@ -81,8 +81,8 @@ class AuthController extends Controller {
         $email = Crypt::decrypt($request->input('token'));
 
         // TODO: Flash message
-        return User::activateByEmail($email) ?
-            redirect($this->redirectPath())->with('status', 'success') :
-            redirect('/');
+        User::activateByEmail($email);
+        
+        return redirect($this->redirectPath())->with('status', 'success');
     }
 }

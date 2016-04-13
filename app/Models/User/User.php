@@ -53,7 +53,6 @@ class User extends BaseUser {
      * The user's avatar
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     *
      * @author Cali
      */
     public function avatar()
@@ -65,12 +64,22 @@ class User extends BaseUser {
      * The user's roles.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     *
      * @author Cali
      */
     public function roles()
     {
         return $this->belongsToMany(Role::class);
+    }
+
+    /**
+     * The user's meta information
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @author Cali
+     */
+    public function metas()
+    {
+        return $this->hasMany(UserMeta::class);
     }
 
     /*
@@ -82,6 +91,7 @@ class User extends BaseUser {
      *
      * @param      $attributes
      * @param null $social_info
+     * @param bool $fire
      * @return static
      *
      * @event UserHasRegistered
@@ -122,6 +132,7 @@ class User extends BaseUser {
     {
         $admin = static::register($attributes, null, false);
         $admin->assignRole('administrator');
+        $admin->activated();
 
         return $admin;
     }
@@ -164,13 +175,27 @@ class User extends BaseUser {
     {
         $user = static::where('email', $email)->first();
 
-        if (! $user->active) {
-            $user->active = true;
-
-            return $user->save();
-        }
+        $user->activated();
 
         return false;
+    }
+
+    /**
+     * Set the user active.
+     *
+     * @return $this
+     * @author Cali
+     */
+    public function activated()
+    {
+        if (! $this->active) {
+            $this->active = true;
+            $this->save();
+
+            return $this;
+        }
+
+        return $this;
     }
 
     /**
@@ -273,5 +298,49 @@ class User extends BaseUser {
         }
 
         return $this;
+    }
+
+    /**
+     * Get or set the user's meta.
+     *
+     * @param      $key
+     * @param null $value
+     * @return bool|string|object
+     *
+     * @author Cali
+     */
+    public function meta($key, $value = null)
+    {
+        $meta = $this->metas()->where('key', $key)->first();
+
+        if ($value) {
+            if (! $meta) {
+                $meta = $this->metas()->create([
+                    'key'   => $key,
+                    'value' => $value
+                ]);
+            } else {
+                $meta->value = $value;
+                $meta->save();
+            }
+        }
+
+        return is_null($meta) ? false : (json_decode($meta->value) ?: $meta->value);
+    }
+
+    /**
+     * Change the admin theme color.
+     *
+     * @param array $attribute
+     * @author Cali
+     */
+    public function changeAdminTheme(array $attribute)
+    {
+        $value = json_encode([
+            'theme' => $attribute['theme'],
+            'color' => $attribute['color']
+        ]);
+
+        $this->meta('admin.theme', $value);
     }
 }

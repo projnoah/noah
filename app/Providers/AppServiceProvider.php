@@ -2,8 +2,9 @@
 
 namespace Noah\Providers;
 
-use Noah\Library\SiteConfiguration as Site;
+use Illuminate\Support\Str;
 use Illuminate\Support\ServiceProvider;
+use Noah\Library\SiteConfiguration as Site;
 
 class AppServiceProvider extends ServiceProvider {
 
@@ -14,7 +15,7 @@ class AppServiceProvider extends ServiceProvider {
      */
     public function boot()
     {
-
+        
     }
 
     /**
@@ -24,6 +25,7 @@ class AppServiceProvider extends ServiceProvider {
      */
     public function register()
     {
+        $this->generateKeyIfNotGiven();
         $this->registerSiteSingleton();
     }
 
@@ -37,5 +39,23 @@ class AppServiceProvider extends ServiceProvider {
         $this->app->singleton('Site', function () {
             return new Site;
         });
+    }
+
+    /**
+     * Always check if the key is generated.
+     * 
+     * @author Cali
+     */
+    protected function generateKeyIfNotGiven()
+    {
+        $config = $this->app->make('config')->get('app');
+
+        if (! Str::startsWith($config['key'], 'base64:')) {
+            $key = 'base64:' . base64_encode(random_bytes(
+                    $config['cipher'] == 'AES-128-CBC' ? 16 : 32
+                ));
+
+            env_put('APP_KEY', $key);
+        }
     }
 }
