@@ -7,8 +7,8 @@ use Carbon\Carbon;
 use Illuminate\Routing\Router;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
-class RouteServiceProvider extends ServiceProvider
-{
+class RouteServiceProvider extends ServiceProvider {
+
     /**
      * This namespace is applied to the controller routes in your routes file.
      *
@@ -21,21 +21,21 @@ class RouteServiceProvider extends ServiceProvider
     /**
      * Define your route model bindings, pattern filters, etc.
      *
-     * @param  \Illuminate\Routing\Router  $router
+     * @param  \Illuminate\Routing\Router $router
      * @author Cali
      */
     public function boot(Router $router)
     {
         $this->setTimeLocale();
         $this->adjustLocale();
-        
+
         parent::boot($router);
     }
 
     /**
      * Define the routes for the application.
      *
-     * @param  \Illuminate\Routing\Router  $router
+     * @param  \Illuminate\Routing\Router $router
      * @author Cali
      */
     public function map(Router $router)
@@ -50,7 +50,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * These routes all receive session state, CSRF protection, etc.
      *
-     * @param  \Illuminate\Routing\Router  $router
+     * @param  \Illuminate\Routing\Router $router
      * @author Cali
      */
     protected function mapWebRoutes(Router $router)
@@ -64,7 +64,7 @@ class RouteServiceProvider extends ServiceProvider
 
     /**
      * Set the Carbon locale.
-     * 
+     *
      * @author Cali
      */
     protected function setTimeLocale()
@@ -74,7 +74,7 @@ class RouteServiceProvider extends ServiceProvider
 
     /**
      * Adjust the locale with different browser languages.
-     * 
+     *
      * @author Cali
      */
     private function adjustLocale()
@@ -98,6 +98,7 @@ class RouteServiceProvider extends ServiceProvider
             case "en":
             case "zh":
                 app()->setLocale($locale);
+
                 return;
             default:
                 return;

@@ -30,6 +30,8 @@ class Kernel extends HttpKernel
             \Illuminate\Session\Middleware\StartSession::class,
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \Noah\Http\Middleware\VerifyCsrfToken::class,
+            \Noah\Http\Middleware\RecordStatistics::class,
+            \Noah\Http\Middleware\PjaxMiddleware::class,
         ],
 
         'api' => [

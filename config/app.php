@@ -156,7 +156,7 @@ return [
         Noah\Providers\AuthServiceProvider::class,
         Noah\Providers\EventServiceProvider::class,
         Noah\Providers\RouteServiceProvider::class,
-        
+
         /*
          * Socialite Providers... 
          */
@@ -166,6 +166,16 @@ return [
          * Storage Providers...
          */
         zgldh\QiniuStorage\QiniuFilesystemServiceProvider::class,
+
+        /*
+         * Location Providers... 
+         */
+        Stevebauman\Location\LocationServiceProvider::class,
+
+        /*
+         * User-Agent Providers...
+         */
+        Jenssegers\Agent\AgentServiceProvider::class,
     ],
 
     /*
@@ -212,12 +222,15 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
         
-        'Noah' => Noah\Library\Facades\Noah::class,
-        
-        'Mailer' => Noah\Library\Facades\Mailer::class,
-        'Site' => Noah\Library\Facades\Site::class,
+        // Noah defaults
+        'Noah'      => Noah\Library\Facades\Noah::class,
+        'Mailer'    => Noah\Library\Facades\Mailer::class,
+        'Site'      => Noah\Library\Facades\Site::class,
+        'Stat'      => Noah\Library\Facades\Stat::class,
         'Socialite' => Cali\Socialite\Facades\Socialite::class,
 
+        // Vendors
+        'Location'  => Stevebauman\Location\Facades\Location::class,
     ],
 
 ];

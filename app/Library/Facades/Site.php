@@ -13,6 +13,6 @@ class Site extends Facade {
      */
     protected static function getFacadeAccessor()
     {
-        return \Noah\Library\SiteConfiguration::class;
+        return \Noah\SiteConfiguration::class;
     }
 }

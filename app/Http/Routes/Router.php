@@ -124,9 +124,27 @@ class Router {
             'middleware' => ['auth', 'role:administrator'],
         ], function () {
             Route::get('/', 'ManageController@showDashboard')->name('dashboard');
+            Route::patch('save/settings', 'ManageController@changeSetting')->name('change-settings');
             Route::patch('save/settings/color', 'ManageController@changeThemeColor')->name('change-theme-color');
+
+            // Users management.
+            Route::group([
+                'prefix'    => 'users',
+                'as'        => 'users.'
+            ], function () {
+                Route::get('/', 'UsersController@showIndex')->name('index');
+            });
+            
+            // Site settings.
+            Route::group([
+                'prefix'    => 'settings',
+                'as'        => 'settings.'
+            ], function () {
+                Route::get('/', 'SettingsController@showGeneralSetting')->name('general');
+                Route::get('services', 'SettingsController@showServicesSetting')->name('services');
+            });
         });
-        
+
         return new static;
     }
 }

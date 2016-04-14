@@ -5,14 +5,14 @@
     <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s1">
         <h3><span class="pull-left">Chat</span><a href="javascript:void(0);" class="pull-right" id="closeRight"><i class="fa fa-times"></i></a></h3>
         <div class="slimscroll">
-            <a href="javascript:void(0);" class="showRight2"><img src="assets/images/avatar2.png" alt=""><span>Sandra smith<small>Hi! How're you?</small></span></a>
-            <a href="javascript:void(0);" class="showRight2"><img src="assets/images/avatar3.png" alt=""><span>Amily Lee<small>Hi! How're you?</small></span></a>
-            <a href="javascript:void(0);" class="showRight2"><img src="assets/images/avatar4.png" alt=""><span>Christopher Palmer<small>Hi! How're you?</small></span></a>
-            <a href="javascript:void(0);" class="showRight2"><img src="assets/images/avatar5.png" alt=""><span>Nick Doe<small>Hi! How're you?</small></span></a>
-            <a href="javascript:void(0);" class="showRight2"><img src="assets/images/avatar2.png" alt=""><span>Sandra smith<small>Hi! How're you?</small></span></a>
-            <a href="javascript:void(0);" class="showRight2"><img src="assets/images/avatar3.png" alt=""><span>Amily Lee<small>Hi! How're you?</small></span></a>
-            <a href="javascript:void(0);" class="showRight2"><img src="assets/images/avatar4.png" alt=""><span>Christopher Palmer<small>Hi! How're you?</small></span></a>
-            <a href="javascript:void(0);" class="showRight2"><img src="assets/images/avatar5.png" alt=""><span>Nick Doe<small>Hi! How're you?</small></span></a>
+            <a href="javascript:void(0);" class="showRight2"><img src="{{ Auth::user()->avatarUrl }}" alt=""><span>Sandra smith<small>Hi! How're you?</small></span></a>
+            <a href="javascript:void(0);" class="showRight2"><img src="{{ Auth::user()->avatarUrl }}" alt=""><span>Amily Lee<small>Hi! How're you?</small></span></a>
+            <a href="javascript:void(0);" class="showRight2"><img src="{{ Auth::user()->avatarUrl }}" alt=""><span>Christopher Palmer<small>Hi! How're you?</small></span></a>
+            <a href="javascript:void(0);" class="showRight2"><img src="{{ Auth::user()->avatarUrl }}" alt=""><span>Nick Doe<small>Hi! How're you?</small></span></a>
+            <a href="javascript:void(0);" class="showRight2"><img src="{{ Auth::user()->avatarUrl }}" alt=""><span>Sandra smith<small>Hi! How're you?</small></span></a>
+            <a href="javascript:void(0);" class="showRight2"><img src="{{ Auth::user()->avatarUrl }}" alt=""><span>Amily Lee<small>Hi! How're you?</small></span></a>
+            <a href="javascript:void(0);" class="showRight2"><img src="{{ Auth::user()->avatarUrl }}" alt=""><span>Christopher Palmer<small>Hi! How're you?</small></span></a>
+            <a href="javascript:void(0);" class="showRight2"><img src="{{ Auth::user()->avatarUrl }}" alt=""><span>Nick Doe<small>Hi! How're you?</small></span></a>
         </div>
     </nav>
     <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2">
@@ -20,7 +20,7 @@
         <div class="slimscroll chat">
             <div class="chat-item chat-item-left">
                 <div class="chat-image">
-                    <img src="assets/images/avatar2.png" alt="">
+                    <img src="{{ Auth::user()->avatarUrl }}" alt="">
                 </div>
                 <div class="chat-message">
                     Hi There!
@@ -33,7 +33,7 @@
             </div>
             <div class="chat-item chat-item-left">
                 <div class="chat-image">
-                    <img src="assets/images/avatar2.png" alt="">
+                    <img src="{{ Auth::user()->avatarUrl }}" alt="">
                 </div>
                 <div class="chat-message">
                     Fine! do you like my project?
@@ -46,7 +46,7 @@
             </div>
             <div class="chat-item chat-item-left">
                 <div class="chat-image">
-                    <img src="assets/images/avatar2.png" alt="">
+                    <img src="{{ Auth::user()->avatarUrl }}" alt="">
                 </div>
                 <div class="chat-message">
                     Thanks, I tried!
@@ -66,7 +66,7 @@
     </nav>
     <div class="menu-wrap">
         <nav class="profile-menu">
-            <div class="profile"><img src="assets/images/profile-menu-image.png" width="60" alt="David Green"/><span>David Green</span></div>
+            <div class="profile"><img :src="User.avatarUrl" width="60" alt="@{{ User.name }}"/><span>@{{ User.name }}</span></div>
             <div class="profile-menu-list">
                 <a href="#"><i class="fa fa-star"></i><span>Favorites</span></a>
                 <a href="#"><i class="fa fa-bell"></i><span>Alerts</span></a>
@@ -78,7 +78,7 @@
     </div>
     <form class="search-form" action="#" method="GET">
         <div class="input-group">
-            <input type="text" name="search" class="form-control search-input" placeholder="Search...">
+            <input type="text" name="search" class="form-control search-input" placeholder="Search...{{ time() }}">
                 <span class="input-group-btn">
                     <button class="btn btn-default close-search waves-effect waves-button waves-classic" type="button"><i class="fa fa-times"></i></button>
                 </span>
@@ -90,10 +90,12 @@
 
         @include('layouts.partials.admin.sidebar')
 
-        <div class="page-inner">
+        <div class="page-inner" id="pjax-container">
             @include('layouts.partials.admin.breadcrumb')
 
-            @yield('app-content')
+            <div id="main-wrapper">
+                @yield('app-content')
+            </div><!-- Main Wrapper -->
 
             @include('layouts.partials.admin.footer')
         </div><!-- Page Inner -->

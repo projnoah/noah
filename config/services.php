@@ -106,4 +106,8 @@ return [
         'client_secret' => env('YOUTUBE_SECRET'),
         'redirect'      => env('YOUTUBE_REDIRECT'),
     ],
+
+    'open-weather-map' => [
+        'api_key' => env('OPEN_WEATHER_MAP_KEY')
+    ]
 ];

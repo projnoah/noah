@@ -5,6 +5,7 @@ namespace Noah;
 use Noah\Events\User\Auth\UserHasReset;
 use Noah\Library\Traits\User\Sociable;
 use Noah\Events\User\Auth\UserHasLoggedIn;
+use Noah\Library\Traits\Model\TimeSortable;
 use Noah\Events\User\Auth\UserHasRegistered;
 use Illuminate\Foundation\Auth\User as BaseUser;
 
@@ -21,7 +22,7 @@ class User extends BaseUser {
     |
     */
 
-    use Sociable;
+    use Sociable, TimeSortable;
 
     /**
      * The attributes that are mass assignable.
@@ -329,12 +330,64 @@ class User extends BaseUser {
     }
 
     /**
+     * Helper reader method for metas.
+     *
+     * @param      $key
+     * @param      $property
+     * @param bool $default
+     * @return bool
+     *
+     * @author Cali
+     */
+    public function metaReader($key, $property, $default = false)
+    {
+        $meta = $this->meta($key);
+
+        if ($meta) {
+            return property_exists($meta, $property) ? $meta->{$property} : $default;
+        } else {
+            return $default;
+        }
+    }
+
+    /**
+     * Helper for admin theme setting metas.
+     * 
+     * @param        $key
+     * @param string $property
+     * @param bool   $default
+     * @return bool
+     *
+     * @author Cali
+     */
+    public function adminThemeSettingMeta($key, $property = 'value', $default = false)
+    {
+        return $this->metaReader($key, $property, $default);
+    }
+
+    /**
+     * Change the admin theme setting.
+     *
+     * @param array $attribute
+     * @author Cali
+     */
+    public function changeAdminThemeSetting(array $attribute)
+    {
+        $value = json_encode([
+            'type'  => $attribute['type'],
+            'value' => $attribute['value']
+        ]);
+
+        $this->meta('admin.theme.' . $attribute['type'], $value);
+    }
+
+    /**
      * Change the admin theme color.
      *
      * @param array $attribute
      * @author Cali
      */
-    public function changeAdminTheme(array $attribute)
+    public function changeAdminThemeColor(array $attribute)
     {
         $value = json_encode([
             'theme' => $attribute['theme'],

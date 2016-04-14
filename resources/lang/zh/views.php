@@ -126,6 +126,41 @@ return [
         ]
     ],
     'admin'        => [
-        'theme-color-changed' => '主题已更换'
+        'main-title'            => '后台管理',
+        'titles'                => [
+            'dashboard' => '仪表盘',
+            'users'     => [
+                'main' => '用户',
+                'sub'  => [
+                    'profile' => '修改个人资料'
+                ]
+            ],
+            'settings'  => [
+                'main' => '站点设置',
+                'sub'  => [
+                    'general' => '常规',
+                    'services' => '第三方服务'
+                ]
+            ]
+        ],
+        'theme-color-changed'   => '主题已更换',
+        'theme-setting-changed' => ':type 设置已更改',
+        'navbar'                => [
+            'settings' => [
+                'fixed-header'   => '顶部导航固定',
+                'fixed-sidebar'  => '边栏固定',
+                'horizontal-bar' => '边栏水平/垂直',
+                'toggle-sidebar' => '边栏最小化',
+                'compact-menu'   => '小菜单',
+                'hover-menu'     => '鼠标悬停菜单',
+                'theme-color'    => '修改主题颜色',
+                'reset'          => '重置设置',
+                'errors'         => [
+                    'static-header-horizontal-bar' => '非固定的顶部导航无法与固定水平边栏兼容, 已重新设置',
+                    'fixed-sidebar-hover-menu'     => '固定边栏无法与悬停菜单兼容, 已重新设置'
+                ]
+            ],
+            'logout'   => '注销'
+        ]
     ]
 ];

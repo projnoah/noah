@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="_token" content="{{ csrf_token() }}">
 
-    <title>@yield('title') @site('title')</title>
+    <title>@yield('title') @site('adminTitle')</title>
 
     {{-- Fonts --}}
     <link href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
@@ -41,6 +41,21 @@
         @if(Auth::user()->meta('admin.theme'))
         var THEME_COLOR = "{{ Auth::user()->meta('admin.theme')->color }}";
         @endif
+
+        var themeSettings = {
+            fixedHeader: '{{ Auth::user()->adminThemeSettingMeta('admin.theme.fixed-header', 'value', true) }}',
+            fixedSidebar: '{{ Auth::user()->adminThemeSettingMeta('admin.theme.fixed-sidebar') }}',
+            horizontalBar: '{{ Auth::user()->adminThemeSettingMeta('admin.theme.horizontal-bar') }}',
+            toggleSidebar: '{{ Auth::user()->adminThemeSettingMeta('admin.theme.toggle-sidebar') }}',
+            compactMenu: '{{ Auth::user()->adminThemeSettingMeta('admin.theme.compact-menu') }}',
+            hoverMenu: '{{ Auth::user()->adminThemeSettingMeta('admin.theme.hover-menu') }}',
+            errors: {
+                staticHeader: "@trans('views.admin.navbar.settings.errors.static-header-horizontal-bar')",
+                fixedSidebar: "@trans('views.admin.navbar.settings.errors.fixed-sidebar-hover-menu')"
+            }
+        },
+                CurrentUser = JSON.parse('{!! Auth::user() !!}');
+
     </script>
     {{-- Scripts Stack --}}
     @stack('scripts.header')

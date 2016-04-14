@@ -5,6 +5,8 @@ $(function () {
         el: "body",
         data: {
             colorChangerForm: $('form#color-changer')[0],
+            settingChangerForm: $('form#setting-changer')[0],
+            User: CurrentUser,
         },
         computed: {
             _token() {
@@ -36,10 +38,34 @@ $(function () {
                         }
                     }
                 });
+            },
+            changeThemeSettings(el, type) {
+                $.ajax({
+                    url: $(this.settingChangerForm).attr('action'),
+                    type: "PATCH",
+                    data: {
+                        _token: this._token,
+                        type: type,
+                        value: el.checked
+                    },
+                    error: (error) => {
+                        toastr.error(error.responseText);
+                    },
+                    success: (JSON) => {
+                        let message = `<h4>${JSON.message}</h4>`;
+                        if (JSON.status !== "error") {
+                            toastr.success(message);
+                        } else {
+                            toastr.error(message);
+                        }
+                    }
+                });
             }
         },
         ready() {
-            
+            return () => {
+
+            }
         }
     });
     

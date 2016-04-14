@@ -9924,7 +9924,9 @@ $(function () {
     var Admin = new Vue({
         el: "body",
         data: {
-            colorChangerForm: $('form#color-changer')[0]
+            colorChangerForm: $('form#color-changer')[0],
+            settingChangerForm: $('form#setting-changer')[0],
+            User: CurrentUser
         },
         computed: {
             _token: function _token() {
@@ -9956,9 +9958,33 @@ $(function () {
                         }
                     }
                 });
+            },
+            changeThemeSettings: function changeThemeSettings(el, type) {
+                $.ajax({
+                    url: $(this.settingChangerForm).attr('action'),
+                    type: "PATCH",
+                    data: {
+                        _token: this._token,
+                        type: type,
+                        value: el.checked
+                    },
+                    error: function error(_error2) {
+                        toastr.error(_error2.responseText);
+                    },
+                    success: function success(JSON) {
+                        var message = '<h4>' + JSON.message + '</h4>';
+                        if (JSON.status !== "error") {
+                            toastr.success(message);
+                        } else {
+                            toastr.error(message);
+                        }
+                    }
+                });
             }
         },
-        ready: function ready() {}
+        ready: function ready() {
+            return function () {};
+        }
     });
 
     window.Admin = Admin;

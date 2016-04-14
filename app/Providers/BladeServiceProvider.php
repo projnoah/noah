@@ -29,6 +29,7 @@ class BladeServiceProvider extends ServiceProvider {
         $this->registerRouteDirective();
         $this->registerSiteDirective();
         $this->registerAuthDirectives();
+        $this->registerStatDirective();
     }
 
     /**
@@ -101,6 +102,18 @@ class BladeServiceProvider extends ServiceProvider {
         });
         Blade::directive('endguest', function () {
             return "<?php endif; ?>";
+        });
+    }
+
+    /**
+     * Register @stat for Stat Facade.
+     * 
+     * @author Cali
+     */
+    protected function registerStatDirective()
+    {
+        Blade::directive('stat', function ($exp) {
+            return "<?php echo Stat::callByExpression{$exp} ?>";
         });
     }
 }

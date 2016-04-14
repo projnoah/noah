@@ -166,8 +166,11 @@ elixir(function (mix) {
             'admin/vendor/MetroJs.min.js',
             'admin/modern.js',
             'builds/admin/app.js',
-            'admin/pages/dashboard.js',
         ], 'public/assets/js/admin/app.js');
+    
+    mix.scripts([
+        'admin/pages/dashboard.js',
+    ], 'public/assets/js/admin/pages/dashboard.js');
 
     //mix.version();
 });

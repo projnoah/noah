@@ -2,8 +2,8 @@ $( document ).ready(function() {
     
     // CounterUp Plugin
     $('.counter').counterUp({
-        delay: 5,
-        time: 800
+        delay: 3,
+        time: 450
     });
     
     toastr.options = {
@@ -13,10 +13,6 @@ $( document ).ready(function() {
         hideMethod: 'fadeOut',
         timeOut: 5000
     };
-    
-    setTimeout(function() {
-        toastr.success('Checkout settings menu on left!', 'Welcome to Modern!');
-    }, 1800);
     
     var flot2 = function () {
 
