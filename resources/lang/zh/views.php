@@ -138,7 +138,7 @@ return [
             'settings'  => [
                 'main' => '站点设置',
                 'sub'  => [
-                    'general' => '常规',
+                    'general'  => '常规设置',
                     'services' => '第三方服务'
                 ]
             ]
@@ -161,6 +161,42 @@ return [
                 ]
             ],
             'logout'   => '注销'
+        ],
+        'footer'                => [
+            'current-version' => '当前版本'
+        ],
+        'pages'                 => [
+            'settings' => [
+                'general'       => [
+                    'basics' => [
+                        'heading'             => '核心设置',
+                        'site-title'          => '站点标题',
+                        'home-uri'            => '主页地址',
+                        'home-uri-help'       => '主页地址, 网站入口地址',
+                        'social-uri'          => '社区地址',
+                        'social-uri-help'     => '社区主页地址, 发布图文分享等SNS系统',
+                        'post-uri'            => '文章地址',
+                        'post-uri-help'       => '文章主页地址, 博文CMS系统',
+                        'admin-uri'           => '后台地址',
+                        'admin-uri-help'      => '后台管理地址, 请谨慎修改',
+                        'registration-on'     => '用户注册',
+                        'registration-on-yes' => '开放注册',
+                        'registration-on-no'  => '仅注册码邀请',
+                        'admin-email'         => '管理邮箱',
+                        'admin-email-help'    => '将以该邮箱发邮件给网站用户',
+                    ],
+                    'seo'    => [
+                        'heading'          => 'SEO设置',
+                        'separator'        => '分隔符',
+                        'separator-help'   => '用来分隔网站标题, 比如 页面 :: 站名',
+                        'description'      => '站点介绍',
+                        'description-help' => '简洁的话语来介绍描述您的网站, 将建站目的与网站功能告诉大家',
+                        'keywords'         => '关键字'
+                    ]
+                ],
+                'update-button' => '保存设置',
+                'updated'       => ':setting 设置已更新'
+            ]
         ]
     ]
 ];

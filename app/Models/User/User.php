@@ -396,4 +396,16 @@ class User extends BaseUser {
 
         $this->meta('admin.theme', $value);
     }
+
+    /**
+     * If the user is an admin.
+     * 
+     * @return bool
+     * @author Cali
+     */
+    public function isAdmin()
+    {
+        // TODO: Dynamic role
+        return $this->hasRole('administrator');
+    }
 }

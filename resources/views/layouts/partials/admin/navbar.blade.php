@@ -198,9 +198,17 @@
                             <img class="img-circle avatar" :src="User.avatarUrl" width="40" height="40" alt="">
                         </a>
                         <ul class="dropdown-menu dropdown-list" role="menu">
-                            <li role="presentation"><a href="profile.html"><i class="fa fa-user"></i>Profile</a></li>
-                            <li role="presentation"><a href="calendar.html"><i class="fa fa-calendar"></i>Calendar</a></li>
-                            <li role="presentation"><a href="inbox.html"><i class="fa fa-envelope"></i>Inbox<span class="badge badge-success pull-right">4</span></a></li>
+                            <li role="presentation">
+                                <a href="@route('admin.users.profile')" data-pjax>
+                                    <i class="icon-user m-r-xs"></i>@trans('views.admin.titles.users.sub.profile')
+                                </a>
+                            </li>
+                            <li role="presentation">
+                                <a href="inbox.html">
+                                    <i class="icon-envelope"></i>Inbox
+                                    <span class="badge badge-success pull-right">4</span>
+                                </a>
+                            </li>
                             <li role="presentation" class="divider"></li>
                             <li role="presentation"><a href="lock-screen.html"><i class="fa fa-lock"></i>Lock screen</a></li>
                             <li role="presentation"><a href="login.html"><i class="fa fa-sign-out m-r-xs"></i>Log out</a></li>
@@ -208,7 +216,7 @@
                     </li>
                     <li>
                         <a href="@route('exit')" class="log-out waves-effect waves-button waves-classic">
-                            <span><i class="icon-power m-r-xs"></i>@trans('views.admin.navbar.logout')</span>
+                            <span><i class="glyphicon glyphicon-off m-r-xs"></i>@trans('views.admin.navbar.logout')</span>
                         </a>
                     </li>
                     <li>

@@ -1701,7 +1701,7 @@ fieldset[disabled] .btn-danger.active {
     box-shadow: 0 5px 5px -5px rgba(0, 0, 0, 0.1);
     border: 0!important;
     margin-bottom: 25px;
-    border-radius: 0;
+    border-radius: 4px;
 }
 
 @media (min-width: 768px) {
@@ -2433,7 +2433,7 @@ ol.linenums {
     box-shadow: none!important;
     font-size: 13px!important;
     padding: 6px 10px!important;
-    height: 34px!important;
+    min-height: 34px!important;
     -webkit-transition: all 0.2s ease-in-out!important;
     -moz-transition: all 0.2s ease-in-out!important;
     -o-transition: all 0.2s ease-in-out!important;
@@ -2461,9 +2461,19 @@ ol.linenums {
 }
 
 .select2-selection--multiple .select2-selection__choice {
-    background: #f1f1f1!important;
-    border-radius: 0!important;
-    border: 1px solid #ccc!important;
+    background: #f5f5f5 !important;
+    border-radius: 4px !important;
+    border: none !important;
+    padding: 2px 7px !important;
+    color: #777;
+}
+
+.select2-container--default .select2-results__option--highlighted[aria-selected] {
+    background: #394862 !important;
+}
+
+.select2-container--default .select2-results__option[aria-selected=true] {
+    background-color: #f1f1f1;
 }
 
 .select2-container--default .select2-selection--single .select2-selection__rendered,
@@ -2474,7 +2484,7 @@ ol.linenums {
 
 .select2-container--default .select2-selection--multiple .select2-selection__choice,
 .select2-container .select2-search--inline .select2-search__field {
-    margin-top: 0!important;
+    margin: 3px 4px !important;
 }
 
 .popover {

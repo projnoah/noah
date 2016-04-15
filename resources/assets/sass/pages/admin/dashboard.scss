@@ -43,3 +43,45 @@
 .toast-warning {
   background-color: $warning-dark;
 }
+
+.form-horizontal .radio, .form-horizontal .radio-inline {
+  padding-top: 4px !important;
+}
+
+.checkbox-inline, .radio-inline {
+  padding: 0 8px 0 0 !important;
+}
+
+.radio-inline label {
+  cursor: pointer;
+}
+
+.loading {
+  opacity: .25;
+  pointer-events: none;
+  @include ts(opacity ease-in-out .35s);
+}
+
+.done-loaded {
+  opacity: 1;
+  pointer-events: all;
+  @include ts(opacity ease-in-out .25s);
+}
+
+.shaky {
+  @include am(shake ease-in-out .7s backwards);
+}
+
+@keyframes shake {
+  from, to {
+    transform: translate3d(0, 0, 0);
+  }
+
+  10%, 30%, 50%, 70%, 90% {
+    transform: translate3d(-12px, 0, 0);
+  }
+
+  20%, 40%, 60%, 80% {
+    transform: translate3d(12px, 0, 0);
+  }
+}

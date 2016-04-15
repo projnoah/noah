@@ -78,7 +78,7 @@
     </div>
     <form class="search-form" action="#" method="GET">
         <div class="input-group">
-            <input type="text" name="search" class="form-control search-input" placeholder="Search...{{ time() }}">
+            <input type="text" name="search" class="form-control search-input" placeholder="Search...">
                 <span class="input-group-btn">
                     <button class="btn btn-default close-search waves-effect waves-button waves-classic" type="button"><i class="fa fa-times"></i></button>
                 </span>
@@ -90,7 +90,7 @@
 
         @include('layouts.partials.admin.sidebar')
 
-        <div class="page-inner" id="pjax-container">
+        <div class="page-inner" id="page-container">
             @include('layouts.partials.admin.breadcrumb')
 
             <div id="main-wrapper">

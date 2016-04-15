@@ -20,14 +20,24 @@ class Noah {
      */
 
     /**
-     * Current version.
+     * Current noah version.
      */
-    const VERSION = "1.0.0";
+    const VERSION = "0.1.0";
 
     /**
-     * Update base url.
+     * Beta version.
      */
-    const UPDATE_BASE_URL = "https://www.projnoah.com/upgrades/";
+    const IS_BETA = true;
+    
+    /**
+     * Noah home URL.
+     */
+    const URL = "https://projnoah.com";
+    
+    /**
+     * Noah update base url.
+     */
+    const UPDATE_BASE_URL = "https://projnoah.com/upgrades/";
 
     /**
      * Update Noah to the latest version.
@@ -70,6 +80,39 @@ class Noah {
     {
         // TODO: Fetch from server
         return "1.0.0";
+    }
+
+    /**
+     * Get the current version of Project Noah.
+     * 
+     * @return string
+     * @author Cali
+     */
+    public static function getCurrentVersion()
+    {
+        return static::VERSION;
+    }
+
+    /**
+     * Get Noah home url.
+     * 
+     * @return string
+     * @author Cali
+     */
+    public static function getHomeUrl()
+    {
+        return static::URL;
+    }
+
+    /**
+     * Is the current version in beta.
+     * 
+     * @return bool
+     * @author Cali
+     */
+    public static function isBeta()
+    {
+        return static::IS_BETA;
     }
 
     /**

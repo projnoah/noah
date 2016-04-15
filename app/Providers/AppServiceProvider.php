@@ -4,7 +4,7 @@ namespace Noah\Providers;
 
 use Illuminate\Support\Str;
 use Illuminate\Support\ServiceProvider;
-use Noah\Library\SiteConfiguration as Site;
+use Noah\SiteConfiguration as Site;
 
 class AppServiceProvider extends ServiceProvider {
 

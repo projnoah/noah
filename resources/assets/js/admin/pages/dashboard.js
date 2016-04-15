@@ -1,3 +1,5 @@
+import "./all";
+
 $( document ).ready(function() {
     
     // CounterUp Plugin
@@ -5,14 +7,6 @@ $( document ).ready(function() {
         delay: 3,
         time: 450
     });
-    
-    toastr.options = {
-        closeButton: true,
-        progressBar: true,
-        showMethod: 'fadeIn',
-        hideMethod: 'fadeOut',
-        timeOut: 5000
-    };
     
     var flot2 = function () {
 
@@ -189,5 +183,7 @@ $( document ).ready(function() {
     flot1();
     
     $(".live-tile").liveTile();
-    
+    $(document).on('pjax:beforeReplace', function () {
+        $(".live-tile").liveTile("destroy");
+    }); 
 });

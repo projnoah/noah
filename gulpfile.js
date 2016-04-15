@@ -132,6 +132,7 @@ elixir(function (mix) {
             'admin/vendor/switchery.min.css',
             'admin/vendor/3d-bold-navigation.style.css',
             'admin/vendor/component.css',
+            'admin/vendor/select2.min.css',
             'admin/vendor/weather-icons.min.css',
             'admin/vendor/MetroJs.min.css',
             'admin/vendor/toastr.min.css',
@@ -143,6 +144,7 @@ elixir(function (mix) {
         ], 'resources/assets/js/builds/admin/app.js')
         .scripts([
             'jquery/jquery.min.js',
+            'jquery/jquery.pjax.js',
             'jquery/jquery-ui.js',
             'admin/vendor/pace.min.js',
             'jquery/jquery.blockui.js',
@@ -157,6 +159,7 @@ elixir(function (mix) {
             'vendor/jquery.waypoints.min.js',
             'jquery/jquery.counterup.js',
             'admin/vendor/toastr.min.js',
+            'vendor/select2.min.js',
             'jquery/flot/jquery.flot.min.js',
             'jquery/flot/jquery.flot.time.min.js',
             'jquery/flot/jquery.flot.symbol.min.js',
@@ -167,10 +170,13 @@ elixir(function (mix) {
             'admin/modern.js',
             'builds/admin/app.js',
         ], 'public/assets/js/admin/app.js');
-    
-    mix.scripts([
+
+    mix.browserify([
         'admin/pages/dashboard.js',
-    ], 'public/assets/js/admin/pages/dashboard.js');
+    ], 'public/assets/js/admin/pages/dashboard.js')
+        .browserify([
+        'admin/pages/general-settings.js'
+    ], 'public/assets/js/admin/pages/general-settings.js');
 
     //mix.version();
 });

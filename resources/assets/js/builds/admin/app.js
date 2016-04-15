@@ -9920,6 +9920,8 @@ module.exports = Vue;
 
 var Vue = require('vue');
 
+$(document).pjax('a[data-pjax]', '#page-container');
+
 $(function () {
     var Admin = new Vue({
         el: "body",

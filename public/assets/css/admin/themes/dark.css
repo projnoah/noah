@@ -67,3 +67,11 @@
 .pace .pace-progress {
     box-shadow: 0 0 10px #34425A, 0 0 5px #34425A;
 }
+
+.btn-primary {
+    background: #34425A !important;
+}
+
+.btn-primary:hover {
+    background: #2b384e !important;
+}

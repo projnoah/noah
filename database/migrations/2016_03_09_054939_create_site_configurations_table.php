@@ -19,7 +19,10 @@ class CreateSiteConfigurationsTable extends Migration {
             $table->timestamps();
         });
 
-        Site::homeUrl('dashboard');
+        Site::homeUri('home');
+        Site::socialUri('dashboard');
+        Site::postUri('posts');
+        Site::adminUri('admin');
         Site::siteTitle("Project Noah");
         Site::description("优雅, 现代, 简洁与全能. 服务于快速建社交/博客站的站长的工具.");
         Site::separator("::");

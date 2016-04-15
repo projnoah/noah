@@ -1,5 +1,7 @@
 const Vue = require('vue');
 
+$(document).pjax('a[data-pjax]', '#page-container');
+
 $(function () {
     const Admin = new Vue({
         el: "body",
@@ -10,7 +12,7 @@ $(function () {
         },
         computed: {
             _token() {
-                return $("meta[name=_token]").attr('content');   
+                return $("meta[name=_token]").attr('content');
             },
             themeColor() {
                 return typeof(THEME_COLOR) == "undefined" ? "#23B7E5" : THEME_COLOR;
@@ -60,7 +62,7 @@ $(function () {
                         }
                     }
                 });
-            }
+            },
         },
         ready() {
             return () => {
@@ -68,6 +70,6 @@ $(function () {
             }
         }
     });
-    
+
     window.Admin = Admin;
 });

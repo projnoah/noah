@@ -27,10 +27,6 @@ class Router {
         Route::post('login', 'Auth\AuthController@login');
         Route::get('logout', 'Auth\AuthController@logout')->name('exit');
 
-        // Registration Routes...
-        Route::get('register', 'Auth\AuthController@showRegistrationForm')->name('sign-up');
-        Route::post('register', 'Auth\AuthController@register');
-
         // Password Reset Routes...
         Route::get('password/reset/{token?}', 'Auth\PasswordController@showResetForm')->name('reset');
         Route::post('password/email', 'Auth\PasswordController@sendResetLinkEmail')->name('reset-password');
@@ -39,10 +35,16 @@ class Router {
         // Email Confirmation...
         Route::get('auth/confirm', 'Auth\AuthController@confirmRegistration')->name('confirm-email');
 
-        // Third Party Authentications...
-        Route::get('auth/{service}/callback', 'Auth\AuthController@callback');
-        Route::get('auth/{service}', 'Auth\AuthController@socialLogin')->name('social');
-        Route::post('auth', 'Auth\AuthController@connect')->name('social-connect');
+        if (! ! site('registrationOn')) {
+            // Registration Routes...
+            Route::get('register', 'Auth\AuthController@showRegistrationForm')->name('sign-up');
+            Route::post('register', 'Auth\AuthController@register');
+
+            // Third Party Authentications...
+            Route::get('auth/{service}/callback', 'Auth\AuthController@callback');
+            Route::get('auth/{service}', 'Auth\AuthController@socialLogin')->name('social');
+            Route::post('auth', 'Auth\AuthController@connect')->name('social-connect');
+        }
 
         return new static;
     }
@@ -62,11 +64,6 @@ class Router {
             Route::get('inbox', 'HomeController@inbox')->name('inbox');
             Route::get('search/{keyword?}', 'HomeController@search')->name('search');
         });
-
-
-//        Route::get('test', function () {
-//            return view('auth.emails.password', ['user' => Noah\User::first(), 'token' => 'safjl12asf']);
-//        });
 
         return new static;
     }
@@ -118,7 +115,7 @@ class Router {
     public static function admins()
     {
         Route::group([
-            'prefix'     => 'admin',
+            'prefix'     => site('adminUri') ?: 'admin',
             'namespace'  => 'Admin',
             'as'         => 'admin.',
             'middleware' => ['auth', 'role:administrator'],
@@ -129,19 +126,22 @@ class Router {
 
             // Users management.
             Route::group([
-                'prefix'    => 'users',
-                'as'        => 'users.'
+                'prefix' => 'users',
+                'as'     => 'users.'
             ], function () {
                 Route::get('/', 'UsersController@showIndex')->name('index');
+                Route::get('profile', 'UsersController@showProfile')->name('profile');
             });
-            
+
             // Site settings.
             Route::group([
-                'prefix'    => 'settings',
-                'as'        => 'settings.'
+                'prefix' => 'settings',
+                'as'     => 'settings.'
             ], function () {
-                Route::get('/', 'SettingsController@showGeneralSetting')->name('general');
-                Route::get('services', 'SettingsController@showServicesSetting')->name('services');
+                Route::get('/', 'SettingsController@showGeneralSettings')->name('general');
+                Route::get('services', 'SettingsController@showServicesSettings')->name('services');
+                
+                Route::post('general/{type}', 'SettingsController@saveGeneralSettings')->name('save-general');
             });
         });
 

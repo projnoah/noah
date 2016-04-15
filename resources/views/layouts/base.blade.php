@@ -51,7 +51,10 @@
 
     {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
     <script src="/assets/js/app.js"></script>
-
+    <script src="//cdn.bootcss.com/jquery.pjax/1.9.6/jquery.pjax.min.js"></script>
+    <script>
+        $(document).pjax('a', '#pjax-container');
+    </script>
     {{-- Scripts Stack --}}
     @stack('scripts.footer')
 </body>

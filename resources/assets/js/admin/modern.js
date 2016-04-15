@@ -1,4 +1,21 @@
+// PJAX JavaScript re-evaluation
+$(document).on('pjax:success', function (e, data, status, xhr) {
+    if (status == 'success') {
+        $("script[pjax-script]").remove();
+
+        $.getScript(xhr.getResponseHeader('X-PJAX-Script'));
+    }
+});
+
 $(document).ready(function () {
+
+    toastr.options = {
+        closeButton: true,
+        progressBar: true,
+        showMethod: 'fadeIn',
+        hideMethod: 'fadeOut',
+        timeOut: 5000
+    };
     
     // Toggle Search
     $('.show-search').click(function () {
@@ -47,7 +64,7 @@ $(document).ready(function () {
 
     // Switchery
     var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
-    
+
     elems.forEach(function (html) {
         var switchery = new Switchery(html, {color: typeof(THEME_COLOR) == "undefined" ? "#23B7E5" : THEME_COLOR});
     });
@@ -75,24 +92,6 @@ $(document).ready(function () {
         $(item).unblock();
     }
 
-    // Panel Control
-    $('.panel-collapse').click(function () {
-        $(this).closest(".panel").children('.panel-body').slideToggle('fast');
-    });
-
-    $('.panel-reload').click(function () {
-        var el = $(this).closest(".panel").children('.panel-body');
-        blockUI(el);
-        window.setTimeout(function () {
-            unblockUI(el);
-        }, 1000);
-
-    });
-
-    $('.panel-remove').click(function () {
-        $(this).closest(".panel").hide();
-    });
-
     // Push Menu
     $('.push-sidebar').click(function () {
         var hidden = $('.sidebar');
@@ -117,15 +116,6 @@ $(document).ready(function () {
         opacity: 0.95,
         cursor: 'move'
     });
-
-    // Uniform
-    var checkBox = $("input[type=checkbox]:not(.switchery), input[type=radio]:not(.no-uniform)");
-    if (checkBox.length > 0) {
-        checkBox.each(function () {
-            $(this).uniform();
-        });
-    }
-    ;
 
     // .toggleAttr() Function
     $.fn.toggleAttr = function (a, b) {
@@ -224,12 +214,6 @@ $(document).ready(function () {
     sidebarAndContentHeight();
 
     window.onresize = sidebarAndContentHeight;
-
-
-    // Slimscroll
-    $('.slimscroll').slimscroll({
-        allowPageScroll: true
-    });
 
     // Layout Settings
     var fixedHeaderCheck = document.querySelector('.fixed-header-check'),
@@ -331,27 +315,27 @@ $(document).ready(function () {
     if (themeSettings.fixedHeader != '1') {
         fixedHeader();
     }
-    
+
     if (themeSettings.fixedSidebar == '1') {
         fixedSidebar();
     }
-    
+
     if (themeSettings.horizontalBar == '1') {
         horizontalBar();
     }
-    
+
     if (themeSettings.toggleSidebar == '1') {
         collapseSidebar();
         $('.navbar .logo-box a span').html($('.navbar .logo-box a span').text() == smTxt ? str : smTxt);
     }
-    
+
     if (themeSettings.compactMenu == '1') {
         compactMenu();
     }
     if (themeSettings.hoverMenu == '1') {
         hoverMenu();
     }
-    
+
     window.collapseSidebar = collapseSidebar;
     window.fixedHeader = fixedHeader;
     window.fixedSidebar = fixedSidebar;

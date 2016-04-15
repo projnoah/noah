@@ -29,7 +29,7 @@
             </li>
             <li class="droplink{{ request()->is(substr(route('admin.settings.general', [], false), 1) . '*') ? ' active' : '' }}">
                 <a href="#" class="waves-effect waves-button">
-                    <span class="menu-icon icon-settings"></span><p>@trans('views.admin.titles.settings.main')</p><span class="arrow"></span>
+                    <span class="menu-icon icon-equalizer"></span><p>@trans('views.admin.titles.settings.main')</p><span class="arrow"></span>
                 </a>
                 <ul class="sub-menu">
                     <li><a href="@route('admin.settings.general')" data-pjax>@trans('views.admin.titles.settings.sub.general')</a></li>

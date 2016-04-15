@@ -113,8 +113,10 @@ class Mailer {
      */
     public function send($callback = null)
     {
-        $this->mailer->send($this->content(), $this->messageData(), is_null($callback) ?
-            $this->messageBuilder() : $callback);
+        if (!! site('smtpEmailOn')) {
+            $this->mailer->send($this->content(), $this->messageData(), is_null($callback) ?
+                $this->messageBuilder() : $callback);
+        }
 
         return $this;
     }
@@ -144,7 +146,7 @@ class Mailer {
     {
         return $this->content;
     }
-    
+
     /**
      * Set up the message builder.
      *
@@ -205,7 +207,7 @@ class Mailer {
 
     /**
      * Get the current user.
-     * 
+     *
      * @return mixed
      * @author Cali
      */

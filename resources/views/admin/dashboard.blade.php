@@ -445,5 +445,5 @@
 @stop
 
 @push('scripts.footer')
-<script src="/assets/js/admin/pages/dashboard.js"></script>
+<script src="/assets/js/admin/pages/dashboard.js" pjax-script></script>
 @endpush

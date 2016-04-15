@@ -46,6 +46,10 @@ class PjaxMiddleware {
             $this->fetchContents($crawler, $container)
         );
 
+        $response->header(
+            'X-PJAX-Script', $crawler->filter('script[pjax-script]')->attr('src')
+        );
+
         return $this;
     }
 
