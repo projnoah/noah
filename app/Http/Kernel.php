@@ -15,7 +15,7 @@ class Kernel extends HttpKernel
      */
     protected $middleware = [
         \Noah\Http\Middleware\RedirectIfNotInstalled::class,
-        \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,
+        \Noah\Http\Middleware\CheckForMaintenanceMode::class,
     ];
 
     /**
@@ -31,6 +31,7 @@ class Kernel extends HttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \Noah\Http\Middleware\VerifyCsrfToken::class,
             \Noah\Http\Middleware\RecordStatistics::class,
+            \Noah\Http\Middleware\ForceSSL::class,
             \Noah\Http\Middleware\PjaxMiddleware::class,
         ],
 

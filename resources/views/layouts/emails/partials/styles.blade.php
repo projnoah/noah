@@ -1,14 +1,19 @@
 <style>
-    body {
+    body, .main-wrap {
         font-family: 'Avenir Next', 'PingFang SC', 'Microsoft Yahei', Arial, sans-serif;
         font-weight: 400;
         font-size: 18px;
-        background: rgb(61, 99, 145);
+        background: linear-gradient(to right, rgb(57, 82, 124), rgb(61, 99, 145));
         padding: 0;
         margin: 0;
         color: #fff;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
+    }
+    .main-wrap {
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(to right, rgb(57, 82, 124), rgb(61, 99, 145));
     }
     #wrapper {
         display: flex;
@@ -28,7 +33,7 @@
         margin: 1em;
         box-shadow: 0 0 8px rgba(0,0,0, 0.65);
     }
-    section {
+    .section {
         background: linear-gradient(to bottom, rgba(25, 5, 15, 0.3), rgba(5, 5, 5, 0.25));
         max-width: 850px;
         min-width: 220px;
@@ -76,11 +81,11 @@
         left: 2.5%;
         margin-bottom: -0.8em;
     }
-    footer {
+    .footer {
         margin: 0 0 2.5em;
         text-align: center;
     }
-    footer a {
+    .footer a {
         font-size: .75em;
     }
     .powered {

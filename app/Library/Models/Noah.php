@@ -116,6 +116,17 @@ class Noah {
     }
 
     /**
+     * Get the currently supported locales.
+     * 
+     * @return array
+     * @author Cali
+     */
+    public static function supportedLocales()
+    {
+        return ['en', 'zh'];
+    }
+
+    /**
      * Dump autoload in Composer.
      * 
      * @author Cali
@@ -175,5 +186,20 @@ class Noah {
         if (! File::isDirectory('upgrades')) {
             File::makeDirectory('upgrades');
         }
+    }
+
+    /**
+     * Get the currently supported oAuths applications.
+     * 
+     * @return array
+     * @author Cali
+     */
+    public static function supportedOAuths()
+    {
+        return [
+            'facebook', 'weibo', 'qq', 'google',
+            'weixin', 'youtube', 'github', 'linkedin',
+            'dribbble', 'disqus', 'slack', 'spotify'
+        ];
     }
 }

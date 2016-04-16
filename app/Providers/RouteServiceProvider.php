@@ -3,6 +3,7 @@
 namespace Noah\Providers;
 
 use Site;
+use Noah;
 use Carbon\Carbon;
 use Illuminate\Routing\Router;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
@@ -69,7 +70,7 @@ class RouteServiceProvider extends ServiceProvider {
      */
     protected function setTimeLocale()
     {
-        Carbon::setLocale($this->app->getLocale());
+        Carbon::setLocale(substr($this->app->getLocale(), 0, 2));
     }
 
     /**
@@ -82,8 +83,10 @@ class RouteServiceProvider extends ServiceProvider {
         if (request()->hasCookie('lang')) {
             $this->setLocale(Crypt::decrypt(request()->cookie('lang')));
         } else {
-            // TODO: Uncomment when we're ready
-//            request()->header('accept-language') ? $this->setLocale(substr(request()->header('accept-language'), 0, 2)) : null;
+            if (site('autoLocale') != '0') {
+                // TODO: Uncomment when we're ready
+//            request()->header('accept-language') ? $this->setLocale(substr(request()->header('accept-language'), 0, 2)) : null;   
+            }
         }
     }
 
@@ -94,14 +97,8 @@ class RouteServiceProvider extends ServiceProvider {
      */
     private function setLocale($locale)
     {
-        switch ($locale) {
-            case "en":
-            case "zh":
-                app()->setLocale($locale);
-
-                return;
-            default:
-                return;
+        if (in_array($locale, Noah::supportedLocales())) {
+            app()->setLocale($locale);
         }
     }
 }

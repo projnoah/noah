@@ -1,4 +1,4 @@
-<footer>
+<div class="footer">
     <div class="full">
         <p>&copy; {{ date('Y') }} - @site('siteTitle').</p>
         <small>All rights reserved.</small>
@@ -11,11 +11,6 @@
     <div class="row">
         <ul>
             <li><a href="#">@trans('emails.unsubscribe')</a></li>
-            <li><a href="#">你猜</a></li>
-            <li><a href="#">你猜</a></li>
         </ul>
     </div>
-    {{--<div class="row">--}}
-    {{--<small>Powered by <a href="http://projnoah.com"><span class="powered">Project Noah</span></a></small>--}}
-    {{--</div>--}}
-</footer>
+</div>

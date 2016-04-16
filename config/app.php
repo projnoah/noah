@@ -176,6 +176,11 @@ return [
          * User-Agent Providers...
          */
         Jenssegers\Agent\AgentServiceProvider::class,
+        
+        /*
+         * Timezone Providers...
+         */
+        Camroncade\Timezone\TimezoneServiceProvider::class,
     ],
 
     /*
@@ -231,6 +236,7 @@ return [
 
         // Vendors
         'Location'  => Stevebauman\Location\Facades\Location::class,
+        'Timezone' => \Camroncade\Timezone\Facades\Timezone::class
     ],
 
 ];

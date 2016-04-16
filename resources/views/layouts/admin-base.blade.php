@@ -54,7 +54,13 @@
                 fixedSidebar: "@trans('views.admin.navbar.settings.errors.fixed-sidebar-hover-menu')"
             }
         },
-                CurrentUser = JSON.parse('{!! Auth::user() !!}');
+                CurrentUser = JSON.parse('{!! Auth::user() !!}'),
+                SiteSettings = {
+                    title: "@site('siteTitle')",
+                    homeUri: "@site('homeUri')",
+                    socialUri: "@site('socialUri')",
+                    postUri: "@site('postUri')"
+                };
 
     </script>
     {{-- Scripts Stack --}}

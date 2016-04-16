@@ -102,7 +102,7 @@ if (! function_exists('site')) {
      * @since 1.0.0
      *
      * @param $name
-     * @return string
+     * @return string|null
      *
      * @author Cali
      */

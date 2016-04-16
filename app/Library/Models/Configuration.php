@@ -38,7 +38,7 @@ class Configuration extends Model {
      */
     public static function getConfigurationByKey($key)
     {
-        return static::where('key', $key)->first()->value;
+        return ($conf = static::where('key', $key)->first()) ? $conf->value : null;
     }
 
     /**

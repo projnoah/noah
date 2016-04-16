@@ -31,6 +31,8 @@ $(function () {
             $(this).uniform();
         });
     }
+
+    Admin.$compile(document.querySelector('body'));
 });
 
 },{}],2:[function(require,module,exports){

@@ -13,7 +13,7 @@
 var loadingIcon = '<i class="fa fa-circle-o-notch fa-spin"></i>&nbsp;';
 
 (function () {
-    $("form").each(function () {
+    $("form:not(.no-ajax)").each(function () {
         var form = this;
         $(this).on('submit', function (e) {
             e.preventDefault();
@@ -106,6 +106,8 @@ $(function () {
             $(this).uniform();
         });
     }
+
+    Admin.$compile(document.querySelector('body'));
 });
 
 },{}],3:[function(require,module,exports){
@@ -120,6 +122,11 @@ $(function () {
         tags: true,
         maximumSelectionLength: 15
     });
+    $('#robots-select').select2({
+        tags: true
+    });
+    $('#timezone-select').select2();
+    $('#locale-select').select2();
 });
 
 },{"./ajaxForm":1,"./all":2}]},{},[3]);

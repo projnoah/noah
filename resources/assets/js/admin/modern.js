@@ -250,7 +250,7 @@ $(document).ready(function () {
 
             sidebarAndContentHeight();
         },
-        str = $('.navbar .logo-box a span').text(),
+        str = SiteSettings.title,
         smTxt = (str.slice(0, 1)),
         collapseSidebar = function () {
             $('body').toggleClass("small-sidebar");

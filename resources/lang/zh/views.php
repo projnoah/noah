@@ -21,7 +21,7 @@ return [
         ],
         'subtitles'     => [
             '1' => '审核信息',
-            '2' => '添加管理员'
+            '2' => '添加管理员',
         ],
         'inputs'        => [
             'db_host'            => '数据库服务器地址',
@@ -139,6 +139,8 @@ return [
                 'main' => '站点设置',
                 'sub'  => [
                     'general'  => '常规设置',
+                    'advanced' => '高级设置',
+                    'display'  => '界面设置',
                     'services' => '第三方服务'
                 ]
             ]
@@ -184,6 +186,7 @@ return [
                         'registration-on-no'  => '仅注册码邀请',
                         'admin-email'         => '管理邮箱',
                         'admin-email-help'    => '将以该邮箱发邮件给网站用户',
+                        'admin-email-setting' => '前往邮件设置'
                     ],
                     'seo'    => [
                         'heading'          => 'SEO设置',
@@ -191,7 +194,69 @@ return [
                         'separator-help'   => '用来分隔网站标题, 比如 页面 :: 站名',
                         'description'      => '站点介绍',
                         'description-help' => '简洁的话语来介绍描述您的网站, 将建站目的与网站功能告诉大家',
-                        'keywords'         => '关键字'
+                        'keywords'         => '关键字',
+                        'keywords-help'    => '希望用户通过搜索引擎的什么关键字来索引到网站',
+                        'ignores'          => '不收录',
+                        'ignores-help'     => '不希望被搜索引擎收录的地址URI',
+                    ],
+                    'region' => [
+                        'heading'          => '地区设置',
+                        'timezone'         => '时区',
+                        'locale'           => '主要语言',
+                        'locale-help'      => '网站的默认界面交互语言',
+                        'auto-locale'      => '自动选择',
+                        'auto-locale-on'   => '开启',
+                        'auto-locale-help' => '根据用户浏览器语言来自动选择相应的界面语言, 若没有该语言将显示"主要语言"',
+                    ],
+                    'extra'  => [
+                        'heading'         => '额外设置',
+                        'icp'             => '备案号',
+                        'ssl'             => '安全协议',
+                        'ssl-on'          => '强制SSL',
+                        'ssl-help'        => 'SSL协议(https)使网站访问更安全, 自动重定向用户, 请确保已安装证书并正确配置',
+                        'powered-by'      => 'Powered By',
+                        'powered-by-on'   => '自豪地显示',
+                        'powered-by-help' => '如果喜欢本程序 望多多宣传并开启显示, 谢谢支持',
+                    ]
+                ],
+                'services'      => [
+                    'oauth' => [
+                        'heading'  => '第三方登录',
+                        'redirect' => '回调链接',
+                        'apply'    => '申请链接',
+                        'on'       => '开启',
+                        'on-text'  => '开启本登录服务',
+                        'tips'     => '使用第三方/社交登录可以让用户快速注册并绑定本地帐号'
+                    ],
+                    'email' => [
+                        'heading'                   => '邮件服务',
+                        'tips'                      => '通过邮件服务可以在用户注册时发送确认链接, 邮件订阅等服务, 对站点的作用必不可少',
+                        'on'                        => '开启邮件服务',
+                        'mail_driver'               => '邮件驱动',
+                        'mail_host'                 => '主机地址',
+                        'mail_host-placeholder'     => '如smtp.exmail.qq.com',
+                        'mail_port'                 => '端口',
+                        'mail_port-placeholder'     => '常用加密端口465',
+                        'mail_username'             => '邮箱用户名',
+                        'mail_username-placeholder' => '如no-reply@example.com',
+                        'mail_password'             => '邮箱验证密码',
+                        'mail_encryption'           => '加密方式',
+                        'test-heading'              => '发送测试邮件',
+                        'test-placeholder'          => '发送测试邮件到...',
+                        'test-tip'                  => '(先保存设置后按发送)若一分钟内还没收到, 请检查是否被丢到垃圾箱内了',
+                        'test-success'              => '邮件发送成功, 请查收',
+                        'test-failure'              => '邮件信息有误, 请重新填写'
+                    ],
+                    'push'  => [
+                        'heading' => '实时推送',
+                        'tips' => '实时推送服务可以实时地聊天, 推送新通知, 监测新用户注册等, 而完全不用刷新页面',
+                        'pusher'  => [
+                            'on' => '开启Pusher推送服务',
+                        ]
+                    ],
+                    'storage' => [
+                        'heading' => '云存储服务',
+                        'tips' => '云存储服务可以减轻本地服务器的资源压力, 使用CDN等高速分配资源是最佳选择',
                     ]
                 ],
                 'update-button' => '保存设置',

@@ -33,6 +33,8 @@
                 </a>
                 <ul class="sub-menu">
                     <li><a href="@route('admin.settings.general')" data-pjax>@trans('views.admin.titles.settings.sub.general')</a></li>
+                    <li><a href="@route('admin.settings.advanced')" data-pjax>@trans('views.admin.titles.settings.sub.advanced')</a></li>
+                    <li><a href="@route('admin.settings.display')" data-pjax>@trans('views.admin.titles.settings.sub.display')</a></li>
                     <li><a href="@route('admin.settings.services')" data-pjax>@trans('views.admin.titles.settings.sub.services')</a></li>
                 </ul>
             </li>

@@ -165,18 +165,28 @@ elixir(function (mix) {
             'jquery/flot/jquery.flot.symbol.min.js',
             'jquery/flot/jquery.flot.resize.min.js',
             'jquery/flot/jquery.flot.tooltip.min.js',
-            'admin/vendor/curvedLines.js',
             'admin/vendor/MetroJs.min.js',
+            'admin/vendor/curvedLines.js',
             'admin/modern.js',
             'builds/admin/app.js',
         ], 'public/assets/js/admin/app.js');
 
     mix.browserify([
-        'admin/pages/dashboard.js',
-    ], 'public/assets/js/admin/pages/dashboard.js')
+            'admin/pages/dashboard.js',
+        ], 'public/assets/js/admin/pages/dashboard.js')
         .browserify([
-        'admin/pages/general-settings.js'
-    ], 'public/assets/js/admin/pages/general-settings.js');
+            'admin/pages/general-settings.js'
+        ], 'public/assets/js/admin/pages/general-settings.js')
+        .browserify([
+            'vendor/TweenMax.min.js',
+            'admin/pages/services-settings.js',
+        ], 'public/assets/js/admin/pages/services-settings.js')
+        .browserify([
+            'admin/pages/advanced-settings.js'
+        ], 'public/assets/js/admin/pages/advanced-settings.js')
+        .browserify([
+            'admin/pages/display-settings.js'
+        ], 'public/assets/js/admin/pages/display-settings.js');
 
     //mix.version();
 });

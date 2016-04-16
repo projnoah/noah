@@ -1,19 +1,24 @@
 <?php
 
 /*
-|--------------------------------------------------------------------------
-| Routes File
-|--------------------------------------------------------------------------
-|
-| Here is where you will register all of the routes in an application.
-| It's a breeze. Simply tell Laravel the URIs it should respond to
-| and give it the controller to call when that URI is requested.
-|
-*/
+ |------------------------------------------------------------
+ | Routes Registration Entry
+ | 路由注册 入口
+ |------------------------------------------------------------
+ |
+ | All routes are registered here and only here
+ | feel free to add your own, call the Route
+ | Facade with the request method, done.
+ |
+ | @project Project Noah
+ | @author Cali
+ |
+ */
 
 Router::installations()
     ->dashboards()
     ->language()
     ->auth();
 
-Router::admins();
+Router::admins()
+    ->robots();

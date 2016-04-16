@@ -9,6 +9,7 @@ $(function () {
             colorChangerForm: $('form#color-changer')[0],
             settingChangerForm: $('form#setting-changer')[0],
             User: CurrentUser,
+            Site: SiteSettings
         },
         computed: {
             _token() {

@@ -42,6 +42,9 @@ trait SocialAuthenticatesUsers {
      */
     public function socialLogin($service)
     {
+        if (site($service . 'On') != '1')
+            return redirect('/');
+        
         return Socialite::with($service)->redirect();
     }
 

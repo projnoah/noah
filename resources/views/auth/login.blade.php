@@ -29,15 +29,18 @@
             </form>
             @if(!!site('registrationOn'))
             <ul class="social-login">
-                <li><a class="social-link" href="@route('social', ['service' => 'weibo'])"><i class="fa fa-weibo"></i></a></li>
-                <li><a class="social-link" href="@route('social', ['service' => 'qq'])"><i class="fa fa-qq"></i></a></li>
-                <li><a class="social-link" href="@route('social', ['service' => 'facebook'])"><i class="fa fa-facebook"></i></a></li>
-                <li><a class="social-link" href="@route('social', ['service' => 'github'])"><i class="fa fa-github"></i></a></li>
+                @foreach(Noah::supportedOAuths() as $service)
+                    @if(site($service . 'On') == '1')
+                        <li><a class="social-link" href="@route('social', ['service' => '$service'])"><i class="fa fa-{{ $service }}"></i></a></li>
+                    @endif
+                @endforeach
             </ul>
             @endif
             <div class="login-options">
                 <button class="forgot-password" data-dialog="reset-dialog">@trans('views.auth.login.forgot_password')</button>
+                @if(!!site('registrationOn'))
                 <button class="register-link" @click="toggleForm">@{{ switchButtonTitle }}</button>
+                @endif
             </div>
             <div class="progress-button-wrapper">
                 <div class="progress-button">
@@ -47,12 +50,14 @@
                     <svg class="cross" width="70" height="70"><path d="m35,35l-9.3,-9.3"/><path d="m35,35l9.3,9.3"/><path d="m35,35l-9.3,9.3"/><path d="m35,35l9.3,-9.3"/></svg>
                 </div>
             </div>
+            @if(!!site('poweredBy'))
             <div class="logo-wrapper">
                 <div class="powered">
                     <h5>Powered by</h5>
                     <img src="@url('assets/logo/PN.png')" alt="Project Noah">
                 </div>
             </div>
+            @endif
         </div>
     </div>
     <password-reset-dialog></password-reset-dialog>
@@ -80,6 +85,7 @@
                     }
                 ]
             },
+            @if(!!site('registrationOn'))
             register: {
                 title: "@trans("views.auth.register.header_title")",
                 url: "@route('sign-up')",
@@ -106,6 +112,7 @@
                     }
                 ]
             },
+            @endif
             reset: {
                 title: "@trans('views.auth.reset.title')",
                 button: "@trans('views.auth.reset.button')",

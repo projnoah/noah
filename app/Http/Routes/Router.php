@@ -41,7 +41,7 @@ class Router {
             Route::post('register', 'Auth\AuthController@register');
 
             // Third Party Authentications...
-            Route::get('auth/{service}/callback', 'Auth\AuthController@callback');
+            Route::get('auth/{service}/callback', 'Auth\AuthController@callback')->name('social-callback');
             Route::get('auth/{service}', 'Auth\AuthController@socialLogin')->name('social');
             Route::post('auth', 'Auth\AuthController@connect')->name('social-connect');
         }
@@ -138,11 +138,50 @@ class Router {
                 'prefix' => 'settings',
                 'as'     => 'settings.'
             ], function () {
+                // Show pages.
                 Route::get('/', 'SettingsController@showGeneralSettings')->name('general');
                 Route::get('services', 'SettingsController@showServicesSettings')->name('services');
-                
+                Route::get('advanced', 'SettingsController@showAdvancedSettings')->name('advanced');
+                Route::get('display', 'SettingsController@showDisplaySettings')->name('display');
+
+                // Save settings.
                 Route::post('general/{type}', 'SettingsController@saveGeneralSettings')->name('save-general');
+                Route::post('services/oauth/{service}', 'SettingsController@saveServicesOAuthSettings')->name('save-oauth');
+                Route::post('services/email', 'SettingsController@saveServicesEmailSettings')->name('save-email');
+                Route::post('services/email/test', 'SettingsController@sendTestEmail')->name('send-test');
+                Route::post('services/push', 'SettingsController@saveServicesPushSettings')->name('save-push');
+                
+                
             });
+        });
+
+        return new static;
+    }
+
+    /**
+     * Get the robots.txt file dynamically.
+     *
+     * @return static
+     * @author Cali
+     */
+    public static function robots()
+    {
+        Route::get('robots.txt', function () {
+            $txt = "User-agent: *\n\r";
+            $ignores = site('siteRobotIgnores');
+            
+            if ($ignores) {
+                $ignoreUris = explode(',', $ignores);
+                foreach ($ignoreUris as $uri) {
+                    $txt .= "Disallow:/{$uri}\n"; 
+                }
+            } else {
+                $txt .= "Disallow:/admin";
+            }
+            
+            return response($txt)->header(
+                'Content-type', 'text/plain'
+            );
         });
 
         return new static;

@@ -1764,7 +1764,7 @@ fieldset[disabled] .btn-danger.active {
 }
 
 .panel .panel-heading + .panel-body {
-    padding: 0 20px 20px 20px;
+    padding: 20px;
 }
 
 .panel-default .panel-heading {
@@ -3084,6 +3084,9 @@ tr.group:hover {
     vertical-align: middle;
     display: table-cell;
     text-align: center;
+    display: block;
+    -ms-text-overflow: ellipsis;
+    text-overflow: ellipsis;
 }
 
 .navbar .logo-box a:hover,
@@ -5521,6 +5524,9 @@ body:not(.small-sidebar):not(.page-horizontal-bar) .menu.accordion-menu,
     background-color: #fff;
 }
 
+.ui-sortable-handle .panel-heading {
+    cursor: move;
+}
 
 /* Media Queries */
 
@@ -5562,6 +5568,10 @@ body:not(.small-sidebar):not(.page-horizontal-bar) .menu.accordion-menu,
         -moz-transition: opacity 0.3s ease-in-out;
         -o-transition: opacity 0.3s ease-in-out;
         transition: opacity 0.3s ease-in-out;
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        padding-top: 60px !important;
     }
     
     body:not(.page-header-fixed) .sidebar {

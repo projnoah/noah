@@ -96,9 +96,15 @@ return [
     ],
 
     'weibo' => [
-        'client_id'     => env('WEIBO_KEY'),
+        'client_id'     => env('WEIBO_ID'),
         'client_secret' => env('WEIBO_SECRET'),
         'redirect'      => env('WEIBO_REDIRECT'),
+    ],
+    
+    'weixin' => [
+        'client_id'     => env('WEIXIN_ID'),
+        'client_secret' => env('WEIXIN_SECRET'),
+        'redirect'      => env('WEIXIN_REDIRECT'),
     ],
 
     'youtube' => [

@@ -29,4 +29,6 @@ $(function () {
             $(this).uniform();
         });
     }
+
+    Admin.$compile(document.querySelector('body'));
 });

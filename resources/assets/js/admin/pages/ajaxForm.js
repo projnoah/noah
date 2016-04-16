@@ -10,7 +10,7 @@
 const loadingIcon = '<i class="fa fa-circle-o-notch fa-spin"></i>&nbsp;';
 
 (function () {
-    $("form").each(function () {
+    $("form:not(.no-ajax)").each(function () {
         const form = this;
         $(this).on('submit', function (e) {
             e.preventDefault();

@@ -45,6 +45,13 @@ class Mailer {
     protected $mailer;
 
     /**
+     * Email address.
+     *
+     * @var string
+     */
+    protected $address;
+
+    /**
      * Mailer constructor and injects BaseMailer
      *
      * @author Cali
@@ -113,7 +120,7 @@ class Mailer {
      */
     public function send($callback = null)
     {
-        if (!! site('smtpEmailOn')) {
+        if (! ! site('smtpEmailOn')) {
             $this->mailer->send($this->content(), $this->messageData(), is_null($callback) ?
                 $this->messageBuilder() : $callback);
         }
@@ -156,9 +163,15 @@ class Mailer {
     protected function messageBuilder()
     {
         return function (Message $message) {
-            $message->to($this->getUser()->email)
-                ->from(Site::adminEmail(), Site::siteTitle())
-                ->subject($this->subject);
+            if (! is_null($this->address)) {
+                $message->to($this->address)
+                    ->from(Site::adminEmail(), Site::siteTitle())
+                    ->subject($this->subject);;
+            } else {
+                $message->to($this->getUser()->email)
+                    ->from(Site::adminEmail(), Site::siteTitle())
+                    ->subject($this->subject);
+            }
         };
     }
 
@@ -201,6 +214,23 @@ class Mailer {
     public function user(User $user)
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Manually set the email address.
+     *
+     * @param $email
+     * @return $this
+     *
+     * @author Cali
+     */
+    public function to($email)
+    {
+        if (! is_null($email) && $email !== '') {
+            $this->address = $email;
+        }
 
         return $this;
     }

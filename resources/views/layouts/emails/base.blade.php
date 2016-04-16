@@ -7,22 +7,24 @@
     @stack('styles')
 </head>
 <body>
-    <div id="wrapper">
-        @include('layouts.emails.partials.header')
+    <div class="main-wrap">
+        <div id="wrapper">
+            @include('layouts.emails.partials.header')
 
-        <section>
-            @unless(is_null($user))
-            <nav class="hello">
-                <span>Hi, {{ $user->name }}</span>
-                <div class="avatar">
-                    <img src="{{ $user->avatarUrl }}" alt="">
-                </div>
-            </nav>
-            @endunless
-            @yield('content')
-        </section>
+            <div class="section">
+                @unless(is_null($user))
+                    <div class="hello">
+                        <span>Hi, {{ $user->name }}</span>
+                        <div class="avatar">
+                            <img src="{{ $user->avatarUrl }}" alt="">
+                        </div>
+                    </div>
+                @endunless
+                @yield('content')
+            </div>
 
-        @include('layouts.emails.partials.footer')
+            @include('layouts.emails.partials.footer')
+        </div>
     </div>
 </body>
 </html>

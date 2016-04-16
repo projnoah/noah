@@ -49,14 +49,14 @@ return [
     'ip'                   => ':attribute 必须是有效的 IP 地址。',
     'json'                 => ':attribute 必须是正确的 JSON 格式。',
     'max'                  => [
-        'numeric' => ':attribute 不能大于 :max。',
+        'numeric' => ':attribute 不能大于 :max 位数。',
         'file'    => ':attribute 不能大于 :max kb。',
         'string'  => ':attribute 不能大于 :max 个字符。',
         'array'   => ':attribute 最多只有 :max 个单元。',
     ],
     'mimes'                => ':attribute 必须是一个 :values 类型的文件。',
     'min'                  => [
-        'numeric' => ':attribute 必须大于等于 :min。',
+        'numeric' => ':attribute 必须大于等于 :min 位数。',
         'file'    => ':attribute 大小不能小于 :min kb。',
         'string'  => ':attribute 至少为 :min 个字符。',
         'array'   => ':attribute 至少有 :min 个单元。',
@@ -170,7 +170,13 @@ return [
         'registration'          => trans('views.admin.pages.settings.general.basics.registration-on'),
         'site_separator'        => trans('views.admin.pages.settings.general.seo.separator'),
         'site_description'      => trans('views.admin.pages.settings.general.seo.description'),
-        'site_keywords'         => trans('views.admin.pages.settings.general.seo.keywords'),
+        'icp'                   => trans('views.admin.pages.settings.general.extra.icp'),
+        'redirect'              => trans('views.admin.pages.settings.services.oauth.redirect'),
+        'mail_driver'           => trans('views.admin.pages.settings.services.email.mail_driver'),
+        'mail_host'             => trans('views.admin.pages.settings.services.email.mail_host'),
+        'mail_port'             => trans('views.admin.pages.settings.services.email.mail_port'),
+        'mail_password'         => trans('views.admin.pages.settings.services.email.mail_password'),
+        'mail_encryption'       => trans('views.admin.pages.settings.services.email.mail_encryption'),
     ],
 
 ];

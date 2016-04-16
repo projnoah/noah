@@ -8025,6 +8025,9 @@ section.dashboard-container {
 .qq-colored {
   color: #07abdd !important; }
 
+.icp {
+  color: #eee; }
+
 @media screen and (max-width: 68em) {
   section.dashboard-container {
     width: 800px; } }
