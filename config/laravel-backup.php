@@ -8,7 +8,7 @@ return [
          * The name of this application. You can use this name to monitor
          * the backups.
          */
-        'name' => site('siteTitle'),
+        'name' => env('APP_URL'),
 
         'source' => [
 
@@ -145,7 +145,7 @@ return [
          * Here you can specify how emails should be sent.
          */
         'mail' => [
-            'from' => site('adminEmail'),
+            'from' => 'your@email.com',
             'to'   => 'your@email.com',
         ],
 
