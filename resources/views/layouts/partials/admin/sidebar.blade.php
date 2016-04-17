@@ -27,6 +27,14 @@
                     <li><a href="@route('admin.users.index', [], false)" data-pjax>@trans('views.admin.titles.users.sub.profile')</a></li>
                 </ul>
             </li>
+            <li class="droplink">
+                <a href="#" class="waves-effect waves-button">
+                    <span class="menu-icon icon"></span><p>@trans('views.admin.titles.data-center.main')</p><span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    <li><a href="#">Something</a></li>
+                </ul>
+            </li>
             <li class="droplink{{ request()->is(substr(route('admin.settings.general', [], false), 1) . '*') ? ' active' : '' }}">
                 <a href="#" class="waves-effect waves-button">
                     <span class="menu-icon icon-equalizer"></span><p>@trans('views.admin.titles.settings.main')</p><span class="arrow"></span>

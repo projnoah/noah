@@ -128,14 +128,20 @@ return [
     'admin'        => [
         'main-title'            => '后台管理',
         'titles'                => [
-            'dashboard' => '仪表盘',
-            'users'     => [
+            'dashboard'   => '仪表盘',
+            'users'       => [
                 'main' => '用户',
                 'sub'  => [
                     'profile' => '修改个人资料'
                 ]
             ],
-            'settings'  => [
+            'data-center' => [
+                'main' => '数据中心',
+                'sub'  => [
+                    '' => ''
+                ]
+            ],
+            'settings'    => [
                 'main' => '站点设置',
                 'sub'  => [
                     'general'  => '常规设置',
