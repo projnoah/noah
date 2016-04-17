@@ -4,10 +4,10 @@
         <a href="{{ Noah::getHomeUrl() }}" style="text-decoration: none;"><b class="powered">Powered by Project Noah</b></a>
     </div>
     <div class="col-xs-5 text-right" style="line-height: 41px;">
-        <small>
+        <small id="noah-version">
             @trans('views.admin.footer.current-version'): {{ Noah::getCurrentVersion() }}
             @if(Noah::isBeta())
-                <span class="beta text-danger">Beta</span>
+                <span class="beta badge badge-danger">Beta</span>
             @endif
         </small>
     </div>

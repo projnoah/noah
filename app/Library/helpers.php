@@ -68,9 +68,9 @@ if (! function_exists('env_put')) {
         }
 
         if (file_exists($path)) {
-            $content = $new_line ? "\n\r$key=$value" : "\n$key=$value";
+            $content = $new_line ? "\n\r{$key}={$value}" : "\n{$key}={$value}";
 
-            if (! env($key)) {
+            if (is_null(env($key))) {
                 try {
                     file_put_contents($path, $content, FILE_APPEND);
                 } catch (Exception $e) {
@@ -78,10 +78,15 @@ if (! function_exists('env_put')) {
                 }
             } else {
                 $content = str_replace($new_line ? "\n\r" : "\n", "", $content);
-
+                
+                $v = env($key);
+                if (is_bool($v)) {
+                    $v = strval($v ? 'true' : 'false');
+                }
+                
                 try {
                     file_put_contents($path,
-                        str_replace("$key=" . env($key), $content, file_get_contents($path))
+                        str_replace("{$key}={$v}", $content, file_get_contents($path))
                     );
                 } catch (Exception $e) {
                     return ENV_DENIED;

@@ -1,6 +1,3 @@
-import "./all";
-import "./ajaxForm";
-
 $(function () {
     [].slice.call(document.querySelectorAll('.tab-menu')).forEach(function (menu) {
         var menuItems = menu.querySelectorAll('.menu__link'),
@@ -26,6 +23,7 @@ $(function () {
 
     $("#driver-select").select2();
     $("#encryption-select").select2();
+    $("#storage-type-select").select2();
     
     var locked = false;
     var $sendButton = $(".send-button")

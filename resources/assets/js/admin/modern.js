@@ -1,12 +1,3 @@
-// PJAX JavaScript re-evaluation
-$(document).on('pjax:success', function (e, data, status, xhr) {
-    if (status == 'success') {
-        $("script[pjax-script]").remove();
-
-        $.getScript(xhr.getResponseHeader('X-PJAX-Script'));
-    }
-});
-
 $(document).ready(function () {
 
     toastr.options = {
@@ -60,13 +51,6 @@ $(document).ready(function () {
     // tooltips
     $('[data-toggle~="tooltip"]').tooltip({
         container: 'body'
-    });
-
-    // Switchery
-    var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
-
-    elems.forEach(function (html) {
-        var switchery = new Switchery(html, {color: typeof(THEME_COLOR) == "undefined" ? "#23B7E5" : THEME_COLOR});
     });
 
     // Element Blocking

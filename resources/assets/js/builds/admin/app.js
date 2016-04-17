@@ -9922,7 +9922,25 @@ var Vue = require('vue');
 
 $(document).pjax('a[data-pjax]', '#page-container');
 
+// PJAX JavaScript re-evaluation
+$(document).on('pjax:success', function (e, data, status, xhr) {
+    if (status == 'success') {
+        $("script[pjax-script]").remove();
+
+        $.getScript(xhr.getResponseHeader('X-PJAX-Script'));
+
+        pjaxReEvaluate();
+    }
+});
+
 $(function () {
+    // Switchery
+    var elems = Array.prototype.slice.call(document.querySelectorAll('.top-menu .js-switch'));
+
+    elems.forEach(function (html) {
+        new Switchery(html, { color: typeof THEME_COLOR == "undefined" ? "#23B7E5" : THEME_COLOR });
+    });
+
     var Admin = new Vue({
         el: "body",
         data: {
@@ -9990,8 +10008,118 @@ $(function () {
         }
     });
 
+    pjaxReEvaluate(true);
+
     window.Admin = Admin;
 });
+
+var pjaxReEvaluate = function pjaxReEvaluate() {
+    var manual = arguments.length <= 0 || arguments[0] === undefined ? false : arguments[0];
+
+    var loadingIcon = '<i class="fa fa-circle-o-notch fa-spin"></i>&nbsp;';
+
+    (function () {
+        // Panel Control
+        $('.panel-collapse').click(function () {
+            $(this).closest(".panel").children('.panel-body').slideToggle('fast');
+        });
+
+        $('.panel-reload').click(function () {
+            var el = $(this).closest(".panel").children('.panel-body');
+            blockUI(el);
+            window.setTimeout(function () {
+                unblockUI(el);
+            }, 1000);
+        });
+
+        $('.panel-remove').click(function () {
+            $(this).closest(".panel").hide();
+        });
+
+        // Slimscroll
+        $('.slimscroll').slimscroll({
+            allowPageScroll: true
+        });
+
+        // Uniform
+        var checkBox = $("input[type=radio]:not(.no-uniform)");
+        if (checkBox.length > 0) {
+            checkBox.each(function () {
+                $(this).uniform();
+            });
+        }
+
+        // Switchery
+        var elems = Array.prototype.slice.call(document.querySelectorAll('#page-container .js-switch'));
+
+        elems.forEach(function (html) {
+            new Switchery(html, { color: typeof THEME_COLOR == "undefined" ? "#23B7E5" : THEME_COLOR });
+        });
+
+        $("form:not(.no-ajax)").each(function () {
+            var form = this;
+            $(this).on('submit', function (e) {
+                e.preventDefault();
+
+                $(form).addClass('loading');
+
+                var button = $(form).find("button[type=submit]")[0],
+                    originText = button.innerHTML;
+                $(button).html(loadingIcon + '&nbsp;' + originText);
+
+                $.ajax({
+                    url: form.action,
+                    type: form.method,
+                    data: $(form).serialize(),
+                    error: function error(_error3) {
+                        if (_error3.status === 422) {
+                            var errors = JSON.parse(_error3.responseText);
+
+                            var _loop = function _loop(er) {
+                                var sel = '[name=' + er + ']',
+                                    groupEl = $($(form).find(sel)[0]).parents('.form-group')[0];
+                                // Add error class to the form-group
+                                $(groupEl).addClass('has-error shaky');
+                                setTimeout(function () {
+                                    return $(groupEl).removeClass('has-error shaky');
+                                }, 8000);
+
+                                toastr.error('<h4>' + errors[er][0] + '</h4>');
+                            };
+
+                            for (var er in errors) {
+                                _loop(er);
+                            }
+                        }
+                    },
+                    success: function success(data) {
+                        if (data.status !== 'error') {
+                            if (typeof data.redirectUrl != 'undefined') {
+                                window.location.href = data.redirectUrl;
+                            }
+
+                            toastr.success('<h4>' + data.message + '</h4>');
+                        } else {
+                            toastr.error('<h4>' + data.message + '</h4>');
+                        }
+                    },
+                    complete: function complete() {
+                        $(button).html(originText);
+                        $(form).removeClass('loading');
+                        $(form).addClass('done-loaded');
+                        setTimeout(function () {
+                            $(form).removeClass('done-loaded');
+                        }, 300);
+                    }
+                });
+            });
+        });
+
+        if (!manual) {
+            Admin.$compile(document.querySelector('body'));
+        }
+    })();
+};
 
 },{"vue":2}]},{},[3]);
 

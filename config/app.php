@@ -156,6 +156,7 @@ return [
         Noah\Providers\AuthServiceProvider::class,
         Noah\Providers\EventServiceProvider::class,
         Noah\Providers\RouteServiceProvider::class,
+        Noah\Providers\ViewComposerServiceProvider::class,
 
         /*
          * Socialite Providers... 
@@ -181,6 +182,11 @@ return [
          * Timezone Providers...
          */
         Camroncade\Timezone\TimezoneServiceProvider::class,
+        
+        /*
+         * Backup Providers...
+         */
+        Spatie\Backup\BackupServiceProvider::class,
     ],
 
     /*

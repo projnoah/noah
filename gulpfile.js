@@ -185,6 +185,12 @@ elixir(function (mix) {
             'admin/pages/advanced-settings.js'
         ], 'public/assets/js/admin/pages/advanced-settings.js')
         .browserify([
+            'admin/pages/cache-settings.js'
+        ], 'public/assets/js/admin/pages/cache-settings.js')
+        .browserify([
+            'admin/pages/database-settings.js'
+        ], 'public/assets/js/admin/pages/database-settings.js')
+        .browserify([
             'admin/pages/display-settings.js'
         ], 'public/assets/js/admin/pages/display-settings.js');
 

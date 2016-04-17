@@ -168,10 +168,9 @@
                         <div class="form-group">
                             <label for="auto_locale" class="col-sm-2 control-label">@trans('views.admin.pages.settings.general.region.auto-locale')</label>
                             <div class="col-sm-10">
-                                <div class="checkbox">
-                                    <label style="padding-left: 0">
-                                        <input type="checkbox" name="auto_locale"{{ site('autoLocale') == '0' ? '' : ' checked' }}>@trans('views.admin.pages.settings.general.region.auto-locale-on')
-                                    </label>
+                                <div class="ios-switch switch-lg">
+                                    <input type="checkbox" name="auto_locale" class="js-switch"{{ site('autoLocale') == '0' ? '' : ' checked' }}>
+                                    &nbsp;@trans('views.admin.pages.settings.general.region.auto-locale-on')
                                 </div>
                                 <small class="help-block">@trans('views.admin.pages.settings.general.region.auto-locale-help')</small>
                             </div>
@@ -202,10 +201,9 @@
                         <div class="form-group">
                             <label for="force_ssl" class="col-sm-2 control-label">@trans('views.admin.pages.settings.general.extra.ssl')</label>
                             <div class="col-sm-10">
-                                <div class="checkbox">
-                                    <label style="padding-left: 0">
-                                        <input type="checkbox" name="force_ssl"{{ site('forceSsl') == '0' ? '' : ' checked' }}>@trans('views.admin.pages.settings.general.extra.ssl-on')
-                                    </label>
+                                <div class="ios-switch switch-lg">
+                                    <input type="checkbox" name="force_ssl" class="js-switch" {{ site('forceSsl') == '0' ? '' : ' checked' }}>
+                                    &nbsp;@trans('views.admin.pages.settings.general.extra.ssl-on')
                                 </div>
                                 <small class="help-block">@trans('views.admin.pages.settings.general.extra.ssl-help')</small>
                             </div>
@@ -213,10 +211,9 @@
                         <div class="form-group">
                             <label for="powered_by" class="col-sm-2 control-label">@trans('views.admin.pages.settings.general.extra.powered-by')</label>
                             <div class="col-sm-10">
-                                <div class="checkbox">
-                                    <label style="padding-left: 0">
-                                        <input type="checkbox" name="powered_by"{{ site('poweredBy') == '0' ? '' : ' checked' }}>@trans('views.admin.pages.settings.general.extra.powered-by-on')
-                                    </label>
+                                <div class="ios-switch switch-lg">
+                                    <input type="checkbox" name="powered_by" class="js-switch" {{ site('poweredBy') == '0' ? '' : ' checked' }}>
+                                    &nbsp;@trans('views.admin.pages.settings.general.extra.powered-by-on')
                                 </div>
                                 <small class="help-block">@trans('views.admin.pages.settings.general.extra.powered-by-help')</small>
                             </div>

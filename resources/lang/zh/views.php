@@ -139,7 +139,12 @@ return [
                 'main' => '站点设置',
                 'sub'  => [
                     'general'  => '常规设置',
-                    'advanced' => '高级设置',
+                    'advanced' => [
+                        'main'     => '高级设置',
+                        'develop'  => '开发设置',
+                        'database' => '数据库设置',
+                        'cache'    => '缓存设置',
+                    ],
                     'display'  => '界面设置',
                     'services' => '第三方服务'
                 ]
@@ -220,7 +225,7 @@ return [
                     ]
                 ],
                 'services'      => [
-                    'oauth' => [
+                    'oauth'   => [
                         'heading'  => '第三方登录',
                         'redirect' => '回调链接',
                         'apply'    => '申请链接',
@@ -228,7 +233,7 @@ return [
                         'on-text'  => '开启本登录服务',
                         'tips'     => '使用第三方/社交登录可以让用户快速注册并绑定本地帐号'
                     ],
-                    'email' => [
+                    'email'   => [
                         'heading'                   => '邮件服务',
                         'tips'                      => '通过邮件服务可以在用户注册时发送确认链接, 邮件订阅等服务, 对站点的作用必不可少',
                         'on'                        => '开启邮件服务',
@@ -247,17 +252,52 @@ return [
                         'test-success'              => '邮件发送成功, 请查收',
                         'test-failure'              => '邮件信息有误, 请重新填写'
                     ],
-                    'push'  => [
+                    'push'    => [
                         'heading' => '实时推送',
-                        'tips' => '实时推送服务可以实时地聊天, 推送新通知, 监测新用户注册等, 而完全不用刷新页面',
+                        'tips'    => '实时推送服务可以实时地聊天, 推送新通知, 监测新用户注册等, 而完全不用刷新页面',
                         'pusher'  => [
                             'on' => '开启Pusher推送服务',
                         ]
                     ],
                     'storage' => [
-                        'heading' => '云存储服务',
-                        'tips' => '云存储服务可以减轻本地服务器的资源压力, 使用CDN等高速分配资源是最佳选择',
+                        'heading'       => '云存储服务',
+                        'tips'          => '云存储服务可以减轻本地服务器的资源压力, 使用CDN等高速分配资源是最佳选择',
+                        'disks'         => [
+                            'local'     => '本地存储',
+                            'ftp'       => 'FTP服务器',
+                            's3'        => '亚马逊s3 (aws)',
+                            'rackspace' => 'Rackspace',
+                            'qiniu'     => '七牛'
+                        ],
+                        'warning'       => '若使用云存储, 请确保该云服务的配置在下方填写正确',
+                        'ftp_host'      => 'FTP主机',
+                        'qiniu_notify'  => '提醒URL (可选)',
+                        'qiniu_default' => '七牛测试域名',
+                        'qiniu_https'   => '七牛https域名',
+                        'qiniu_custom'  => '自定义绑定域名',
                     ]
+                ],
+                'advanced'      => [
+                    'warning-title' => '注意!',
+                    'warning-text'  => '请谨慎修改本页的高级设置, 设置不妥有可能导致不良的后果, 真的确定了再修改',
+                    'develop'       => [
+                        'title'                  => '开发模式',
+                        'environment'            => '程序环境',
+                        'environment-local'      => '本地开发',
+                        'environment-production' => '服务器部署',
+                        'debug'                  => '错误调试模式',
+                        'debug-tips'             => '如果程序出错或者某些地方莫名奇妙的出bug才需要打开调试',
+                        'maintenance'            => '网站维护模式',
+                        'maintenance-tips'       => '打开维护模式后用户将无法访问网站页面并重定向到503页面',
+                        'maintenance-warning'    => '您也可以手动前往网站根目录/storage/framework中删掉down文件来恢复',
+                        'admin-ignores'          => '无视管理员',
+                        'admin-ignores-tips'     => '开启后管理员有权限在维护下访问与管理站点',
+                        'server-info'            => '服务器信息',
+                        'php-ver'                => 'PHP版本',
+                        'mysql-ver'              => 'MySQL版本',
+                        'os'                     => '操作系统',
+                        'server-software'        => 'Web服务器',
+                    ],
                 ],
                 'update-button' => '保存设置',
                 'updated'       => ':setting 设置已更新'

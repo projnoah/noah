@@ -10,11 +10,10 @@
                 {!! csrf_field() !!}
                 <div class="form-group">
                     <div class="col-sm-8 col-sm-offset-4">
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox"
-                                       name="on"{{ site(strtolower($service) . 'On') == '1' ? ' checked' : '' }}>@trans('views.admin.pages.settings.services.oauth.on-text')
-                            </label>
+                        <div class="ios-switch switch-lg">
+                            <input type="checkbox" class="js-switch"
+                                   name="on"{{ site(strtolower($service) . 'On') == '1' ? ' checked' : '' }}>
+                            &nbsp;@trans('views.admin.pages.settings.services.oauth.on-text')
                         </div>
                     </div>
                 </div>

@@ -177,6 +177,7 @@ return [
         'mail_port'             => trans('views.admin.pages.settings.services.email.mail_port'),
         'mail_password'         => trans('views.admin.pages.settings.services.email.mail_password'),
         'mail_encryption'       => trans('views.admin.pages.settings.services.email.mail_encryption'),
+        'ftp_host'              => trans('views.admin.pages.settings.services.storage.ftp_host'),
     ],
 
 ];

@@ -138,19 +138,29 @@ class Router {
                 'prefix' => 'settings',
                 'as'     => 'settings.'
             ], function () {
-                // Show pages.
+                
                 Route::get('/', 'SettingsController@showGeneralSettings')->name('general');
                 Route::get('services', 'SettingsController@showServicesSettings')->name('services');
-                Route::get('advanced', 'SettingsController@showAdvancedSettings')->name('advanced');
-                Route::get('display', 'SettingsController@showDisplaySettings')->name('display');
-
-                // Save settings.
-                Route::post('general/{type}', 'SettingsController@saveGeneralSettings')->name('save-general');
-                Route::post('services/oauth/{service}', 'SettingsController@saveServicesOAuthSettings')->name('save-oauth');
-                Route::post('services/email', 'SettingsController@saveServicesEmailSettings')->name('save-email');
-                Route::post('services/email/test', 'SettingsController@sendTestEmail')->name('send-test');
-                Route::post('services/push', 'SettingsController@saveServicesPushSettings')->name('save-push');
                 
+                Route::group(['prefix' => 'advanced', 'as' => 'advanced.'], function () {
+                    Route::get('/', 'SettingsController@showAdvancedSettings')->name('index');
+                    Route::post('/', 'SettingsController@saveAdvancedDevelopSettings')->name('save-develop');
+                    Route::get('database', 'SettingsController@showDatabaseSettings')->name('database');
+                    Route::get('cache', 'SettingsController@showCacheSettings')->name('cache');
+                });
+                
+                Route::get('display', 'SettingsController@showDisplaySettings')->name('display');
+                Route::get('upgrade', 'SettingsController@showUpgradeSettings')->name('upgrade');
+
+                Route::post('general/{type}', 'SettingsController@saveGeneralSettings')->name('save-general');
+                Route::group(['prefix' => 'service'], function () {
+                    Route::post('oauth/{service}', 'SettingsController@saveServicesOAuthSettings')->name('save-oauth');
+                    Route::post('email', 'SettingsController@saveServicesEmailSettings')->name('save-email');
+                    Route::post('email/test', 'SettingsController@sendTestEmail')->name('send-test');
+                    Route::post('push', 'SettingsController@saveServicesPushSettings')->name('save-push');
+                    Route::post('storage', 'SettingsController@saveServicesStorageSettings')->name('save-storage');
+                    Route::post('storage/{disk}', 'SettingsController@saveServicesDiskSettings')->name('save-disk');
+                });
                 
             });
         });

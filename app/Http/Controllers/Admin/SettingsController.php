@@ -36,7 +36,7 @@ class SettingsController extends Controller {
 
     /**
      * Show advanced settings page.
-     * 
+     *
      * @return mixed
      * @author Cali
      */
@@ -47,13 +47,46 @@ class SettingsController extends Controller {
 
     /**
      * Show display settings page.
-     * 
+     *
      * @return mixed
      * @author Cali
      */
     public function showDisplaySettings()
     {
         return view('admin.settings.display');
+    }
+
+    /**
+     * Show database settings page.
+     *
+     * @return mixed
+     * @author Cali
+     */
+    public function showDatabaseSettings()
+    {
+        return view('admin.settings.database');
+    }
+
+    /**
+     * Show cache settings page.
+     * 
+     * @return mixed
+     * @author Cali
+     */
+    public function showCacheSettings()
+    {
+        return view('admin.settings.cache');
+    }
+    
+    /**
+     * Show upgrade settings page.
+     * 
+     * @return mixed
+     * @author Cali
+     */
+    public function showUpgradeSettings()
+    {
+        return view();
     }
 
     /**
@@ -196,10 +229,10 @@ class SettingsController extends Controller {
 
     /**
      * Save pusher settings.
-     * 
+     *
      * @param Request $request
      * @return array
-     * 
+     *
      * @author Cali
      */
     public function saveServicesPushSettings(Request $request)
@@ -209,12 +242,118 @@ class SettingsController extends Controller {
             'key'    => 'required',
             'secret' => 'required'
         ]);
-        
+
         Site::saveServicesPushSettings($request);
-        
+
         return $this->successResponse([
             'message' => trans('views.admin.pages.settings.updated', [
                 'setting' => trans('views.admin.pages.settings.services.push.heading')
+            ])
+        ]);
+    }
+
+    /**
+     * Save storage settings.
+     *
+     * @param Request $request
+     * @return array
+     *
+     * @author Cali
+     */
+    public function saveServicesStorageSettings(Request $request)
+    {
+        $this->validate($request, ['type' => 'required']);
+
+        Site::saveServicesStorageSettings($request);
+
+        return $this->successResponse([
+            'message' => trans('views.admin.pages.settings.updated', [
+                'setting' => trans('views.admin.pages.settings.services.storage.heading')
+            ])
+        ]);
+    }
+
+    /**
+     * Save disks credentials.
+     * 
+     * @param         $disk
+     * @param Request $request
+     * @return array
+     * 
+     * @author Cali
+     */
+    public function saveServicesDiskSettings($disk, Request $request)
+    {
+        $this->validate($request, $this->getDiskRules($disk));
+        
+        Site::saveServicesDiskSettings($disk, $request);
+        
+        return $this->successResponse([
+            'message' => trans('views.admin.pages.settings.updated', [
+                'setting' => trans('views.admin.pages.settings.services.storage.heading')
+            ])
+        ]);
+    }
+
+    /**
+     * Get disk validation rules.
+     * 
+     * @param $disk
+     * @return array
+     * 
+     * @author Cali
+     */
+    protected function getDiskRules($disk)
+    {
+        switch ($disk) {
+            case 'ftp':
+                return [
+                    'ftp_host' => 'required',
+                    'username' => 'required',
+                    'password' => 'required',
+                ];
+            case 's3':
+                return [
+                    'key'    => 'required',
+                    'secret' => 'required',
+                    'region' => 'required',
+                    'bucket' => 'required',
+                ];
+            case 'rackspace':
+                return [
+                    'key'       => 'requried',
+                    'username'  => 'requried',
+                    'secret'    => 'required',
+                    'region'    => 'required',
+                    'endpoint'  => 'required',
+                    'container' => 'required',
+                    'url_type'  => 'required',
+                ];
+            case 'qiniu':
+                return [
+                    'access_key' => 'required',
+                    'secret_key' => 'required',
+                    'bucket' => 'required',
+                    'default' => 'required',
+                ];
+        }
+    }
+
+    /**
+     * Save develop settings.
+     *
+     * @param Request $request
+     * @return array
+     *
+     * @author Cali
+     */
+    public function saveAdvancedDevelopSettings(Request $request)
+    {
+        Site::saveAdvancedDevelopSettings($request);
+
+        return $this->successResponse([
+            'message' => trans('views.admin.pages.settings.updated', [
+                'setting' => trans('views.admin.pages.settings.advanced.develop.title')
             ])
         ]);
     }

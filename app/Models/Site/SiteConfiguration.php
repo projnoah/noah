@@ -2,6 +2,7 @@
 
 namespace Noah;
 
+use Artisan;
 use Illuminate\Http\Request;
 use Noah\Library\Models\Configuration;
 
@@ -205,5 +206,62 @@ class SiteConfiguration extends Configuration {
         env_put("PUSHER_APP_ID", trim($request->input('app_id')), true);
         env_put("PUSHER_KEY", trim($request->input('key')));
         env_put("PUSHER_SECRET", trim($request->input('secret')));
+    }
+
+    /**
+     * Save storage type settings.
+     * 
+     * @param Request $request
+     * @author Cali
+     */
+    public static function saveServicesStorageSettings(Request $request)
+    {
+        if (in_array($request->input('type'), array_keys(config('filesystems.disks'))) && 
+            ($type = trim($request->input('type'))) != env('DISK_TYPE', 'local')) {
+            env_put('DISK_TYPE', $type);
+        }
+    }
+
+    /**
+     * Save disk credentials.
+     *
+     * @param         $disk
+     * @param Request $request
+     *
+     * @author Cali
+     */
+    public static function saveServicesDiskSettings($disk, Request $request)
+    {
+        $attributes = $request->except('_token');
+        
+        foreach ($attributes as $key => $value) {
+            if (trim($value) != '') {
+                env_put(str_contains($key, $disk) ? strtoupper($key) : strtoupper("{$disk}_{$key}"), trim($value));
+            }
+        }
+    }
+
+    /**
+     * Save develop settings.
+     * 
+     * @param Request $request
+     * @author Cali
+     */
+    public static function saveAdvancedDevelopSettings(Request $request)
+    {
+        if (($env = $request->input('environment', 'local')) != config('app.env')) {
+            env_put('APP_ENV', $env);
+        }
+
+        $debug = $request->input('debug', 'off') == 'on' ? 'true' : 'false';
+        env_put('APP_DEBUG', strval($debug));
+
+        if (($ignores = $request->input('ignores_admin', 'off') == 'on' ? 1 : 0) != site('adminIgnoresMaintenance')) {
+            static::adminIgnoresMaintenance($ignores);
+        }
+
+        if (($on = $request->input('maintenance', 'off') === 'on') ^ app()->isDownForMaintenance()) {
+            Artisan::call($on ? 'down' : 'up');
+        }
     }
 }

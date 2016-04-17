@@ -10,11 +10,9 @@
                         <form action="@route('admin.settings.save-email')" method="POST" id="email-form">
                             {!! csrf_field() !!}
                             <div class="form-group text-center">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" name="on" class="form-control"{{ site('smtpEmailOn') == '1' ? ' checked' : '' }}>
-                                        @trans('views.admin.pages.settings.services.email.on')
-                                    </label>
+                                <div class="ios-switch switch-md">
+                                    <input type="checkbox" name="on" class="js-switch"{{ site('smtpEmailOn') == '1' ? ' checked' : '' }}>
+                                    &nbsp;@trans('views.admin.pages.settings.services.email.on')
                                 </div>
                             </div>
                             <div class="form-group">

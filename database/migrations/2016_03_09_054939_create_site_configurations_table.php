@@ -28,6 +28,7 @@ class CreateSiteConfigurationsTable extends Migration {
         Site::separator("::");
         Site::keywords("modern", "noah", "project noah");
         Site::siteRobotIgnores("admin");
+        Site::adminIgnoresMaintenance("1");
         Site::adminEmail(env('ADMIN_EMAIL'));
         Site::registrationOn("1");
         Site::smtpEmailOn("0");

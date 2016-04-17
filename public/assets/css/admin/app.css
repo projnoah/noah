@@ -7468,6 +7468,15 @@ body:not(.small-sidebar):not(.page-horizontal-bar) .menu.accordion-menu,
   line-height: 1;
   margin: 0; }
 
+.beta, .new-version {
+  vertical-align: text-bottom; }
+
+.pace .pace-progress {
+  z-index: 999999 !important; }
+
+.cell {
+  border-bottom: 1px dashed rgba(0, 0, 0, 0.15); }
+
 .menu__list {
   position: relative;
   display: -webkit-flex;
