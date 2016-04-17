@@ -29,7 +29,7 @@
             </li>
             <li class="droplink">
                 <a href="#" class="waves-effect waves-button">
-                    <span class="menu-icon icon"></span><p>@trans('views.admin.titles.data-center.main')</p><span class="arrow"></span>
+                    <span class="menu-icon icon-support"></span><p>@trans('views.admin.titles.data-center.main')</p><span class="arrow"></span>
                 </a>
                 <ul class="sub-menu">
                     <li><a href="#">Something</a></li>

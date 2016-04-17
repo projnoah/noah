@@ -97,10 +97,7 @@ class Router {
      */
     public static function language()
     {
-        Route::get('language/{language}', function ($language) {
-            return redirect()->back()
-                ->withCookie(cookie()->forever('lang', $language));
-        });
+        Route::get('language/{language}', 'Dashboard\HomeController@changeLanguage');
 
         return new static;
     }
@@ -138,17 +135,18 @@ class Router {
                 'prefix' => 'settings',
                 'as'     => 'settings.'
             ], function () {
-                
+
                 Route::get('/', 'SettingsController@showGeneralSettings')->name('general');
                 Route::get('services', 'SettingsController@showServicesSettings')->name('services');
-                
+
                 Route::group(['prefix' => 'advanced', 'as' => 'advanced.'], function () {
                     Route::get('/', 'SettingsController@showAdvancedSettings')->name('index');
                     Route::post('/', 'SettingsController@saveAdvancedDevelopSettings')->name('save-develop');
                     Route::get('database', 'SettingsController@showDatabaseSettings')->name('database');
                     Route::get('cache', 'SettingsController@showCacheSettings')->name('cache');
+                    Route::patch('cache/{type}/{action?}', 'SettingsController@doCacheByType')->name('do-cache');
                 });
-                
+
                 Route::get('display', 'SettingsController@showDisplaySettings')->name('display');
                 Route::get('upgrade', 'SettingsController@showUpgradeSettings')->name('upgrade');
 
@@ -161,7 +159,7 @@ class Router {
                     Route::post('storage', 'SettingsController@saveServicesStorageSettings')->name('save-storage');
                     Route::post('storage/{disk}', 'SettingsController@saveServicesDiskSettings')->name('save-disk');
                 });
-                
+
             });
         });
 
@@ -176,23 +174,7 @@ class Router {
      */
     public static function robots()
     {
-        Route::get('robots.txt', function () {
-            $txt = "User-agent: *\n\r";
-            $ignores = site('siteRobotIgnores');
-            
-            if ($ignores) {
-                $ignoreUris = explode(',', $ignores);
-                foreach ($ignoreUris as $uri) {
-                    $txt .= "Disallow:/{$uri}\n"; 
-                }
-            } else {
-                $txt .= "Disallow:/admin";
-            }
-            
-            return response($txt)->header(
-                'Content-type', 'text/plain'
-            );
-        });
+        Route::get('robots.txt', 'Dashboard\HomeController@generateRobotsTxt');
 
         return new static;
     }

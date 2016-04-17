@@ -7,7 +7,8 @@ $(document).on('pjax:success', function (e, data, status, xhr) {
     if (status == 'success') {
         $("script[pjax-script]").remove();
 
-        $.getScript(xhr.getResponseHeader('X-PJAX-Script'));
+        if (xhr.getResponseHeader('X-PJAX-Script') && xhr.getResponseHeader('X-PJAX-Script') != '')
+            $.getScript(xhr.getResponseHeader('X-PJAX-Script'));
 
         pjaxReEvaluate();
     }
@@ -20,7 +21,7 @@ $(function () {
     elems.forEach(function (html) {
         new Switchery(html, {color: typeof(THEME_COLOR) == "undefined" ? "#23B7E5" : THEME_COLOR});
     });
-    
+
     const Admin = new Vue({
         el: "body",
         data: {
@@ -136,7 +137,7 @@ const pjaxReEvaluate = (manual = false) => {
         elems.forEach(function (html) {
             new Switchery(html, {color: typeof(THEME_COLOR) == "undefined" ? "#23B7E5" : THEME_COLOR});
         });
-
+        
         $("form:not(.no-ajax)").each(function () {
             const form = this;
             $(this).on('submit', function (e) {

@@ -264,4 +264,22 @@ class SiteConfiguration extends Configuration {
             Artisan::call($on ? 'down' : 'up');
         }
     }
+
+    public static function doCacheByType($type, $action = 'refresh')
+    {
+        switch ($type) {
+            case 'main-cache':
+                Artisan::call($action === 'refresh' ? 'config:cache' : 'config:clear');
+                if ($action !== 'refresh') {
+                    Artisan::call('cache:clear');
+                }
+                break;
+            case 'route-cache':
+                Artisan::call($action === 'refresh' ? 'route:cache' : 'route:clear');
+                break;
+            default:
+                Artisan::call('view:clear');
+                break;
+        }
+    }
 }

@@ -9927,7 +9927,7 @@ $(document).on('pjax:success', function (e, data, status, xhr) {
     if (status == 'success') {
         $("script[pjax-script]").remove();
 
-        $.getScript(xhr.getResponseHeader('X-PJAX-Script'));
+        if (xhr.getResponseHeader('X-PJAX-Script') && xhr.getResponseHeader('X-PJAX-Script') != '') $.getScript(xhr.getResponseHeader('X-PJAX-Script'));
 
         pjaxReEvaluate();
     }

@@ -4,6 +4,12 @@
     </div>
     <div class="panel-body">
         <div class="row m-b-xs">
+            <div class="col-sm-4 text-right">@trans('views.admin.pages.settings.advanced.develop.noah-installed')</div>
+            <div class="col-sm-8">
+                <b>{{ $noah_installed_time->diffForHumans() }}</b>
+            </div>
+        </div>
+        <div class="row m-b-xs">
             <div class="col-sm-4 text-right">@trans('views.admin.pages.settings.advanced.develop.php-ver')</div>
             <div class="col-sm-8">
                 <b>{{ $php_version }}</b>

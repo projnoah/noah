@@ -69,7 +69,7 @@ class SettingsController extends Controller {
 
     /**
      * Show cache settings page.
-     * 
+     *
      * @return mixed
      * @author Cali
      */
@@ -77,10 +77,10 @@ class SettingsController extends Controller {
     {
         return view('admin.settings.cache');
     }
-    
+
     /**
      * Show upgrade settings page.
-     * 
+     *
      * @return mixed
      * @author Cali
      */
@@ -275,19 +275,19 @@ class SettingsController extends Controller {
 
     /**
      * Save disks credentials.
-     * 
+     *
      * @param         $disk
      * @param Request $request
      * @return array
-     * 
+     *
      * @author Cali
      */
     public function saveServicesDiskSettings($disk, Request $request)
     {
         $this->validate($request, $this->getDiskRules($disk));
-        
+
         Site::saveServicesDiskSettings($disk, $request);
-        
+
         return $this->successResponse([
             'message' => trans('views.admin.pages.settings.updated', [
                 'setting' => trans('views.admin.pages.settings.services.storage.heading')
@@ -297,10 +297,10 @@ class SettingsController extends Controller {
 
     /**
      * Get disk validation rules.
-     * 
+     *
      * @param $disk
      * @return array
-     * 
+     *
      * @author Cali
      */
     protected function getDiskRules($disk)
@@ -333,8 +333,8 @@ class SettingsController extends Controller {
                 return [
                     'access_key' => 'required',
                     'secret_key' => 'required',
-                    'bucket' => 'required',
-                    'default' => 'required',
+                    'bucket'     => 'required',
+                    'default'    => 'required',
                 ];
         }
     }
@@ -354,6 +354,26 @@ class SettingsController extends Controller {
         return $this->successResponse([
             'message' => trans('views.admin.pages.settings.updated', [
                 'setting' => trans('views.admin.pages.settings.advanced.develop.title')
+            ])
+        ]);
+    }
+
+    /**
+     * Refresh cache or clear it out.
+     *
+     * @param        $type
+     * @param string $action
+     * @return array
+     *
+     * @author Cali
+     */
+    public function doCacheByType($type, $action = 'refresh')
+    {
+        Site::doCacheByType($type, $action);
+
+        return $this->successResponse([
+            'message' => trans('views.admin.pages.settings.advanced.cache.' . $action . 'ed', [
+                'type' => trans('views.admin.pages.settings.advanced.cache.' . $type)
             ])
         ]);
     }

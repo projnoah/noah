@@ -299,11 +299,24 @@ return [
                         'admin-ignores'          => '无视管理员',
                         'admin-ignores-tips'     => '开启后管理员有权限在维护下访问与管理站点',
                         'server-info'            => '服务器信息',
+                        'noah-installed'         => '安装Noah在',
                         'php-ver'                => 'PHP版本',
                         'mysql-ver'              => 'MySQL版本',
                         'os'                     => '操作系统',
                         'server-software'        => 'Web服务器',
                     ],
+                    'cache'         => [
+                        'title'              => '缓存管理',
+                        'tips'               => '开启缓存可以大幅度提升网站编译效率',
+                        'main-cache'         => '后台设置缓存',
+                        'main-cache-warning' => '开启后将把后台的设置缓存起来, 若修改了任何配置请牢记回来刷新缓存',
+                        'route-cache'        => '路由URL缓存',
+                        'view-cache'         => '前端编译缓存',
+                        'refresh'            => '刷新',
+                        'clear'              => '清除',
+                        'refreshed'          => ':type 已成功刷新',
+                        'cleared'            => ':type 已成功清除'
+                    ]
                 ],
                 'update-button' => '保存设置',
                 'updated'       => ':setting 设置已更新'

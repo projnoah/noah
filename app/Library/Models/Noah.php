@@ -4,8 +4,7 @@ namespace Noah\Library\Models;
 
 use File;
 use Artisan;
-use Composer\Console\Application;
-use Symfony\Component\Console\Input\ArrayInput;
+use Carbon\Carbon;
 
 class Noah {
 
@@ -28,12 +27,12 @@ class Noah {
      * Beta version.
      */
     const IS_BETA = true;
-    
+
     /**
      * Noah home URL.
      */
     const URL = "https://projnoah.com";
-    
+
     /**
      * Noah update base url.
      */
@@ -41,9 +40,9 @@ class Noah {
 
     /**
      * Update Noah to the latest version.
-     * 
+     *
      * @since 1.0.0
-     * 
+     *
      * @return array
      * @author Cali
      */
@@ -67,24 +66,24 @@ class Noah {
 
         self::dumpAutoload();
         self::migrateDatabase();
-        
+
         return $output;
     }
 
     /**
      * Get the new version string.
-     * 
+     *
      * @return string
      */
     public static function getNewVersion()
     {
         // TODO: Fetch from server
-        return "1.0.0";
+        return site('noahNewVersion') ?: false;
     }
 
     /**
      * Get the current version of Project Noah.
-     * 
+     *
      * @return string
      * @author Cali
      */
@@ -95,7 +94,7 @@ class Noah {
 
     /**
      * Get Noah home url.
-     * 
+     *
      * @return string
      * @author Cali
      */
@@ -106,7 +105,7 @@ class Noah {
 
     /**
      * Is the current version in beta.
-     * 
+     *
      * @return bool
      * @author Cali
      */
@@ -117,7 +116,7 @@ class Noah {
 
     /**
      * Get the currently supported locales.
-     * 
+     *
      * @return array
      * @author Cali
      */
@@ -128,29 +127,30 @@ class Noah {
 
     /**
      * Dump autoload in Composer.
-     * 
+     *
      * @author Cali
      */
     private static function dumpAutoload()
     {
-        // Change to root directory
-        chdir('../');
-        
-        putenv('COMPOSER_HOME=' . base_path('vendor/bin/composer'));
+        // Change to root directory (Old fashion way)
+//        chdir('../');
 
-        $input = new ArrayInput(['command' => 'dump-autoload']);
-        
-        $application = new Application();
-        $application->setAutoExit(false);
-        $application->run($input);
-        
+//        putenv('COMPOSER_HOME=' . base_path('vendor/bin/composer'));
+
+//        $input = new ArrayInput(['command' => 'dump-autoload']);
+//        
+//        $application = new Application();
+//        $application->setAutoExit(false);
+//        $application->run($input);
+
         // Change back in
-        chdir('public');
+//        chdir('public');
+        Artisan::call('optimize');
     }
 
     /**
      * Migrate the database changes.
-     * 
+     *
      * @author Cali
      */
     private static function migrateDatabase()
@@ -160,7 +160,7 @@ class Noah {
 
     /**
      * Overwrite the updated files.
-     * 
+     *
      * @param $file_path
      * @author Cali
      */
@@ -172,13 +172,13 @@ class Noah {
         foreach ($directories as $directory) {
             File::copyDirectory($directory, '../' . File::name($directory));
         }
-        
+
         File::deleteDirectory("upgrades/$dir_path");
     }
 
     /**
      * Check upgrades directory. Create if not exists.
-     * 
+     *
      * @author Cali
      */
     private static function checkDirectory()
@@ -190,7 +190,7 @@ class Noah {
 
     /**
      * Get the currently supported oAuths applications.
-     * 
+     *
      * @return array
      * @author Cali
      */
@@ -205,7 +205,7 @@ class Noah {
 
     /**
      * Get advanced server information.
-     * 
+     *
      * @return array
      * @author Cali
      */
@@ -215,13 +215,14 @@ class Noah {
         $mysql_version = mysqli_get_server_info(mysqli_connect(config('database.connections.mysql.host'), config('database.connections.mysql.username'),
             config('database.connections.mysql.password')));
         $operating_system = PHP_OS;
-        
+        $noah_installed_time = Carbon::parse(str_replace('Installed at ', '', File::get(base_path('noah.lock'))));
+
         try {
             $server_software = $_SERVER['SERVER_SOFTWARE'];
         } catch (\Exception $e) {
             $server_software = 'Unknown';
         }
-        
-        return compact('php_version', 'mysql_version', 'operating_system', 'server_software');
+
+        return compact('php_version', 'mysql_version', 'operating_system', 'server_software', 'noah_installed_time');
     }
 }
