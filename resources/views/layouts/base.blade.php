@@ -21,10 +21,10 @@
     @stack('styles')
 
     {{-- Favicons --}}
-    <link rel="icon" href="/favicon.png">
-    <link rel="shortcut icon" href="/favicon.png">
-    <link rel="apple-touch-icon" href="/favicon.png">
-    <link rel="apple-touch-icon-precomposed" href="/favicon.png">
+    <link rel="icon" href="/assets/logo.png?ver={{ site('logoVersion') ?: 0 }}">
+    <link rel="shortcut icon" href="/assets/logo.png?ver={{ site('logoVersion') ?: 0 }}">
+    <link rel="apple-touch-icon" href="/assets/logo.png?ver={{ site('logoVersion') ?: 0 }}">
+    <link rel="apple-touch-icon-precomposed" href="/assets/logo.png?ver={{ site('logoVersion') ?: 0 }}">
 
     <!--[if IE]>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>

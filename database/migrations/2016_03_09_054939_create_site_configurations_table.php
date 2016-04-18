@@ -24,7 +24,7 @@ class CreateSiteConfigurationsTable extends Migration {
         Site::postUri('posts');
         Site::adminUri('admin');
         Site::siteTitle("Project Noah");
-        Site::description("优雅, 现代, 简洁与全能. 服务于快速建社交/博客站的站长的工具.");
+        Site::description("优雅, 现代, 简洁与全能. 服务于快速建网站的站长.");
         Site::separator("::");
         Site::keywords("modern", "noah", "project noah");
         Site::siteRobotIgnores("admin");

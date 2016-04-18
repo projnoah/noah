@@ -44,6 +44,9 @@
 .cell {
   border-bottom: 1px dashed rgba(0, 0, 0, 0.15); }
 
+.dz-message img {
+  max-width: 110px; }
+
 .menu__list {
   position: relative;
   display: -webkit-flex;
@@ -381,5 +384,62 @@
   background: #ff5722;
   -webkit-transform: scale(0.7, 0.7);
   transform: scale(0.7, 0.7); }
+
+.js .input-file {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1; }
+
+.input-file + label {
+  max-width: 80%;
+  font-size: 1.25rem;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: pointer;
+  display: inline-block;
+  overflow: hidden;
+  padding: 0.625rem 1.25rem; }
+
+.input-file + label figure {
+  font-size: 4.8em;
+  color: #fff; }
+
+.no-js .input-file + label {
+  display: none; }
+
+.input-file:focus + label,
+.input-file.has-focus + label {
+  outline: 1px dotted #000;
+  outline: -webkit-focus-ring-color auto 5px; }
+
+.input-file + label * {
+  /* pointer-events: none; */
+  /* in case of FastClick lib use */ }
+
+.input-uploader + label {
+  color: #0d3b62; }
+
+.input-uploader:focus + label,
+.input-uploader.has-focus + label,
+.input-uploader + label:hover {
+  color: #87b2c8; }
+
+.input-uploader + label figure {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: #0d3b62;
+  display: block;
+  padding: 20px;
+  margin: 0 auto 10px; }
+
+.input-uploader:focus + label figure,
+.input-uploader.has-focus + label figure,
+.input-uploader + label:hover figure {
+  background-color: rgba(13, 59, 98, 0.65); }
 
 /*# sourceMappingURL=dashboard.css.map */

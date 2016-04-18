@@ -408,4 +408,19 @@ class User extends BaseUser {
         // TODO: Dynamic role
         return $this->hasRole('administrator');
     }
+
+    /**
+     * Check if the user has bound the given oAuth service.
+     * 
+     * @param $service
+     * @return bool
+     * 
+     * @author Cali
+     */
+    public function boundOAuth($service)
+    {
+        $social = json_decode($this->attributes['social_info']);
+        
+        return property_exists($social, strtolower($service));
+    }
 }

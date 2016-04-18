@@ -10,7 +10,7 @@
 
 @section('app-content')
     <div class="row">
-
+        @include('admin.settings.related.database-info')
     </div>
 @stop
 

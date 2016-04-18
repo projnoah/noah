@@ -41,7 +41,7 @@
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">Secret</label>
                                 <div class="col-sm-9">
-                                    <input class="form-control" value="{{ env('PUSHER_SECRET') }}" name="secret">
+                                    <input type="password" class="form-control" value="{{ env('PUSHER_SECRET') }}" name="secret">
                                 </div>
                             </div>
                             <div class="form-group">

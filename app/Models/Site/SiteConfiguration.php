@@ -67,8 +67,7 @@ class SiteConfiguration extends Configuration {
      */
     public static function logo()
     {
-        // TODO: Dynamic
-        return url('favicon.png');
+        return url('assets/logo.png?ver=' . static::logoVersion() ?: '0');
     }
 
     /**

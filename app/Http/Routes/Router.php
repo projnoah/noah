@@ -127,7 +127,14 @@ class Router {
                 'as'     => 'users.'
             ], function () {
                 Route::get('/', 'UsersController@showIndex')->name('index');
-                Route::get('profile', 'UsersController@showProfile')->name('profile');
+                
+                Route::group(['prefix' => 'profile', 'as' => 'profile.'], function () {
+                    Route::get('/', 'UsersController@showProfile')->name('index');
+
+                    Route::patch('save', 'UsersController@saveProfile')->name('save');
+                    Route::patch('password', 'UsersController@updatePassword')->name('update-password');
+                    Route::post('oauth/{service}', 'UsersController@bindOrUnbindOAuth')->name('oauth');
+                });
             });
 
             // Site settings.
@@ -147,7 +154,11 @@ class Router {
                     Route::patch('cache/{type}/{action?}', 'SettingsController@doCacheByType')->name('do-cache');
                 });
 
-                Route::get('display', 'SettingsController@showDisplaySettings')->name('display');
+                Route::group(['prefix' => 'display', 'as' => 'display.'], function () {
+                    Route::get('/', 'SettingsController@showDisplaySettings')->name('index');
+                    Route::post('logo', 'SettingsController@uploadLogo')->name('upload-logo');
+                });
+                
                 Route::get('upgrade', 'SettingsController@showUpgradeSettings')->name('upgrade');
 
                 Route::post('general/{type}', 'SettingsController@saveGeneralSettings')->name('save-general');
@@ -159,7 +170,6 @@ class Router {
                     Route::post('storage', 'SettingsController@saveServicesStorageSettings')->name('save-storage');
                     Route::post('storage/{disk}', 'SettingsController@saveServicesDiskSettings')->name('save-disk');
                 });
-
             });
         });
 

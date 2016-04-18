@@ -24,10 +24,10 @@
     @stack('styles')
 
     {{-- Favicons --}}
-    <link rel="icon" href="/favicon.png">
-    <link rel="shortcut icon" href="/favicon.png">
-    <link rel="apple-touch-icon" href="/favicon.png">
-    <link rel="apple-touch-icon-precomposed" href="/favicon.png">
+    <link rel="icon" href="/assets/logo.png?ver={{ site('logoVersion') ?: 0 }}">
+    <link rel="shortcut icon" href="/assets/logo.png?ver={{ site('logoVersion') ?: 0 }}">
+    <link rel="apple-touch-icon" href="/assets/logo.png?ver={{ site('logoVersion') ?: 0 }}">
+    <link rel="apple-touch-icon-precomposed" href="/assets/logo.png?ver={{ site('logoVersion') ?: 0 }}">
 
     <!--[if IE]>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -54,13 +54,14 @@
                 fixedSidebar: "@trans('views.admin.navbar.settings.errors.fixed-sidebar-hover-menu')"
             }
         },
-                CurrentUser = JSON.parse('{!! Auth::user() !!}'),
+                CurrentUser = JSON.parse('{!! addslashes(Auth::user()) !!}'),
                 SiteSettings = {
                     title: "@site('siteTitle')",
                     homeUri: "@site('homeUri')",
                     socialUri: "@site('socialUri')",
                     postUri: "@site('postUri')"
-                };
+                },
+                DataTableLines = JSON.parse('{!! addslashes(json_encode(trans('views.datatable'))) !!}');
 
     </script>
     {{-- Scripts Stack --}}

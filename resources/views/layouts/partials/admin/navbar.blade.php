@@ -199,7 +199,7 @@
                         </a>
                         <ul class="dropdown-menu dropdown-list" role="menu">
                             <li role="presentation">
-                                <a href="@route('admin.users.profile')" data-pjax>
+                                <a href="@route('admin.users.profile.index')" data-pjax>
                                     <i class="icon-user m-r-xs"></i>@trans('views.admin.titles.users.sub.profile')
                                 </a>
                             </li>

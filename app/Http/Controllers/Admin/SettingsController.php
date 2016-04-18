@@ -86,7 +86,7 @@ class SettingsController extends Controller {
      */
     public function showUpgradeSettings()
     {
-        return view();
+        return view('admin.settings.upgrade');
     }
 
     /**
@@ -376,5 +376,28 @@ class SettingsController extends Controller {
                 'type' => trans('views.admin.pages.settings.advanced.cache.' . $type)
             ])
         ]);
+    }
+
+    /**
+     * Upload site logo.
+     *
+     * @param Request $request
+     * @return array
+     *
+     * @author Cali
+     */
+    public function uploadLogo(Request $request)
+    {
+        $file = $request->file('logo');
+
+        $file->move('assets', 'logo.png');
+
+        if (site('logoVersion')) {
+            Site::logoVersion(intval(site('logoVersion')) + 1);
+        } else {
+            Site::logoVersion('1');
+        }
+        
+        return response('/assets/logo.png?ver=' . site('logoVersion'), 200, ['Content-type' => 'text/plain']);
     }
 }

@@ -128,7 +128,7 @@ return [
     */
 
     'attributes' => [
-        'name'                  => '名称',
+        'name'                  => '昵称',
         'username'              => '用户名',
         'email'                 => '邮箱',
         'password'              => '密码',

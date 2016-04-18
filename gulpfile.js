@@ -134,8 +134,10 @@ elixir(function (mix) {
             'admin/vendor/component.css',
             'admin/vendor/select2.min.css',
             'admin/vendor/weather-icons.min.css',
+            'admin/vendor/jquery.datatables.min.css',
             'admin/vendor/MetroJs.min.css',
             'admin/vendor/toastr.min.css',
+            'UI/dropzone.min.css',
             'admin/modern.css',
             'builds/pages/admin/dashboard.css'
         ], 'public/assets/css/admin/app.css')
@@ -165,12 +167,18 @@ elixir(function (mix) {
             'jquery/flot/jquery.flot.symbol.min.js',
             'jquery/flot/jquery.flot.resize.min.js',
             'jquery/flot/jquery.flot.tooltip.min.js',
+            'jquery/ajaxfileupload.js',
+            'jquery/jquery.datatables.min.js',
             'admin/vendor/MetroJs.min.js',
             'admin/vendor/curvedLines.js',
             'admin/modern.js',
             'builds/admin/app.js',
         ], 'public/assets/js/admin/app.js');
 
+    mix.browserify([
+        'admin/pages/profile-users.js'    
+    ], 'public/assets/js/admin/pages/profile-users.js');
+    
     mix.browserify([
             'admin/pages/dashboard.js',
         ], 'public/assets/js/admin/pages/dashboard.js')
@@ -193,6 +201,6 @@ elixir(function (mix) {
         .browserify([
             'admin/pages/display-settings.js'
         ], 'public/assets/js/admin/pages/display-settings.js');
-
+    
     //mix.version();
 });

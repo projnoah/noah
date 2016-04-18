@@ -26,7 +26,7 @@
                 <div class="form-group">
                     <label class="col-sm-3 control-label">{{ $app_secret }}</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" name="app_secret" autocomplete="off" value="{{ env(strtoupper($service) . '_SECRET') }}">
+                        <input type="password" class="form-control" name="app_secret" autocomplete="off" value="{{ env(strtoupper($service) . '_SECRET') }}">
                     </div>
                 </div>
                 <div class="form-group">

@@ -10,7 +10,7 @@
                     {{ Auth::user()->name }}
                     @else
                         请先登录
-                        @endcheck
+                    @endcheck
                 </span>
             </div>
             <div class="icon-list">

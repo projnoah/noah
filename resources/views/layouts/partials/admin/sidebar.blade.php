@@ -24,15 +24,24 @@
                     <span class="menu-icon icon-user"></span><p>@trans('views.admin.titles.users.main')</p><span class="arrow"></span>
                 </a>
                 <ul class="sub-menu">
-                    <li><a href="@route('admin.users.index', [], false)" data-pjax>@trans('views.admin.titles.users.sub.profile')</a></li>
+                    <li><a href="@route('admin.users.index', [], false)" data-pjax>@trans('views.admin.titles.users.sub.index')</a></li>
+                    <li><a href="@route('admin.users.profile.index', [], false)" data-pjax>@trans('views.admin.titles.users.sub.profile')</a></li>
                 </ul>
+            </li>
+            <li class="droplink">
+                <a href="#" class="waves-effect waves-button">
+                    <span class="menu-icon icon-picture"></span><p>@trans('views.admin.titles.media.main')</p><span class="arrow"></span>
+                    <ul class="sub-menu">
+                        <li><a href="#">Sub</a></li>
+                    </ul>
+                </a>
             </li>
             <li class="droplink">
                 <a href="#" class="waves-effect waves-button">
                     <span class="menu-icon icon-support"></span><p>@trans('views.admin.titles.data-center.main')</p><span class="arrow"></span>
                 </a>
                 <ul class="sub-menu">
-                    <li><a href="#">Something</a></li>
+                    <li><a href="#">Sub</a></li>
                 </ul>
             </li>
             <li class="droplink{{ request()->is(substr(route('admin.settings.general', [], false), 1) . '*') ? ' active' : '' }}">
@@ -52,8 +61,16 @@
                             <li><a href="@route('admin.settings.advanced.cache', [], false)" data-pjax>@trans('views.admin.titles.settings.sub.advanced.cache')</a></li>
                         </ul>
                     </li>
-                    <li><a href="@route('admin.settings.display', [], false)" data-pjax>@trans('views.admin.titles.settings.sub.display')</a></li>
+                    <li><a href="@route('admin.settings.display.index', [], false)" data-pjax>@trans('views.admin.titles.settings.sub.display')</a></li>
                     <li><a href="@route('admin.settings.services', [], false)" data-pjax>@trans('views.admin.titles.settings.sub.services')</a></li>
+                    <li>
+                        <a href="@route('admin.settings.upgrade', [], false)" data-pjax>
+                            <i class="icon-present"></i>&nbsp;@trans('views.admin.titles.settings.sub.upgrade')
+                            @if(Noah::getNewVersion())
+                            <span class="badge badge-danger">@trans('views.admin.pages.settings.new-version')</span>
+                            @endif
+                        </a>
+                    </li>
                 </ul>
             </li>
             @stack('sidebar-menu')

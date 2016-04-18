@@ -12,6 +12,34 @@ class VerifyCsrfToken extends BaseVerifier
      * @var array
      */
     protected $except = [
-        //
+
     ];
+
+    /**
+     * @return array
+     */
+    public function getExcept()
+    {
+        return [
+            route('admin.settings.display.upload-logo', [], false)
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function shouldPassThrough($request)
+    {
+        foreach ($this->getExcept() as $except) {
+            if ($except !== '/') {
+                $except = trim($except, '/');
+            }
+
+            if ($request->is($except)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

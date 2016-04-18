@@ -2,7 +2,7 @@
 ![Logo](https://dn-abletive.qbox.me/projnoah-108.png)
 
 #### A modern tool that creates an SNS/CMS website in a flash
-#### 服务于快速建社交/博客站的站长的工具
+#### 服务于快速建网站的站长
 
 >Elegant, Modern, Simple and Versatile | 优雅, 现代, 简洁与全能<br>
 >(c) 2016. Project Noah

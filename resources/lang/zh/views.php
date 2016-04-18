@@ -132,7 +132,14 @@ return [
             'users'       => [
                 'main' => '用户',
                 'sub'  => [
+                    'index'   => '用户管理',
                     'profile' => '修改个人资料'
+                ]
+            ],
+            'media'       => [
+                'main' => '媒体库',
+                'sub'  => [
+
                 ]
             ],
             'data-center' => [
@@ -152,7 +159,8 @@ return [
                         'cache'    => '缓存设置',
                     ],
                     'display'  => '界面设置',
-                    'services' => '第三方服务'
+                    'services' => '第三方服务',
+                    'upgrade'  => '系统更新'
                 ]
             ]
         ],
@@ -179,6 +187,21 @@ return [
             'current-version' => '当前版本'
         ],
         'pages'                 => [
+            'users'    => [
+                'profile' => [
+                    'basics'   => [
+                        'heading' => '基本个人资料',
+                    ],
+                    'password' => [
+                        'heading' => '密码设置',
+
+                    ],
+                    'social'   => [
+                        'heading' => '社交帐号设置',
+                        'not-found' => '暂未开启任何社交平台绑定服务'
+                    ]
+                ]
+            ],
             'settings' => [
                 'general'       => [
                     'basics' => [
@@ -316,11 +339,53 @@ return [
                         'clear'              => '清除',
                         'refreshed'          => ':type 已成功刷新',
                         'cleared'            => ':type 已成功清除'
+                    ],
+                    'database'      => [
+                        'title'  => '数据库总览',
+                        'tables' => [
+                            'name'          => '表名',
+                            'engine'        => '引擎',
+                            'rows'          => '行数',
+                            'size'          => '大小',
+                            'collation'     => '定序',
+                            'total_count'   => '合计一共:count张表',
+                            'total_records' => ':count行'
+                        ]
+                    ],
+                ],
+                'display'       => [
+                    'upload-logo' => [
+                        'title'       => '网站LOGO',
+                        'upload'      => '选择图片文件',
+                        'upload-tips' => '推荐1:1比例的 不超过500px的Logo图片',
+                        'uploaded'    => 'Logo上传成功',
                     ]
                 ],
                 'update-button' => '保存设置',
-                'updated'       => ':setting 设置已更新'
+                'updated'       => ':setting 设置已更新',
+                'new-version'   => '新'
             ]
         ]
+    ],
+
+    'datatable' => [
+        'info'          => "从_START_ 到 _END_的显示结果 , 一共 _TOTAL_ 条记录",
+        'infoEmpty'     => '无结果',
+        'infoFiltered'  => '(过滤_MAX_条记录)',
+        'lengthMenu'    => '展示 _MENU_ 条记录',
+        'loadingRecord' => '加载中...',
+        'processing'    => '处理中...',
+        'search'        => '搜索:',
+        'zeroRecords'   => '无任何搜索结果',
+        'paginate'      => [
+            'first'    => '第一页',
+            'last'     => '最后一页',
+            'next'     => '下一页',
+            'previous' => '上一页'
+        ]
+    ],
+
+    'dropzone' => [
+        'drag-here' => '支持图片拖拽上传或直接点击'
     ]
 ];

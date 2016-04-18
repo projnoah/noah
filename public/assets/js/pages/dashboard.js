@@ -10083,6 +10083,16 @@ var Dashboard = {
                     _vm.isTopMenuOpen ? $(_vm.$el).removeClass('show-menu') : $(_vm.$el).addClass('show-menu');
                     _vm.isTopMenuOpen = !_vm.isTopMenuOpen;
                 },
+                openPage: function openPage() {
+                    var newWindow = arguments.length <= 0 || arguments[0] === undefined ? false : arguments[0];
+                    var ev = arguments[1];
+
+                    if (newWindow) {
+                        window.open($(ev.target).attr('data-link'), "_blank");
+                    } else {
+                        window.location.href = $(ev.target).attr('data-link');
+                    }
+                },
                 bodyClicked: function bodyClicked(ev) {
                     var target = ev.target;
                     if (_vm.isTopMenuOpen && target !== document.querySelector('.profile-button')) {

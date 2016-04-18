@@ -14,6 +14,13 @@ const Dashboard = {
                     vm.isTopMenuOpen ? $(vm.$el).removeClass('show-menu') : $(vm.$el).addClass('show-menu');
                     vm.isTopMenuOpen = !vm.isTopMenuOpen;
                 },
+                openPage: (newWindow = false, ev) => {
+                    if (newWindow) {
+                        window.open($(ev.target).attr('data-link'), "_blank");
+                    } else {
+                        window.location.href = $(ev.target).attr('data-link');
+                    }
+                },
                 bodyClicked: (ev) => {
                     const target = ev.target;
                     if (vm.isTopMenuOpen && target !== document.querySelector('.profile-button')) {

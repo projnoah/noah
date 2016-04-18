@@ -15,6 +15,13 @@
             <li>
                 <button class="profile-button" @click="toggleTopMenu"><i class="fa fa-user"></i></button>
             </li>
+            @check
+            @if(Auth::user()->isAdmin())
+            <li>
+                <button @click="openPage(true, $event)" data-link="@route('admin.dashboard')"><i class="fa fa-sliders"></i></button>
+            </li>
+            @endif
+            @endcheck
         </ul>
         <div class="search-wrapper">
             <form action="@route('search')" method="GET" role="search" novalidate @submit.prevent="searchQuery">

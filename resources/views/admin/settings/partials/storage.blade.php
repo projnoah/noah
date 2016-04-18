@@ -82,7 +82,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Secret</label>
-                                <input type="text" name="secret" class="form-control" value="{{ config('filesystems.disks.s3.secret') }}">
+                                <input type="password" name="secret" class="form-control" value="{{ config('filesystems.disks.s3.secret') }}">
                             </div>
                             <div class="form-group">
                                 <label>Region</label>

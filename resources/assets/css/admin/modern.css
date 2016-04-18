@@ -2365,7 +2365,7 @@ input[disabled] {
 }
 
 .form-control:focus {
-    border: 1px solid #bdc5c9;
+    border: 1px solid #135790;
     background: #fff;
 }
 
@@ -2786,7 +2786,7 @@ tr.group:hover {
 /* Dropzone */
 
 .dropzone {
-    border: 1px solid #f1f1f1;
+    border: 1px dashed #eee;
     border-radius: 0;
     background: #f9f9f9;
 }

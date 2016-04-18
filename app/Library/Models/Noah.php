@@ -189,7 +189,7 @@ class Noah {
     }
 
     /**
-     * Get the currently supported oAuths applications.
+     * Get the currently supported oAuth applications.
      *
      * @return array
      * @author Cali
@@ -201,6 +201,24 @@ class Noah {
             'weixin', 'youtube', 'github', 'linkedin',
             'dribbble', 'disqus', 'slack', 'spotify'
         ];
+    }
+
+    /**
+     * Currently active oAuth applications.
+     * 
+     * @return mixed
+     * @author Cali
+     */
+    public static function activeOAuths()
+    {
+        $actives = collect([]);
+
+        foreach (static::supportedOAuths() as $service) {
+            if (site($service . 'On') == '1')
+                $actives->push($service);
+        }
+        
+        return $actives;
     }
 
     /**
