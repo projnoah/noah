@@ -21,7 +21,9 @@ class VerifyCsrfToken extends BaseVerifier
     public function getExcept()
     {
         return [
-            route('admin.settings.display.upload-logo', [], false)
+            route('admin.settings.display.upload-logo', [], false),
+            route('admin.users.profile.upload-avatar', [], false),
+            route('admin.users.profile.resize-avatar', [], false)
         ];
     }
 

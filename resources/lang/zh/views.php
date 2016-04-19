@@ -197,8 +197,19 @@ return [
 
                     ],
                     'social'   => [
-                        'heading' => '社交帐号设置',
-                        'not-found' => '暂未开启任何社交平台绑定服务'
+                        'heading'        => '社交帐号设置',
+                        'not-found'      => '暂未开启任何社交平台绑定服务',
+                        'tips'           => '绑定帐号可以免去输入帐号密码的烦恼',
+                        'bind'           => '绑定',
+                        'unbind'         => '解除绑定',
+                        'bind-success'   => '成功绑定:service帐号',
+                        'bind-error'     => '您的:service帐号已绑定其他用户',
+                        'unbind-success' => '成功解绑:service',
+                    ],
+                    'avatar'   => [
+                        'heading'        => '头像设置',
+                        'update-success' => '头像更新成功',
+                        'update-failure' => '头像更新失败'
                     ]
                 ]
             ],

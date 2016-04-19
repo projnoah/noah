@@ -3,12 +3,10 @@
 namespace Noah\Library\Traits\Auth;
 
 use Auth;
-use Event;
 use Validator;
 use Noah\User;
 use Socialite;
 use Illuminate\Http\Request;
-use Noah\Events\User\Auth\UserHasRegistered;
 
 trait SocialAuthenticatesUsers {
 
@@ -61,13 +59,25 @@ trait SocialAuthenticatesUsers {
         // Check if the user has signed up already
         $user = User::socialize($service);
 
-        if (! $user instanceof User) {
+        if (! $user instanceof User && ! is_bool($user)) {
             // If not, ask for the user's input
             return view('auth.social', compact('user', 'service'));
         }
 
-        Auth::login($user, true);
-
+        if (Auth::guest()) {
+            Auth::login($user, true);
+        } else {
+            if (session()->has('redirect')) {
+                return redirect(session('redirect'))->with($user === false ? [
+                    'status' => 'error',
+                    'message' => trans('views.admin.pages.users.profile.social.bind-error', compact('service'))
+                ] : [
+                    'status' => 'success',
+                    'message' => trans('views.admin.pages.users.profile.social.bind-success', compact('service'))
+                ]);
+            }
+        }
+        
         return redirect($this->redirectPath());
     }
 

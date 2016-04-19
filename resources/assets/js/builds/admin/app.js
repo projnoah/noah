@@ -10096,9 +10096,14 @@ var pjaxReEvaluate = function pjaxReEvaluate() {
                         if (data.status !== 'error') {
                             if (typeof data.redirectUrl != 'undefined') {
                                 window.location.href = data.redirectUrl;
+                            } else if (typeof data.newWindowUrl != 'undefined') {
+                                window.open(data.newWindowUrl, "_blank");
+                            } else if (typeof data.reload != 'undefined') {
+                                toastr.success('<h4>' + data.message + '</h4>');
+                                $.pjax.reload('#page-container');
+                            } else {
+                                toastr.success('<h4>' + data.message + '</h4>');
                             }
-
-                            toastr.success('<h4>' + data.message + '</h4>');
                         } else {
                             toastr.error('<h4>' + data.message + '</h4>');
                         }

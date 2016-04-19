@@ -78,12 +78,12 @@ if (! function_exists('env_put')) {
                 }
             } else {
                 $content = str_replace($new_line ? "\n\r" : "\n", "", $content);
-                
+
                 $v = env($key);
                 if (is_bool($v)) {
                     $v = strval($v ? 'true' : 'false');
                 }
-                
+
                 try {
                     file_put_contents($path,
                         str_replace("{$key}={$v}", $content, file_get_contents($path))
@@ -116,5 +116,41 @@ if (! function_exists('site')) {
         $site = app('Site');
 
         return call_user_func_array([$site, $name], []);
+    }
+}
+
+if (! function_exists('resize_avatar')) {
+    /**
+     * Resize avatar by the given path.
+     * 
+     * @param $path
+     * @return bool
+     * 
+     * @author Cali
+     */
+    function resize_avatar($path, $width, $height, $x, $y)
+    {
+        switch (getimagesize($path)['mime']) {
+            case 'image/gif':
+                $source_image = imagecreatefromgif($path);
+                break;
+            case 'image/jpeg':
+                $source_image = imagecreatefromjpeg($path);
+                break;
+            case 'image/png':
+                $source_image = imagecreatefrompng($path);
+                break;
+        }
+
+        $cropped_image = imagecreatetruecolor($width, $height);
+        imagecopy($cropped_image, $source_image, 0, 0,
+            $x, $y, $width, $height);
+
+        $resized_avatar = imagejpeg($cropped_image, $path);
+
+        imagedestroy($source_image);
+        imagedestroy($cropped_image);
+        
+        return $resized_avatar;
     }
 }

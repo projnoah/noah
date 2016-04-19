@@ -52,6 +52,10 @@ $(function () {
             complete: () => {
                 $($form).removeClass('loading');
                 $($($label).find("figure")[0]).toggleClass('icon-cloud-upload fa fa-spin fa-spinner');
+                setTimeout(() => {
+                    const sel = `#${$($form).attr('id')}`;
+                    $.pjax.reload(sel);
+                }, 100);
             }
         });
     }

@@ -79,7 +79,7 @@ return [
 
     'qq' => [
         'client_id'     => env('QQ_ID'),
-        'client_secret' => env('QQ_KEY'),
+        'client_secret' => env('QQ_SECRET'),
         'redirect'      => env('QQ_REDIRECT'),
     ],
 

@@ -2,6 +2,8 @@
 
 namespace Noah;
 
+use Storage;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Database\Eloquent\Model;
 
 class Avatar extends Model {
@@ -82,5 +84,28 @@ class Avatar extends Model {
     public static function defaultUrl()
     {
         return url(static::DEFAULT_URI);
+    }
+
+    /**
+     * Move the avatar file into storage.
+     *
+     * @param UploadedFile $file
+     * @param User         $user
+     * @return static
+     *
+     * @author Cali
+     */
+    public static function move(UploadedFile $file, User $user)
+    {
+        $path = 'avatars/' . $user->id . '/' . $file->hashName();
+        Storage::put($path, file_get_contents($file->getRealPath()));
+
+        $avatar = new static([
+            'type' => 0,
+            'src'  => $path
+        ]);
+        $user->avatars()->save($avatar);
+
+        return $avatar;
     }
 }

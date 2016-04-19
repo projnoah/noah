@@ -22,3 +22,5 @@ Router::installations()
 
 Router::admins()
     ->robots();
+
+Router::users();

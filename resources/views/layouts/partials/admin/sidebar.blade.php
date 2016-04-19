@@ -59,6 +59,7 @@
                             <li><a href="@route('admin.settings.advanced.index', [], false)" data-pjax>@trans('views.admin.titles.settings.sub.advanced.develop')</a></li>
                             <li><a href="@route('admin.settings.advanced.database', [], false)" data-pjax>@trans('views.admin.titles.settings.sub.advanced.database')</a></li>
                             <li><a href="@route('admin.settings.advanced.cache', [], false)" data-pjax>@trans('views.admin.titles.settings.sub.advanced.cache')</a></li>
+                            <li><a href="#">二级域名设置</a></li>
                         </ul>
                     </li>
                     <li><a href="@route('admin.settings.display.index', [], false)" data-pjax>@trans('views.admin.titles.settings.sub.display')</a></li>

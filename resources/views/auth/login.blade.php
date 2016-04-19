@@ -31,7 +31,7 @@
             <ul class="social-login">
                 @foreach(Noah::supportedOAuths() as $service)
                     @if(site($service . 'On') == '1')
-                        <li><a class="social-link" href="@route('social', ['service' => '$service'])"><i class="fa fa-{{ $service }}"></i></a></li>
+                        <li><a class="social-link" href="@route('social', compact('service'))"><i class="fa fa-{{ $service }}"></i></a></li>
                     @endif
                 @endforeach
             </ul>

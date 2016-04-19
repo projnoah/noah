@@ -2,11 +2,13 @@
 
 namespace Noah;
 
-use Noah\Events\User\Auth\UserHasReset;
 use Noah\Library\Traits\User\Sociable;
+use Noah\Events\User\Auth\UserHasReset;
+use Noah\Library\Traits\User\UserMetas;
 use Noah\Events\User\Auth\UserHasLoggedIn;
 use Noah\Library\Traits\Model\TimeSortable;
 use Noah\Events\User\Auth\UserHasRegistered;
+use Noah\Library\Traits\User\AvatarControls;
 use Illuminate\Foundation\Auth\User as BaseUser;
 
 class User extends BaseUser {
@@ -22,7 +24,7 @@ class User extends BaseUser {
     |
     */
 
-    use Sociable, TimeSortable;
+    use Sociable, TimeSortable, AvatarControls, UserMetas;
 
     /**
      * The attributes that are mass assignable.
@@ -51,14 +53,25 @@ class User extends BaseUser {
      */
 
     /**
-     * The user's avatar
+     * The user's avatars
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @author Cali
+     */
+    public function avatars()
+    {
+        return $this->hasMany(Avatar::class);
+    }
+
+    /**
+     * Fetch the latest avatar.
+     *
+     * @return mixed
      * @author Cali
      */
     public function avatar()
     {
-        return $this->hasOne(Avatar::class);
+        return $this->avatars()->latest()->first();
     }
 
     /**
@@ -123,22 +136,6 @@ class User extends BaseUser {
     }
 
     /**
-     * Create an admin account.
-     *
-     * @param $attributes
-     * @return User
-     * @author Cali
-     */
-    public static function createAdmin($attributes)
-    {
-        $admin = static::register($attributes, null, false);
-        $admin->assignRole('administrator');
-        $admin->activated();
-
-        return $admin;
-    }
-
-    /**
      * After the user has logged in.
      *
      * @event UserHasLoggedIn
@@ -162,6 +159,22 @@ class User extends BaseUser {
         event(new UserHasReset($this));
 
         return $this;
+    }
+    
+    /**
+     * Create an admin account.
+     *
+     * @param $attributes
+     * @return User
+     * @author Cali
+     */
+    public static function createAdmin($attributes)
+    {
+        $admin = static::register($attributes, null, false);
+        $admin->assignRole('administrator');
+        $admin->activated();
+
+        return $admin;
     }
 
     /**
@@ -208,13 +221,13 @@ class User extends BaseUser {
      */
     public function getAvatarUrlAttribute()
     {
-        if (is_null($this->avatar)) {
+        if ($this->avatars()->count() === 0) {
             return Avatar::defaultUrl();
         }
 
-        return $this->avatar->type === Avatar::TYPE_LOCAL ?
-            url($this->avatar->src) :
-            $this->avatar->src;
+        return $this->avatar()->type === Avatar::TYPE_LOCAL ?
+            route('users.avatar', ['user' => $this->id, 'v' => $this->avatarVersion()]) :
+            $this->avatar()->src;
     }
 
     /**
@@ -302,57 +315,8 @@ class User extends BaseUser {
     }
 
     /**
-     * Get or set the user's meta.
-     *
-     * @param      $key
-     * @param null $value
-     * @return bool|string|object
-     *
-     * @author Cali
-     */
-    public function meta($key, $value = null)
-    {
-        $meta = $this->metas()->where('key', $key)->first();
-
-        if ($value) {
-            if (! $meta) {
-                $meta = $this->metas()->create([
-                    'key'   => $key,
-                    'value' => $value
-                ]);
-            } else {
-                $meta->value = $value;
-                $meta->save();
-            }
-        }
-
-        return is_null($meta) ? false : (json_decode($meta->value) ?: $meta->value);
-    }
-
-    /**
-     * Helper reader method for metas.
-     *
-     * @param      $key
-     * @param      $property
-     * @param bool $default
-     * @return bool
-     *
-     * @author Cali
-     */
-    public function metaReader($key, $property, $default = false)
-    {
-        $meta = $this->meta($key);
-
-        if ($meta) {
-            return property_exists($meta, $property) ? $meta->{$property} : $default;
-        } else {
-            return $default;
-        }
-    }
-
-    /**
      * Helper for admin theme setting metas.
-     * 
+     *
      * @param        $key
      * @param string $property
      * @param bool   $default
@@ -399,7 +363,7 @@ class User extends BaseUser {
 
     /**
      * If the user is an admin.
-     * 
+     *
      * @return bool
      * @author Cali
      */
@@ -407,20 +371,5 @@ class User extends BaseUser {
     {
         // TODO: Dynamic role
         return $this->hasRole('administrator');
-    }
-
-    /**
-     * Check if the user has bound the given oAuth service.
-     * 
-     * @param $service
-     * @return bool
-     * 
-     * @author Cali
-     */
-    public function boundOAuth($service)
-    {
-        $social = json_decode($this->attributes['social_info']);
-        
-        return property_exists($social, strtolower($service));
     }
 }

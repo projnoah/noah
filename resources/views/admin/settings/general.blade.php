@@ -122,9 +122,13 @@
                             <label for="site_robot_ignores" class="col-sm-2 control-label">@trans('views.admin.pages.settings.general.seo.ignores')</label>
                             <div class="col-sm-10">
                                 <select name="site_robot_ignores[]" multiple id="robots-select" style="display: none; width: 100%">
+                                    @if(site('siteRobotIgnores'))
                                     @foreach(explode(',', site('siteRobotIgnores')) as $uri)
                                         <option value="{{ $uri }}" selected>{{ $uri }}</option>
                                     @endforeach
+                                    @else
+                                        <option value="{{ site('adminUri') }}" selected>{{ site('adminUri') }}</option>
+                                    @endif
                                 </select>
                                 <small class="help-block">@trans('views.admin.pages.settings.general.seo.ignores-help')</small>
                             </div>

@@ -23,7 +23,7 @@
                             <img id="logo-img" src="/assets/logo.png?ver={{ site('logoVersion') ?: 0 }}" alt="Logo" class="img-rounded" style="max-width: 99%;">
                         </div>
                     </div>
-                    <form action="@route('admin.settings.display.upload-logo', [], false)" method="POST" class="no-ajax" enctype="multipart/form-data">
+                    <form action="@route('admin.settings.display.upload-logo', [], false)" method="POST" class="no-ajax" enctype="multipart/form-data" id="logo-uploader">
                         <div class="text-center form-group">
                             <input type="file" name="logo" id="logo-file" class="input-file input-uploader" accept="image/png,image/jpeg,image/gif" />
                             <label for="logo">

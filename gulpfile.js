@@ -171,6 +171,7 @@ elixir(function (mix) {
             'jquery/jquery.datatables.min.js',
             'admin/vendor/MetroJs.min.js',
             'admin/vendor/curvedLines.js',
+            'vendor/cropper.min.js',
             'admin/modern.js',
             'builds/admin/app.js',
         ], 'public/assets/js/admin/app.js');
