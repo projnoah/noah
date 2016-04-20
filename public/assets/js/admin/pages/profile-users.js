@@ -35,9 +35,6 @@ $(function () {
                     Admin.User.avatarUrl = jsonData.avatarUrl;
                     toastr.success('<h4>' + jsonData.message + '</h4>');
                     $($resizeButton).fadeOut();
-                    setTimeout(function () {
-                        return $($resizeButton).remove();
-                    }, 350);
                     $image.cropper('destroy');
                 } else {
                     toastr.error('<h4>' + jsonData.message + '</h4>');

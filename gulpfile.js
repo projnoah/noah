@@ -171,12 +171,16 @@ elixir(function (mix) {
             'jquery/jquery.datatables.min.js',
             'admin/vendor/MetroJs.min.js',
             'admin/vendor/curvedLines.js',
+            'vendor/sweetalert.min.js',
             'vendor/cropper.min.js',
             'admin/modern.js',
             'builds/admin/app.js',
         ], 'public/assets/js/admin/app.js');
 
     mix.browserify([
+        'admin/pages/index-users.js'  
+    ], 'public/assets/js/admin/pages/index-users.js')
+        .browserify([
         'admin/pages/profile-users.js'    
     ], 'public/assets/js/admin/pages/profile-users.js');
     

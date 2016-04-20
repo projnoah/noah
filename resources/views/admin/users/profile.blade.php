@@ -3,7 +3,7 @@
 @section('title', trans('views.admin.titles.users.sub.profile'))
 
 @section('breadcrumb')
-    <li><a href="@route('admin.users.index', [], false)" data-pjax>@trans('views.admin.titles.users.sub.index')</a></li>
+    <li><a href="@route('admin.users.index', [], false)" data-pjax><i class="icon-user"></i>&nbsp;@trans('views.admin.titles.users.sub.index')</a></li>
     <li class="active">@trans('views.admin.titles.users.sub.profile')</li>
 @stop
 
@@ -149,12 +149,5 @@
 @stop
 
 @push('scripts.footer')
-@if(session()->has('status'))
-<script>
-    $(function () {
-        toastr['{{ session('status') }}']('{{ session('message') }}');
-    });
-</script>
-@endif
 <script src="/assets/js/admin/pages/profile-users.js" pjax-script></script>
 @endpush

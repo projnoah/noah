@@ -116,7 +116,7 @@ class SiteConfiguration extends Configuration {
             env_put('TIMEZONE', $timezone);
         if (($locale = $request->input('locale')) !== app()->getLocale())
             env_put('LOCALE', $locale);
-        if (($on = $request->input('auto_locale', 'no') == 'on' ? 1 : 0) != site('autoLocale'))
+        if (($on = $request->input('auto_locale', 'no') == 'on' ? '1' : '0') !== site('autoLocale'))
             static::autoLocale($on);
     }
 
@@ -128,11 +128,11 @@ class SiteConfiguration extends Configuration {
      */
     public static function saveGeneralExtraSettings(Request $request)
     {
-        if (($on = $request->input('force_ssl', 'no') == 'on' ? 1 : 0) != site('forceSsl'))
-            static::forceSsl($on);
-        if (($on = $request->input('powered_by', 'no') == 'on' ? 1 : 0) != site('poweredBy'))
-            static::poweredBy($on);
-        
+        if (($sslOn = $request->input('force_ssl', 'no') == 'on' ? '1' : '0') !== site('forceSsl'))
+            static::forceSsl($sslOn);
+        if (($powerOn = $request->input('powered_by', 'no') == 'on' ? '1' : '0') !== site('poweredBy'))
+            static::poweredBy($powerOn);
+
         static::massiveUpdate($request->only('icp'));
     }
 
@@ -264,6 +264,14 @@ class SiteConfiguration extends Configuration {
         }
     }
 
+    /**
+     * Cache by different type.
+     * 
+     * @param        $type
+     * @param string $action
+     * 
+     * @author Cali
+     */
     public static function doCacheByType($type, $action = 'refresh')
     {
         switch ($type) {

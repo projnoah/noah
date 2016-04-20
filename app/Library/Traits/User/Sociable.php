@@ -149,6 +149,6 @@ trait Sociable {
      */
     protected function getSocialInfo()
     {
-        return json_decode($this->attributes['social_info']);
+        return json_decode($this->attributes['social_info'] ?: '{}');
     }
 }

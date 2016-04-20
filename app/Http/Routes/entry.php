@@ -15,8 +15,9 @@
  |
  */
 
-Router::installations()
-    ->dashboards()
+Router::installations();
+
+Router::dashboards()
     ->language()
     ->auth();
 

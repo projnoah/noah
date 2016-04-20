@@ -73,7 +73,13 @@
 
     {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
     <script src="/assets/js/admin/app.js"></script>
-
+    @if(session()->has('status'))
+        <script>
+            $(function () {
+                toastr['{{ session('status') }}']('{{ session('message') }}');
+            });
+        </script>
+    @endif
     {{-- Scripts Stack --}}
     @stack('scripts.footer')
 

@@ -188,6 +188,15 @@ return [
         ],
         'pages'                 => [
             'users'    => [
+                'index' => [
+                    'heading' => '用户管理',
+                    'search-heading' => '查找:keyword的相关用户',
+                    'table' => [
+                        'registered_at' => '注册于',
+                        'count' => '每页:perPage名用户, 累计共:total名用户'
+                    ],
+                    'search' => '搜索用户'
+                ],
                 'profile' => [
                     'basics'   => [
                         'heading' => '基本个人资料',

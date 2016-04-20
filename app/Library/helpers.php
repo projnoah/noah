@@ -107,12 +107,15 @@ if (! function_exists('site')) {
      * @since 1.0.0
      *
      * @param $name
-     * @return string|null
+     * @return string|null|bool
      *
      * @author Cali
      */
     function site($name)
     {
+        if (! noah_installed())
+            return false;
+        
         $site = app('Site');
 
         return call_user_func_array([$site, $name], []);

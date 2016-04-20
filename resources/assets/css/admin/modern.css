@@ -2052,8 +2052,10 @@ fieldset[disabled] .btn-danger.active {
 
 /* Pagination */
 
-.pagination > li > a {
+.pagination > li > a, .pagination > li span {
     color: #5B5B5B;
+    border: none;
+    border-radius: 2px;
 }
 
 .pagination > .active > a,
@@ -2062,8 +2064,8 @@ fieldset[disabled] .btn-danger.active {
 .pagination > .active > span:hover,
 .pagination > .active > a:focus,
 .pagination > .active > span:focus {
-    background: #22BAA0; 
-    border-color: #22BAA0;
+    background: #0D3B62;
+    border-color: #0D3B62;
 }
 
 
@@ -6141,4 +6143,14 @@ body:not(.small-sidebar):not(.page-horizontal-bar) .menu.accordion-menu,
 .cropper-disabled .cropper-line,
 .cropper-disabled .cropper-point {
     cursor: not-allowed;
+}
+
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+    vertical-align: middle;
+}
+
+.table-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

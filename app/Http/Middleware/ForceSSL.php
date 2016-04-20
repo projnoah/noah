@@ -15,7 +15,7 @@ class ForceSSL {
      */
     public function handle($request, Closure $next)
     {
-        if (! $request->isSecure() && site('forceSsl') == '1') {
+        if (! $request->isSecure() && noah_installed() && site('forceSsl') == '1') {
             return redirect($request->path(), 302, [], true);
         }
 

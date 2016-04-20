@@ -85,7 +85,7 @@ class RouteServiceProvider extends ServiceProvider {
         } else {
             if (site('autoLocale') != '0') {
                 // TODO: Uncomment when we're ready
-//            request()->header('accept-language') ? $this->setLocale(substr(request()->header('accept-language'), 0, 2)) : null;   
+//            request()->header('accept-language') ? $this->setLocale(substr(request()->header('accept-language'), 0, 2)) : null;
             }
         }
     }

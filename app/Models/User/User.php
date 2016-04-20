@@ -30,8 +30,6 @@ class User extends BaseUser {
      * The attributes that are mass assignable.
      *
      * @var array
-     *
-     * @author Cali
      */
     protected $fillable = [
         'username', 'name', 'email', 'password',
@@ -41,13 +39,18 @@ class User extends BaseUser {
      * The attributes that are excluded to present.
      *
      * @var array
-     *
-     * @author Cali
      */
     protected $hidden = [
         'password', 'remember_token', 'social_info'
     ];
 
+    /**
+     * Item per page when paginated.
+     * 
+     * @var int
+     */
+    protected $perPage = 35;
+    
     /*
      * Relationships starts
      */
@@ -371,5 +374,19 @@ class User extends BaseUser {
     {
         // TODO: Dynamic role
         return $this->hasRole('administrator');
+    }
+
+    /**
+     * Search users by the keyword.
+     * 
+     * @param $query
+     * @param $keyword
+     * @return mixed
+     * 
+     * @author Cali
+     */
+    public static function scopeSearch($query, $keyword)
+    {
+        return $query->where('name', 'like', "%{$keyword}%")->orWhere('username', 'like', "%{$keyword}%");
     }
 }

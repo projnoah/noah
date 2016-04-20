@@ -3,6 +3,7 @@
 namespace Noah\Http\Controllers\Admin;
 
 use Socialite;
+use Noah\User;
 use Noah\Avatar;
 use Illuminate\Http\Request;
 use Noah\Http\Controllers\Controller;
@@ -22,7 +23,9 @@ class UsersController extends Controller {
      */
     public function showIndex()
     {
-        return view('admin.users.index');
+        $users = User::paginate();
+
+        return view('admin.users.index', compact('users'));
     }
 
     /**
@@ -36,6 +39,21 @@ class UsersController extends Controller {
         return view('admin.users.profile');
     }
 
+    /**
+     * Search users by the given keyword.
+     * 
+     * @param $keyword
+     * @return mixed
+     * 
+     * @author Cali
+     */
+    public function searchUsers($keyword)
+    {
+        $users = User::search($keyword)->paginate();
+        
+        return view('admin.users.index', compact('users', 'keyword'));    
+    }
+    
     /**
      * Save user's profile.
      *
@@ -152,16 +170,17 @@ class UsersController extends Controller {
      */
     public function resizeAvatar(Request $request)
     {
-        $path = storage_path('app/' . $request->user()->localAvatar()->src);
+        $old_avatar = $request->user()->localAvatar();
+        $path = storage_path('app/' . $old_avatar->src);
 
-        $resized_avatar = resize_avatar($path, $request->width, $request->height, $request->x, $request->y);
+        $resized_avatar = resize_avatar($path, intval($request->width), intval($request->height), intval($request->x), intval($request->y));
 
-        $avatar = new Avatar(['type' => Avatar::TYPE_LOCAL, 'src' => $request->user()->localAvatar()->src]);
+        $avatar = new Avatar(['type' => Avatar::TYPE_LOCAL, 'src' => $old_avatar->src]);
         $request->user()->avatars()->save($avatar);
 
         return $this->successResponse([
             'avatarUrl' => route('users.avatar', [
-                'user' => $request->user()->id, 'v' => $request->user()->avatarVersion()
+                'user' => $request->user()->id, 'v' => ($request->user()->avatarVersion() + 1)
             ]),
             'message'   => $resized_avatar ? trans('views.admin.pages.users.profile.avatar.update-success') :
                 trans('views.admin.pages.users.profile.avatar.update-failure')

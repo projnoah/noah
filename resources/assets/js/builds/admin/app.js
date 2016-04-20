@@ -9919,8 +9919,9 @@ module.exports = Vue;
 'use strict';
 
 var Vue = require('vue');
+var pjaxContainer = '#page-container';
 
-$(document).pjax('a[data-pjax]', '#page-container');
+$(document).pjax('a[data-pjax], .pagination a', pjaxContainer);
 
 // PJAX JavaScript re-evaluation
 $(document).on('pjax:success', function (e, data, status, xhr) {
@@ -9947,7 +9948,8 @@ $(function () {
             colorChangerForm: $('form#color-changer')[0],
             settingChangerForm: $('form#setting-changer')[0],
             User: CurrentUser,
-            Site: SiteSettings
+            Site: SiteSettings,
+            keyword: ''
         },
         computed: {
             _token: function _token() {
@@ -10053,7 +10055,19 @@ var pjaxReEvaluate = function pjaxReEvaluate() {
         var elems = Array.prototype.slice.call(document.querySelectorAll('#page-container .js-switch'));
 
         elems.forEach(function (html) {
-            new Switchery(html, { color: typeof THEME_COLOR == "undefined" ? "#23B7E5" : THEME_COLOR });
+            new Switchery(html, { color: typeof THEME_COLOR == "undefined" ? "#34425A" : THEME_COLOR });
+        });
+
+        $("form.pjax").each(function () {
+            var form = this;
+            $(this).on('submit', function (e) {
+                e.preventDefault();
+
+                $.pjax({
+                    url: form.action,
+                    container: pjaxContainer
+                });
+            });
         });
 
         $("form:not(.no-ajax)").each(function () {
@@ -10063,9 +10077,12 @@ var pjaxReEvaluate = function pjaxReEvaluate() {
 
                 $(form).addClass('loading');
 
-                var button = $(form).find("button[type=submit]")[0],
-                    originText = button.innerHTML;
-                $(button).html(loadingIcon + '&nbsp;' + originText);
+                var button = $(form).find("button[type=submit]")[0];
+
+                if (button) {
+                    var originText = button.innerHTML;
+                    $(button).html(loadingIcon + '&nbsp;' + originText);
+                }
 
                 $.ajax({
                     url: form.action,
@@ -10100,7 +10117,7 @@ var pjaxReEvaluate = function pjaxReEvaluate() {
                                 window.open(data.newWindowUrl, "_blank");
                             } else if (typeof data.reload != 'undefined') {
                                 toastr.success('<h4>' + data.message + '</h4>');
-                                $.pjax.reload('#page-container');
+                                $.pjax.reload(pjaxContainer);
                             } else {
                                 toastr.success('<h4>' + data.message + '</h4>');
                             }
@@ -10109,12 +10126,14 @@ var pjaxReEvaluate = function pjaxReEvaluate() {
                         }
                     },
                     complete: function complete() {
-                        $(button).html(originText);
-                        $(form).removeClass('loading');
-                        $(form).addClass('done-loaded');
-                        setTimeout(function () {
-                            $(form).removeClass('done-loaded');
-                        }, 300);
+                        if (button) {
+                            $(button).html(originText);
+                            $(form).removeClass('loading');
+                            $(form).addClass('done-loaded');
+                            setTimeout(function () {
+                                $(form).removeClass('done-loaded');
+                            }, 300);
+                        }
                     }
                 });
             });

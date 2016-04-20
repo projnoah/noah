@@ -7,6 +7,11 @@ use Noah\Statistic;
 
 class RecordStatistics {
 
+    protected $excludes = [
+        ['route' => 'admin.dashboard', 'all' => true],
+        ['route' => 'users.avatar', 'all' => true]
+    ];
+
     /**
      * Handle an incoming request.
      *
@@ -16,11 +21,37 @@ class RecordStatistics {
      */
     public function handle($request, Closure $next)
     {
-        if (noah_installed() && strtoupper($request->method()) === 'GET' && 
-            ! $request->is(substr(route('admin.dashboard', [], false), 1) . '*')) {
-            Statistic::visited($request);
+        if (noah_installed() && strtoupper($request->method()) === 'GET') {
+            if ($this->filterExclusions($request)) {
+                Statistic::visited($request);
+            }
         }
 
         return $next($request);
+    }
+
+    /**
+     * Filter excluded paths that is unnecessary to record in statistics.
+     *
+     * @param $request
+     * @return bool
+     *
+     * @author Cali
+     */
+    protected function filterExclusions($request)
+    {
+        foreach ($this->excludes as $exclude) {
+            if ($exclude['all']) {
+                if ($request->is(substr(route($exclude['route'], [], false), 1) . '*')) {
+                    return false;
+                }
+            } else {
+                if ($request->is(substr(route($exclude['route'], [], false), 1))) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
     }
 }

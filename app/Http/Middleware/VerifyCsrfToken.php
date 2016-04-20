@@ -20,11 +20,11 @@ class VerifyCsrfToken extends BaseVerifier
      */
     public function getExcept()
     {
-        return [
+        return noah_installed() ? [
             route('admin.settings.display.upload-logo', [], false),
             route('admin.users.profile.upload-avatar', [], false),
             route('admin.users.profile.resize-avatar', [], false)
-        ];
+        ] : [];
     }
 
     /**

@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateBlogTagTable extends Migration {
+class CreateTagsTable extends Migration {
 
     /**
      * Run the migrations.
@@ -18,16 +18,18 @@ class CreateBlogTagTable extends Migration {
             $table->timestamps();
         });
 
-        Schema::create('blog_tag', function (Blueprint $table) {
-            $table->unsignedBigInteger('blog_id')->index();
+        Schema::create('taggables', function (Blueprint $table) {
+            $table->charset = 'utf8';
+            $table->collation = 'utf8_general_ci';
+            
+            $table->bigIncrements('id');
             $table->unsignedBigInteger('tag_id')->index();
+            $table->unsignedBigInteger('taggable_id')->index();
+            $table->string('taggable_type')->index();
 
             $table->timestamps();
-
-            $table->foreign('blog_id')->references('id')->on('blogs')->onDelete('cascade');
+            
             $table->foreign('tag_id')->references('id')->on('tags')->onDelete('cascade');
-
-            $table->primary(['blog_id', 'tag_id']);
         });
     }
 
@@ -38,7 +40,7 @@ class CreateBlogTagTable extends Migration {
      */
     public function down()
     {
-        Schema::drop('blog_tag');
+        Schema::drop('taggables');
         Schema::drop('tags');
     }
 }

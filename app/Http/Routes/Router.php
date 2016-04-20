@@ -58,7 +58,7 @@ class Router {
      */
     public static function dashboards()
     {
-        Route::group(['namespace' => 'Dashboard'], function () {
+        Route::group(['namespace' => 'Dashboard',], function () {
             Route::get('/', 'HomeController@home')->name('home');
             Route::get('dashboard', 'HomeController@home')->name('dashboard');
             Route::get('inbox', 'HomeController@inbox')->name('inbox');
@@ -77,13 +77,11 @@ class Router {
      */
     public static function installations()
     {
-        if (! noah_installed()) {
-            Route::group(['prefix' => 'install'], function () {
-                Route::get('step/{step?}', 'InstallationController@install');
-                Route::post('step/{step}', 'InstallationController@postInstall')->name('install');
-                Route::get('done', 'InstallationController@done')->name('install-done');
-            });
-        }
+        Route::group(['prefix' => 'install'], function () {
+            Route::get('step/{step?}', 'InstallationController@install');
+            Route::post('step/{step}', 'InstallationController@postInstall')->name('install');
+            Route::get('done', 'InstallationController@done')->name('install-done');
+        });
 
         return new static;
     }
@@ -127,7 +125,8 @@ class Router {
                 'as'     => 'users.'
             ], function () {
                 Route::get('/', 'UsersController@showIndex')->name('index');
-                
+                Route::get('search/{keyword}', 'UsersController@searchUsers')->name('search');
+
                 Route::group(['prefix' => 'profile', 'as' => 'profile.'], function () {
                     Route::get('/', 'UsersController@showProfile')->name('index');
 
@@ -161,7 +160,7 @@ class Router {
                     Route::get('/', 'SettingsController@showDisplaySettings')->name('index');
                     Route::post('logo', 'SettingsController@uploadLogo')->name('upload-logo');
                 });
-                
+
                 Route::get('upgrade', 'SettingsController@showUpgradeSettings')->name('upgrade');
 
                 Route::post('general/{type}', 'SettingsController@saveGeneralSettings')->name('save-general');
@@ -194,7 +193,7 @@ class Router {
 
     /**
      * User related routes.
-     * 
+     *
      * @return static
      * @author Cali
      */
@@ -203,10 +202,10 @@ class Router {
         if (site('avatarsSubDomain') != '1') {
             Route::group([
                 'namespace' => 'User',
-                'prefix' => 'users',
-                'as' => 'users.'
+                'prefix'    => 'users',
+                'as'        => 'users.'
             ], function () {
-                Route::get('avatars/{user}', 'ProfileController@getAvatar')->name('avatar');
+                Route::get('avatars/{user?}', 'ProfileController@getAvatar')->name('avatar');
             });
         } else {
             Route::group([
@@ -215,7 +214,7 @@ class Router {
                 // TODO: avatars sub domain binding
             });
         }
-        
+
         return new static;
     }
 }

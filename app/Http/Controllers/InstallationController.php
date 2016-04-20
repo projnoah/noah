@@ -206,7 +206,11 @@ class InstallationController extends Controller {
      */
     protected function checkDatabaseCredentials($credentials)
     {
-        return $this->saveCredentialsToEnvironment($credentials) && $this->checkDatabaseConnection();
+        if (! $this->saveCredentialsToEnvironment($credentials)) {
+            return false;
+        }
+
+        return $this->checkDatabaseConnection();
     }
 
     /**
@@ -217,16 +221,18 @@ class InstallationController extends Controller {
      */
     protected function testConnection()
     {
+        $error = null;
+
         try {
             Schema::create('pre-install', function (Blueprint $table) {
                 $table->increments('id');
             });
             Schema::drop('pre-install');
         } catch (\Exception $e) {
-            return $e->getCode();
+            $error = $e->getCode();
         }
 
-        return true;
+        return is_null($error) ? true : $error;
     }
 
     /**
@@ -300,7 +306,7 @@ class InstallationController extends Controller {
     {
         $result = $this->testConnection();
 
-        if (is_bool($result) && $result) {
+        if ($result === true) {
             return true;
         } elseif (is_int($result)) {
             switch ($result) {

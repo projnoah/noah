@@ -1,5 +1,6 @@
 @import "../../variables";
 @import "../../mixins";
+@import "../../vendor/sweetalert";
 
 .tab-menu {
   line-height: 1;
@@ -462,4 +463,37 @@
 .input-uploader.has-focus + label figure,
 .input-uploader + label:hover figure {
   background-color: rgba($themedarkblue, 0.65);
+}
+
+.user-avatar {
+  display: inline-block;
+  padding: 0;
+  margin: 0 3px;
+  width: 35px;
+  height: 35px;
+}
+
+.btn-naked {
+  &:hover {
+    text-decoration: none;
+    opacity: .75;
+  }
+}
+
+.search-input {
+  position: relative;
+  padding: 5px 28px !important;
+  display: block;
+
+  & + i.fa-search:before {
+    position: absolute;
+    left: 25px;
+    top: 10px;
+    color: #bbb;
+    @include ts();
+  }
+  
+  &:focus + i.fa-search:before {
+    color: $themedarkblue;
+  }
 }

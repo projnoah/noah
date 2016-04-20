@@ -11,9 +11,11 @@
 |
 */
 
-$factory->define(Noah\User::class, function (Faker\Generator $faker) {
+$factory->define(Noah\User::class, function () {
+    $faker = Faker\Factory::create('zh_CN');
     return [
         'name' => $faker->name,
+        'username' => $faker->userName,
         'email' => $faker->email,
         'password' => bcrypt(str_random(10)),
         'remember_token' => str_random(10),
