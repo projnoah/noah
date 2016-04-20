@@ -7,6 +7,11 @@
 @stop
 
 @section('app-content')
+    <script>
+        var deleteMessages = JSON.parse("{!! addslashes(json_encode(trans('views.admin.pages.users.index.delete-messages'))) !!}");
+        var deleteUrl = "@route('admin.users.delete')",
+                bulkUrl = "@route('admin.users.bulk')";
+    </script>
     <div class="row">
         <div class="panel panel-white">
             <div class="panel-heading">
@@ -32,8 +37,14 @@
                         </form>
                     </div>
                 </div>
+                @if($users->count())
                 <div class="row">
-
+                    <div class="col-xs-12">
+                        <span class="text-primary">@trans('views.admin.pages.users.index.bulk-actions')</span>
+                        <div class="actions" style="display: inline-block;">
+                            <button class="btn btn-danger btn-rounded m-l-lg bulk-delete">@trans('views.admin.pages.users.index.delete')</button>
+                        </div>
+                    </div>
                 </div>
                 <table class="table table-responsive">
                     <thead>
@@ -67,13 +78,17 @@
                     </tr>
                     </tfoot>
                     <tbody>
-                    @forelse($users as $user)
+                    @foreach($users as $user)
                         <tr user-id="{{ $user->id }}">
                             <th scope="row">
+                                @if(Auth::id() !== $user->id)
                                 <div class="ios-switch switch-sm">
                                     <input type="checkbox" class="js-switch">
                                     {{ $user->id }}
                                 </div>
+                                @else
+                                {{ $user->id }}
+                                @endif
                             </th>
                             <td>
                                 <a href="#" class="btn-block btn-naked">
@@ -90,25 +105,46 @@
                                 </time>
                             </td>
                             <td class="text-center">
-                                <a href="#" class="m-l-sm text-primary btn-naked"><i class="icon-pencil"
-                                                                                     style="font-size: 1.4em"></i></a>
-                                <a href="#" class="m-l-sm text-danger btn-naked"><i class="icon-close"
-                                                                                    style="font-size: 1.4em"></i></a>
+                                <a href="{{ Auth::id() === $user->id ? route('admin.users.profile.index') : route('admin.users.edit.profile', ['user' => $user->id]) }}" class="m-l-sm text-primary btn-naked" data-pjax>
+                                    <i class="icon-pencil" style="font-size: 1.4em"></i>
+                                </a>
+                                @if(Auth::id() !== $user->id)
+                                    <a href="#" class="m-l-sm text-danger btn-naked" data-delete>
+                                        <i class="icon-close" style="font-size: 1.4em"></i>
+                                    </a>
+                                @endif
                             </td>
                         </tr>
-                    @empty
-                    @endforelse
+                    @endforeach
                     </tbody>
                 </table>
+                @else
+                    <div class="well text-center">
+                        <h1><i class="icon-ban fa-3x"></i></h1>
+                        <h2>@trans('views.admin.pages.users.index.no-result')</h2>
+                    </div>
+                @endif
+                @if($users->count())
+                <div class="row">
+                    <div class="col-xs-12">
+                        <span class="text-primary">@trans('views.admin.pages.users.index.bulk-actions')</span>
+                        <div class="actions" style="display: inline-block;">
+                            <button class="btn btn-danger btn-rounded m-l-lg bulk-delete">@trans('views.admin.pages.users.index.delete')</button>
+                        </div>
+                    </div>
+                </div>
+                @endif
                 <div class="text-center row">
                     {!! $users->links() !!}
                 </div>
+                @if($users->count())
                 <div class="row text-center text-primary">
                     <b>@trans('views.admin.pages.users.index.table.count', [
                             'perPage' => $users->perPage(),
                             'total' => $users->total()
                         ])</b>
                 </div>
+                @endif
             </div>
         </div>
     </div>

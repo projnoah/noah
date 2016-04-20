@@ -145,7 +145,8 @@ return [
             'data-center' => [
                 'main' => '数据中心',
                 'sub'  => [
-                    '' => ''
+                    'index'   => '数据统计',
+                    'factory' => '模型工厂'
                 ]
             ],
             'settings'    => [
@@ -187,15 +188,25 @@ return [
             'current-version' => '当前版本'
         ],
         'pages'                 => [
-            'users'    => [
-                'index' => [
-                    'heading' => '用户管理',
-                    'search-heading' => '查找:keyword的相关用户',
-                    'table' => [
+            'users'       => [
+                'index'   => [
+                    'heading'         => '用户管理',
+                    'search-heading'  => '查找:keyword的相关用户',
+                    'table'           => [
                         'registered_at' => '注册于',
-                        'count' => '每页:perPage名用户, 累计共:total名用户'
+                        'count'         => '每页:perPage名用户, 累计共:total名用户'
                     ],
-                    'search' => '搜索用户'
+                    'search'          => '搜索用户',
+                    'bulk-actions'    => '批量操作',
+                    'delete'          => '删除',
+                    'delete-messages' => [
+                        'title'   => "确定要删除用户吗?",
+                        'text'    => '用户删除后将无法恢复, 谨慎选择',
+                        'cancel'  => "手贱了",
+                        'confirm' => "确定删除",
+                        'success' => '成功删除用户'
+                    ],
+                    'no-result'       => '暂无相关用户'
                 ],
                 'profile' => [
                     'basics'   => [
@@ -211,6 +222,8 @@ return [
                         'tips'           => '绑定帐号可以免去输入帐号密码的烦恼',
                         'bind'           => '绑定',
                         'unbind'         => '解除绑定',
+                        'bound'          => '已绑定',
+                        'unbound'        => '未绑定',
                         'bind-success'   => '成功绑定:service帐号',
                         'bind-error'     => '您的:service帐号已绑定其他用户',
                         'unbind-success' => '成功解绑:service',
@@ -222,7 +235,38 @@ return [
                     ]
                 ]
             ],
-            'settings' => [
+            'data-center' => [
+                'index'   => [
+                    'total-users'      => '用户总数',
+                    'total-page-views' => '网站流量总数',
+                    'total-blogs'      => '社交博客总数',
+                    'total-comments'   => '评论总数',
+                    'visitor-records'  => '访客记录',
+                    'most'             => '最多:item',
+                    'attributes'       => [
+                        'browser'  => '浏览器',
+                        'platform' => '操作系统',
+                        'city'     => '城市',
+                        'device'   => '设备',
+                        'uri'      => '访问地址'
+                    ]
+                ],
+                'factory' => [
+                    'heading'       => '欢迎来到模型工厂',
+                    'tips'          => '模式工厂是Project Noah特有的数据生产间, 在这里你可以快速生成测试数据, 比如生成100个用户, 500个博文等.',
+                    'model'         => '选择生产模型',
+                    'quantity'      => '选择数量',
+                    'quantity-tips' => '数量选择越多时间消耗越久, 若超时请一次选择较少数量',
+                    'models'        => [
+                        'user' => '用户模型',
+                        'blog' => '博文模型'
+                    ],
+                    'create'        => '开始生产',
+                    'created'       => ':q个:model 已成功出厂',
+                    'half-created'  => '模型生产过程中遇到了小问题, 没有完全生产'
+                ]
+            ],
+            'settings'    => [
                 'general'       => [
                     'basics' => [
                         'heading'             => '核心设置',
@@ -407,5 +451,10 @@ return [
 
     'dropzone' => [
         'drag-here' => '支持图片拖拽上传或直接点击'
+    ],
+
+    'unavailable' => [
+        'coming-soon'    => '即将开放',
+        'in-development' => '更多开发中'
     ]
 ];

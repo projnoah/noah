@@ -15,25 +15,37 @@
                     <h4 class="panel-title">@trans('views.admin.pages.users.profile.basics.heading')</h4>
                 </div>
                 <div class="panel-body">
-                    <form action="@route('admin.users.profile.save', [], false)" method="POST" class="form-horizontal">
+                    <form action="{{ isset($user) ? route('admin.users.edit.update', ['user' => $user->id], false) : route('admin.users.profile.save', [], false) }}" method="POST" class="form-horizontal">
                         {!! csrf_field() !!}
                         {!! method_field('PATCH') !!}
                         <div class="form-group">
                             <label class="col-md-2 control-label">@trans('validation.attributes.username')</label>
                             <div class="col-md-10">
-                                <input type="text" name="username" class="form-control" v-model="User.username" required>
+                                @unless(isset($user))
+                                    <input type="text" name="username" class="form-control" v-model="User.username" required>
+                                @else
+                                    <input type="text" name="username" class="form-control" value="{{ $user->username }}" required>
+                                @endunless
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-2 control-label">@trans('validation.attributes.name')</label>
                             <div class="col-md-10">
-                                <input type="text" name="name" class="form-control" v-model="User.name" required>
+                                @unless(isset($user))
+                                    <input type="text" name="name" class="form-control" v-model="User.name" required>
+                                @else
+                                    <input type="text" name="name" class="form-control" value="{{ $user->name }}" required>
+                                @endunless
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-2 control-label">@trans('validation.attributes.email')</label>
                             <div class="col-md-10">
-                                <input type="email" name="email" class="form-control" v-model="User.email" required>
+                                @unless(isset($user))
+                                    <input type="email" name="email" class="form-control" v-model="User.email" required>
+                                @else
+                                    <input type="email" name="email" class="form-control" value="{{ $user->email }}" required>
+                                @endunless
                             </div>
                         </div>
                         <div class="form-group">
@@ -51,7 +63,7 @@
                     <h4 class="panel-title">@trans('views.admin.pages.users.profile.password.heading')</h4>
                 </div>
                 <div class="panel-body">
-                    <form action="@route('admin.users.profile.update-password')" method="POST" class="form-horizontal">
+                    <form action="{{ isset($user) ? route('admin.users.edit.password', ['user' => $user->id]) : route('admin.users.profile.update-password') }}" method="POST" class="form-horizontal">
                         {!! csrf_field() !!}
                         {!! method_field('PATCH') !!}
                         <div class="form-group">
@@ -95,12 +107,20 @@
                                         <div class="col-md-8 col-sm-7 col-xs-6">
                                             <b class="{{ $service }}-colored" style="text-transform: capitalize"><i class="fa fa-{{ $service }}"></i>&nbsp;{{ $service == 'qq' ? 'QQ' : $service }}</b>
                                         </div>
-                                        <div class="col-md-4 col-sm-5 col-xs-6">
+                                        <div class="col-md-4 col-sm-5 col-xs-6 text-right">
+                                            @unless(isset($user))
                                             @if(Auth::user()->boundOAuth($service))
                                                 <button type="submit" class="btn btn-danger btn-block btn-rounded">@trans('views.admin.pages.users.profile.social.unbind')</button>
                                             @else
                                                 <button type="submit" class="btn btn-success btn-block btn-rounded">@trans('views.admin.pages.users.profile.social.bind')</button>
                                             @endif
+                                            @else
+                                                @if($user->boundOAuth($service))
+                                                    <b>@trans('views.admin.pages.users.profile.social.bound')</b>
+                                                @else
+                                                    <b>@trans('views.admin.pages.users.profile.social.unbound')</b>
+                                                @endif
+                                            @endunless
                                         </div>
                                     </form>
                                 @endforeach
@@ -114,6 +134,7 @@
                 </div>
             </div>
         </div>
+        @unless(isset($user))
         <div class="col-md-6">
             <div class="panel panel-white">
                 <div class="panel-heading">
@@ -145,6 +166,7 @@
                 </div>
             </div>
         </div>
+        @endunless
     </div>
 @stop
 

@@ -36,12 +36,13 @@
                     </ul>
                 </a>
             </li>
-            <li class="droplink">
+            <li class="droplink{{ request()->is(substr(route('admin.center.index', [], false), 1) . '*') ? ' active' : '' }}">
                 <a href="#" class="waves-effect waves-button">
                     <span class="menu-icon icon-support"></span><p>@trans('views.admin.titles.data-center.main')</p><span class="arrow"></span>
                 </a>
                 <ul class="sub-menu">
-                    <li><a href="#">Sub</a></li>
+                    <li><a href="@route('admin.center.index', [], false)" data-pjax>@trans('views.admin.titles.data-center.sub.index')</a></li>
+                    <li><a href="@route('admin.center.factory', [], false)" data-pjax>@trans('views.admin.titles.data-center.sub.factory')</a></li>
                 </ul>
             </li>
             <li class="droplink{{ request()->is(substr(route('admin.settings.general', [], false), 1) . '*') ? ' active' : '' }}">

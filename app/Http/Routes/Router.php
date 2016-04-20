@@ -126,6 +126,14 @@ class Router {
             ], function () {
                 Route::get('/', 'UsersController@showIndex')->name('index');
                 Route::get('search/{keyword}', 'UsersController@searchUsers')->name('search');
+                Route::delete('{user?}', 'UsersController@deleteUser')->name('delete');
+                Route::patch('bulk', 'UsersController@bulkAction')->name('bulk');
+                
+                Route::group(['prefix' => 'edit', 'as' => 'edit.'], function () {
+                    Route::get('{user}', 'UsersController@showUserProfile')->name('profile');
+                    Route::patch('{user}', 'UsersController@updateUserProfile')->name('update');
+                    Route::patch('{user}/password', 'UsersController@updateUserPassword')->name('password');
+                });
 
                 Route::group(['prefix' => 'profile', 'as' => 'profile.'], function () {
                     Route::get('/', 'UsersController@showProfile')->name('index');
@@ -137,6 +145,16 @@ class Router {
                     Route::post('avatar', 'UsersController@uploadAvatar')->name('upload-avatar');
                     Route::post('resize', 'UsersController@resizeAvatar')->name('resize-avatar');
                 });
+            });
+
+            Route::group([
+                'prefix' => 'center',
+                'as' => 'center.',
+            ], function () {
+                Route::get('/', 'CenterController@showIndex')->name('index');
+                Route::get('factory', 'CenterController@showFactory')->name('factory');
+                
+                Route::post('factory', 'CenterController@createFactory');
             });
 
             // Site settings.

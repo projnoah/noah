@@ -185,6 +185,10 @@ elixir(function (mix) {
     ], 'public/assets/js/admin/pages/profile-users.js');
     
     mix.browserify([
+        'admin/pages/factory-center.js'
+    ], 'public/assets/js/admin/pages/factory-center.js');
+    
+    mix.browserify([
             'admin/pages/dashboard.js',
         ], 'public/assets/js/admin/pages/dashboard.js')
         .browserify([

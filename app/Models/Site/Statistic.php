@@ -2,6 +2,7 @@
 
 namespace Noah;
 
+use DB;
 use Location;
 use Jenssegers\Agent\Agent;
 use Illuminate\Http\Request;
@@ -111,5 +112,117 @@ class Statistic extends Model {
     public static function pageViewsRatio($method = 'today')
     {
         return (static::pageViews($method) / static::count()) * 100;
+    }
+
+    /**
+     * Get the total page views.
+     * 
+     * @return int
+     * @author Cali
+     */
+    public static function totalPageViews()
+    {
+        return static::count();
+    }
+
+    /**
+     * Get the total user count.
+     * 
+     * @return int
+     * @author Cali
+     */
+    public static function totalUsers()
+    {
+        return User::count();
+    }
+
+    /**
+     * Get the total blog count.
+     * 
+     * @return int
+     * @author Cali
+     */
+    public static function totalBlogs()
+    {
+        return Blog::count();
+    }
+
+    /**
+     * Get the total comment count.
+     *
+     * @return int
+     * @author Cali
+     */
+    public static function totalComments()
+    {
+        return Comment::count();
+    }
+
+    /**
+     * Get the most browser.
+     * 
+     * @return mixed
+     * @author Cali
+     */
+    public static function mostBrowser()
+    {
+        return self::getMostRecord('browser');
+    }
+
+    /**
+     * Get the most platform.
+     * 
+     * @return mixed
+     * @author Cali
+     */
+    public static function mostPlatform()
+    {
+        return self::getMostRecord('platform');
+    }
+    
+    /**
+     * Get the most city.
+     * 
+     * @return mixed
+     * @author Cali
+     */
+    public static function mostCity()
+    {
+        return self::getMostRecord('city');
+    }
+    
+    /**
+     * Get the most device.
+     * 
+     * @return mixed
+     * @author Cali
+     */
+    public static function mostDevice()
+    {
+        return self::getMostRecord('device');
+    }
+
+    /**
+     * Get the most uri.
+     * 
+     * @return mixed
+     * @author Cali
+     */
+    public static function mostUri()
+    {
+        return self::getMostRecord('uri');
+    }
+
+    /**
+     * Get a most record.
+     * 
+     * @param $column
+     * @return mixed
+     * @author Cali
+     */
+    protected static function getMostRecord($column)
+    {
+        return static::select(DB::raw("count({$column}) as count, {$column} as name"))
+            ->groupBy($column)->orderBy('count', 'desc')->first();
     }
 }

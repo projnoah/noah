@@ -62,6 +62,7 @@
                     postUri: "@site('postUri')"
                 },
                 DataTableLines = JSON.parse('{!! addslashes(json_encode(trans('views.datatable'))) !!}');
+        var pjaxContainer = '#page-container';
 
     </script>
     {{-- Scripts Stack --}}

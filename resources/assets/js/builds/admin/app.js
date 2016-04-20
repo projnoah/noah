@@ -9919,7 +9919,6 @@ module.exports = Vue;
 'use strict';
 
 var Vue = require('vue');
-var pjaxContainer = '#page-container';
 
 $(document).pjax('a[data-pjax], .pagination a', pjaxContainer);
 
@@ -10002,6 +10001,22 @@ $(function () {
                             toastr.error(message);
                         }
                     }
+                });
+            },
+
+            showWarningAlert: function showWarningAlert(messages, callback) {
+                swal({
+                    title: messages.title,
+                    text: messages.text,
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: messages.confirm,
+                    cancelButtonText: messages.cancel,
+                    closeOnConfirm: false,
+                    showLoaderOnConfirm: true
+                }, function (isConfirm) {
+                    if (isConfirm) callback();
                 });
             }
         },

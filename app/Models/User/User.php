@@ -387,6 +387,8 @@ class User extends BaseUser {
      */
     public static function scopeSearch($query, $keyword)
     {
-        return $query->where('name', 'like', "%{$keyword}%")->orWhere('username', 'like', "%{$keyword}%");
+        return $query->where('name', 'like', "%{$keyword}%")
+            ->orWhere('username', 'like', "%{$keyword}%")
+            ->orWhere('email', 'like', "%{$keyword}%");
     }
 }

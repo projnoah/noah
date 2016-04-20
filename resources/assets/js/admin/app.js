@@ -1,5 +1,4 @@
 const Vue = require('vue');
-const pjaxContainer = '#page-container';
 
 $(document).pjax('a[data-pjax], .pagination a', pjaxContainer);
 
@@ -85,6 +84,22 @@ $(function () {
                     }
                 });
             },
+            showWarningAlert: (messages, callback) => {
+                swal({
+                    title: messages.title,
+                    text: messages.text,
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: messages.confirm,
+                    cancelButtonText: messages.cancel,
+                    closeOnConfirm: false,
+                    showLoaderOnConfirm: true
+                }, function (isConfirm) {
+                    if (isConfirm)
+                        callback();
+                });
+            }
         },
         ready() {
             return () => {
