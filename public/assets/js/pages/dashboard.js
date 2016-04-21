@@ -10107,6 +10107,7 @@ var Dashboard = {
                         window.location.href = form.action + "/" + input.value;
                     }
                 }
+
             }
         });
     }
@@ -10115,6 +10116,14 @@ var Dashboard = {
 var _vm = Dashboard.vm();
 
 $(document).ready(function () {
+    toastr.options = {
+        closeButton: true,
+        progressBar: true,
+        showMethod: 'fadeIn',
+        hideMethod: 'fadeOut',
+        timeOut: 5000
+    };
+
     document.querySelector('.content-wrap').addEventListener('click', _vm.bodyClicked);
 
     var blogItems = $(".blogs-list .blog-item");

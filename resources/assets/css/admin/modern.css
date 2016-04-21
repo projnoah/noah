@@ -4678,18 +4678,8 @@ body:not(.page-horizontal-bar):not(.small-sidebar) .menu.accordion-menu a {
     margin-left: 5px;
 }
 
-#flotchart1 {
+#visitor-chart {
     height: 340px;
-    width: 100%;
-}
-
-#flotchart2 {
-    height: 278px;
-    width: 100%;
-}
-
-#flotchart3 {
-    height: 200px;
     width: 100%;
 }
 

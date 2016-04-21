@@ -88,6 +88,11 @@
             </div>
         </div>
         <div class="col-sm-6">
+            @include('admin.center.stats.uri')
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
             <div class="panel panel-white">
                 <div class="panel-body">
                     <b>@trans('views.unavailable.in-development')</b>

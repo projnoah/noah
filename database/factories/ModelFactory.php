@@ -12,7 +12,9 @@
 */
 
 $factory->define(Noah\User::class, function () {
-    $faker = Faker\Factory::create('zh_CN');
+    $locale = app()->getLocale();
+    $faker = Faker\Factory::create($locale == 'zh' ? 'zh_CN' : 'en_US');
+
     return [
         'name' => $faker->name,
         'username' => $faker->userName,

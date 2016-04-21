@@ -26,6 +26,7 @@
                 <ul class="sub-menu">
                     <li><a href="@route('admin.users.index', [], false)" data-pjax>@trans('views.admin.titles.users.sub.index')</a></li>
                     <li><a href="@route('admin.users.profile.index', [], false)" data-pjax>@trans('views.admin.titles.users.sub.profile')</a></li>
+                    <li><a href="@route('admin.users.invitations', [], false)" data-pjax>@trans('views.admin.titles.users.sub.invitations')</a></li>
                 </ul>
             </li>
             <li class="droplink">
@@ -60,7 +61,7 @@
                             <li><a href="@route('admin.settings.advanced.index', [], false)" data-pjax>@trans('views.admin.titles.settings.sub.advanced.develop')</a></li>
                             <li><a href="@route('admin.settings.advanced.database', [], false)" data-pjax>@trans('views.admin.titles.settings.sub.advanced.database')</a></li>
                             <li><a href="@route('admin.settings.advanced.cache', [], false)" data-pjax>@trans('views.admin.titles.settings.sub.advanced.cache')</a></li>
-                            <li><a href="#">二级域名设置</a></li>
+                            <li><a href="@route('admin.settings.advanced.sub-domains', [], false)" data-pjax>@trans('views.admin.titles.settings.sub.advanced.sub-domains')</a></li>
                         </ul>
                     </li>
                     <li><a href="@route('admin.settings.display.index', [], false)" data-pjax>@trans('views.admin.titles.settings.sub.display')</a></li>

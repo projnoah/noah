@@ -99,6 +99,11 @@ $(function () {
                     if (isConfirm)
                         callback();
                 });
+            },
+            logout: (e) => {
+                Admin.showWarningAlert(logoutMessages, function () {
+                    window.location.href = $(e.target).attr('data-href');
+                });
             }
         },
         ready() {
@@ -185,6 +190,7 @@ const pjaxReEvaluate = (manual = false) => {
                     url: form.action,
                     type: form.method,
                     data: $(form).serialize(),
+                    timeout: 0,
                     error: function (error) {
                         if (error.status === 422) {
                             let errors = JSON.parse(error.responseText);

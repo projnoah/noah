@@ -22350,26 +22350,6 @@ if ( typeof define === 'function' && define.amd ) {
     return Waves;
 });
 
-jQuery(document).ready(function($){
-	function toggleNav(bool) {
-		$('.cd-nav-container, .cd-overlay').toggleClass('is-visible', bool);
-		$('main').toggleClass('scale-down', bool);
-		$('body').toggleClass('navigation-visible', bool);
-	}
-    
-	//open navigation clicking the menu icon
-	$('.cd-nav-trigger').on('click', function(event){
-		event.preventDefault();
-		toggleNav(true);
-	});
-    
-	//close the navigation
-	$('.cd-close-nav, .cd-overlay').on('click', function(event){
-		event.preventDefault();
-		toggleNav(false);
-	});
-
-});
 /*!
 Waypoints - 4.0.0
 Copyright © 2011-2015 Caleb Troughton
@@ -26387,7 +26367,6 @@ $(document).ready(function () {
     $('.toggle-fullscreen').click(function () {
         toggleFullScreen();
     });
-
 
     // Waves
     Waves.displayEffect();
@@ -36830,6 +36809,11 @@ $(function () {
                 }, function (isConfirm) {
                     if (isConfirm) callback();
                 });
+            },
+            logout: function logout(e) {
+                Admin.showWarningAlert(logoutMessages, function () {
+                    window.location.href = $(e.target).attr('data-href');
+                });
             }
         },
         ready: function ready() {
@@ -36915,6 +36899,7 @@ var pjaxReEvaluate = function pjaxReEvaluate() {
                     url: form.action,
                     type: form.method,
                     data: $(form).serialize(),
+                    timeout: 0,
                     error: function error(_error3) {
                         if (_error3.status === 422) {
                             var errors = JSON.parse(_error3.responseText);

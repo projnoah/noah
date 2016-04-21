@@ -90,6 +90,17 @@ class SettingsController extends Controller {
     }
 
     /**
+     * Show sub-domains settings.
+     * 
+     * @return mixed
+     * @author Cali
+     */
+    public function showSubDomainsSettings()
+    {
+        return view('admin.settings.sub-domains');
+    }
+
+    /**
      * Save general settings.
      *
      * @param         $type
@@ -399,5 +410,10 @@ class SettingsController extends Controller {
         }
         
         return response('/assets/logo.png?ver=' . site('logoVersion'), 200, ['Content-type' => 'text/plain']);
+    }
+
+    public function saveSubDomainsSettings(Request $request)
+    {
+        // TODO:
     }
 }

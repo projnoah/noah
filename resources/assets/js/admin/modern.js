@@ -44,7 +44,6 @@ $(document).ready(function () {
         toggleFullScreen();
     });
 
-
     // Waves
     Waves.displayEffect();
 

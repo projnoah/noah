@@ -179,5 +179,9 @@ return [
         'mail_encryption'       => trans('views.admin.pages.settings.services.email.mail_encryption'),
         'ftp_host'              => trans('views.admin.pages.settings.services.storage.ftp_host'),
     ],
+    
+    'dates' => [
+        'today' => '今天'
+    ]
 
 ];

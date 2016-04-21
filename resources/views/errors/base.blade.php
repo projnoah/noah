@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html lang="{{ app()->getLocale() }}">
 <head>
+    <meta charset="UTF-8">
     <title>@yield('title')</title>
 
     <link href="http://fonts.useso.com/css?family=Lato:100" rel="stylesheet" type="text/css">

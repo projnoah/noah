@@ -7,12 +7,13 @@ use Noah\User;
 use Noah\Avatar;
 use Illuminate\Http\Request;
 use Noah\Http\Controllers\Controller;
+use Noah\Library\Features\Users\Invitation;
 use Noah\Library\Traits\Controller\APIResponse;
 use Noah\Http\Requests\User\UpdateUserProfileRequest;
 use Noah\Http\Requests\User\UpdateUserPasswordRequest;
 
 class UsersController extends Controller {
-
+    
     use APIResponse;
 
     /**
@@ -54,6 +55,19 @@ class UsersController extends Controller {
         return view('admin.users.index', compact('users', 'keyword'));    
     }
 
+    /**
+     * Show invitations.
+     * 
+     * @return mixed
+     * @author Cali
+     */
+    public function showInvitations()
+    {
+        return Invitation::hasCodes() ? view('admin.users.invitations', [
+            'codes' => Invitation::getCodes()
+        ]) : view('admin.users.invitations');
+    }
+    
     /**
      * Deletes a user.
      * 
@@ -254,9 +268,7 @@ class UsersController extends Controller {
      */
     public function uploadAvatar(Request $request)
     {
-        $avatar = $request->file('avatar');
-
-        Avatar::move($avatar, $request->user());
+        Avatar::move($request->file('avatar'), $request->user());
 
         return response(json_encode([
             'url' => route('users.avatar', ['user' => $request->user()->id])
@@ -275,13 +287,7 @@ class UsersController extends Controller {
      */
     public function resizeAvatar(Request $request)
     {
-        $old_avatar = $request->user()->localAvatar();
-        $path = storage_path('app/' . $old_avatar->src);
-
-        $resized_avatar = resize_avatar($path, intval($request->width), intval($request->height), intval($request->x), intval($request->y));
-
-        $avatar = new Avatar(['type' => Avatar::TYPE_LOCAL, 'src' => $old_avatar->src]);
-        $request->user()->avatars()->save($avatar);
+        $resized_avatar = Avatar::resize($request);
 
         return $this->successResponse([
             'avatarUrl' => route('users.avatar', [
@@ -289,6 +295,24 @@ class UsersController extends Controller {
             ]),
             'message'   => $resized_avatar ? trans('views.admin.pages.users.profile.avatar.update-success') :
                 trans('views.admin.pages.users.profile.avatar.update-failure')
+        ]);
+    }
+
+    /**
+     * Generate invitation codes.
+     * 
+     * @param Request $request
+     * @return array
+     * 
+     * @author Cali
+     */
+    public function generateInvitationCode(Request $request)
+    {
+        Invitation::generateCodes(intval($request->quantity));
+        
+        return $this->successResponse([
+            'message' => trans('views.admin.pages.users.invitations.generated'),
+            'reload'  => 'true'
         ]);
     }
 }

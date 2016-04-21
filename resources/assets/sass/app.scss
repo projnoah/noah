@@ -3,6 +3,8 @@
 @import "mixins";
 @import "variables";
 @import "vendor/ns-notification";
+@import "vendor/toastr";
+@import "vendor/pace";
 
 body {
   font-family: $fonts;
@@ -75,7 +77,7 @@ nav.dashboard-nav {
 
     &:before {
       content: '';
-      background: url("/favicon.png") center center no-repeat;
+      background: url("/assets/logo.png") center center no-repeat;
       height: 100%;
       display: block;
       background-size: #{$nav-height - 10px} #{$nav-height - 10px};
@@ -861,6 +863,90 @@ section.dashboard-container {
 
 .icp {
   color: #eee;
+}
+
+.blog-form {
+  position: relative;
+
+  .blog-container {
+    width: 100%;
+    min-height: 100px;
+    background: #fff;
+    color: #555;
+    border-radius: 4px;
+
+    .blog-form-header {
+
+    }
+
+    .blog-controls {
+      padding: 10px 20px;
+      box-sizing: border-box;
+      width: 100%;
+      display: table;
+
+      .control {
+        display: table-cell;
+        vertical-align: middle;
+        width: 100%;
+      }
+
+      .left {
+        text-align: left;
+      }
+
+      .right {
+        text-align: right;
+      }
+    }
+
+    .blog-form-text-content {
+      padding: 0 20px;
+      position: relative;
+
+      .blog-form-title {
+        margin-bottom: 15px;
+        padding: 5px;
+      }
+    }
+
+    .editor {
+      cursor: text;
+
+      &.richtext {
+        min-height: 80px;
+        line-height: 21px;
+        word-wrap: break-word;
+      }
+    }
+
+    .editor-placeholder {
+      color: #aaa;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 2px;
+      pointer-events: none;
+      text-align: left;
+    }
+
+    .blog-tag-editor {
+      margin-top: 5px;
+      padding: 5px 20px 10px 15px;
+      overflow: hidden;
+      word-break: break-all;
+      cursor: text;
+    }
+  }
+
+
+  .blog-form-header {
+    color: #a2a2a2;
+  }
+
+  &.blog-form--text {
+
+  }
 }
 
 @media screen and (max-width: 68em) {

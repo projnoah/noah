@@ -100,5 +100,4 @@
             @include('layouts.partials.admin.footer')
         </div><!-- Page Inner -->
     </main><!-- Page Content -->
-    @include('layouts.partials.admin.quick-menu')
 @stop

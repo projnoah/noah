@@ -6,7 +6,7 @@
     <section class="dashboard-container">
         <div class="blogs-container">
             <section class="left-column">
-                <nav class="blog-wrap new-blog-container" id="new-blog">
+                <nav class="blog-wrap new-blog-container" role="menu" id="new-blog">
                     <div class="blog-selections">
                         <div class="selection">
                             <button class="post-text">
@@ -49,6 +49,53 @@
                                 <i class="fa fa-map-marker"></i>
                                 <span>签到</span>
                             </button>
+                        </div>
+                    </div>
+                    {{-- Append form --}}
+                    <div class="row">
+                        <h3>@trans('views.unavailable.coming-soon')</h3>
+                    </div>
+                    <div class="blog-form blog-form--text hidden">
+                        {{--<div class="blog-margin"></div>--}}
+                        <div class="blog-container">
+                            <div class="blog-container-inner">
+                                <div class="blog-form-header clearfix">
+                                    <div class="blog-controls">
+                                        <div class="control left">
+                                            <b>{{ Auth::user()->name }}</b>
+                                        </div>
+                                        <div class="control right">
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="blog-form-text-content">
+                                    <div class="blog-form-title">
+
+                                    </div>
+                                    <div class="text-field">
+                                        <div class="editor-wrapper">
+                                            <div class="editor richtext" contenteditable="true">
+                                                <p></p>
+                                            </div>
+                                            <div class="editor-placeholder">说点什么吧...</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="blog-form-footer">
+                                    <div class="blog-tag-editor"></div>
+                                </div>
+                                <div class="blog-form-bottom">
+                                    <div class="blog-controls">
+                                        <div class="control left">
+                                            <button>关闭</button>
+                                        </div>
+                                        <div class="control right">
+                                            <button>发布</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="blog-avatar">

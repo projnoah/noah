@@ -2,6 +2,7 @@
 
 namespace Noah;
 
+use Illuminate\Http\Request;
 use Storage;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Database\Eloquent\Model;
@@ -107,5 +108,26 @@ class Avatar extends Model {
         $user->avatars()->save($avatar);
 
         return $avatar;
+    }
+
+    /**
+     * Resize the avatar by the given data.
+     * 
+     * @param Request $request
+     * @return mixed
+     * 
+     * @author Cali
+     */
+    public static function resize(Request $request)
+    {
+        $old_avatar = $request->user()->localAvatar();
+        $path = storage_path('app/' . $old_avatar->src);
+
+        $resized_avatar = resize_avatar($path, intval($request->width), intval($request->height), intval($request->x), intval($request->y));
+
+        $avatar = new Avatar(['type' => Avatar::TYPE_LOCAL, 'src' => $old_avatar->src]);
+        $request->user()->avatars()->save($avatar);
+        
+        return $resized_avatar;
     }
 }

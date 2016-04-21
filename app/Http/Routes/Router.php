@@ -126,9 +126,11 @@ class Router {
             ], function () {
                 Route::get('/', 'UsersController@showIndex')->name('index');
                 Route::get('search/{keyword}', 'UsersController@searchUsers')->name('search');
+                Route::get('invitations', 'UsersController@showInvitations')->name('invitations');
                 Route::delete('{user?}', 'UsersController@deleteUser')->name('delete');
                 Route::patch('bulk', 'UsersController@bulkAction')->name('bulk');
-                
+                Route::post('invitations', 'UsersController@generateInvitationCode');
+
                 Route::group(['prefix' => 'edit', 'as' => 'edit.'], function () {
                     Route::get('{user}', 'UsersController@showUserProfile')->name('profile');
                     Route::patch('{user}', 'UsersController@updateUserProfile')->name('update');
@@ -149,11 +151,11 @@ class Router {
 
             Route::group([
                 'prefix' => 'center',
-                'as' => 'center.',
+                'as'     => 'center.',
             ], function () {
                 Route::get('/', 'CenterController@showIndex')->name('index');
                 Route::get('factory', 'CenterController@showFactory')->name('factory');
-                
+
                 Route::post('factory', 'CenterController@createFactory');
             });
 
@@ -171,6 +173,8 @@ class Router {
                     Route::post('/', 'SettingsController@saveAdvancedDevelopSettings')->name('save-develop');
                     Route::get('database', 'SettingsController@showDatabaseSettings')->name('database');
                     Route::get('cache', 'SettingsController@showCacheSettings')->name('cache');
+                    Route::get('sub-domains', 'SettingsController@showSubDomainsSettings')->name('sub-domains');
+                    Route::patch('sub-domains', 'SettingsController@saveSubDomainsSettings');
                     Route::patch('cache/{type}/{action?}', 'SettingsController@doCacheByType')->name('do-cache');
                 });
 
@@ -227,9 +231,11 @@ class Router {
             });
         } else {
             Route::group([
-                'domain' => 'avatars.projnoah.dev'
+                'namespace' => 'User',
+                'as'        => 'users.',
+                'domain'    => site('avatarSubDomainName') ?: 'avatars.' . str_replace('http://', '', str_replace('https://', '', env('APP_URL')))
             ], function () {
-                // TODO: avatars sub domain binding
+                Route::get('u/{user?}', 'ProfileController@getAvatar')->name('avatar');
             });
         }
 

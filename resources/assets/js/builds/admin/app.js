@@ -10018,6 +10018,11 @@ $(function () {
                 }, function (isConfirm) {
                     if (isConfirm) callback();
                 });
+            },
+            logout: function logout(e) {
+                Admin.showWarningAlert(logoutMessages, function () {
+                    window.location.href = $(e.target).attr('data-href');
+                });
             }
         },
         ready: function ready() {
@@ -10103,6 +10108,7 @@ var pjaxReEvaluate = function pjaxReEvaluate() {
                     url: form.action,
                     type: form.method,
                     data: $(form).serialize(),
+                    timeout: 0,
                     error: function error(_error3) {
                         if (_error3.status === 422) {
                             var errors = JSON.parse(_error3.responseText);

@@ -32,7 +32,7 @@
                             <div class="form-group">
                                 <label class="control-label">@trans('views.admin.pages.data-center.factory.quantity')</label>
                                 <select name="quantity" id="quantity-select" class="form-control" style="width: 100%;">
-                                    @foreach([5,10,25,50,100,200,500] as $item)
+                                    @foreach([5,10,25,50,70,100,150,200] as $item)
                                         <option value="{{ $item }}">{{ $item }}</option>
                                     @endforeach
                                 </select>

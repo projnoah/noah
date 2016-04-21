@@ -18,7 +18,7 @@
                         <a href="javascript:void(0);" class="waves-effect waves-button waves-classic sidebar-toggle"><i class="fa fa-bars"></i></a>
                     </li>
                     <li>
-                        <a href="#cd-nav" class="waves-effect waves-button waves-classic cd-nav-trigger"><i class="icon-layers"></i></a>
+                        <a href="@route('dashboard')" class="waves-effect waves-button waves-classic cd-nav-trigger"><i class="icon-layers"></i></a>
                     </li>
                     <li>
                         <a href="javascript:void(0);" class="waves-effect waves-button waves-classic toggle-fullscreen"><i class="fa fa-expand"></i></a>
@@ -215,8 +215,9 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="@route('exit')" class="log-out waves-effect waves-button waves-classic">
-                            <span><i class="glyphicon glyphicon-off m-r-xs"></i>@trans('views.admin.navbar.logout')</span>
+                        <script>var logoutMessages = JSON.parse("{!! addslashes(json_encode(trans('views.logout'))) !!}");</script>
+                        <a href="#" data-href="@route('exit')" class="log-out waves-effect waves-button waves-classic" @click="logout">
+                            <span style="pointer-events: none"><i class="glyphicon glyphicon-off m-r-xs"></i>@trans('views.admin.navbar.logout')</span>
                         </a>
                     </li>
                     <li>

@@ -34,7 +34,8 @@ const Dashboard = {
                     if (input.value.trim() != "") {
                         window.location.href = `${form.action}/${input.value}`;
                     }
-                }
+                },
+                
             }
         });
     },
@@ -43,6 +44,14 @@ const Dashboard = {
 const vm = Dashboard.vm();
 
 $(document).ready(function () {
+    toastr.options = {
+        closeButton: true,
+        progressBar: true,
+        showMethod: 'fadeIn',
+        hideMethod: 'fadeOut',
+        timeOut: 5000
+    };
+    
     document.querySelector('.content-wrap').addEventListener('click', vm.bodyClicked);
 
     const blogItems = $(".blogs-list .blog-item");

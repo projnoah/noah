@@ -21,6 +21,8 @@ class CreateStatisticsTable extends Migration
             $table->string('browser');
             $table->string('platform');
             $table->string('device');
+            $table->string('robot')->nullable();
+            $table->unsignedInteger('user_id')->nullable();
             $table->boolean('mobile');
             $table->ipAddress('ip');
             $table->string('country')->index();

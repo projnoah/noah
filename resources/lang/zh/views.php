@@ -132,8 +132,9 @@ return [
             'users'       => [
                 'main' => '用户',
                 'sub'  => [
-                    'index'   => '用户管理',
-                    'profile' => '修改个人资料'
+                    'index'       => '用户管理',
+                    'profile'     => '修改个人资料',
+                    'invitations' => '邀请码管理'
                 ]
             ],
             'media'       => [
@@ -154,14 +155,15 @@ return [
                 'sub'  => [
                     'general'  => '常规设置',
                     'advanced' => [
-                        'main'     => '高级设置',
-                        'develop'  => '开发设置',
-                        'database' => '数据库设置',
-                        'cache'    => '缓存设置',
+                        'main'        => '高级设置',
+                        'develop'     => '开发设置',
+                        'database'    => '数据库设置',
+                        'cache'       => '缓存设置',
+                        'sub-domains' => '二级域名设置'
                     ],
                     'display'  => '界面设置',
                     'services' => '第三方服务',
-                    'upgrade'  => '系统更新'
+                    'upgrade'  => '系统更新',
                 ]
             ]
         ],
@@ -187,9 +189,23 @@ return [
         'footer'                => [
             'current-version' => '当前版本'
         ],
+        'navigation'            => [
+
+        ],
         'pages'                 => [
+            'dashboard'   => [
+                'new-users-this-month'  => '本月新用户',
+                'page-views-this-month' => '本月站点浏览量',
+                'unique-ips-today'      => '今天独立IP',
+                'unique-visitors-today' => '今天网站UV',
+                'visitors'              => '访客流量',
+                'browser-stats'         => '访客浏览器比例',
+                'city-stats'            => '访客地区比例',
+                'uri'                   => '页面排行',
+                'home'                  => '主页'
+            ],
             'users'       => [
-                'index'   => [
+                'index'       => [
                     'heading'         => '用户管理',
                     'search-heading'  => '查找:keyword的相关用户',
                     'table'           => [
@@ -208,7 +224,7 @@ return [
                     ],
                     'no-result'       => '暂无相关用户'
                 ],
-                'profile' => [
+                'profile'     => [
                     'basics'   => [
                         'heading' => '基本个人资料',
                     ],
@@ -233,6 +249,18 @@ return [
                         'update-success' => '头像更新成功',
                         'update-failure' => '头像更新失败'
                     ]
+                ],
+                'invitations' => [
+                    'tips'        => '将注册码发送给好友后, 访问这个链接进行注册',
+                    'unavailable' => '您已开启注册功能',
+                    'heading'     => '生成注册码',
+                    'quantity'    => '选择生成数量',
+                    'generate'    => '生成',
+                    'table'       => [
+                        'code' => '注册码',
+                        'date' => '生成时间'
+                    ],
+                    'generated'   => '已成功生成注册码'
                 ]
             ],
             'data-center' => [
@@ -253,17 +281,17 @@ return [
                 ],
                 'factory' => [
                     'heading'       => '欢迎来到模型工厂',
-                    'tips'          => '模式工厂是Project Noah特有的数据生产间, 在这里你可以快速生成测试数据, 比如生成100个用户, 500个博文等.',
+                    'tips'          => '模式工厂是Project Noah特有的数据生产间, 在这里你可以快速生成测试数据, 比如生成50名用户, 100篇博文等.',
                     'model'         => '选择生产模型',
                     'quantity'      => '选择数量',
-                    'quantity-tips' => '数量选择越多时间消耗越久, 若超时请一次选择较少数量',
+                    'quantity-tips' => '数量选择越多时间消耗越久, 若超时请选择较少数量',
                     'models'        => [
                         'user' => '用户模型',
                         'blog' => '博文模型'
                     ],
                     'create'        => '开始生产',
                     'created'       => ':q个:model 已成功出厂',
-                    'half-created'  => '模型生产过程中遇到了小问题, 没有完全生产'
+                    'half-created'  => '模型生产过程中遇到了数据重复问题, 没有完全生产'
                 ]
             ],
             'settings'    => [
@@ -391,6 +419,7 @@ return [
                         'mysql-ver'              => 'MySQL版本',
                         'os'                     => '操作系统',
                         'server-software'        => 'Web服务器',
+                        'developed-by'           => '开发人员'
                     ],
                     'cache'         => [
                         'title'              => '缓存管理',
@@ -416,6 +445,13 @@ return [
                             'total_records' => ':count行'
                         ]
                     ],
+                    'sub-domains'   => [
+                        'avatar-sub-domain'         => '头像专属域名',
+                        'avatar-uri'                => '二级域名地址',
+                        'user-sub-domain'           => '用户主页域名',
+                        'switch'                    => '开启二级域名',
+                        'sub-domain-name-exclusion' => '不允许域名前缀'
+                    ]
                 ],
                 'display'       => [
                     'upload-logo' => [
@@ -447,6 +483,13 @@ return [
             'next'     => '下一页',
             'previous' => '上一页'
         ]
+    ],
+
+    'logout' => [
+        'title'   => '确定要注销吗',
+        'text'    => '注销后将无法访问该页面',
+        'confirm' => '确定注销',
+        'cancel'  => '算了'
     ],
 
     'dropzone' => [
