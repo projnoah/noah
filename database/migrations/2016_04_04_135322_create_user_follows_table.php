@@ -13,6 +13,9 @@ class CreateUserFollowsTable extends Migration {
     public function up()
     {
         Schema::create('user_follows', function (Blueprint $table) {
+            $table->charset = 'utf8';
+            $table->collation = 'utf8_general_ci';
+            
             $table->unsignedInteger('from_user_id')->index();
             $table->unsignedInteger('to_user_id')->index();
 

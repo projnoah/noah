@@ -20,7 +20,7 @@ class Invitation {
      */
     public static function hasCodes()
     {
-        return File::exists(public_path(self::INVI_CODES_PATH));    
+        return File::exists(storage_path(self::INVI_CODES_PATH));
     }
 
     /**
@@ -31,7 +31,7 @@ class Invitation {
      */
     public static function getCodes()
     {
-        return static::hasCodes() ? json_decode(File::get(public_path(self::INVI_CODES_PATH))) : [];
+        return static::hasCodes() ? json_decode(File::get(storage_path(self::INVI_CODES_PATH))) : [];
     }
     
     /**
@@ -49,11 +49,11 @@ class Invitation {
             ]);
         }
 
-        if (! File::exists(public_path(self::INVI_CODES_PATH))) {
-            File::put(public_path(self::INVI_CODES_PATH), json_encode($codes));
+        if (! File::exists(storage_path(self::INVI_CODES_PATH))) {
+            File::put(storage_path(self::INVI_CODES_PATH), json_encode($codes));
         } else {
-            $content = json_decode(File::get(public_path(self::INVI_CODES_PATH)));
-            File::put(public_path(self::INVI_CODES_PATH), json_encode(array_merge($content, $codes)));
+            $content = json_decode(File::get(storage_path(self::INVI_CODES_PATH)));
+            File::put(storage_path(self::INVI_CODES_PATH), json_encode(array_merge($content, $codes)));
         }
     }
 
@@ -67,10 +67,10 @@ class Invitation {
      */
     public static function validatesCode($code)
     {
-        if (! File::exists(public_path(self::INVI_CODES_PATH)))
+        if (! File::exists(storage_path(self::INVI_CODES_PATH)))
             return false;
         
-        $codes = json_decode(File::get(public_path(self::INVI_CODES_PATH)));
+        $codes = json_decode(File::get(storage_path(self::INVI_CODES_PATH)));
         foreach ($codes as $c) {
             if ($c->code == $code)
                 return true;

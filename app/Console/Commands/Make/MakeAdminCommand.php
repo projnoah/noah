@@ -41,8 +41,8 @@ class MakeAdminCommand extends Command {
         $user = User::createAdmin([
             'username' => $this->argument('username'),
             'name'     => $this->argument('username'),
-            'email'    => $this->ask('Enter the email:'),
-            'password' => bcrypt($this->ask('Type in the password to complete, 3 characters minimum:'))
+            'email'    => $this->ask('Enter the email'),
+            'password' => bcrypt($this->ask('Type in the password to complete, 3 characters minimum'))
         ]);
         
         if ($user) {

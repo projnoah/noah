@@ -50,7 +50,7 @@
                     <svg class="cross" width="70" height="70"><path d="m35,35l-9.3,-9.3"/><path d="m35,35l9.3,9.3"/><path d="m35,35l-9.3,9.3"/><path d="m35,35l9.3,-9.3"/></svg>
                 </div>
             </div>
-            @if(!!site('poweredBy'))
+            @if(site('poweredBy') == '0')
             <div class="logo-wrapper">
                 <div class="powered">
                     <h5>Powered by</h5>

@@ -83,7 +83,7 @@ class SiteConfiguration extends Configuration {
         }
 
         static::massiveUpdate($request->except(['_token', 'registration']));
-        env_put('MAIL_USERNAME', $request->input('admin_email'));
+        env_put('ADMIN_EMAIL', $request->input('admin_email'));
     }
 
     /**

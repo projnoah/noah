@@ -196,8 +196,8 @@ return [
             'dashboard'   => [
                 'new-users-this-month'  => '本月新用户',
                 'page-views-this-month' => '本月站点浏览量',
-                'unique-ips-today'      => '今天独立IP',
-                'unique-visitors-today' => '今天网站UV',
+                'unique-ips-today'      => '今日独立IP',
+                'unique-visitors-today' => '今日网站UV',
                 'visitors'              => '访客流量',
                 'browser-stats'         => '访客浏览器比例',
                 'city-stats'            => '访客地区比例',

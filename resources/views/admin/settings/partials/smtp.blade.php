@@ -32,7 +32,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="mail_username">@trans('views.admin.pages.settings.services.email.mail_username')</label>
-                                <p class="form-control-static">{{ env('MAIL_USERNAME') }}</p>
+                                <p class="form-control-static">{{ env('ADMIN_EMAIL') }}</p>
                             </div>
                             <div class="form-group">
                                 <label for="mail_password">@trans('views.admin.pages.settings.services.email.mail_password')</label>

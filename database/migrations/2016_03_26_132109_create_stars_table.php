@@ -13,6 +13,9 @@ class CreateStarsTable extends Migration {
     public function up()
     {
         Schema::create('stars', function (Blueprint $table) {
+            $table->charset = 'utf8';
+            $table->collation = 'utf8_general_ci';
+
             $table->bigIncrements('id');
             $table->unsignedBigInteger('starrable_id')->index();
             $table->string('starrable_type')->index();
