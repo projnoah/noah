@@ -14,10 +14,10 @@ class Location extends BaseLocation {
 
     /**
      * Get city name by pinyin.
-     * 
+     *
      * @param $pinyin
      * @return mixed
-     * 
+     *
      * @author Cali
      */
     public static function cityName($pinyin)
@@ -26,7 +26,7 @@ class Location extends BaseLocation {
         $city = array_where($cities, function ($key, $value) use ($pinyin) {
             return strtolower($value->pinyin) === strtolower($pinyin);
         });
-        
+
         return is_null($city) ? $pinyin : array_values($city)[0]->name;
     }
 }
