@@ -41,10 +41,10 @@ class Router {
             Route::post('register', 'Auth\AuthController@register');
 
             // Third Party Authentications...
-            Route::get('auth/{service}/callback', 'Auth\AuthController@callback')->name('social-callback');
             Route::get('auth/{service}', 'Auth\AuthController@socialLogin')->name('social');
             Route::post('auth', 'Auth\AuthController@connect')->name('social-connect');
         }
+        Route::get('auth/{service}/callback', 'Auth\AuthController@callback')->name('social-callback');
 
         return new static;
     }

@@ -29,7 +29,6 @@
                                 <p>@trans('views.admin.pages.settings.services.oauth.tips')</p>
                             </blockquote>
                         </div>
-                        @if(site('registrationOn'))
                         @include('admin.settings.partials.oauth', [
                             'service' => 'facebook',
                             'app_id' => 'APP_ID',
@@ -102,7 +101,6 @@
                             'app_secret' => 'Client_SECRET',
                             'apply_url' => 'https://developer.spotify.com/my-applications/#!/applications/create'
                         ])
-                        @endif
                     </div>
                 </div>
             </div>

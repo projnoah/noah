@@ -235,13 +235,13 @@ return [
         
         // Noah defaults
         'Noah'      => Noah\Library\Facades\Noah::class,
-        'Mailer'    => Noah\Library\Facades\Mailer::class,
         'Site'      => Noah\Library\Facades\Site::class,
         'Stat'      => Noah\Library\Facades\Stat::class,
+        'Mailer'    => Noah\Library\Facades\Mailer::class,
+        'Location'  => Noah\Library\Facades\Location::class,
         'Socialite' => Cali\Socialite\Facades\Socialite::class,
 
         // Vendors
-        'Location'  => Stevebauman\Location\Facades\Location::class,
         'Timezone' => \Camroncade\Timezone\Facades\Timezone::class
     ],
 

@@ -135,7 +135,7 @@
                                 <ul class="list-unstyled">
                                     @foreach(Stat::getTopFive('city') as $city)
                                         <li>
-                                            <b><i class="fa fa-{{ str_slug($city->name) }}"></i>&nbsp;{{ $city->name }}</b>
+                                            <b><i class="{{ str_slug($city->name) }}"></i>&nbsp;{{ Location::cityName($city->name) }}</b>
                                             <div class="text-info pull-right">{{ $city->ratio }}%</div>
                                             <div class="clearfix">
                                                 <div class="progress progress-xs bs-n m-t-xs m-b-xs">
