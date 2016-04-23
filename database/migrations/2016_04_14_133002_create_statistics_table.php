@@ -26,7 +26,7 @@ class CreateStatisticsTable extends Migration
             $table->boolean('mobile');
             $table->ipAddress('ip');
             $table->string('country')->index();
-            $table->string('city')->index();
+            $table->string('city')->nullable();
             $table->timestamps();
         });
     }
