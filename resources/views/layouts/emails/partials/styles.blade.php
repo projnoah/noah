@@ -24,7 +24,7 @@
         padding: 0;
         margin: 0;
     }
-    header {
+    .header {
         margin: 1.5em 0 0;
     }
     .logo {
