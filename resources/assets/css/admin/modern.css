@@ -4399,12 +4399,16 @@ body:not(.page-horizontal-bar):not(.small-sidebar) .menu.accordion-menu a {
     display: block;
     position: absolute;
     bottom: 0;
-    padding-left: 25px;
+    left: 0;
+    padding-left: 170px;
     padding-right: 25px;
     padding-top: 19px;
     padding-bottom: 19px;
 }
 
+.small-sidebar.page-sidebar-fixed.page-header-fixed .page-inner .page-footer {
+    padding-left: 80px !important;
+}
 
 /* Sidebar Pusher */
 

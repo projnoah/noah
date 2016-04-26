@@ -77,8 +77,8 @@ return [
 
     'selected_driver_fallbacks' => [
 
-        'IpInfo',
         'GeoPlugin',
+        'IpInfo',
         'MaxMind',
 
     ],
@@ -93,7 +93,7 @@ return [
     |
     */
 
-    'localhost_testing' => true,
+    'localhost_testing' => false,
 
     /*
     |--------------------------------------------------------------------------

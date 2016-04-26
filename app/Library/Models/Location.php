@@ -27,6 +27,6 @@ class Location extends BaseLocation {
             return strtolower($value->pinyin) === strtolower($pinyin);
         });
 
-        return is_null($city) ? $pinyin : array_values($city)[0]->name;
+        return is_null($city) || count($city) === 0 ? $pinyin : array_values($city)[0]->name;
     }
 }

@@ -114,7 +114,8 @@ class Statistic extends Model {
      */
     public static function pageViewsRatio($count)
     {
-        return ($count / static::count()) * 100;
+        if ($count || static::count())
+            return ($count / static::count()) * 100;
     }
 
     /**
