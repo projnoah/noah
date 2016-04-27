@@ -289,4 +289,19 @@ class SiteConfiguration extends Configuration {
                 break;
         }
     }
+
+    public static function saveSubDomainsSettings(Request $request)
+    {
+        if (($subOn = $request->input('avatar_sub_domains_switch', 'off') == 'on' ? 1 : 0) != site('avatarsSubDomain')) {
+            static::avatarsSubDomain($subOn);
+        }
+        if (($userSubOn = $request->input('user_sub_domains_switch', 'off') == 'on' ? 1 : 0) != site('usersSubDomain')) {
+            static::usersSubDomain($userSubOn);
+        }
+        if (($exclusions = implode(',', $request->input('sub_domain_name_exclusions'))) != site('keywords')) {
+            static::keywords($exclusions);
+        }
+        
+        static::massiveUpdate($request->only(['avatar_domain_name']));
+    }
 }

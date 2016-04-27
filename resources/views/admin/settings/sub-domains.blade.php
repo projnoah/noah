@@ -20,6 +20,7 @@
                             {!! csrf_field() !!}
                             {!! method_field('PATCH') !!}
                             <div class="form-group">
+
                                 <label class="col-sm-3 control-label">@trans('views.admin.pages.settings.advanced.sub-domains.avatar-sub-domain')</label>
                                 <div class="ios-switch switch-md col-sm-9">
                                     <input type="checkbox" name="avatar_sub_domains_switch" class="js-switch"{{ site('avatarsSubDomain') ? ' checked' : '' }}>
@@ -42,7 +43,9 @@
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">@trans('views.admin.pages.settings.advanced.sub-domains.sub-domain-name-exclusion')</label>
                                 <div class="col-sm-9">
-                                    <input name="sub_domain_name_exclusion" type="text" class="form-control" value="{{ site('subDomainNameExclusion') ?: 'avatars' }}">
+                                    <select name="sub_domain_name_exclusions" id="" multiple>
+                                        <option value=""></option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="form-group m-t-xs">

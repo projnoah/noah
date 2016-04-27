@@ -412,8 +412,22 @@ class SettingsController extends Controller {
         return response('/assets/logo.png?ver=' . site('logoVersion'), 200, ['Content-type' => 'text/plain']);
     }
 
+    /**
+     * Save sub-domains settings.
+     *
+     * @param Request $request
+     * @return array
+     *
+     * @author Cali
+     */
     public function saveSubDomainsSettings(Request $request)
     {
-        // TODO:
+        Site::saveSubDomainsSettings($request);
+
+        return $this->successResponse([
+            'message' => trans('views.admin.pages.settings.updated', [
+                'setting' => trans('views.admin.titles.settings.sub.advanced.sub-domains')
+            ])
+        ]);
     }
 }

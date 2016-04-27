@@ -38,11 +38,14 @@ class MakeAdminCommand extends Command {
      */
     public function handle()
     {
+        $email = $this->ask('Enter the email');
+        $password = $this->ask('Type in the password to complete, 3 characters minimum');
+        
         $user = User::createAdmin([
             'username' => $this->argument('username'),
             'name'     => $this->argument('username'),
-            'email'    => $this->ask('Enter the email'),
-            'password' => bcrypt($this->ask('Type in the password to complete, 3 characters minimum'))
+            'email'    => $email,
+            'password' => bcrypt($password)
         ]);
         
         if ($user) {

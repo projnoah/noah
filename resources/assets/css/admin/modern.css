@@ -4400,14 +4400,22 @@ body:not(.page-horizontal-bar):not(.small-sidebar) .menu.accordion-menu a {
     position: absolute;
     bottom: 0;
     left: 0;
-    padding-left: 170px;
+    padding-left: 20px;
     padding-right: 25px;
     padding-top: 19px;
     padding-bottom: 19px;
 }
 
-.small-sidebar.page-sidebar-fixed.page-header-fixed .page-inner .page-footer {
-    padding-left: 80px !important;
+.page-sidebar-fixed .page-footer {
+    padding-left: 180px;
+}
+
+.small-sidebar .page-footer {
+    padding-left: 80px;
+}
+
+.page-horizontal-bar .page-footer {
+    padding-left: 20px;
 }
 
 /* Sidebar Pusher */
@@ -5744,6 +5752,10 @@ body:not(.small-sidebar):not(.page-horizontal-bar) .menu.accordion-menu,
     .page-horizontal-bar.page-sidebar-fixed.compact-menu .checkout,
     .page-horizontal-bar.page-sidebar-fixed:not(.compact-menu) .checkout {
         top: 60px;
+    }
+
+    .page-footer {
+        padding-left: 20px !important;
     }
 }
 

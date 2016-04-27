@@ -206,7 +206,7 @@ class Statistic extends Model {
      */
     public static function mostBrowser()
     {
-        return self::getMostRecord('browser');
+        return self::getMostRecord('browser', true);
     }
 
     /**
@@ -217,7 +217,7 @@ class Statistic extends Model {
      */
     public static function mostPlatform()
     {
-        return self::getMostRecord('platform');
+        return self::getMostRecord('platform', true);
     }
 
     /**
@@ -228,7 +228,7 @@ class Statistic extends Model {
      */
     public static function mostCity()
     {
-        return self::getMostRecord('city');
+        return self::getMostRecord('city', true);
     }
 
     /**
@@ -256,7 +256,7 @@ class Statistic extends Model {
     /**
      * Get a most record.
      *
-     * @param $column
+     * @param      $column
      * @return mixed
      * @author Cali
      */
@@ -281,18 +281,24 @@ class Statistic extends Model {
 
     /**
      * Get the top records by the given limit.
-     * 
-     * @param     $column
-     * @param int $take
+     *
+     * @param      $column
+     * @param int  $take
+     * @param bool $no_bots
      * @return mixed
-     * 
+     *
      * @author Cali
      */
-    public static function getTop($column, $take = 5)
+    public static function getTop($column, $take = 5, $no_bots = true)
     {
         $totalRecords = static::count();
-        $records = static::select(DB::raw("count({$column}) as count, {$column} as name"))
-            ->groupBy($column)->orderBy('count', 'desc')->take($take)->get();
+        $query = static::select(DB::raw("count({$column}) as count, {$column} as name"));
+
+        if ($no_bots) {
+            $query->whereNull('robot');
+        }
+
+        $records = $query->groupBy($column)->orderBy('count', 'desc')->take($take)->get();
 
         foreach ($records as $record) {
             $record->ratio = floor(($record->count / $totalRecords) * 100);

@@ -115,7 +115,7 @@ if (! function_exists('site')) {
     {
         if (! noah_installed())
             return false;
-        
+
         $site = app('Site');
 
         return call_user_func_array([$site, $name], []);
@@ -125,10 +125,10 @@ if (! function_exists('site')) {
 if (! function_exists('resize_avatar')) {
     /**
      * Resize avatar by the given path.
-     * 
+     *
      * @param $path
      * @return bool
-     * 
+     *
      * @author Cali
      */
     function resize_avatar($path, $width, $height, $x, $y)
@@ -153,7 +153,27 @@ if (! function_exists('resize_avatar')) {
 
         imagedestroy($source_image);
         imagedestroy($cropped_image);
-        
+
         return $resized_avatar;
+    }
+}
+
+if (! function_exists('root_domain')) {
+    /**
+     * Get the root domain of the url.
+     *
+     * @param $url
+     * @return string
+     *
+     * @author Cali
+     */
+    function root_domain($url = null)
+    {
+        $url = $url ?: config('app.url');
+        if (preg_match('%[^:\.\/]+(?:(?<ext>\.(?:com|net|org|edu|gov|biz|tv|me|pro|name|cc|co|info|cm|dev))|(?<ctr>\.(?:cn|us|hk|tw|uk|it|fr|br|in|de))|\k<ext>\k<ctr>)+$%i', $url, $match)) {
+            return $match[0];
+        }
+
+        return $url;
     }
 }

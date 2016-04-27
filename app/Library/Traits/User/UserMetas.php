@@ -24,8 +24,9 @@ trait UserMetas {
                     'value' => $value
                 ]);
             } else {
-                $meta->value = $value;
-                $meta->save();
+                $meta->update([
+                    'value' => $value
+                ]);
             }
         }
 
