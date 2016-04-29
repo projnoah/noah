@@ -34,7 +34,7 @@ if (! function_exists('noah_installed')) {
     /**
      * Determine if Noah is installed.
      *
-     * @since 1.0.0
+     * @since 0.1.0
      *
      * @return bool
      * @author Cali
@@ -45,11 +45,26 @@ if (! function_exists('noah_installed')) {
     }
 }
 
+if (! function_exists('noah_version')) {
+    /**
+     * Get the Noah version.
+     * 
+     * @since 0.1.0
+     * 
+     * @return string
+     * @author Cali
+     */
+    function noah_version()
+    {
+        return Noah\Library\Models\Noah::VERSION;
+    }
+}
+
 if (! function_exists('env_put')) {
     /**
      * Store or update an environment variable.
      *
-     * @since 1.0.0
+     * @since 0.1.0
      *
      * @param      $key
      * @param      $value
@@ -104,7 +119,7 @@ if (! function_exists('site')) {
     /**
      * Helper for getting the site configuration.
      *
-     * @since 1.0.0
+     * @since 0.1.0
      *
      * @param $name
      * @return string|null|bool
@@ -126,6 +141,8 @@ if (! function_exists('resize_avatar')) {
     /**
      * Resize avatar by the given path.
      *
+     * @since 0.1.0
+     * 
      * @param $path
      * @return bool
      *
@@ -162,6 +179,8 @@ if (! function_exists('root_domain')) {
     /**
      * Get the root domain of the url.
      *
+     * @since 0.1.0
+     * 
      * @param $url
      * @return string
      *

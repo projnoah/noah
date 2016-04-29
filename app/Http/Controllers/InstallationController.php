@@ -206,7 +206,8 @@ class InstallationController extends Controller {
      */
     protected function checkDatabaseCredentials($credentials)
     {
-        if (! $this->saveCredentialsToEnvironment($credentials)) {
+        $succeeds = $this->saveCredentialsToEnvironment($credentials);
+        if (! $succeeds) {
             return false;
         }
 
@@ -224,11 +225,8 @@ class InstallationController extends Controller {
         $error = null;
 
         try {
-            Schema::create('pre-install', function (Blueprint $table) {
-                $table->increments('id');
-            });
-            Schema::drop('pre-install');
-        } catch (\Exception $e) {
+            new mysqli(config('database.connections.mysql.host'), config('database.connections.mysql.username'), config('database.connections.mysql.password'), config('database.connections.mysql.database'));
+        } catch (\PDOException $e) {
             $error = $e->getCode();
         }
 

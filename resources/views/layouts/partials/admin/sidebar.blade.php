@@ -69,8 +69,8 @@
                     <li>
                         <a href="@route('admin.settings.upgrade', [], false)" data-pjax>
                             <i class="icon-present"></i>&nbsp;@trans('views.admin.titles.settings.sub.upgrade')
-                            @if(Noah::getNewVersion())
-                            <span class="badge badge-danger">@trans('views.admin.pages.settings.new-version')</span>
+                            @if(Noah::getNewVersion() != noah_version())
+                            <span class="badge badge-danger" id="new-version-badge">@trans('views.admin.pages.settings.new-version')</span>
                             @endif
                         </a>
                     </li>

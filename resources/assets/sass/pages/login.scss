@@ -242,7 +242,7 @@
 		margin: 0 15px;
 		@extend .animated, .fadeInDown;
 
-		@for $i from 1 through 5 {
+		@for $i from 1 through 10 {
 			&:nth-of-type(#{$i}) {
 				@include anim-delay(0.5s + $i * 0.13s);
 			}

@@ -3,8 +3,10 @@
 namespace Noah\Library\Models;
 
 use File;
+use Cache;
 use Artisan;
 use Carbon\Carbon;
+use GuzzleHttp\Client;
 
 class Noah {
 
@@ -36,38 +38,51 @@ class Noah {
     /**
      * Noah update base url.
      */
-    const UPDATE_BASE_URL = "https://projnoah.com/upgrades/";
+    const UPGRADE_BASE_URL = "https://upgrade.projnoah.com/archives/";
 
     /**
-     * Update Noah to the latest version.
+     * Noah query url for fetching updates.
+     */
+    const UPGRADE_QUERY_URL = "https://upgrade.projnoah.com/api/version";
+
+    /**
+     * Upgrade Noah to the latest version.
      *
-     * @since 1.0.0
+     * @since 0.1.0
      *
-     * @return array
      * @author Cali
      */
-    public static function update()
+    public static function upgrade()
     {
-        $output = [];
+        static::log('');
+
         $file_path = 'v' . self::getNewVersion() . '.zip';
-        $file_url = self::UPDATE_BASE_URL . $file_path;
+        $file_url = self::UPGRADE_BASE_URL . $file_path;
 
         self::checkDirectory();
 
+        // Open maintenance mode
+        self::maintenanceMode();
+
         try {
-            exec("cd upgrades && curl -O $file_url", $output);
-            exec("cd upgrades && unzip $file_path", $output);
+            self::fetchZip($file_url, $file_path);
+            self::unzipFile($file_path);
         } catch (\Exception $e) {
             // TODO: Something went wrong...
-            return $output;
+            return $e->getMessage();
         }
 
-        self::overwriteFiles($file_path);
-
+        // Post-upgrade actions
         self::dumpAutoload();
         self::migrateDatabase();
 
-        return $output;
+        Cache::forget('new_version');
+
+        // Bring up the app
+        self::maintenanceMode(false);
+
+        static::log(trans('views.upgrades.complete'));
+        static::log('=========== UPGRADE_COMPLETE ===========');
     }
 
     /**
@@ -77,8 +92,21 @@ class Noah {
      */
     public static function getNewVersion()
     {
-        // TODO: Fetch from server
-        return site('noahNewVersion') ?: false;
+        if (! Cache::has('new_version')) {
+            $client = new Client;
+            $response = $client->get(self::UPGRADE_QUERY_URL);
+            $version = json_decode($response->getBody()->getContents());
+
+            if ($version->version != self::VERSION) {
+                Cache::put('new_version', $version->version, Carbon::now()->addDays(2));
+            } else {
+                Cache::put('new_version', $version->version, 10);
+            }
+
+            return $version->version;
+        } else {
+            return Cache::get('new_version', self::VERSION);
+        }
     }
 
     /**
@@ -115,6 +143,17 @@ class Noah {
     }
 
     /**
+     * Get upgrade base url.
+     *
+     * @return string
+     * @author Cali
+     */
+    public static function getUpgradeQueryUrl()
+    {
+        return static::UPGRADE_QUERY_URL;
+    }
+
+    /**
      * Get the currently supported locales.
      *
      * @return array
@@ -126,26 +165,20 @@ class Noah {
     }
 
     /**
-     * Dump autoload in Composer.
+     * Dump autoload in and generate class loader.
      *
      * @author Cali
      */
     private static function dumpAutoload()
     {
-        // Change to root directory (Old fashion way)
-//        chdir('../');
-
-//        putenv('COMPOSER_HOME=' . base_path('vendor/bin/composer'));
-
-//        $input = new ArrayInput(['command' => 'dump-autoload']);
-//        
-//        $application = new Application();
-//        $application->setAutoExit(false);
-//        $application->run($input);
-
-        // Change back in
-//        chdir('public');
+        Artisan::call('config:clear');
+        Artisan::call('clear-compiled');
+        Artisan::call('cache:clear');
+        Artisan::call('route:clear');
+        Artisan::call('view:clear');
         Artisan::call('optimize');
+
+        static::log(trans('views.upgrades.optimize'));
     }
 
     /**
@@ -155,25 +188,9 @@ class Noah {
      */
     private static function migrateDatabase()
     {
-        Artisan::call('migrate');
-    }
+        static::log(trans('views.upgrades.migrate'));
 
-    /**
-     * Overwrite the updated files.
-     *
-     * @param $file_path
-     * @author Cali
-     */
-    private static function overwriteFiles($file_path)
-    {
-        $dir_path = str_replace('.zip', "", $file_path);
-        $directories = File::directories("upgrades/$dir_path");
-
-        foreach ($directories as $directory) {
-            File::copyDirectory($directory, '../' . File::name($directory));
-        }
-
-        File::deleteDirectory("upgrades/$dir_path");
+        Artisan::call('migrate', ['--force' => true]);
     }
 
     /**
@@ -205,7 +222,7 @@ class Noah {
 
     /**
      * Currently active oAuth applications.
-     * 
+     *
      * @return mixed
      * @author Cali
      */
@@ -217,7 +234,7 @@ class Noah {
             if (site($service . 'On') == '1')
                 $actives->push($service);
         }
-        
+
         return $actives;
     }
 
@@ -242,5 +259,110 @@ class Noah {
         }
 
         return compact('php_version', 'mysql_version', 'operating_system', 'server_software', 'noah_installed_time');
+    }
+
+    /**
+     * Unzip a file.
+     *
+     * @param $file_path
+     * @author Cali
+     */
+    public static function unzipFile($file_path)
+    {
+        static::log(trans('views.upgrades.unzip'));
+
+        $zip = new \ZipArchive;
+        if ($zip->open(public_path('upgrades/' . $file_path)) === true) {
+            $zip->extractTo(base_path());
+            $zip->close();
+        }
+    }
+
+    /**
+     * Fetch the zip file.
+     *
+     * @param $file_url
+     * @param $file_path
+     *
+     * @author Cali
+     */
+    public static function fetchZip($file_url, $file_path)
+    {
+        static::log(trans('views.upgrades.fetch-zip.fetching'));
+
+        $stream = fopen(public_path('upgrades/' . $file_path), 'w');
+
+        $curl = static::prepareCurl($file_url);
+        curl_setopt($curl, CURLOPT_FILE, $stream);
+        curl_exec($curl);
+
+        curl_close($curl);
+        fclose($stream);
+
+        static::log(trans('views.upgrades.fetch-zip.done'));
+    }
+
+    /**
+     * Prepare curl connection.
+     *
+     * @param $url
+     * @return mixed
+     *
+     * @author Cali
+     */
+    public static function prepareCurl($url)
+    {
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_URL, $url);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_TIMEOUT, 3600);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
+
+        return $curl;
+    }
+
+    /**
+     * Log the message into file.
+     *
+     * @param $message
+     * @author Cali
+     */
+    public static function log($message = null)
+    {
+        $path = storage_path('logs/upgrade.log');
+
+        if (is_null($message)) {
+            $fp = fopen($path, 'r');
+            fseek($fp, - 1, SEEK_END);
+            $s = '';
+
+            while (($c = fgetc($fp)) !== false) {
+                if ($c == PHP_EOL && $s) break;
+                $s = $c . $s;
+                fseek($fp, - 2, SEEK_CUR);
+            }
+            fclose($fp);
+
+            return $s;
+        } else {
+            if (! File::exists($path)) {
+                File::put($path, '# ' . $message . PHP_EOL);
+            } else {
+                File::append($path, '# ' . $message . PHP_EOL);
+            }
+        }
+    }
+
+    /**
+     * Open/close maintenance mode.
+     *
+     * @param bool $open
+     * @author Cali
+     */
+    public static function maintenanceMode($open = true)
+    {
+        Artisan::call($open ? 'down' : 'up');
+        static::log(trans('views.upgrades.maintenance.' . ($open ? 'down' : 'up')));
     }
 }

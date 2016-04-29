@@ -39,7 +39,7 @@ class HomeController extends Controller {
      */
     public function test()
     {
-        return User::find(1);
+        return 'Cool';
     }
 
     public function inbox()

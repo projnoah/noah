@@ -461,6 +461,11 @@ return [
                         'uploaded'    => 'Logo上传成功',
                     ]
                 ],
+                'upgrade' => [
+                    'latest-version' => '已经是最新版本了',
+                    'new-version' => '新版本更新',
+                    'details' => '更新内容'
+                ],
                 'update-button' => '保存设置',
                 'updated'       => ':setting 设置已更新',
                 'new-version'   => '新'
@@ -499,5 +504,20 @@ return [
     'unavailable' => [
         'coming-soon'    => '即将开放',
         'in-development' => '更多开发中'
+    ],
+
+    'upgrades' => [
+        'maintenance' => [
+            'up'   => '关闭网站维护',
+            'down' => '开启网站维护'
+        ],
+        'fetch-zip'   => [
+            'fetching' => '正在下载更新包',
+            'done'     => '更新包下载完成'
+        ],
+        'unzip'       => '解压更新包...',
+        'optimize'    => '清除缓存, 刷新文件目录',
+        'migrate'     => '更新数据库...',
+        'complete'    => '更新完成, 感谢使用Noah'
     ]
 ];

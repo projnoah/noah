@@ -9,7 +9,7 @@ class RecordStatistics {
 
     protected $excludes = [
         ['route' => 'admin.dashboard', 'all' => true],
-        ['route' => 'users.avatar', 'all' => true]
+        ['route' => 'users.avatar', 'all' => true],
     ];
 
     /**

@@ -15,13 +15,14 @@
  |
  */
 
-Router::installations();
+if (! noah_installed()) {
+    Router::installations();
+} else {
+    Router::dashboards()
+        ->language()
+        ->auth();
 
-Router::dashboards()
-    ->language()
-    ->auth();
+    Router::admins()->robots();
 
-Router::admins()
-    ->robots();
-
-Router::users();
+    Router::users();
+}

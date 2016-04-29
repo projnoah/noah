@@ -2,6 +2,7 @@
 
 namespace Noah\Http\Controllers\Admin;
 
+use Noah;
 use Site;
 use Mailer;
 use Illuminate\Http\Request;
@@ -91,7 +92,7 @@ class SettingsController extends Controller {
 
     /**
      * Show sub-domains settings.
-     * 
+     *
      * @return mixed
      * @author Cali
      */
@@ -408,7 +409,7 @@ class SettingsController extends Controller {
         } else {
             Site::logoVersion('1');
         }
-        
+
         return response('/assets/logo.png?ver=' . site('logoVersion'), 200, ['Content-type' => 'text/plain']);
     }
 
@@ -429,5 +430,39 @@ class SettingsController extends Controller {
                 'setting' => trans('views.admin.titles.settings.sub.advanced.sub-domains')
             ])
         ]);
+    }
+
+    /**
+     * Upgrade the application.
+     *
+     * @author Cali
+     */
+    public function upgrade()
+    {
+        if (Noah::getNewVersion() != noah_version()) {
+            Noah::upgrade();
+        }
+    }
+
+    /**
+     * Get the upgrade log.
+     * 
+     * @return array
+     * @author Cali
+     */
+    public function getUpgradeLog()
+    {
+        if (str_contains(Noah::log(), 'UPGRADE_COMPLETE')) {
+            return [
+                'upgrade' => 'complete'
+            ];
+        } else {
+            $m = Noah::log();
+
+            return [
+                'upgrade' => 'pending',
+                'message' => str_replace(PHP_EOL, '', $m)
+            ];
+        }
     }
 }

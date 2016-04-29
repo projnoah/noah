@@ -35,7 +35,7 @@ class Router {
         // Email Confirmation...
         Route::get('auth/confirm', 'Auth\AuthController@confirmRegistration')->name('confirm-email');
 
-        if (! ! site('registrationOn')) {
+        if (noah_installed() && ! ! site('registrationOn')) {
             // Registration Routes...
             Route::get('register', 'Auth\AuthController@showRegistrationForm')->name('sign-up');
             Route::post('register', 'Auth\AuthController@register');
@@ -184,6 +184,8 @@ class Router {
                 });
 
                 Route::get('upgrade', 'SettingsController@showUpgradeSettings')->name('upgrade');
+                Route::patch('upgrade', 'SettingsController@upgrade');
+                Route::post('upgrade', 'SettingsController@getUpgradeLog');
 
                 Route::post('general/{type}', 'SettingsController@saveGeneralSettings')->name('save-general');
                 Route::group(['prefix' => 'service'], function () {
@@ -209,6 +211,11 @@ class Router {
     public static function robots()
     {
         Route::get('robots.txt', 'Dashboard\HomeController@generateRobotsTxt');
+        Route::get('test', function () {
+            Noah\Person::create();
+            
+            return Noah\Person::first();
+        });
 
         return new static;
     }

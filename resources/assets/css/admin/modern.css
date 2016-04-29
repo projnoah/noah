@@ -5780,6 +5780,10 @@ body:not(.small-sidebar):not(.page-horizontal-bar) .menu.accordion-menu,
     font-weight: 500;
 }
 
+.page-footer.single-row p {
+    margin-top: 8px !important;
+}
+
 .cropper-container {
     font-size: 0;
     line-height: 0;

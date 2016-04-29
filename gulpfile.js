@@ -215,7 +215,10 @@ elixir(function (mix) {
         ], 'public/assets/js/admin/pages/display-settings.js')
         .browserify([
             'admin/pages/sub-domains-settings.js'
-        ], 'public/assets/js/admin/pages/sub-domains-settings.js');
+        ], 'public/assets/js/admin/pages/sub-domains-settings.js')
+        .browserify([
+            'admin/pages/upgrade-settings.js'
+        ], 'public/assets/js/admin/pages/upgrade-settings.js');
 
     //mix.version();
 });
