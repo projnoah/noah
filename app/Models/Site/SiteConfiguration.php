@@ -290,6 +290,12 @@ class SiteConfiguration extends Configuration {
         }
     }
 
+    /**
+     * Save sub domains settings.
+     *
+     * @param Request $request
+     * @author Cali
+     */
     public static function saveSubDomainsSettings(Request $request)
     {
         if (($subOn = $request->input('avatar_sub_domains_switch', 'off') == 'on' ? 1 : 0) != site('avatarsSubDomain')) {
@@ -298,10 +304,34 @@ class SiteConfiguration extends Configuration {
         if (($userSubOn = $request->input('user_sub_domains_switch', 'off') == 'on' ? 1 : 0) != site('usersSubDomain')) {
             static::usersSubDomain($userSubOn);
         }
-        if (($exclusions = implode(',', $request->input('sub_domain_name_exclusions'))) != site('keywords')) {
-            static::keywords($exclusions);
+        if (($exclusions = implode(',', $request->input('sub_domain_name_exclusions'))) != site('subDomainNameExclusions')) {
+            static::subDomainNameExclusions($exclusions);
         }
         
-        static::massiveUpdate($request->only(['avatar_domain_name']));
+        static::massiveUpdate($request->only('avatar_domain_name'));
+    }
+
+    /**
+     * Initial setup for migration.
+     * 
+     * @author Cali
+     */
+    public static function initialSetup()
+    {
+        static::homeUri('home');
+        static::socialUri('dashboard');
+        static::postUri('posts');
+        static::adminUri('admin');
+        static::siteTitle("Project Noah");
+        static::description("优雅, 现代, 简洁与全能. 服务于快速建网站的站长.");
+        static::separator("::");
+        static::keywords("modern", "noah", "project noah");
+        static::siteRobotIgnores("admin");
+        static::adminIgnoresMaintenance("1");
+        static::adminEmail(env('ADMIN_EMAIL'));
+        static::registrationOn("1");
+        static::smtpEmailOn("0");
+        static::forceSsl("0");
+        static::subDomainNameExclusions("avatars");
     }
 }

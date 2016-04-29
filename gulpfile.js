@@ -191,28 +191,31 @@ elixir(function (mix) {
     //     'admin/pages/factory-center.js'
     // ], 'public/assets/js/admin/pages/factory-center.js');
     //
-    // mix.browserify([
-    //         'admin/pages/dashboard.js',
-    //     ], 'public/assets/js/admin/pages/dashboard.js')
-    //     .browserify([
-    //         'admin/pages/general-settings.js'
-    //     ], 'public/assets/js/admin/pages/general-settings.js')
-    //     .browserify([
-    //         'vendor/TweenMax.min.js',
-    //         'admin/pages/services-settings.js',
-    //     ], 'public/assets/js/admin/pages/services-settings.js')
-    //     .browserify([
-    //         'admin/pages/advanced-settings.js'
-    //     ], 'public/assets/js/admin/pages/advanced-settings.js')
-    //     .browserify([
-    //         'admin/pages/cache-settings.js'
-    //     ], 'public/assets/js/admin/pages/cache-settings.js')
-    //     .browserify([
-    //         'admin/pages/database-settings.js'
-    //     ], 'public/assets/js/admin/pages/database-settings.js')
-    //     .browserify([
-    //         'admin/pages/display-settings.js'
-    //     ], 'public/assets/js/admin/pages/display-settings.js');
+    mix.browserify([
+            'admin/pages/dashboard.js',
+        ], 'public/assets/js/admin/pages/dashboard.js')
+        .browserify([
+            'admin/pages/general-settings.js'
+        ], 'public/assets/js/admin/pages/general-settings.js')
+        .browserify([
+            'vendor/TweenMax.min.js',
+            'admin/pages/services-settings.js',
+        ], 'public/assets/js/admin/pages/services-settings.js')
+        .browserify([
+            'admin/pages/advanced-settings.js'
+        ], 'public/assets/js/admin/pages/advanced-settings.js')
+        .browserify([
+            'admin/pages/cache-settings.js'
+        ], 'public/assets/js/admin/pages/cache-settings.js')
+        .browserify([
+            'admin/pages/database-settings.js'
+        ], 'public/assets/js/admin/pages/database-settings.js')
+        .browserify([
+            'admin/pages/display-settings.js'
+        ], 'public/assets/js/admin/pages/display-settings.js')
+        .browserify([
+            'admin/pages/sub-domains-settings.js'
+        ], 'public/assets/js/admin/pages/sub-domains-settings.js');
 
     //mix.version();
 });

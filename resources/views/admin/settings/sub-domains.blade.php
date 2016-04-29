@@ -30,7 +30,7 @@
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">@trans('views.admin.pages.settings.advanced.sub-domains.avatar-uri')</label>
                                 <div class="col-sm-9">
-                                    <input name="avatar_domain_name" type="text" class="form-control" value="{{ site('avatarSubDomainName') ?: 'avatars' }}">
+                                    <input name="avatar_domain_name" type="text" class="form-control" value="{{ site('avatarDomainName') ?: 'avatars' }}">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -43,8 +43,10 @@
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">@trans('views.admin.pages.settings.advanced.sub-domains.sub-domain-name-exclusion')</label>
                                 <div class="col-sm-9">
-                                    <select name="sub_domain_name_exclusions" id="" multiple>
-                                        <option value=""></option>
+                                    <select name="sub_domain_name_exclusions[]" id="exclusions" multiple style="width: 100%">
+                                        @foreach(explode(',', site('subDomainNameExclusions')) as $domain)
+                                            <option value="{{ $domain }}" selected>{{ $domain }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -60,3 +62,7 @@
         </div>
     </div>
 @stop
+
+@push('scripts.footer')
+<script src="/assets/js/admin/pages/sub-domains-settings.js" pjax-script></script>
+@endpush
