@@ -1,6 +1,14 @@
 # Project Noah
 ![Logo](https://dn-abletive.qbox.me/projnoah-108.png)
 
+### 版本:
+- 2016-04-30 => Beta v0.1.0
+
+### 安装与使用
+详细教程文档请查看官网: [官方文档](https://docs.projnoah.com)
+
+Demo体验站: [官方网站](https://projnoah.com)
+
 #### A modern tool that creates an SNS/CMS website in a flash
 #### 服务于快速建网站的站长
 
@@ -10,9 +18,9 @@
 Created by Cali
 
 ## Warnings
-**Note that this application is still in alpha development phase, DO NOT use until the first release**
+**Note that this application is still in beta development phase**
 
-**注意 目前该程序暂处于alpha开发阶段, 请不要在发布版本前使用**
+**注意 目前该程序暂处于beta阶段**
 
 ## License
 
