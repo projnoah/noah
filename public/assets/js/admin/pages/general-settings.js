@@ -1,16 +1,1 @@
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-'use strict';
-
-$(function () {
-    $('#keywords-select').select2({
-        tags: true,
-        maximumSelectionLength: 15
-    });
-    $('#robots-select').select2({
-        tags: true
-    });
-    $('#timezone-select').select2();
-    $('#locale-select').select2();
-});
-
-},{}]},{},[1]);
+!function e(t,r,n){function o(i,u){if(!r[i]){if(!t[i]){var s="function"==typeof require&&require;if(!u&&s)return s(i,!0);if(c)return c(i,!0);var f=new Error("Cannot find module '"+i+"'");throw f.code="MODULE_NOT_FOUND",f}var l=r[i]={exports:{}};t[i][0].call(l.exports,function(e){var r=t[i][1][e];return o(r?r:e)},l,l.exports,e,t,r,n)}return r[i].exports}for(var c="function"==typeof require&&require,i=0;i<n.length;i++)o(n[i]);return o}({1:[function(e,t,r){"use strict";$(function(){$("#keywords-select").select2({tags:!0,maximumSelectionLength:15}),$("#robots-select").select2({tags:!0}),$("#timezone-select").select2(),$("#locale-select").select2()})},{}]},{},[1]);

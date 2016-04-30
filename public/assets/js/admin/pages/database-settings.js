@@ -1,11 +1,1 @@
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-"use strict";
-
-$(function () {
-    $("#database-tables").DataTable({
-        "paging": false,
-        "language": DataTableLines
-    });
-});
-
-},{}]},{},[1]);
+!function r(e,n,t){function a(o,u){if(!n[o]){if(!e[o]){var f="function"==typeof require&&require;if(!u&&f)return f(o,!0);if(i)return i(o,!0);var c=new Error("Cannot find module '"+o+"'");throw c.code="MODULE_NOT_FOUND",c}var s=n[o]={exports:{}};e[o][0].call(s.exports,function(r){var n=e[o][1][r];return a(n?n:r)},s,s.exports,r,e,n,t)}return n[o].exports}for(var i="function"==typeof require&&require,o=0;o<t.length;o++)a(t[o]);return a}({1:[function(r,e,n){"use strict";$(function(){$("#database-tables").DataTable({paging:!1,language:DataTableLines})})},{}]},{},[1]);
