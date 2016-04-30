@@ -56,6 +56,8 @@ class AppServiceProvider extends ServiceProvider {
                 ));
 
             env_put('APP_KEY', $key);
+
+            $this->app['config']['app.key'] = $key;
         }
     }
 }
