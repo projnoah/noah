@@ -461,10 +461,14 @@ return [
                         'uploaded'    => 'Logo上传成功',
                     ]
                 ],
-                'upgrade' => [
+                'upgrade'       => [
+                    'heading'        => '版本更新',
                     'latest-version' => '已经是最新版本了',
-                    'new-version' => '新版本更新',
-                    'details' => '更新内容'
+                    'new-version'    => '新版本更新',
+                    'details'        => '更新内容',
+                    'tips'           => '小贴士: 在更新前请备份数据库, 以防万一.<br>请勿在升级过程中关闭页面',
+                    'manual'         => '手动更新前往:',
+                    'official'       => '官方升级网站'
                 ],
                 'update-button' => '保存设置',
                 'updated'       => ':setting 设置已更新',

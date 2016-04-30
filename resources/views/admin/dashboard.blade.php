@@ -154,63 +154,63 @@
         <div class="col-md-6">
             @include('admin.center.stats.uri')
         </div>
-        <div class="col-md-6">
-            <div class="panel panel-white">
-                <div class="panel-heading">
-                    <h4 class="panel-title">Weather</h4>
-                </div>
-                <div class="panel-body">
-                    <div class="weather-widget">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="weather-top">
-                                    <div class="weather-current pull-left">
-                                        <i class="wi wi-day-cloudy weather-icon"></i>
-                                        <p><span>83<sup>&deg;F</sup></span></p>
-                                    </div>
-                                    <h2 class="weather-day pull-right">Miami, FL<br>
-                                        <small><b>13th April, 2015</b></small>
-                                    </h2>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <ul class="list-unstyled weather-info">
-                                    <li>Wind <span class="pull-right"><b>ESE 16 mph</b></span></li>
-                                    <li>Humidity <span class="pull-right"><b>64%</b></span></li>
-                                    <li>Pressure <span class="pull-right"><b>30.15 in</b></span></li>
-                                    <li>UV Index <span class="pull-right"><b>6</b></span></li>
-                                </ul>
-                            </div>
-                            <div class="col-md-6">
-                                <ul class="list-unstyled weather-info">
-                                    <li>Cloud Cover <span class="pull-right"><b>60%</b></span></li>
-                                    <li>Ceiling <span class="pull-right"><b>17800 ft</b></span></li>
-                                    <li>Dew Point <span class="pull-right"><b>70° F</b></span></li>
-                                    <li>Visibility <span class="pull-right"><b>10 mi</b></span></li>
-                                </ul>
-                            </div>
-                            <div class="col-md-12">
-                                <ul class="list-unstyled weather-days row">
-                                    <li class="col-xs-4 col-sm-2"><span>12:00</span><i
-                                                class="wi wi-day-cloudy"></i><span>82<sup>&deg;F</sup></span></li>
-                                    <li class="col-xs-4 col-sm-2"><span>13:00</span><i
-                                                class="wi wi-day-cloudy"></i><span>82<sup>&deg;F</sup></span></li>
-                                    <li class="col-xs-4 col-sm-2"><span>14:00</span><i
-                                                class="wi wi-day-cloudy"></i><span>82<sup>&deg;F</sup></span></li>
-                                    <li class="col-xs-4 col-sm-2"><span>15:00</span><i
-                                                class="wi wi-day-cloudy"></i><span>83<sup>&deg;F</sup></span></li>
-                                    <li class="col-xs-4 col-sm-2"><span>16:00</span><i
-                                                class="wi wi-day-cloudy"></i><span>82<sup>&deg;F</sup></span></li>
-                                    <li class="col-xs-4 col-sm-2"><span>17:00</span><i
-                                                class="wi wi-day-sunny-overcast"></i><span>82<sup>&deg;F</sup></span>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        {{--<div class="col-md-6">--}}
+            {{--<div class="panel panel-white">--}}
+                {{--<div class="panel-heading">--}}
+                    {{--<h4 class="panel-title">Weather</h4>--}}
+                {{--</div>--}}
+                {{--<div class="panel-body">--}}
+                    {{--<div class="weather-widget">--}}
+                        {{--<div class="row">--}}
+                            {{--<div class="col-md-12">--}}
+                                {{--<div class="weather-top">--}}
+                                    {{--<div class="weather-current pull-left">--}}
+                                        {{--<i class="wi wi-day-cloudy weather-icon"></i>--}}
+                                        {{--<p><span>83<sup>&deg;F</sup></span></p>--}}
+                                    {{--</div>--}}
+                                    {{--<h2 class="weather-day pull-right">Miami, FL<br>--}}
+                                        {{--<small><b>13th April, 2015</b></small>--}}
+                                    {{--</h2>--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
+                            {{--<div class="col-md-6">--}}
+                                {{--<ul class="list-unstyled weather-info">--}}
+                                    {{--<li>Wind <span class="pull-right"><b>ESE 16 mph</b></span></li>--}}
+                                    {{--<li>Humidity <span class="pull-right"><b>64%</b></span></li>--}}
+                                    {{--<li>Pressure <span class="pull-right"><b>30.15 in</b></span></li>--}}
+                                    {{--<li>UV Index <span class="pull-right"><b>6</b></span></li>--}}
+                                {{--</ul>--}}
+                            {{--</div>--}}
+                            {{--<div class="col-md-6">--}}
+                                {{--<ul class="list-unstyled weather-info">--}}
+                                    {{--<li>Cloud Cover <span class="pull-right"><b>60%</b></span></li>--}}
+                                    {{--<li>Ceiling <span class="pull-right"><b>17800 ft</b></span></li>--}}
+                                    {{--<li>Dew Point <span class="pull-right"><b>70° F</b></span></li>--}}
+                                    {{--<li>Visibility <span class="pull-right"><b>10 mi</b></span></li>--}}
+                                {{--</ul>--}}
+                            {{--</div>--}}
+                            {{--<div class="col-md-12">--}}
+                                {{--<ul class="list-unstyled weather-days row">--}}
+                                    {{--<li class="col-xs-4 col-sm-2"><span>12:00</span><i--}}
+                                                {{--class="wi wi-day-cloudy"></i><span>82<sup>&deg;F</sup></span></li>--}}
+                                    {{--<li class="col-xs-4 col-sm-2"><span>13:00</span><i--}}
+                                                {{--class="wi wi-day-cloudy"></i><span>82<sup>&deg;F</sup></span></li>--}}
+                                    {{--<li class="col-xs-4 col-sm-2"><span>14:00</span><i--}}
+                                                {{--class="wi wi-day-cloudy"></i><span>82<sup>&deg;F</sup></span></li>--}}
+                                    {{--<li class="col-xs-4 col-sm-2"><span>15:00</span><i--}}
+                                                {{--class="wi wi-day-cloudy"></i><span>83<sup>&deg;F</sup></span></li>--}}
+                                    {{--<li class="col-xs-4 col-sm-2"><span>16:00</span><i--}}
+                                                {{--class="wi wi-day-cloudy"></i><span>82<sup>&deg;F</sup></span></li>--}}
+                                    {{--<li class="col-xs-4 col-sm-2"><span>17:00</span><i--}}
+                                                {{--class="wi wi-day-sunny-overcast"></i><span>82<sup>&deg;F</sup></span>--}}
+                                    {{--</li>--}}
+                                {{--</ul>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+            {{--</div>--}}
+        {{--</div>--}}
     </div>
 @stop
 

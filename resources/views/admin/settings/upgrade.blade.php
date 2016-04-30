@@ -11,7 +11,7 @@
     <div class="row">
         <div class="panel panel-white p-v-md">
             <div class="panel-heading">
-                <h4 class="panel-title"></h4>
+                <h4 class="panel-title">@trans('views.admin.pages.settings.upgrade.heading')</h4>
             </div>
             <div class="panel-body text-center">
                 @if(($version = Noah::getNewVersion()) == noah_version())
@@ -42,8 +42,9 @@
                         <blockquote class="upgrade-logs">
                         </blockquote>
                     </div>
-                    <div class="text-center text-danger">
-                        <p>小贴士: 在更新前请备份数据库, 以防万一</p>
+                    <div class="row clearfix text-center text-danger">
+                        <p>@trans('views.admin.pages.settings.upgrade.tips')</p>
+                        <p>@trans('views.admin.pages.settings.upgrade.manual') <a href="https://upgrade.projnoah.com" target="_blank">@trans('views.admin.pages.settings.upgrade.official')</a></p>
                     </div>
                     <form action="@route('admin.settings.upgrade')" class="hidden" id="upgrade-form"></form>
                 @endif

@@ -21,7 +21,9 @@ $(function () {
                 type: 'PATCH',
                 data: { _token: $("meta[name=_token]").attr('content') },
                 success: function success() {
+                    $("#upgrade-progress .progress-bar").css('width', '100%');
                     toastr.success('<h4>' + upgradeCompleteMessage + '</h4>');
+                    upgradeCompleted();
                 },
                 timeout: 3600
             });
@@ -41,7 +43,7 @@ $(function () {
     });
 
     function fetchLogs() {
-        timer = window.setInterval(fetchUpgradeLog, 100);
+        timer = window.setInterval(fetchUpgradeLog, 50);
     }
 
     function fetchUpgradeLog() {
@@ -55,12 +57,11 @@ $(function () {
                         if (lastLog != logData.message) {
                             lastLog = logData.message;
                             $('<p>' + logData.message + '</p>').appendTo($(".upgrade-logs"));
-                            progress += 12.5;
+                            progress += 15;
                             $("#upgrade-progress .progress-bar").css('width', progress + '%');
                         }
                     } else {
                         forever = false;
-                        upgradeCompleted();
                     }
                 }
             });
@@ -70,12 +71,14 @@ $(function () {
     }
 
     function upgradeCompleted() {
-        $("#upgrade-progress").fadeOut();
+        setTimeout(function () {
+            return $("#upgrade-progress").fadeOut();
+        }, 350);
         $("#new-version-badge").remove();
         $("#new-version-footer").remove();
         setTimeout(function () {
             return $.pjax.reload(pjaxContainer);
-        }, 1050);
+        }, 1500);
     }
 });
 

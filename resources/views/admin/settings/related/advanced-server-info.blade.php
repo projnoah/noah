@@ -33,11 +33,5 @@
                 <b>{{ $server_software }}</b>
             </div>
         </div>
-        <div class="row m-b-xs clearfix">
-            <div class="col-xs-4 text-right">@trans('views.admin.pages.settings.advanced.develop.developed-by')</div>
-            <div class="col-xs-8">
-                <b><a href="http://projnoah.com" target="_blank">Cali Castle</a></b>
-            </div>
-        </div>
     </div>
 </div>

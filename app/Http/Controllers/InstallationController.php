@@ -271,7 +271,7 @@ class InstallationController extends Controller {
             env_put('DB_PASSWORD', $credentials['password']);
             env_put('DB_DATABASE', $credentials['database']);
             env_put('APP_ENV', 'production');
-            env_put('APP_DEBUG', 'false');
+            env_put('APP_DEBUG', 'true');
             env_put('APP_URL', url('/'));
 
             if (($prefix = trim($credentials['prefix'])) !== "") {

@@ -29,14 +29,14 @@
                     <li><a href="@route('admin.users.invitations', [], false)" data-pjax>@trans('views.admin.titles.users.sub.invitations')</a></li>
                 </ul>
             </li>
-            <li class="droplink">
-                <a href="#" class="waves-effect waves-button">
-                    <span class="menu-icon icon-picture"></span><p>@trans('views.admin.titles.media.main')</p><span class="arrow"></span>
-                    <ul class="sub-menu">
-                        <li><a href="#">Sub</a></li>
-                    </ul>
-                </a>
-            </li>
+            {{--<li class="droplink">--}}
+                {{--<a href="#" class="waves-effect waves-button">--}}
+                    {{--<span class="menu-icon icon-picture"></span><p>@trans('views.admin.titles.media.main')</p><span class="arrow"></span>--}}
+                    {{--<ul class="sub-menu">--}}
+                        {{--<li><a href="#">Sub</a></li>--}}
+                    {{--</ul>--}}
+                {{--</a>--}}
+            {{--</li>--}}
             <li class="droplink{{ request()->is(substr(route('admin.center.index', [], false), 1) . '*') ? ' active' : '' }}">
                 <a href="#" class="waves-effect waves-button">
                     <span class="menu-icon icon-support"></span><p>@trans('views.admin.titles.data-center.main')</p><span class="arrow"></span>

@@ -1,7 +1,7 @@
 {
-    "name": "laravel/laravel",
+    "name": "projnoah/noah",
     "description": "Project Noah.",
-    "keywords": ["framework", "laravel"],
+    "keywords": ["cms", "sns", "noah", "projnoah"],
     "license": "MIT",
     "type": "project",
     "require": {

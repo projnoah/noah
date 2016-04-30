@@ -18,7 +18,7 @@
                         <a href="javascript:void(0);" class="waves-effect waves-button waves-classic sidebar-toggle"><i class="fa fa-bars"></i></a>
                     </li>
                     <li>
-                        <a href="@route('dashboard')" class="waves-effect waves-button waves-classic cd-nav-trigger"><i class="icon-layers"></i></a>
+                        <a href="@route('dashboard')" class="waves-effect waves-button waves-classic cd-nav-trigger" target="_blank"><i class="icon-layers"></i></a>
                     </li>
                     <li>
                         <a href="javascript:void(0);" class="waves-effect waves-button waves-classic toggle-fullscreen"><i class="fa fa-expand"></i></a>
@@ -204,14 +204,13 @@
                                 </a>
                             </li>
                             <li role="presentation">
-                                <a href="inbox.html">
+                                <a href="#">
                                     <i class="icon-envelope"></i>Inbox
                                     <span class="badge badge-success pull-right">4</span>
                                 </a>
                             </li>
                             <li role="presentation" class="divider"></li>
-                            <li role="presentation"><a href="lock-screen.html"><i class="fa fa-lock"></i>Lock screen</a></li>
-                            <li role="presentation"><a href="login.html"><i class="fa fa-sign-out m-r-xs"></i>Log out</a></li>
+                            <li role="presentation"><a href="#"><i class="fa fa-lock"></i>Lock screen</a></li>
                         </ul>
                     </li>
                     <li>
