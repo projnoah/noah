@@ -19,10 +19,7 @@ trait UserMetas {
 
         if ($value) {
             if (! $meta) {
-                $meta = $this->metas()->create([
-                    'key'   => $key,
-                    'value' => $value
-                ]);
+                $meta = $this->metas()->create(compact('key', 'value'));
             } else {
                 $meta->update([
                     'value' => $value
