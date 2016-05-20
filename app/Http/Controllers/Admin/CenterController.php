@@ -6,11 +6,8 @@ use Noah\Blog;
 use Noah\User;
 use Illuminate\Http\Request;
 use Noah\Http\Controllers\Controller;
-use Noah\Library\Traits\Controller\APIResponse;
 
 class CenterController extends Controller {
-
-    use APIResponse;
 
     /**
      * Show index page of data center.

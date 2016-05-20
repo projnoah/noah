@@ -7,11 +7,8 @@ use Site;
 use Mailer;
 use Illuminate\Http\Request;
 use Noah\Http\Controllers\Controller;
-use Noah\Library\Traits\Controller\APIResponse;
 
 class SettingsController extends Controller {
-
-    use APIResponse;
 
     /**
      * Show general settings page.

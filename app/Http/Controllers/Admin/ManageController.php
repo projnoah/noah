@@ -5,11 +5,8 @@ namespace Noah\Http\Controllers\Admin;
 use Noah\Http\Requests;
 use Illuminate\Http\Request;
 use Noah\Http\Controllers\Controller;
-use Noah\Library\Traits\Controller\APIResponse;
 
 class ManageController extends Controller {
-
-    use APIResponse;
 
     /**
      * Display admin dashboard.

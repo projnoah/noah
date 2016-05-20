@@ -8,13 +8,10 @@ use Noah\Avatar;
 use Illuminate\Http\Request;
 use Noah\Http\Controllers\Controller;
 use Noah\Library\Features\Users\Invitation;
-use Noah\Library\Traits\Controller\APIResponse;
 use Noah\Http\Requests\User\UpdateUserProfileRequest;
 use Noah\Http\Requests\User\UpdateUserPasswordRequest;
 
 class UsersController extends Controller {
-    
-    use APIResponse;
 
     /**
      * Show index users management page.
