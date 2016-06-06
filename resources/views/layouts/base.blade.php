@@ -12,7 +12,7 @@
     <title>@yield('title') @site('title')</title>
 
     {{-- Fonts --}}
-    <link href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/assets/css/font-awesome.min.css" rel="stylesheet">
     {{-- Styles --}}
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
     <link rel="stylesheet" href="/assets/css/app.css">
